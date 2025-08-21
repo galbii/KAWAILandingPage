@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import PianoConsultationDialog from '@/components/PianoConsultationDialog';
 
 interface FeaturedPiano {
   id: string;
@@ -197,6 +198,7 @@ function PianoSection({ piano, index }: PianoSectionProps) {
 
 export function FeaturedDeals() {
   const [isHeroVisible, setIsHeroVisible] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

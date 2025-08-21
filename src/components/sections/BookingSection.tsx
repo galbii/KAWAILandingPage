@@ -1,68 +1,10 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
-
-interface BookingData {
-  bookingId: string;
-  name: string;
-  email: string;
-  phone?: string;
-  startTime: string;
-  endTime: string;
-  eventType: string;
-  location?: string;
-  additionalNotes?: string;
-  uid: string;
-}
-
-interface CalWindow extends Window {
-  Cal?: {
-    (action: string, config?: object): void;
-    init: (config: { debug: boolean }) => void;
-    inline: (config: { elementOrSelector: string; calLink: string; config: { theme: string } }) => void;
-    on: (config: { action: string; callback: (e: { detail: unknown }) => void }) => void;
-  };
-}
-
-interface CalEvent {
-  detail: {
-    data: {
-      bookingId: string;
-      uid: string;
-      eventTypeId: string;
-      startTime: string;
-      endTime: string;
-      type: string;
-      location?: string;
-      additionalNotes?: string;
-      responses?: Record<string, { value: string }>;
-      attendees?: Array<{ name: string; email: string }>;
-    };
-  };
-}
-
-// Function to save booking data
-async function saveBookingData(data: BookingData) {
-  const response = await fetch('/api/bookings', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  });
-
-  if (!response.ok) {
-    throw new Error('Failed to save booking data');
-  }
-
-  return response.json();
-}
+import { useState, useEffect, useRef } from 'react';
 
 export default function BookingSection() {
   const [isVisible, setIsVisible] = useState(false);
-  const [isCalendarLoaded, setIsCalendarLoaded] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
-  const calendarRef = useRef<HTMLDivElement>(null);
 
   // Intersection observer for scroll animations
   useEffect(() => {
@@ -82,82 +24,23 @@ export default function BookingSection() {
     return () => observer.disconnect();
   }, []);
 
-  const loadCalEmbed = useCallback(() => {
-    // Check if Cal.com script is already loaded
-    if (typeof window !== 'undefined' && !(window as CalWindow).Cal) {
-      const script = document.createElement('script');
-      script.src = 'https://app.cal.com/embed/embed.js';
-      script.async = true;
-      script.onload = () => {
-        initializeCalendar();
-      };
-      document.head.appendChild(script);
-    } else {
-      initializeCalendar();
-    }
-  }, []);
-
-  // Load Cal.com embed when component is visible
+  // Load Calendly script when component becomes visible
   useEffect(() => {
-    if (isVisible && !isCalendarLoaded) {
-      loadCalEmbed();
+    if (isVisible) {
+      const script = document.createElement('script');
+      script.src = 'https://assets.calendly.com/assets/external/widget.js';
+      script.async = true;
+      document.head.appendChild(script);
+
+      return () => {
+        // Clean up script when component unmounts
+        const existingScript = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
+        if (existingScript) {
+          document.head.removeChild(existingScript);
+        }
+      };
     }
-  }, [isVisible, isCalendarLoaded, loadCalEmbed]);
-
-  const initializeCalendar = () => {
-    if (typeof window !== 'undefined' && (window as CalWindow).Cal && calendarRef.current) {
-      const Cal = (window as CalWindow).Cal!;
-      
-      // Initialize Cal.com embed
-      Cal('init', { debug: false });
-      
-      // Create inline calendar
-      Cal('inline', {
-        elementOrSelector: '#cal-booking-embed',
-        calLink: 'team/your-team/piano-consultation', // Replace with your actual Cal.com link
-        config: {
-          theme: 'light'
-        }
-      });
-
-      // Listen for booking events
-      Cal('on', {
-        action: 'bookingSuccessful',
-        callback: async (e: CalEvent) => {
-          console.log('Booking successful:', e.detail);
-          
-          // Extract booking data
-          const bookingData = {
-            bookingId: e.detail.data.bookingId,
-            name: e.detail.data.responses?.name?.value || 'Unknown',
-            email: e.detail.data.responses?.email?.value || 'unknown@example.com',
-            phone: e.detail.data.responses?.phone?.value,
-            startTime: e.detail.data.startTime,
-            endTime: e.detail.data.endTime,
-            eventType: e.detail.data.type,
-            location: e.detail.data.location || 'Not specified',
-            additionalNotes: e.detail.data.additionalNotes,
-            uid: e.detail.data.uid
-          };
-
-          // Save to database
-          try {
-            await saveBookingData(bookingData);
-            console.log('Booking data saved successfully');
-          } catch (error) {
-            console.error('Error saving booking data:', error);
-          }
-        }
-      });
-
-      Cal('on', {
-        action: 'linkReady',
-        callback: () => {
-          setIsCalendarLoaded(true);
-        }
-      });
-    }
-  };
+  }, [isVisible]);
 
 
   return (
@@ -176,23 +59,17 @@ export default function BookingSection() {
             </p>
           </div>
 
-          {/* Calendar Container */}
+          {/* Calendly Widget Container */}
           <div className="bg-kawai-pearl p-6 rounded-2xl shadow-lg">
             <div 
-              ref={calendarRef}
-              id="cal-booking-embed"
-              className="min-h-[600px] w-full"
-            >
-              {/* Calendar will be embedded here */}
-              {!isCalendarLoaded && (
-                <div className="flex items-center justify-center h-96 text-kawai-black/70">
-                  <div className="text-center">
-                    <div className="w-12 h-12 border-4 border-red-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                    <p>Loading booking calendar...</p>
-                  </div>
-                </div>
-              )}
-            </div>
+              className="calendly-inline-widget" 
+              data-url="https://calendly.com/kawaipianogallery/shsu-piano-sale" 
+              style={{ 
+                minWidth: '320px', 
+                height: '700px',
+                width: '100%'
+              }}
+            />
           </div>
         </div>
       </div>

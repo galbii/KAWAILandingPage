@@ -65,3 +65,5 @@ This is a landing page for a **KAWAI piano sale event** in partnership with **Sa
 - Premium piano showcase and consultation booking
 - Brand partnership between KAWAI and SHSU
 - Sophisticated, premium-focused design aesthetic
+- memorize how we've implemented our analytics
+- memorize this form that we're using for our ctas

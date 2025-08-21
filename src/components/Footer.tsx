@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { Phone, Mail, MapPin, Facebook, Instagram, Youtube, Twitter } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
+import { trackKawaiEvent } from '@/lib/analytics'
 
 
 const socialLinks = [
@@ -50,32 +51,20 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Contact Info */}
-          <div>
-            <h3 className="font-semibold text-lg mb-4 text-kawai-pearl">Contact Us</h3>
-            <div className="space-y-3">
-              <div className="flex items-center space-x-3">
-                <Phone className="h-5 w-5 text-kawai-red" />
-                <span>(713) 904-0001</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Mail className="h-5 w-5 text-kawai-red" />
-                <span>info@kawaipianoshouston.com</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <MapPin className="h-5 w-5 text-kawai-red" />
-                <span>5800 Richmond Ave, Houston, TX 77057</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Stay Connected */}
+          {/* Stay Connected - Newsletter (Middle) */}
           <div>
             <h3 className="font-semibold text-lg mb-4 text-kawai-pearl">Stay Connected</h3>
             <p className="text-kawai-neutral mb-4">
               Join our community for piano insights, artist stories, and exclusive events.
             </p>
-            <form className="flex space-x-2">
+            <form 
+              onSubmit={(e) => {
+                e.preventDefault();
+                trackKawaiEvent.subscribeNewsletter('footer');
+                // Handle actual form submission here
+              }}
+              className="flex space-x-2"
+            >
               <input
                 type="email"
                 placeholder="Enter your email"
@@ -88,6 +77,37 @@ export function Footer() {
                 Subscribe
               </Button>
             </form>
+          </div>
+
+          {/* Contact Info - Right */}
+          <div>
+            <h3 className="font-semibold text-lg mb-4 text-kawai-pearl">Contact Us</h3>
+            <div className="space-y-3">
+              <div className="flex items-center space-x-3">
+                <Phone className="h-5 w-5 text-kawai-red" />
+                <a 
+                  href="tel:7139040001"
+                  onClick={() => trackKawaiEvent.callPhone('footer')}
+                  className="hover:text-kawai-red transition-colors cursor-pointer"
+                >
+                  (713) 904-0001
+                </a>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Mail className="h-5 w-5 text-kawai-red" />
+                <a 
+                  href="mailto:info@kawaipianoshouston.com"
+                  onClick={() => trackKawaiEvent.emailContact('footer')}
+                  className="hover:text-kawai-red transition-colors cursor-pointer"
+                >
+                  info@kawaipianoshouston.com
+                </a>
+              </div>
+              <div className="flex items-center space-x-3">
+                <MapPin className="h-5 w-5 text-kawai-red" />
+                <span>5800 Richmond Ave, Houston, TX 77057</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

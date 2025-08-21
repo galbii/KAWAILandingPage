@@ -1,3 +1,7 @@
+'use client'
+
+import { trackKawaiEvent } from '@/lib/analytics';
+
 export default function ContactSection() {
   return (
     <section id="contact" className="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
@@ -54,8 +58,20 @@ export default function ContactSection() {
                 <div>
                   <h4 className="font-semibold text-gray-dark mb-1">Phone & Email</h4>
                   <p className="text-gray-medium">
-                    <a href="tel:7139040001" className="hover:text-primary transition-colors">(713) 904-0001</a><br />
-                    <a href="mailto:info@kawaipianoshouston.com" className="hover:text-primary transition-colors">info@kawaipianoshouston.com</a>
+                    <a 
+                      href="tel:7139040001" 
+                      onClick={() => trackKawaiEvent.callPhone('contact_section')}
+                      className="hover:text-primary transition-colors"
+                    >
+                      (713) 904-0001
+                    </a><br />
+                    <a 
+                      href="mailto:info@kawaipianoshouston.com" 
+                      onClick={() => trackKawaiEvent.emailContact('contact_section')}
+                      className="hover:text-primary transition-colors"
+                    >
+                      info@kawaipianoshouston.com
+                    </a>
                   </p>
                 </div>
               </div>
@@ -78,10 +94,16 @@ export default function ContactSection() {
             </div>
             
             <div className="mt-8 space-y-3">
-              <button className="w-full btn-primary text-white font-semibold py-3 px-6 rounded-xl shadow-lg">
+              <button 
+                onClick={() => trackKawaiEvent.getDirections('contact_section')}
+                className="w-full btn-primary text-white font-semibold py-3 px-6 rounded-xl shadow-lg"
+              >
                 Get Directions
               </button>
-              <button className="w-full border-2 border-primary text-primary font-semibold py-3 px-6 rounded-xl hover:bg-primary hover:text-white transition-all duration-300">
+              <button 
+                onClick={() => trackKawaiEvent.scheduleTour('contact_section')}
+                className="w-full border-2 border-primary text-primary font-semibold py-3 px-6 rounded-xl hover:bg-primary hover:text-white transition-all duration-300"
+              >
                 Schedule Private Tour
               </button>
             </div>
@@ -107,7 +129,10 @@ export default function ContactSection() {
                   </svg>
                   <h4 className="text-xl font-bold text-gray-dark mb-2">Interactive Map</h4>
                   <p className="text-gray-medium mb-6">Click to view detailed directions<br />and parking information</p>
-                  <button className="bg-primary text-white px-6 py-2 rounded-full font-semibold hover:bg-primary-dark transition-colors">
+                  <button 
+                    onClick={() => trackKawaiEvent.getDirections('contact_map')}
+                    className="bg-primary text-white px-6 py-2 rounded-full font-semibold hover:bg-primary-dark transition-colors"
+                  >
                     Open Map
                   </button>
                 </div>

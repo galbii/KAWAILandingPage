@@ -1,5 +1,11 @@
 
+'use client';
+
+import { useState } from 'react';
+import PianoConsultationDialog from '@/components/PianoConsultationDialog';
+
 export default function AboutEventSection() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <section id="about-event" className="py-24 bg-muted/30 scroll-container">
       <div className="max-w-7xl mx-auto px-6">
@@ -40,9 +46,9 @@ export default function AboutEventSection() {
             </div>
 
             <div className="bg-gradient-to-r from-kawai-red/5 to-tsu-blue/5 rounded-lg p-6 border border-kawai-red/20">
-              <div className="text-center space-y-4">
-                <h4 className="text-lg font-semibold text-kawai-red">Secure Your Access to Our Early Bird Inventory</h4>
-                <p className="text-sm text-muted-foreground">Don&apos;t miss out on exclusive deals, priority access to our premium selection, <span className="text-kawai-red font-medium">free delivery and tuning</span></p>
+              <div className="text-center">
+                <h4 className="text-lg font-semibold text-kawai-red mb-2">Secure Your Access to Our Early Bird Inventory</h4>
+                <p className="text-sm text-muted-foreground mb-4">Don&apos;t miss out on exclusive deals, <span className="text-kawai-red/80 font-medium">priority access to our premium selection</span>, <span className="text-kawai-red font-medium">free delivery and tuning</span></p>
                 <div className="space-y-3">
                   <button 
                     onClick={() => {
@@ -56,13 +62,19 @@ export default function AboutEventSection() {
                     Secure Your Savings and Find Deals
                   </button>
                   <button 
+                    onClick={() => setIsModalOpen(true)}
+                    className="block w-full bg-red-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-red-700 transition-colors border-2 border-red-700"
+                  >
+                    Secure Your Spot
+                  </button>
+                  <button 
                     onClick={() => {
                       const featuredDeals = document.querySelector('#featured-deals') || document.querySelector('[id*="deals"]');
                       if (featuredDeals) {
                         featuredDeals.scrollIntoView({ behavior: 'smooth' });
                       }
                     }}
-                    className="block w-full bg-white text-kawai-red px-6 py-3 rounded-lg font-medium border border-kawai-red hover:bg-kawai-red/5 transition-colors"
+                    className="block w-full bg-black text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-800 hover:scale-105 hover:shadow-lg transition-all duration-200 ease-in-out"
                   >
                     View Featured Deals
                   </button>
@@ -155,6 +167,12 @@ export default function AboutEventSection() {
           </div>
         </div>
       </div>
+      
+      {/* Piano Consultation Dialog */}
+      <PianoConsultationDialog 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
     </section>
   );
 }

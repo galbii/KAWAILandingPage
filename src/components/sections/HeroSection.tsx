@@ -1,12 +1,16 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import PianoConsultationModal from '@/components/PianoConsultationModal';
+import PianoConsultationDialog from '@/components/PianoConsultationDialog';
+import { trackKawaiEvent } from '@/lib/analytics';
 
 export default function HeroSection() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleFindPianoClick = () => {
+    // Track the analytics event
+    trackKawaiEvent.findPiano('hero');
+    
     // Scroll to featured deals section
     const featuredDealsSection = document.getElementById('featured-deals');
     if (featuredDealsSection) {
@@ -18,8 +22,16 @@ export default function HeroSection() {
     }, 800);
   };
 
+  const handleSecureSpotClick = () => {
+    // Track the analytics event
+    trackKawaiEvent.secureSpot('hero');
+    
+    // Could add form modal or redirect logic here
+    // For now, just track the intent
+  };
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center text-white pt-24 hero-parallax scroll-container overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center text-white pt-8 hero-parallax scroll-container overflow-hidden">
       {/* Video Background */}
       <video
         autoPlay
@@ -86,7 +98,10 @@ export default function HeroSection() {
             >
               Find Your Piano
             </Button>
-            <Button className="bg-red-700 text-white hover:bg-red-600 px-8 py-3 text-lg font-semibold">
+            <Button 
+              onClick={handleSecureSpotClick}
+              className="bg-red-700 text-white hover:bg-red-600 px-8 py-3 text-lg font-semibold"
+            >
               Secure Your Spot
             </Button>
           </div>
@@ -103,8 +118,8 @@ export default function HeroSection() {
         </div>
       </div>
       
-      {/* Piano Consultation Modal */}
-      <PianoConsultationModal 
+      {/* Piano Consultation Dialog */}
+      <PianoConsultationDialog 
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 
       />
