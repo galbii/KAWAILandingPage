@@ -51,12 +51,7 @@ export default function AboutEventSection() {
                 <p className="text-sm text-muted-foreground mb-4">Don&apos;t miss out on exclusive deals, <span className="text-kawai-red/80 font-medium">priority access to our premium selection</span>, <span className="text-kawai-red font-medium">free delivery and tuning</span></p>
                 <div className="space-y-3">
                   <button 
-                    onClick={() => {
-                      const featuredDeals = document.querySelector('#featured-deals') || document.querySelector('[id*="deals"]');
-                      if (featuredDeals) {
-                        featuredDeals.scrollIntoView({ behavior: 'smooth' });
-                      }
-                    }}
+                    onClick={() => setIsModalOpen(true)}
                     className="bg-kawai-red text-white px-6 py-3 rounded-lg font-medium hover:bg-kawai-red/90 transition-colors"
                   >
                     Secure Your Savings and Find Deals

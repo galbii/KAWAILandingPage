@@ -26,8 +26,8 @@ export default function HeroSection() {
     // Track the analytics event
     trackKawaiEvent.secureSpot('hero');
     
-    // Could add form modal or redirect logic here
-    // For now, just track the intent
+    // Open the piano consultation dialog
+    setIsModalOpen(true);
   };
 
   return (

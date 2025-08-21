@@ -262,7 +262,10 @@ export function FeaturedDeals() {
           <p className="text-kawai-black/70 max-w-md mx-auto">
             Get personalized recommendations and schedule your consultation
           </p>
-          <button className="inline-flex items-center px-8 py-4 bg-red-700 hover:bg-red-600 text-white font-semibold text-lg rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 group">
+          <button 
+            onClick={() => setIsModalOpen(true)}
+            className="inline-flex items-center px-8 py-4 bg-red-700 hover:bg-red-600 text-white font-semibold text-lg rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 group"
+          >
             <span>Secure Your Savings</span>
             <svg
               className="w-6 h-6 ml-3 transition-transform duration-300 group-hover:translate-x-1"
@@ -276,6 +279,12 @@ export function FeaturedDeals() {
           </button>
         </div>
       </section>
+      
+      {/* Piano Consultation Dialog */}
+      <PianoConsultationDialog 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
     </div>
   );
 }

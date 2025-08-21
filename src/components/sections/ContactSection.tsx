@@ -1,6 +1,8 @@
 'use client'
 
+import { useState } from 'react';
 import { trackKawaiEvent } from '@/lib/analytics';
+import PianoConsultationDialog from '@/components/PianoConsultationDialog';
 
 export default function ContactSection() {
   return (
