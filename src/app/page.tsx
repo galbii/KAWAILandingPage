@@ -1,165 +1,753 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import Image from 'next/image';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { useEffect } from 'react';
 
 export default function Home() {
-  const [timeLeft, setTimeLeft] = useState({
-    days: 3,
-    hours: 11,
-    minutes: 31,
-    seconds: 13
-  });
-
   useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(prevTime => {
-        if (prevTime.seconds > 0) {
-          return { ...prevTime, seconds: prevTime.seconds - 1 };
-        } else if (prevTime.minutes > 0) {
-          return { ...prevTime, minutes: prevTime.minutes - 1, seconds: 59 };
-        } else if (prevTime.hours > 0) {
-          return { ...prevTime, hours: prevTime.hours - 1, minutes: 59, seconds: 59 };
-        } else if (prevTime.days > 0) {
-          return { ...prevTime, days: prevTime.days - 1, hours: 23, minutes: 59, seconds: 59 };
-        }
-        return prevTime;
-      });
-    }, 1000);
+    // Check for reduced motion preference
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
 
-    return () => clearInterval(timer);
+    // Header scroll effect
+    const header = document.querySelector('header');
+    const handleScroll = () => {
+      requestAnimationFrame(() => {
+        const scrollY = window.scrollY;
+        
+        // Header scroll state
+        if (scrollY > 100) {
+          header?.classList.add('header-scrolled');
+        } else {
+          header?.classList.remove('header-scrolled');
+        }
+
+        // Parallax effects
+        const parallaxSlow = scrollY * 0.3;
+        const parallaxMedium = scrollY * 0.5;
+        const parallaxFast = scrollY * 0.7;
+
+        document.documentElement.style.setProperty('--scroll-offset-slow', `${parallaxSlow}px`);
+        document.documentElement.style.setProperty('--scroll-offset-medium', `${parallaxMedium}px`);
+        document.documentElement.style.setProperty('--scroll-offset-fast', `${parallaxFast}px`);
+      });
+    };
+
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('scroll-visible');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all scroll-animate elements
+    const animateElements = document.querySelectorAll('.scroll-animate, .scroll-animate-left, .scroll-animate-right, .scroll-animate-scale');
+    animateElements.forEach((el) => observer.observe(el));
+
+    // Add scroll listener
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    // Initial check
+    handleScroll();
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      observer.disconnect();
+    };
   }, []);
 
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-200/20 animate-fade-in-down">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-background/85 backdrop-blur-xl border-b border-border/30 shadow-lg header-enhanced">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <div className="text-3xl font-bold text-gradient-primary tracking-wide animate-scale-in">
-              KAWAI
-              <div className="text-xs font-normal text-gray-medium mt-1 tracking-widest">PREMIUM PIANOS</div>
+          <div className="flex justify-between items-center h-16 sm:h-20 lg:h-24">
+            {/* Brand Partnership Section */}
+            <div className="flex items-center gap-3 sm:gap-4 lg:gap-6">
+              {/* KAWAI Logo - Prominent */}
+              <div className="relative w-28 h-10 sm:w-36 sm:h-12 lg:w-44 lg:h-14 animate-slide-in-left">
+                <Image
+                  src="/images/kawai-logo-red-1x.png"
+                  alt="KAWAI"
+                  fill
+                  className="object-contain filter drop-shadow-lg"
+                  priority
+                />
+              </div>
+              
+              {/* Partnership Connector */}
+              <div className="hidden sm:flex items-center animate-scale-in">
+                <span className="text-4xl font-light text-black">×</span>
+              </div>
+              
+              {/* TSU Logo */}
+              <div className="relative w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 animate-slide-in-right">
+                <Image
+                  src="/images/texas-southern-tigers-logo-936726837.png"
+                  alt="Texas Southern University Tigers"
+                  fill
+                  className="object-contain filter drop-shadow-lg"
+                  priority
+                />
+              </div>
+              
+              {/* Event Information */}
+              <div className="hidden lg:block ml-4 animate-fade-in-up">
+                <div className="space-y-0.5">
+                  <div className="text-sm font-bold text-foreground tracking-wide bg-gradient-to-r from-red-600 to-red-800 bg-clip-text text-transparent">
+                    Exclusive Sale Event
+                  </div>
+                  <div className="text-xs text-muted-foreground font-medium tracking-wider">
+                    April 3-6, 2025
+                  </div>
+                </div>
+              </div>
+              
+              {/* Mobile Event Badge */}
+              <div className="lg:hidden animate-fade-in-up">
+                <Badge 
+                  variant="outline" 
+                  className="text-xs font-medium border-red-200 text-red-700 bg-red-50/50"
+                >
+                  Sale Event
+                </Badge>
+              </div>
             </div>
-            <nav className="hidden md:flex items-center space-x-8">
-              <a href="#event" className="relative text-gray-700 hover:text-primary transition-all duration-300 font-medium tracking-wide group">
-                Event Details
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-primary transition-all duration-300 group-hover:w-full"></span>
-              </a>
-              <a href="#products" className="relative text-gray-700 hover:text-primary transition-all duration-300 font-medium tracking-wide group">
-                Products
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-primary transition-all duration-300 group-hover:w-full"></span>
-              </a>
-              <a href="#contact" className="relative text-gray-700 hover:text-primary transition-all duration-300 font-medium tracking-wide group">
-                Contact
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-primary transition-all duration-300 group-hover:w-full"></span>
-              </a>
-              <button className="btn-primary text-white font-semibold py-2 px-6 rounded-full text-sm tracking-wide">
-                Register Now
-              </button>
-            </nav>
-            <button className="md:hidden text-gray-700 hover:text-primary transition-colors">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
+            
+            {/* CTA Section */}
+            <div className="flex items-center animate-slide-up">
+              <Button 
+                size="lg"
+                className="bg-gradient-to-r from-red-600 via-red-700 to-red-800 text-white font-bold px-6 sm:px-8 lg:px-10 shadow-xl border border-red-500/20 transition-all duration-300"
+              >
+                <span className="hidden sm:inline">Book Consultation</span>
+                <span className="sm:hidden">Book Now</span>
+              </Button>
+            </div>
           </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center text-white overflow-hidden pt-20">
-        <div className="absolute inset-0 hero-gradient"></div>
-        <div className="absolute inset-0 bg-black/30"></div>
+      <section className="bg-red-700 min-h-screen flex items-center justify-center text-white pt-24 hero-parallax scroll-container">
+        {/* Background Layer for Parallax */}
+        <div className="hero-background parallax-element parallax-slow">
+          <div className="absolute inset-0 bg-gradient-to-br from-red-700 via-red-800 to-red-900"></div>
+        </div>
         
-        {/* Floating Elements */}
-        <div className="absolute top-1/4 left-10 w-2 h-2 bg-gold rounded-full animate-bounce animate-delay-100 opacity-60"></div>
-        <div className="absolute top-1/3 right-16 w-3 h-3 bg-white rounded-full animate-pulse animate-delay-300 opacity-40"></div>
-        <div className="absolute bottom-1/4 left-1/4 w-1 h-1 bg-gold-light rounded-full animate-ping animate-delay-500 opacity-80"></div>
-        
-        <div className="relative z-10 text-center max-w-6xl mx-auto px-4">
-          <div className="mb-12 animate-scale-in">
-            <div className="w-40 h-40 mx-auto mb-8 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 shadow-2xl">
-              <div className="text-5xl font-bold text-gradient-gold animate-pulse">🎹</div>
+        <div className="max-w-6xl mx-auto px-6 text-center hero-content">
+          
+          {/* Main Header with Overlaid TSU Seal */}
+          <div className="relative mb-16 scroll-animate-scale">
+            {/* Top Line */}
+            <div className="w-full h-1 bg-white/60 mb-8 scroll-animate-left"></div>
+            
+            <h1 className="text-3xl md:text-5xl lg:text-6xl text-white tracking-wider leading-tight scroll-animate">
+              <span className="font-normal">TEXAS SOUTHERN UNIVERSITY</span>
+              <br />
+              <span className="font-black">PIANO SALE EVENT</span>
+            </h1>
+            
+            {/* Bottom Line */}
+            <div className="w-full h-1 bg-white/60 mt-8 scroll-animate-right"></div>
+            
+            {/* TSU Seal Overlay with Parallax */}
+            <div className="absolute inset-0 flex items-center justify-center parallax-element parallax-medium">
+              <div className="relative w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 opacity-20">
+                <Image
+                  src="/images/seal-tsu-4055528333.png"
+                  alt="Texas Southern University"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
             </div>
           </div>
           
-          <div className="space-y-6">
-            <h1 className="text-6xl md:text-8xl font-bold leading-tight animate-fade-in-up">
-              EXCLUSIVE PREMIUM
-              <br />
-              <span className="text-gradient-gold animate-fade-in-up animate-delay-200">SALE EVENT</span>
-            </h1>
-            
-            <p className="text-2xl md:text-3xl font-light opacity-90 animate-fade-in-up animate-delay-300 tracking-wide">
-              FEBRUARY 16TH - FEBRUARY 19TH, 2024
-            </p>
-            
-            <p className="text-lg md:text-xl opacity-80 max-w-2xl mx-auto animate-fade-in-up animate-delay-400 leading-relaxed">
-              Experience the artistry of world-class piano craftsmanship with exclusive deals on our premium collection
-            </p>
-          </div>
-          
-          <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up animate-delay-500">
-            <button className="btn-primary text-white font-bold py-4 px-10 rounded-full text-lg tracking-wide shadow-2xl">
-              DISCOVER PIANOS
-            </button>
-            <button className="bg-white/10 backdrop-blur-md border border-white/30 text-white font-semibold py-4 px-10 rounded-full text-lg tracking-wide hover:bg-white/20 transition-all duration-300">
-              Watch Video
-            </button>
-          </div>
-          
-          <div className="mt-16 animate-bounce animate-delay-700">
-            <svg className="w-8 h-8 mx-auto text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
+          {/* Essential Info - Centered */}
+          <div className="space-y-8 max-w-2xl mx-auto">
+            <h2 className="text-2xl md:text-3xl font-bold text-white scroll-animate">
+              Save up to $6,000 on Premium Kawai Pianos
+            </h2>
+            <p className="text-lg text-white/90 scroll-animate">April 3-6, 2025</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center scroll-animate">
+              <Button className="bg-white text-red-700 hover:bg-gray-100 px-8 py-3 text-lg font-semibold">
+                Find Your Piano
+              </Button>
+              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-red-700 px-8 py-3 text-lg font-semibold">
+                Book a Spot
+              </Button>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Countdown Timer Section */}
-      <section className="relative bg-gradient-to-r from-primary via-primary-dark to-secondary py-16 overflow-hidden">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-gold via-gold-light to-gold animate-pulse"></div>
-        
-        <div className="relative max-w-5xl mx-auto text-center px-4">
-          <h2 className="text-white text-3xl md:text-4xl font-bold mb-4 animate-fade-in-up tracking-wide">
-            Limited Time Offer Ends In:
-          </h2>
-          <p className="text-white/80 text-lg mb-12 animate-fade-in-up animate-delay-200">
-            Don't miss this exclusive opportunity to own a premium KAWAI piano
-          </p>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 mb-12">
-            <div className="text-center animate-fade-in-up animate-delay-100">
-              <div className="countdown-card text-primary text-4xl md:text-5xl font-bold py-6 px-4 rounded-2xl min-w-[100px] shadow-2xl">
-                {timeLeft.days.toString().padStart(2, '0')}
+      {/* About Event Section */}
+      <section id="about-event" className="py-24 bg-muted/30 scroll-container">
+        <div className="max-w-7xl mx-auto px-6">
+          {/* Section Header */}
+          <div className="text-center mb-16 space-y-4">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight scroll-animate">
+              About This <span className="text-kawai-red">Exclusive Event</span>
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed scroll-animate">
+              A rare opportunity to access premium Kawai pianos at exclusive pricing through our official partnership with Texas Southern University Music Department
+            </p>
+          </div>
+
+          {/* Image Gallery */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            <Card className="h-72 overflow-hidden group hover:shadow-lg transition-shadow scroll-animate">
+              <CardContent className="p-0 h-full">
+                <div className="h-2/3 bg-muted flex items-center justify-center">
+                  <span className="text-muted-foreground text-sm">Piano Showroom Image</span>
+                </div>
+                <div className="p-4 h-1/3 flex flex-col justify-center">
+                  <h4 className="font-semibold">Piano Showroom</h4>
+                  <p className="text-sm text-muted-foreground">Premium collection display</p>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="h-72 overflow-hidden group hover:shadow-lg transition-shadow scroll-animate">
+              <CardContent className="p-0 h-full">
+                <div className="h-2/3 bg-amber-50 flex items-center justify-center">
+                  <span className="text-amber-700 text-sm">TSU Partnership Image</span>
+                </div>
+                <div className="p-4 h-1/3 flex flex-col justify-center">
+                  <h4 className="font-semibold">TSU Partnership</h4>
+                  <p className="text-sm text-muted-foreground">Official university collaboration</p>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="h-72 overflow-hidden group hover:shadow-lg transition-shadow scroll-animate">
+              <CardContent className="p-0 h-full">
+                <div className="h-2/3 bg-blue-50 flex items-center justify-center">
+                  <span className="text-blue-700 text-sm">Happy Families Image</span>
+                </div>
+                <div className="p-4 h-1/3 flex flex-col justify-center">
+                  <h4 className="font-semibold">Happy Families</h4>
+                  <p className="text-sm text-muted-foreground">500+ satisfied customers</p>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="h-72 overflow-hidden group hover:shadow-lg transition-shadow scroll-animate">
+              <CardContent className="p-0 h-full">
+                <div className="h-2/3 bg-green-50 flex items-center justify-center">
+                  <span className="text-green-700 text-sm">Quality Guarantee Image</span>
+                </div>
+                <div className="p-4 h-1/3 flex flex-col justify-center">
+                  <h4 className="font-semibold">Quality Guarantee</h4>
+                  <p className="text-sm text-muted-foreground">10-year comprehensive warranty</p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Event Description */}
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6 scroll-animate-left">
+              <h3 className="text-2xl md:text-3xl font-bold tracking-tight">
+                A Partnership Built on <span className="text-kawai-red">Musical Excellence</span>
+              </h3>
+              
+              <div className="space-y-4 text-muted-foreground leading-relaxed">
+                <p className="text-base">
+                  For over five years, our exclusive partnership with Texas Southern University&apos;s Music Department has brought Houston families access to premium Kawai pianos at specially negotiated pricing.
+                </p>
+                
+                <p className="text-base">
+                  This four-day exclusive event features carefully selected instruments that meet TSU&apos;s rigorous quality standards. Each piano has been chosen by the university&apos;s music faculty for its exceptional sound quality, build craftsmanship, and educational value.
+                </p>
+                
+                <p className="text-base">
+                  Whether you&apos;re a TSU student, Houston resident, or music enthusiast, this event offers a rare opportunity to acquire professional-grade instruments with the confidence that comes from institutional endorsement.
+                </p>
               </div>
-              <div className="text-white text-sm mt-3 font-semibold tracking-widest uppercase opacity-90">Days</div>
+
+              <div className="grid sm:grid-cols-2 gap-4">
+                <Card>
+                  <CardContent className="pt-4">
+                    <h4 className="font-semibold mb-2">Event Dates</h4>
+                    <p className="text-sm text-muted-foreground">April 3-6, 2025<br />Limited appointment slots</p>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardContent className="pt-4">
+                    <h4 className="font-semibold mb-2">Location</h4>
+                    <p className="text-sm text-muted-foreground">Houston Showroom<br />3100 Cleburne Street</p>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
-            <div className="text-center animate-fade-in-up animate-delay-200">
-              <div className="countdown-card text-primary text-4xl md:text-5xl font-bold py-6 px-4 rounded-2xl min-w-[100px] shadow-2xl">
-                {timeLeft.hours.toString().padStart(2, '0')}
-              </div>
-              <div className="text-white text-sm mt-3 font-semibold tracking-widest uppercase opacity-90">Hours</div>
-            </div>
-            <div className="text-center animate-fade-in-up animate-delay-300">
-              <div className="countdown-card text-primary text-4xl md:text-5xl font-bold py-6 px-4 rounded-2xl min-w-[100px] shadow-2xl">
-                {timeLeft.minutes.toString().padStart(2, '0')}
-              </div>
-              <div className="text-white text-sm mt-3 font-semibold tracking-widest uppercase opacity-90">Minutes</div>
-            </div>
-            <div className="text-center animate-fade-in-up animate-delay-400">
-              <div className="countdown-card text-primary text-4xl md:text-5xl font-bold py-6 px-4 rounded-2xl min-w-[100px] shadow-2xl">
-                {timeLeft.seconds.toString().padStart(2, '0')}
-              </div>
-              <div className="text-white text-sm mt-3 font-semibold tracking-widest uppercase opacity-90">Seconds</div>
+
+            <div className="relative scroll-animate-right">
+              <Card className="h-[440px] overflow-hidden">
+                <CardContent className="p-0 h-full">
+                  <div className="h-3/5 bg-muted flex items-center justify-center">
+                    <span className="text-muted-foreground">Premium Piano Collection Image</span>
+                  </div>
+                  <div className="p-6 h-2/5">
+                    <h4 className="text-xl font-bold mb-4">Premium Piano Collection</h4>
+                    <div className="grid grid-cols-2 gap-2 text-sm">
+                      <div className="bg-muted/50 rounded p-2">
+                        <div className="font-medium text-kawai-red">Digital Pianos</div>
+                        <div className="text-muted-foreground text-xs">ES Series</div>
+                      </div>
+                      <div className="bg-muted/50 rounded p-2">
+                        <div className="font-medium text-kawai-red">Upright Pianos</div>
+                        <div className="text-muted-foreground text-xs">K Series</div>
+                      </div>
+                      <div className="bg-muted/50 rounded p-2">
+                        <div className="font-medium text-kawai-red">Grand Pianos</div>
+                        <div className="text-muted-foreground text-xs">GL Series</div>
+                      </div>
+                      <div className="bg-muted/50 rounded p-2">
+                        <div className="font-medium text-kawai-red">Professional</div>
+                        <div className="text-muted-foreground text-xs">Concert Grade</div>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
-          
-          <div className="animate-fade-in-up animate-delay-500">
-            <button className="bg-white text-primary hover:bg-gray-50 font-bold py-4 px-12 rounded-full text-lg transition-all duration-300 shadow-2xl hover:shadow-3xl hover:scale-105 tracking-wide">
-              SECURE YOUR SPOT
-            </button>
-            <p className="text-white/70 text-sm mt-4">✨ Free registration • No commitment required</p>
+        </div>
+      </section>
+
+      {/* Piano Showcase */}
+      <section id="featured-deals" className="py-24 bg-background">
+        <div className="max-w-7xl mx-auto px-6">
+          {/* Section Header */}
+          <div className="text-center mb-16 space-y-4">
+            <Badge variant="outline" className="mb-2">
+              Limited Inventory: Only 48 Premium Pianos Available
+            </Badge>
+            
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
+              Featured <span className="text-kawai-red">Piano Deals</span>
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              Specially negotiated pricing through our TSU partnership &ndash; unavailable elsewhere
+            </p>
+          </div>
+
+          {/* Piano Inventory */}
+          <div className="grid gap-6">
+            {[
+              {
+                name: "Kawai ES120 Digital Piano",
+                model: "ES120",
+                category: "Digital",
+                price: "$949",
+                originalPrice: "$1,099",
+                savings: "$150",
+                monthlyPayment: "$79",
+                remaining: 12,
+                features: ["88 Weighted Keys", "Premium Sound Engine", "Bluetooth Ready", "TSU Approved"],
+                badge: "STUDENT FAVORITE"
+              },
+              {
+                name: "Kawai ES520 Digital Piano",
+                model: "ES520",
+                category: "Digital Premium",
+                price: "$999",
+                originalPrice: "$1,399",
+                savings: "$400",
+                monthlyPayment: "$83",
+                remaining: 8,
+                features: ["88 Keys", "Bluetooth Ready", "App Compatible", "Faculty Choice"],
+                badge: "BEST VALUE"
+              },
+              {
+                name: "K200 Upright Acoustic Piano",
+                model: "K200",
+                category: "Upright",
+                price: "$6,390",
+                originalPrice: "$8,395",
+                savings: "$2,005",
+                monthlyPayment: "$532",
+                remaining: 4,
+                features: ["Perfect Home Size", "Rich Acoustic Tone", "TSU Standard", "Free Setup"],
+                badge: "FAMILY FAVORITE"
+              },
+              {
+                name: "GL10 Grand Piano",
+                model: "GL10",
+                category: "Grand",
+                price: "$12,950",
+                originalPrice: "$18,995",
+                savings: "$6,045",
+                monthlyPayment: "$1,079",
+                remaining: 2,
+                features: ["Performance Grade", "Concert Quality", "Faculty Approved", "White Glove Delivery"],
+                badge: "PREMIUM SELECTION"
+              }
+            ].map((piano, index) => (
+              <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow">
+                <div className="grid lg:grid-cols-3 gap-6">
+                  {/* Piano Image and Info */}
+                  <div className="lg:col-span-1">
+                    <div className="h-48 bg-muted flex items-center justify-center">
+                      <span className="text-muted-foreground text-sm">{piano.name} Image</span>
+                    </div>
+                    <CardHeader className="pb-4">
+                      <div className="flex items-center justify-between mb-2">
+                        <Badge variant="outline" className="text-xs">{piano.badge}</Badge>
+                        <Badge variant="secondary" className="text-xs">{piano.category}</Badge>
+                      </div>
+                      <CardTitle className="text-lg">{piano.name}</CardTitle>
+                      <CardDescription className="text-sm">Model: {piano.model}</CardDescription>
+                    </CardHeader>
+                  </div>
+
+                  {/* Pricing */}
+                  <div className="lg:col-span-1">
+                    <CardContent className="pt-6">
+                      <div className="text-center space-y-3">
+                        <div>
+                          <div className="text-sm text-muted-foreground line-through">Was: {piano.originalPrice}</div>
+                          <div className="text-3xl font-bold text-kawai-red">{piano.price}</div>
+                          <div className="text-base font-semibold text-green-600">Save {piano.savings}</div>
+                        </div>
+                        
+                        <div className="border-t pt-3">
+                          <div className="text-sm text-muted-foreground">Or pay monthly:</div>
+                          <div className="text-lg font-semibold">{piano.monthlyPayment}/month</div>
+                        </div>
+
+                        <div className="text-sm text-muted-foreground">
+                          {piano.remaining} remaining
+                        </div>
+                      </div>
+                    </CardContent>
+                  </div>
+
+                  {/* Features and CTAs */}
+                  <div className="lg:col-span-1">
+                    <CardContent className="pt-6">
+                      <div className="space-y-3 mb-6">
+                        {piano.features.map((feature, featureIndex) => (
+                          <div key={featureIndex} className="text-sm text-muted-foreground">
+                            {feature}
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="space-y-2">
+                        <Button className="w-full bg-kawai-red hover:bg-kawai-red-dark" size="sm">
+                          Add to Consultation
+                        </Button>
+                        <Button variant="outline" className="w-full" size="sm">
+                          Learn More
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+
+          {/* Value Proposition */}
+          <div className="mt-12">
+            <Card className="p-6">
+              <CardHeader className="pb-4">
+                <CardTitle className="text-center text-xl">What's Included with Every Piano</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid md:grid-cols-4 gap-4 text-center">
+                  <div>
+                    <h4 className="font-medium mb-1">10-Year Warranty</h4>
+                    <p className="text-sm text-muted-foreground">Comprehensive coverage</p>
+                  </div>
+                  <div>
+                    <h4 className="font-medium mb-1">Free Delivery</h4>
+                    <p className="text-sm text-muted-foreground">Within 50 miles</p>
+                  </div>
+                  <div>
+                    <h4 className="font-medium mb-1">Professional Setup</h4>
+                    <p className="text-sm text-muted-foreground">Expert installation</p>
+                  </div>
+                  <div>
+                    <h4 className="font-medium mb-1">30-Day Guarantee</h4>
+                    <p className="text-sm text-muted-foreground">Satisfaction promise</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Authority & Trust Section */}
+      <section className="py-24 bg-muted/30">
+        <div className="max-w-7xl mx-auto px-6">
+          {/* Section Header */}
+          <div className="text-center mb-16 space-y-4">
+            <div className="inline-flex items-center gap-3 bg-amber-50 border border-amber-200 rounded-full px-4 py-2">
+              <div className="w-6 h-6 bg-amber-500 rounded-full flex items-center justify-center">
+                <span className="text-white font-bold text-xs">TSU</span>
+              </div>
+              <span className="text-amber-800 font-medium text-sm">Official Partnership</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
+              Trusted by <span className="text-kawai-red">Music Professionals</span>
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              Our exclusive partnership with Texas Southern University Music Department brings you institutional credibility and expert-approved piano selections.
+            </p>
+          </div>
+
+          {/* Testimonial & Credentials */}
+          <div className="grid lg:grid-cols-2 gap-12 mb-16">
+            {/* TSU Endorsement */}
+            <Card className="p-6">
+              <CardHeader className="pb-4">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 bg-amber-500 rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-sm">TSU</span>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold">Music Department Chair</h3>
+                    <p className="text-sm text-amber-600">Texas Southern University</p>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <blockquote className="text-muted-foreground italic mb-4">
+                  &ldquo;Our partnership with Kawai ensures that our students and the Houston community have access to exceptional piano quality that meets our institutional performance standards.&rdquo;
+                </blockquote>
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 bg-muted rounded-full"></div>
+                  <div>
+                    <div className="font-medium text-sm">Dr. Marcus Williams</div>
+                    <div className="text-xs text-muted-foreground">Chair, Music Department</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Quick Guarantees */}
+            <Card className="p-6">
+              <CardHeader className="pb-4">
+                <CardTitle className="text-lg">Quality Guarantees</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex gap-3">
+                  <div className="w-8 h-8 bg-kawai-red rounded flex items-center justify-center flex-shrink-0">
+                    <span className="text-white text-xs">✓</span>
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-sm">10-Year Comprehensive Warranty</h4>
+                    <p className="text-xs text-muted-foreground">Complete coverage including parts and service</p>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <div className="w-8 h-8 bg-kawai-red rounded flex items-center justify-center flex-shrink-0">
+                    <span className="text-white text-xs">✓</span>
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-sm">Authorized Dealer</h4>
+                    <p className="text-xs text-muted-foreground">Official Kawai dealer with factory support</p>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <div className="w-8 h-8 bg-kawai-red rounded flex items-center justify-center flex-shrink-0">
+                    <span className="text-white text-xs">✓</span>
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-sm">30-Day Satisfaction Guarantee</h4>
+                    <p className="text-xs text-muted-foreground">Full return policy with confidence</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Social Proof Section */}
+      <section className="py-24 bg-slate-900 text-white">
+        <div className="max-w-7xl mx-auto px-6">
+          {/* Section Header */}
+          <div className="text-center mb-12 space-y-3">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
+              Join the <span className="text-amber-300">Musical Community</span>
+            </h2>
+            <p className="text-amber-200 text-lg">
+              April 3-6, 2025 • Limited Appointment Slots Available
+            </p>
+            <p className="text-slate-300 max-w-3xl mx-auto">
+              Be part of Houston&apos;s exclusive piano community with TSU-endorsed expert guidance and premium instrument selection
+            </p>
+          </div>
+
+          {/* Community Metrics Grid - Clean */}
+          <div className="grid md:grid-cols-4 gap-6 mb-16">
+            <Card className="bg-white/10 border-white/20 text-center">
+              <CardContent className="pt-6">
+                <div className="text-4xl font-bold text-amber-300 mb-2">847</div>
+                <div className="text-white text-sm font-medium mb-1">Happy Families</div>
+                <div className="text-gray-300 text-xs">4.9/5 satisfaction</div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white/10 border-white/20 text-center">
+              <CardContent className="pt-6">
+                <div className="text-4xl font-bold text-amber-300 mb-2">200+</div>
+                <div className="text-white text-sm font-medium mb-1">TSU Students</div>
+                <div className="text-gray-300 text-xs">Musical excellence</div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white/10 border-white/20 text-center">
+              <CardContent className="pt-6">
+                <div className="text-4xl font-bold text-amber-300 mb-2">15+</div>
+                <div className="text-white text-sm font-medium mb-1">Years Serving</div>
+                <div className="text-gray-300 text-xs">Houston community</div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white/10 border-white/20 text-center">
+              <CardContent className="pt-6">
+                <div className="text-4xl font-bold text-amber-300 mb-2">48</div>
+                <div className="text-white text-sm font-medium mb-1">Pianos Remaining</div>
+                <div className="text-gray-300 text-xs">Limited inventory</div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Live Activity Feed - Clean */}
+          <div className="max-w-4xl mx-auto mb-12">
+            <Card className="bg-white/10 border-white/20">
+              <CardHeader>
+                <div className="flex items-center space-x-3">
+                  <div className="w-3 h-3 bg-green-400 rounded-full"></div>
+                  <span className="text-white font-semibold">Recent Activity</span>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-3 text-white/90 text-sm">
+                    <div className="flex justify-between">
+                      <span>Sarah from Katy booked consultation</span>
+                      <span className="text-amber-300 text-xs">2 min ago</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Johnson family reserved K200 piano</span>
+                      <span className="text-amber-300 text-xs">7 min ago</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>New review from Michael R.</span>
+                      <span className="text-amber-300 text-xs">12 min ago</span>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-3 text-white/90 text-sm">
+                    <div className="flex justify-between">
+                      <span>TSU student inquiry for ES520</span>
+                      <span className="text-amber-300 text-xs">15 min ago</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Phone consultation completed</span>
+                      <span className="text-amber-300 text-xs">18 min ago</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-amber-300 font-medium">12 consultations booked today</span>
+                      <Badge className="bg-green-500 text-white text-xs">LIVE</Badge>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Customer Reviews - Clean */}
+          <div className="max-w-5xl mx-auto mb-12">
+            <div className="text-center mb-8">
+              <h3 className="text-2xl font-bold text-white mb-4">What Our Community Says</h3>
+              <div className="flex items-center justify-center space-x-4 mb-6">
+                <span className="text-2xl font-bold text-amber-300">4.9</span>
+                <span className="text-white/80">/5 on Google</span>
+                <span className="text-white/60">•</span>
+                <span className="text-white/80">847 verified reviews</span>
+              </div>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                {
+                  name: "Jennifer M.",
+                  location: "Katy", 
+                  text: "Outstanding service! The TSU partnership really shows in the quality and expertise. Our daughter loves her new Kawai piano.",
+                  timeAgo: "1 week ago"
+                },
+                {
+                  name: "David L.",
+                  location: "Sugar Land",
+                  text: "Professional, knowledgeable, and patient. They helped us choose the perfect piano for our family. Highly recommended!",
+                  timeAgo: "2 weeks ago"
+                },
+                {
+                  name: "Maria R.",
+                  location: "Houston",
+                  text: "The consultation was invaluable. Their expertise and the TSU connection gave us confidence in our investment.",
+                  timeAgo: "3 weeks ago"
+                }
+              ].map((review, index) => (
+                <Card key={index} className="bg-white/10 border-white/20">
+                  <CardContent className="pt-6">
+                    <div className="h-20 bg-gray-200 rounded mb-4 flex items-center justify-center">
+                      <span className="text-gray-500 text-xs">Customer Photo</span>
+                    </div>
+                    <blockquote className="text-white/90 text-sm mb-4">"{review.text}"</blockquote>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="text-white font-medium text-sm">{review.name}</div>
+                        <div className="text-white/60 text-xs">{review.location}</div>
+                      </div>
+                      <div className="text-white/50 text-xs">{review.timeAgo}</div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          {/* Final CTA Section - Clean */}
+          <div className="text-center">
+            <Card className="bg-white/10 border-white/20 max-w-3xl mx-auto">
+              <CardContent className="pt-8">
+                <h3 className="text-white text-2xl font-bold mb-4">Reserve Your Exclusive Access</h3>
+                <p className="text-white/90 mb-6">Join hundreds of satisfied Houston families in the TSU piano community</p>
+                
+                <Button size="lg" className="bg-kawai-red hover:bg-kawai-red-dark text-white font-bold text-lg px-12 py-4 mb-6">
+                  BOOK YOUR CONSULTATION NOW
+                </Button>
+                
+                <div className="grid sm:grid-cols-3 gap-4 text-sm text-white/90">
+                  <span>Free 30-min consultation</span>
+                  <span>No pressure environment</span>
+                  <span>30-day price guarantee</span>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
@@ -249,86 +837,6 @@ export default function Home() {
                 </button>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Products Section */}
-      <section id="products" className="py-20 bg-white relative overflow-hidden">
-        <div className="absolute top-1/2 left-0 w-96 h-96 bg-gradient-to-br from-primary/5 to-transparent rounded-full -translate-y-1/2 -translate-x-48"></div>
-        <div className="absolute top-1/4 right-0 w-80 h-80 bg-gradient-to-bl from-accent/5 to-transparent rounded-full translate-x-40"></div>
-        
-        <div className="relative max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16 animate-fade-in-up">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-dark mb-6 tracking-tight">
-              Featured <span className="text-gradient-primary">Deals</span>
-            </h2>
-            <div className="w-24 h-1 bg-gradient-primary mx-auto mb-6 rounded-full"></div>
-            <p className="text-xl text-gray-medium max-w-3xl mx-auto leading-relaxed">
-              Discover exceptional savings on our most celebrated piano collections
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { name: "Digital Piano ES110", price: "$599", originalPrice: "$799", savings: "25%", image: "🎹", category: "Digital", featured: false },
-              { name: "Upright Piano K-200", price: "$4,999", originalPrice: "$6,499", savings: "23%", image: "🎼", category: "Upright", featured: true },
-              { name: "Grand Piano GX-2", price: "$39,999", originalPrice: "$49,999", savings: "20%", image: "🎵", category: "Grand", featured: true },
-              { name: "Portable Piano MP7SE", price: "$1,299", originalPrice: "$1,599", savings: "19%", image: "🎶", category: "Portable", featured: false }
-            ].map((product, index) => (
-              <div key={index} className={`product-card rounded-3xl overflow-hidden shadow-xl animate-fade-in-up animate-delay-${(index + 1) * 100} ${
-                product.featured ? 'ring-2 ring-primary/20' : ''
-              }`}>
-                {product.featured && (
-                  <div className="bg-gradient-primary text-white text-xs font-bold px-3 py-1 absolute top-4 right-4 rounded-full z-10">
-                    BEST SELLER
-                  </div>
-                )}
-                
-                <div className="relative h-56 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center text-8xl overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
-                  <div className="relative z-10 transform hover:scale-110 transition-transform duration-500">
-                    {product.image}
-                  </div>
-                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-primary text-xs font-bold px-2 py-1 rounded-full">
-                    {product.category}
-                  </div>
-                  <div className="absolute bottom-4 right-4 bg-green-500 text-white text-sm font-bold px-3 py-1 rounded-full">
-                    -{product.savings} OFF
-                  </div>
-                </div>
-                
-                <div className="p-6">
-                  <h3 className="font-bold text-xl text-gray-dark mb-3 leading-tight">{product.name}</h3>
-                  
-                  <div className="mb-6">
-                    <div className="flex items-baseline gap-2 mb-2">
-                      <span className="text-3xl font-bold text-gradient-primary">{product.price}</span>
-                      <span className="text-gray-medium line-through text-lg">{product.originalPrice}</span>
-                    </div>
-                    <p className="text-sm text-green-600 font-medium">
-                      You save ${parseInt(product.originalPrice.replace('$', '').replace(',', '')) - parseInt(product.price.replace('$', '').replace(',', ''))}
-                    </p>
-                  </div>
-                  
-                  <div className="space-y-3">
-                    <button className="w-full btn-primary text-white font-semibold py-3 px-4 rounded-xl shadow-lg">
-                      Learn More
-                    </button>
-                    <button className="w-full border-2 border-gray-200 text-gray-700 font-semibold py-3 px-4 rounded-xl hover:border-primary hover:text-primary transition-all duration-300">
-                      Quick Demo
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          <div className="text-center mt-16 animate-fade-in-up animate-delay-500">
-            <button className="bg-gradient-to-r from-gray-800 to-gray-900 text-white font-bold py-4 px-12 rounded-full hover:from-gray-700 hover:to-gray-800 transition-all duration-300 shadow-xl">
-              View Complete Collection
-            </button>
-            <p className="text-gray-medium mt-4">🏆 Award-winning instruments • 🏠 Showroom available • 📞 Expert consultation</p>
           </div>
         </div>
       </section>
