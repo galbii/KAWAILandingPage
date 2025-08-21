@@ -101,7 +101,7 @@
 - **Median Household Income**: $63,000 (target audience: $75,000+)
 - **Music Education Interest**: High due to diverse cultural community
 - **Competition Level**: Moderate with opportunity for differentiation
-- **HBCU Community**: Strong Texas Southern University alumni network
+- **HBCU Community**: Strong Sam Houston State University alumni network
 
 ### Market Penetration Opportunities
 - **Underserved Segments**: Adult learners and HBCU community
@@ -146,7 +146,7 @@
 - **Local Dealers**: Relationship-based sales and service
 
 ### Differentiation Opportunities
-- **University Partnership**: TSU endorsement unique advantage
+- **University Partnership**: SHSU endorsement unique advantage
 - **Community Focus**: HBCU heritage and local pride
 - **Educational Authority**: Academic program integration
 - **Personalized Service**: Consultation-based sales approach
@@ -163,7 +163,7 @@
 - Spring recital preparation (March-April)
 
 ### Long-Term Market Development (2025-2027)
-- TSU partnership expansion opportunities
+- SHSU partnership expansion opportunities
 - Music educator network development
 - Community event sponsorship and visibility
 - Referral program and customer loyalty building
@@ -180,7 +180,7 @@
 ## 🔑 Strategic Recommendations
 
 ### Market Entry Strategy
-1. **Leverage TSU Partnership**: Unique authority positioning
+1. **Leverage SHSU Partnership**: Unique authority positioning
 2. **Focus on Education**: Cognitive benefits and academic success
 3. **Community Engagement**: HBCU pride and local connections
 4. **Quality Positioning**: Premium selection with institutional backing
@@ -193,7 +193,7 @@
 - **Build to April event**: Systematic engagement and anticipation
 
 ### Competitive Response
-- **Unique Positioning**: TSU partnership cannot be replicated
+- **Unique Positioning**: SHSU partnership cannot be replicated
 - **Educational Authority**: Academic credibility vs. retail competition
 - **Community Values**: HBCU heritage and local pride
 - **Quality Focus**: Institutional standards vs. commercial sales

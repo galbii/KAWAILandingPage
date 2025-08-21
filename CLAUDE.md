@@ -46,7 +46,7 @@ This is a **Next.js 15.4.6 application** using the App Router with the following
 
 ### Styling System
 - **CSS Custom Properties**: Extensive use of CSS variables for colors, gradients, shadows, and spacing
-- **Premium Design System**: Custom KAWAI and TSU brand colors with sophisticated gradients
+- **Premium Design System**: Custom KAWAI and SHSU brand colors with sophisticated gradients
 - **Advanced Animations**: Custom keyframes for fadeIn, slide, scale, shimmer, and parallax effects
 - **Scroll-Based Interactions**: Header state management and scroll-triggered animations
 - **Component-Specific Classes**: Specialized styling for cards, buttons, and interactive elements
@@ -60,8 +60,8 @@ This is a **Next.js 15.4.6 application** using the App Router with the following
 - **Icons**: Lucide React integration
 
 ### Business Context
-This is a landing page for a **KAWAI piano sale event** in partnership with **Texas Southern University**, featuring:
-- Event dates: April 3-6, 2025 in Houston
+This is a landing page for a **KAWAI piano sale event** in partnership with **Sam Houston State University**, featuring:
+- Event dates: September 11-14, 2025 in Houston
 - Premium piano showcase and consultation booking
-- Brand partnership between KAWAI and TSU
+- Brand partnership between KAWAI and SHSU
 - Sophisticated, premium-focused design aesthetic

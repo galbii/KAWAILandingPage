@@ -22,7 +22,7 @@ Root Causes:
 
 Mitigation Strategies:
 ├── Content Variety Program
-│   ├── Different content creators (TSU students, faculty, customers)
+│   ├── Different content creators (SHSU students, faculty, customers)
 │   ├── Multiple content formats (blog, video, email, social, interactive)
 │   ├── Seasonal message adaptation preventing repetition
 │   └── Progressive information disclosure building complexity
@@ -66,7 +66,7 @@ Mitigation Strategies:
 │   ├── Early bird registration creating committed audience
 │   └── Relationship development before competitive peak
 ├── Unique Positioning and Differentiation
-│   ├── TSU partnership exclusive differentiation strategy
+│   ├── SHSU partnership exclusive differentiation strategy
 │   ├── Educational authority positioning vs. retail competition
 │   ├── Community-focused messaging reducing direct competition
 │   └── Quality and consultation emphasis vs. price competition
@@ -162,7 +162,7 @@ Mitigation Strategies:
 │   └── Quality assurance and inspection protocols
 ```
 
-**Partnership Risk (TSU Relationship)**
+**Partnership Risk (SHSU Relationship)**
 ```
 Risk Profile:
 ├── Risk Level: Low-Medium
@@ -172,7 +172,7 @@ Risk Profile:
 ├── Timeline Impact: Mid-campaign disruption requiring strategy pivot
 
 Partnership Vulnerabilities:
-├── TSU Music Department leadership changes
+├── SHSU Music Department leadership changes
 ├── University policy changes affecting commercial partnerships
 ├── Academic priorities shifting away from commercial relationships
 ├── Competitive approach or alternative partnership opportunities
@@ -402,7 +402,7 @@ Quality Assurance Framework:
 │   ├── Consultation quality and customer satisfaction tracking
 │   └── Follow-up and relationship management excellence
 ├── Partnership Relationship Management
-│   ├── TSU partnership value demonstration and mutual benefit
+│   ├── SHSU partnership value demonstration and mutual benefit
 │   ├── Faculty and student satisfaction and engagement
 │   ├── Community reputation and relationship quality
 │   └── Long-term partnership sustainability and growth

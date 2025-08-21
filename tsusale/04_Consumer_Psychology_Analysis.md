@@ -65,12 +65,12 @@ Symbolic Value Drivers:
 
 ### Primary Decision Influences (Weighted by Importance)
 
-| Factor | Influence Weight | Psychological Impact | TSU Campaign Application |
+| Factor | Influence Weight | Psychological Impact | SHSU Campaign Application |
 |--------|------------------|---------------------|-------------------------|
-| **Quality Assurance** | 35% | Risk reduction and confidence building | 10-year warranty, TSU endorsement, institutional standards |
+| **Quality Assurance** | 35% | Risk reduction and confidence building | 10-year warranty, SHSU endorsement, institutional standards |
 | **Expert Recommendation** | 25% | Authority bias and professional validation | Music department chair letter, faculty approval |
 | **Value Proposition** | 20% | Loss aversion and investment justification | Significant discounts, payment plans, long-term value |
-| **Dealer Reputation** | 15% | Trust building and social proof | TSU partnership credibility, customer testimonials |
+| **Dealer Reputation** | 15% | Trust building and social proof | SHSU partnership credibility, customer testimonials |
 | **Financing Options** | 5% | Affordability and accessibility | Payment plans, 0% APR, budget accommodation |
 
 ### Psychological Decision-Making Process
@@ -139,9 +139,9 @@ Psychological Fatigue Prevention:
 │   ├── Holiday family bonding themes (October-December)
 │   ├── New Year personal development (January-February)
 │   ├── Spring achievement and recital preparation (March-April)
-│   └── Consistent TSU authority threading throughout
+│   └── Consistent SHSU authority threading throughout
 ├── Progressive Information Disclosure
-│   ├── Introduction phase: TSU partnership and credibility
+│   ├── Introduction phase: SHSU partnership and credibility
 │   ├── Education phase: Piano benefits and expert insights
 │   ├── Consideration phase: Product comparisons and consultations
 │   ├── Decision phase: Exclusive opportunities and urgency
@@ -189,7 +189,7 @@ March-April (Achievement and Spring Psychology):
 
 **Authority Principle Application**:
 ```
-TSU Partnership Authority Impact:
+SHSU Partnership Authority Impact:
 ├── Institutional Credibility Transfer
 │   ├── University reputation lending to piano selection
 │   ├── Academic standards implying quality assurance
@@ -201,7 +201,7 @@ TSU Partnership Authority Impact:
 │   ├── Academic research supporting piano education benefits
 │   └── Institutional backing reducing purchase anxiety
 ├── Social Proof and Community Validation
-│   ├── TSU student success stories and achievements
+│   ├── SHSU student success stories and achievements
 │   ├── Alumni network endorsement and community pride
 │   ├── HBCU heritage and cultural authenticity
 │   └── Educational community membership and belonging
@@ -258,7 +258,7 @@ Purchase Justification Strategies:
 
 **Risk Mitigation Strategies**:
 ```
-TSU Campaign Risk Reduction:
+SHSU Campaign Risk Reduction:
 ├── Expert Recommendation (Authority Risk Reduction)
 ├── Quality Guarantee and Warranty (Performance Risk Reduction)
 ├── Consultation Process (Decision Risk Reduction)
@@ -282,20 +282,20 @@ Aspiration and Achievement:
 └── "Create lasting memories and family musical traditions"
 
 Authority and Trust:
-├── "Texas Southern University Music Department recommended"
+├── "Sam Houston State University Music Department recommended"
 ├── "Professional-grade pianos meeting institutional standards"
 ├── "Expert faculty selection ensuring quality and value"
 └── "Educational authority backing your investment decision"
 
 Scarcity and Urgency:
 ├── "Limited selection of 48 premium pianos available"
-├── "Exclusive TSU partnership pricing for community members"
+├── "Exclusive SHSU partnership pricing for community members"
 ├── "April 3-6 event - only 4 days of special access"
 └── "Best selection available on first-come, first-served basis"
 
 Social Proof and Belonging:
 ├── "Join 500+ Houston families who trust our expertise"
-├── "TSU students and alumni achieve musical excellence"
+├── "SHSU students and alumni achieve musical excellence"
 ├── "Music educators choose our quality selection"
 └── "Community-supported and culturally authentic partnership"
 ```
@@ -305,7 +305,7 @@ Social Proof and Belonging:
 **8-Month Emotional Evolution**:
 ```
 Phase 1 (August-September): Curiosity and Interest
-├── Discovery of TSU partnership and unique opportunity
+├── Discovery of SHSU partnership and unique opportunity
 ├── Educational benefits research and expert validation
 ├── Initial engagement and information gathering
 └── Trust building through authority and credibility
@@ -336,13 +336,13 @@ Phase 4 (March-April): Action and Commitment
 ### Campaign Messaging Strategy
 
 **Headline Psychology Testing**:
-- **Authority Focus**: "TSU Music Department Recommended Piano Sale"
+- **Authority Focus**: "SHSU Music Department Recommended Piano Sale"
 - **Benefit Focus**: "Unlock Your Child's Musical Potential - Save up to $6,000"
 - **Scarcity Focus**: "48 Premium Pianos - April 3-6 Only"
 - **Community Focus**: "Exclusive Houston HBCU Partnership Piano Event"
 
 **Call-to-Action Psychology**:
-- **Low Commitment**: "Learn More About TSU Partnership"
+- **Low Commitment**: "Learn More About SHSU Partnership"
 - **Medium Commitment**: "Schedule Free Piano Consultation"
 - **High Commitment**: "Reserve Your Piano Selection Appointment"
 - **Urgency Driven**: "Secure Your April Sale Access Now"
@@ -352,7 +352,7 @@ Phase 4 (March-April): Action and Commitment
 **Progressive Trust Development**:
 ```
 Stage 1: Authority Establishment
-├── TSU partnership announcement and credentials
+├── SHSU partnership announcement and credentials
 ├── Music department chair endorsement letter
 ├── Faculty expertise and qualifications highlight
 └── Institutional quality standards explanation

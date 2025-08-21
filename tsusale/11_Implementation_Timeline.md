@@ -7,7 +7,7 @@
 **Days 1-2: Legal and Partnership Establishment**
 ```
 Partnership Formalization Tasks:
-├── TSU Partnership Agreement Finalization
+├── SHSU Partnership Agreement Finalization
 │   ├── Legal review of partnership terms and marketing rights
 │   ├── Music Department chair endorsement letter acquisition
 │   ├── Official partnership announcement approval process
@@ -54,22 +54,22 @@ Technical Setup Priorities:
 Creative Development Priorities:
 ├── Photography and Visual Asset Creation
 │   ├── Professional piano inventory photography session
-│   ├── TSU partnership materials and badge design
+│   ├── SHSU partnership materials and badge design
 │   ├── Houston location and showroom photography
 │   └── Stock photography acquisition and licensing
 ├── Video Content Production Planning
-│   ├── TSU Music Department chair interview scheduling
+│   ├── SHSU Music Department chair interview scheduling
 │   ├── Student testimonial and performance video planning
 │   ├── Piano demonstration video scripting and preparation
 │   └── Video production team coordination and scheduling
 ├── Brand Identity and Marketing Materials
-│   ├── TSU partnership logo and badge design
+│   ├── SHSU partnership logo and badge design
 │   ├── Campaign branding and visual identity development
 │   ├── Print materials design (brochures, business cards)
 │   └── Digital marketing template creation and optimization
 ├── Website Integration and Landing Page Development
 │   ├── Landing page wireframe and design development
-│   ├── TSU partnership authority page creation
+│   ├── SHSU partnership authority page creation
 │   ├── Piano inventory showcase page optimization
 │   └── Appointment booking system integration and testing
 ```
@@ -81,7 +81,7 @@ Creative Development Priorities:
 Content Development Sprint:
 ├── Website Content and Landing Page Creation
 │   ├── Primary landing page copywriting and design
-│   ├── TSU partnership authority page content development
+│   ├── SHSU partnership authority page content development
 │   ├── Piano comparison and selection guide creation
 │   └── FAQ section and objection handling content
 ├── Advertising Creative Development
@@ -161,7 +161,7 @@ Soft Launch Implementation:
 ```
 August Week 1-2 Priorities:
 ├── Complete technical setup and soft launch (as detailed above)
-├── TSU partnership announcement and press release distribution
+├── SHSU partnership announcement and press release distribution
 ├── Initial content publication and SEO foundation establishment
 └── Limited-scale advertising campaign activation and optimization
 ```
@@ -169,14 +169,14 @@ August Week 1-2 Priorities:
 **Week 3: Partnership Launch and Authority Building**
 ```
 August Week 3 Focus:
-├── TSU Partnership Public Announcement
+├── SHSU Partnership Public Announcement
 │   ├── Press release distribution to Houston media outlets
 │   ├── Social media announcement with faculty endorsement video
 │   ├── Email announcement to existing customer and contact database
 │   └── Website homepage integration and authority page promotion
 ├── Educational Content Campaign Launch
 │   ├── "5 Reasons Piano Lessons Transform Children's Education" blog post
-│   ├── TSU Music Department chair endorsement video publication
+│   ├── SHSU Music Department chair endorsement video publication
 │   ├── Student success story collection and initial testimonial creation
 │   └── Social media content calendar activation and engagement
 ├── Early Bird Registration System Activation
@@ -216,7 +216,7 @@ August Performance Goals:
 ├── Social Media Growth: 200+ new followers
 ├── SEO Progress: Top 20 rankings for 5+ target keywords
 ├── Brand Awareness: Initial Houston market recognition
-└── Partnership Credibility: Established TSU relationship authority
+└── Partnership Credibility: Established SHSU relationship authority
 ```
 
 ### Month 2 (September): Back-to-School Optimization
@@ -232,7 +232,7 @@ September Focus Areas:
 ├── Content Marketing Expansion
 │   ├── "The Science Behind Piano and Academic Success" blog series
 │   ├── Age-appropriate piano learning guide creation and promotion
-│   ├── TSU music program curriculum integration content
+│   ├── SHSU music program curriculum integration content
 │   └── Parent testimonial collection and success story development
 ├── Advertising Campaign Optimization
 │   ├── Google Ads expansion and keyword optimization
@@ -274,7 +274,7 @@ Q1 Strategic Review (November):
 │   ├── Competitive response evaluation and market share assessment
 │   └── Budget utilization efficiency and reallocation opportunities
 ├── Partnership Relationship Evaluation
-│   ├── TSU partnership effectiveness and credibility impact
+│   ├── SHSU partnership effectiveness and credibility impact
 │   ├── Faculty engagement and endorsement value assessment
 │   ├── Student testimonial quality and community response
 │   └── Partnership expansion opportunities and development
@@ -338,7 +338,7 @@ Final Campaign Review (April):
 │   ├── Best practice establishment and process optimization
 │   └── Future campaign planning and improvement recommendations
 ├── Partnership and Relationship Evaluation
-│   ├── TSU partnership value and ongoing relationship planning
+│   ├── SHSU partnership value and ongoing relationship planning
 │   ├── Community network development and expansion opportunities
 │   ├── Customer satisfaction and loyalty program development
 │   └── Referral program optimization and word-of-mouth enhancement

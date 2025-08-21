@@ -78,7 +78,7 @@ export default function HeroSection() {
         
         {/* Essential Info - Centered */}
         <div className="space-y-8 max-w-2xl mx-auto">
-          <p className="font-body text-lg text-white/90 scroll-animate tracking-wide">April 3-6, 2025</p>
+          <p className="font-body text-lg text-white/90 scroll-animate tracking-wide">September 11-14, 2025</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center scroll-animate">
             <Button 
               onClick={handleFindPianoClick}

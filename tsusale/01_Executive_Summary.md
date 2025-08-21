@@ -1,6 +1,6 @@
 # Piano Sale Campaign - Executive Summary
 
-## Texas Southern University Piano Sale Campaign Strategy
+## Sam Houston State University Piano Sale Campaign Strategy
 **Campaign Period**: August 2024 - April 2025  
 **Sale Event**: April 3-6, 2025  
 **Primary Objective**: Maximize appointment bookings and conversions for exclusive piano sale event
@@ -29,7 +29,7 @@
 ### Primary Goals
 1. **Maximize Appointment Bookings**: Target 750+ qualified consultations
 2. **Drive High-Quality Conversions**: 30% appointment-to-sale conversion rate
-3. **Build Authority & Trust**: Leverage TSU partnership for credibility
+3. **Build Authority & Trust**: Leverage SHSU partnership for credibility
 4. **Create Sustained Engagement**: 8-month relationship building campaign
 
 ### Success Metrics
@@ -43,7 +43,7 @@
 ## 🗓️ CAMPAIGN TIMELINE OVERVIEW
 
 ### Phase 1: Foundation Building (August-September)
-- Establish TSU partnership credibility
+- Establish SHSU partnership credibility
 - Capture back-to-school interest
 - Build email list and retargeting audience
 - **Budget**: 20% of total investment
@@ -86,14 +86,14 @@
 
 ## 🔑 COMPETITIVE ADVANTAGES
 
-### TSU Partnership Benefits
+### SHSU Partnership Benefits
 - Exclusive academic endorsement and authority
 - Music department chair recommendation letter
 - Student testimonials and success stories
 - Community credibility and trust building
 
 ### Market Positioning
-- Only TSU-endorsed piano dealer in Houston
+- Only SHSU-endorsed piano dealer in Houston
 - Educational authority vs. retail competition
 - Premium quality with institutional backing
 - Community-focused approach with HBCU pride
@@ -119,7 +119,7 @@
 ## 🎯 NEXT STEPS
 
 ### Immediate Actions (Weeks 1-2)
-1. Finalize TSU partnership agreement and endorsement letter
+1. Finalize SHSU partnership agreement and endorsement letter
 2. Set up tracking infrastructure and analytics
 3. Develop landing page and initial creative assets
 4. Launch Phase 1 foundation building campaigns

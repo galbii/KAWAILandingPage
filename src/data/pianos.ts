@@ -22,7 +22,7 @@ export const pianos: Piano[] = [
     savings: "$150",
     monthlyPayment: "$79",
     remaining: 12,
-    features: ["88 Weighted Keys", "Premium Sound Engine", "Bluetooth Ready", "TSU Approved"],
+    features: ["88 Weighted Keys", "Premium Sound Engine", "Bluetooth Ready", "SHSU Approved"],
     badge: "STUDENT FAVORITE",
     image: "/images/pianos/es120.jpeg"
   },
@@ -48,7 +48,7 @@ export const pianos: Piano[] = [
     savings: "$2,005",
     monthlyPayment: "$532",
     remaining: 4,
-    features: ["Perfect Home Size", "Rich Acoustic Tone", "TSU Standard", "Free Setup"],
+    features: ["Perfect Home Size", "Rich Acoustic Tone", "SHSU Standard", "Free Setup"],
     badge: "FAMILY FAVORITE",
     image: "/images/pianos/K-200_EP_styling.jpg"
   },

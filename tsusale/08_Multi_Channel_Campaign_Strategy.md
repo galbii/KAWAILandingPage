@@ -6,13 +6,13 @@
 
 **Campaign Structure Hierarchy**
 ```
-Campaign 1: Brand Protection & TSU Partnership
-├── Ad Group 1: TSU Piano Keywords
-│   ├── "Texas Southern University piano" (Exact)
-│   ├── "TSU music department piano" (Phrase)
-│   ├── "TSU endorsed piano dealer" (Phrase)
+Campaign 1: Brand Protection & SHSU Partnership
+├── Ad Group 1: SHSU Piano Keywords
+│   ├── "Sam Houston State University piano" (Exact)
+│   ├── "SHSU music department piano" (Phrase)
+│   ├── "SHSU endorsed piano dealer" (Phrase)
 │   ├── "Texas Southern piano partnership" (Modified Broad)
-│   └── Landing Page: TSU Partnership Authority Page
+│   └── Landing Page: SHSU Partnership Authority Page
 ├── Ad Group 2: Brand + Location
 │   ├── "Kawai piano Houston" (Phrase)
 │   ├── "Piano dealer Houston" (Modified Broad)
@@ -100,7 +100,7 @@ Microsoft Ads Opportunity:
 │   ├── Educational and classical music keywords
 │   ├── Adult learning and professional development
 │   ├── Higher-end piano models and financing
-│   └── TSU partnership and institutional credibility
+│   └── SHSU partnership and institutional credibility
 ```
 
 **Bing Campaign Structure**
@@ -124,12 +124,12 @@ Facebook Campaign Structure:
 │   ├── Audience: Houston parents 35-55, income $75,000+
 │   ├── Interests: Music education, children's activities, piano lessons
 │   ├── Behaviors: Private school parents, music lesson shoppers
-│   └── Creative: TSU student performance videos, family testimonials
+│   └── Creative: SHSU student performance videos, family testimonials
 ├── Campaign 2: Video Views & Engagement
 │   ├── Objective: Video Views and ThruPlay optimization
 │   ├── Budget: $1,500/month
 │   ├── Audience: Broader Houston metro, music interest
-│   ├── Content: TSU faculty interviews, piano demonstrations
+│   ├── Content: SHSU faculty interviews, piano demonstrations
 │   ├── Retargeting: Video viewers for appointment booking
 │   └── Optimization: 15-second view completion
 ├── Campaign 3: Conversion & Retargeting
@@ -192,18 +192,18 @@ Instagram Content Calendar:
 ├── Monday: Motivational Mondays
 │   ├── Student achievement highlights and success stories
 │   ├── Practice motivation and musical inspiration quotes
-│   ├── TSU student performance clips and highlights
+│   ├── SHSU student performance clips and highlights
 │   └── Community success celebrations and recognition
 ├── Wednesday: Educational Wednesdays
 │   ├── Piano technique tips and practice advice
 │   ├── Music theory basics and educational content
 │   ├── Instrument care and maintenance guidance
-│   └── TSU faculty expertise and educational insights
+│   └── SHSU faculty expertise and educational insights
 ├── Friday: Feature Fridays
 │   ├── Piano model spotlights and demonstrations
 │   ├── Behind-the-scenes content and piano selection
 │   ├── Customer testimonials and family stories
-│   └── TSU partnership highlights and community events
+│   └── SHSU partnership highlights and community events
 ├── Weekend: Community and Lifestyle
 │   ├── Family musical activities and bonding
 │   ├── Houston music community events and participation
@@ -215,13 +215,13 @@ Instagram Content Calendar:
 ```
 Hashtag Portfolio:
 ├── Brand-Specific Tags
-│   ├── #TSUPianoPartnership
+│   ├── #SHSUPianoPartnership
 │   ├── #HoustonPianoSale
-│   ├── #TSUMusicDepartment
+│   ├── #SHSUMusicDepartment
 │   └── #KawaiPianoHouston
 ├── Community Tags
 │   ├── #HoustonMusic
-│   ├── #TSUPride
+│   ├── #SHSUPride
 │   ├── #HBCUExcellence
 │   └── #HoustonFamilies
 ├── Educational Tags
@@ -241,8 +241,8 @@ Hashtag Portfolio:
 **Professional Audience Engagement**
 ```
 LinkedIn Campaign Focus:
-├── TSU Alumni Network Targeting
-│   ├── Texas Southern University alumni (all graduation years)
+├── SHSU Alumni Network Targeting
+│   ├── Sam Houston State University alumni (all graduation years)
 │   ├── Professional achievement and success emphasis
 │   ├── Community pride and institutional support
 │   └── Exclusive alumni pricing and early access offers
@@ -272,10 +272,10 @@ LinkedIn Campaign Focus:
 
 **Welcome Series (5-Email Sequence)**
 ```
-Email 1 (Immediate): "Welcome to the TSU Piano Community"
-├── Subject Line: "Your TSU Piano Guide is Here + Exclusive Access"
+Email 1 (Immediate): "Welcome to the SHSU Piano Community"
+├── Subject Line: "Your SHSU Piano Guide is Here + Exclusive Access"
 ├── Content Focus
-│   ├── TSU partnership introduction and credibility establishment
+│   ├── SHSU partnership introduction and credibility establishment
 │   ├── Free piano buying guide PDF download link
 │   ├── Exclusive early access to April sale event registration
 │   └── Community membership benefits and exclusive offers
@@ -283,12 +283,12 @@ Email 1 (Immediate): "Welcome to the TSU Piano Community"
 ├── Delivery: Immediately upon signup
 └── Open Rate Target: 65%+ (welcome email performance)
 
-Email 2 (Day 3): "Meet Dr. [Name], TSU Music Department Chair"
+Email 2 (Day 3): "Meet Dr. [Name], SHSU Music Department Chair"
 ├── Subject Line: "The Professor Behind Our Partnership (Video Inside)"
 ├── Content Focus
-│   ├── Video introduction from TSU Music Department chair
+│   ├── Video introduction from SHSU Music Department chair
 │   ├── Educational philosophy and piano recommendation principles
-│   ├── TSU music program achievements and student success
+│   ├── SHSU music program achievements and student success
 │   └── Personal endorsement of partnership and quality standards
 ├── CTA: "Watch Dr. [Name]'s Message + Schedule Your Consultation"
 ├── Delivery: 3 days after welcome email
@@ -298,7 +298,7 @@ Email 3 (Day 7): "The Science: How Piano Education Transforms Children"
 ├── Subject Line: "Research-Backed Benefits Your Child Will Love"
 ├── Content Focus
 │   ├── Scientific research on piano education and cognitive development
-│   ├── TSU music program outcomes and student achievements
+│   ├── SHSU music program outcomes and student achievements
 │   ├── Academic correlation studies and real-world results
 │   └── Parent testimonials and child development success stories
 ├── CTA: "See How Piano Benefits Your Child + Book Assessment"
@@ -331,7 +331,7 @@ Email 5 (Day 21): "Exclusive: Your Limited Early Access Opportunity"
 **Monthly Newsletter Campaign**
 ```
 Monthly Newsletter Content Strategy:
-├── TSU Music Department News and Achievements
+├── SHSU Music Department News and Achievements
 │   ├── Student accomplishments and academic successes
 │   ├── Faculty recognition and professional achievements
 │   ├── Music program expansion and community outreach
@@ -425,7 +425,7 @@ Weekly Content Publication Schedule:
 │   ├── "The Connection Between Piano Study and Academic Success"
 │   └── "Age-Appropriate Piano Learning: Expert Guidelines"
 ├── Community Wednesdays (Engagement-Focused)
-│   ├── "TSU Student Spotlight: Musical Journey Success Stories"
+│   ├── "SHSU Student Spotlight: Musical Journey Success Stories"
 │   ├── "Houston Piano Community: Local Recital Opportunities"
 │   ├── "Piano Teacher Recommendations: Building Your Support Network"
 │   └── "HBCU Musical Heritage: Celebrating Excellence and Tradition"
@@ -433,7 +433,7 @@ Weekly Content Publication Schedule:
 │   ├── "Kawai Piano Model Comparison: Finding Your Perfect Match"
 │   ├── "Digital vs Acoustic: Making the Right Choice for Your Family"
 │   ├── "Piano Financing Made Simple: Options and Approval Process"
-│   └── "TSU Partnership Benefits: Why Academic Endorsement Matters"
+│   └── "SHSU Partnership Benefits: Why Academic Endorsement Matters"
 ```
 
 ### Video Content Strategy
@@ -442,13 +442,13 @@ Weekly Content Publication Schedule:
 ```
 Video Content Categories:
 ├── Educational Series (Weekly)
-│   ├── TSU music faculty interview series and expertise sharing
+│   ├── SHSU music faculty interview series and expertise sharing
 │   ├── Piano demonstration and comparison videos
 │   ├── Student progress documentation and achievement showcases
 │   └── Practice tips and technique improvement guidance
 ├── Behind-the-Scenes Content (Bi-weekly)
 │   ├── Piano selection process and quality assurance
-│   ├── TSU partnership development and relationship building
+│   ├── SHSU partnership development and relationship building
 │   ├── Customer consultation and family decision-making
 │   └── Piano setup, delivery, and customer service excellence
 ├── Customer Success Stories (Monthly)
@@ -457,7 +457,7 @@ Video Content Categories:
 │   ├── Adult learning success stories and personal fulfillment
 │   └── Community involvement and musical participation highlights
 ├── Live Streaming Events (Quarterly)
-│   ├── TSU faculty masterclass sessions and educational content
+│   ├── SHSU faculty masterclass sessions and educational content
 │   ├── Q&A sessions with piano experts and consultants
 │   ├── Virtual showroom tours and piano demonstrations
 │   └── Community event coverage and real-time engagement
@@ -486,9 +486,9 @@ Houston-Area Podcast Opportunities:
 ```
 
 **Guest Appearance Strategy**
-- **TSU Music Faculty**: Expert interviews on piano education benefits
+- **SHSU Music Faculty**: Expert interviews on piano education benefits
 - **Satisfied Customers**: Success story sharing and testimonials
 - **Community Leaders**: HBCU pride and educational excellence advocacy
 - **Business Partnerships**: Community involvement and relationship building
 
-This comprehensive multi-channel strategy ensures maximum reach, engagement, and conversion optimization across all major digital marketing platforms while maintaining consistent TSU partnership authority and educational positioning.
+This comprehensive multi-channel strategy ensures maximum reach, engagement, and conversion optimization across all major digital marketing platforms while maintaining consistent SHSU partnership authority and educational positioning.

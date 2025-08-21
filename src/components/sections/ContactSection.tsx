@@ -38,9 +38,9 @@ export default function ContactSection() {
                 <div>
                   <h4 className="font-semibold text-gray-dark mb-1">Showroom Address</h4>
                   <p className="text-gray-medium leading-relaxed">
-                    3100 Cleburne Street<br />
-                    Houston, TX 77004<br />
-                    <span className="text-sm text-primary font-medium">Prime Arts District Location</span>
+                    5800 Richmond Ave<br />
+                    Houston, TX 77057<br />
+                    <span className="text-sm text-primary font-medium">Official Kawai Piano Gallery</span>
                   </p>
                 </div>
               </div>
@@ -54,8 +54,8 @@ export default function ContactSection() {
                 <div>
                   <h4 className="font-semibold text-gray-dark mb-1">Phone & Email</h4>
                   <p className="text-gray-medium">
-                    <a href="tel:7135550123" className="hover:text-primary transition-colors">(713) 555-0123</a><br />
-                    <a href="mailto:info@kawaisale.com" className="hover:text-primary transition-colors">info@kawaisale.com</a>
+                    <a href="tel:7139040001" className="hover:text-primary transition-colors">(713) 904-0001</a><br />
+                    <a href="mailto:info@kawaipianoshouston.com" className="hover:text-primary transition-colors">info@kawaipianoshouston.com</a>
                   </p>
                 </div>
               </div>
@@ -69,9 +69,9 @@ export default function ContactSection() {
                 <div>
                   <h4 className="font-semibold text-gray-dark mb-1">Event Hours</h4>
                   <p className="text-gray-medium text-sm">
-                    Feb 16-17: 9:00 AM - 6:00 PM<br />
-                    Feb 18: 10:00 AM - 5:00 PM<br />
-                    Feb 19: 9:00 AM - 4:00 PM
+                    Mon-Fri: 10:00 AM - 7:00 PM<br />
+                    Saturday: 10:00 AM - 6:00 PM<br />
+                    Sunday: 1:00 PM - 5:00 PM
                   </p>
                 </div>
               </div>

@@ -8,30 +8,30 @@
 ```
 Above-the-Fold Structure:
 ├── Dynamic Headlines Based on Traffic Source
-│   ├── From Search Ads: "Houston's Exclusive Piano Sale - TSU Partnership"
+│   ├── From Search Ads: "Houston's Exclusive Piano Sale - SHSU Partnership"
 │   ├── From Social Media: "Transform Your Family's Musical Journey"
 │   ├── From Email Campaign: "Your Reserved Piano Consultation Awaits"
-│   └── From Organic Search: "Texas Southern University Piano Sale Event"
+│   └── From Organic Search: "Sam Houston State University Piano Sale Event"
 ├── Supporting Subheadline
 │   ├── "Save up to $6,000 on Premium Kawai Pianos"
-│   ├── "Endorsed by TSU Music Department"
+│   ├── "Endorsed by SHSU Music Department"
 │   ├── "April 3-6 Only - Limited Selection Available"
 │   └── "10-Year Warranty & Quality Guarantee"
 ├── Primary CTA Button
 │   ├── Text: "Book Your Private Piano Consultation"
-│   ├── Color: High-contrast TSU gold/maroon theme
+│   ├── Color: High-contrast SHSU gold/maroon theme
 │   ├── Size: Minimum 60px height for mobile optimization
 │   └── Calendly Integration: Direct appointment booking
 ├── Trust Indicators
-│   ├── TSU official logo and partnership badge
+│   ├── SHSU official logo and partnership badge
 │   ├── "Official Partner" credential display
 │   ├── 5-star rating display with review count
 │   └── "10-Year Warranty" guarantee seal
 ```
 
 **Visual Hierarchy Optimization**
-- **Hero Image**: High-quality TSU student at premium piano
-- **Logo Placement**: TSU partnership prominent but not overwhelming
+- **Hero Image**: High-quality SHSU student at premium piano
+- **Logo Placement**: SHSU partnership prominent but not overwhelming
 - **CTA Prominence**: 3 primary CTAs above fold for different commitment levels
 - **Trust Signal Integration**: Authority badges integrated naturally
 
@@ -39,16 +39,16 @@ Above-the-Fold Structure:
 
 ### Authority & Trust Building Section
 
-**TSU Partnership Credibility**
+**SHSU Partnership Credibility**
 ```
 Authority Elements Structure:
 ├── Music Department Chair Endorsement
 │   ├── Professional headshot and credentials
 │   ├── Direct quote about partnership and quality standards
-│   ├── Signature and official TSU letterhead integration
+│   ├── Signature and official SHSU letterhead integration
 │   └── Video testimonial embed option
 ├── "Official Piano Partner" Badge System
-│   ├── TSU Music Department official seal
+│   ├── SHSU Music Department official seal
 │   ├── Partnership duration and exclusivity
 │   ├── Quality certification and standards
 │   └── Educational program integration highlights
@@ -83,7 +83,7 @@ Piano Inventory Presentation:
 │ │[High-Res    │     Was: $1,099   NOW: $949             │
 │ │ Product     │     Save $150 (14% off)                 │
 │ │ Image]      │     🎹 Weighted Keys | 🔊 Premium Sound │
-│ └─────────────┘     ✅ TSU Approved | 🛡️ 10-Year Warranty│
+│ └─────────────┘     ✅ SHSU Approved | 🛡️ 10-Year Warranty│
 │                     [Add to Consultation] [Learn More]   │
 ├─────────────────────────────────────────────────────────┤
 │ Kawai ES520 Digital Piano                               │
@@ -99,7 +99,7 @@ Piano Inventory Presentation:
 │ │[Piano in    │     Was: $8,395   NOW: $6,390           │
 │ │ Family      │     Save $2,005 (24% off)               │
 │ │ Setting]    │     🏠 Perfect Size | 🎵 Rich Tone       │
-│ └─────────────┘     ✅ TSU Standard | 🔧 Free Setup      │
+│ └─────────────┘     ✅ SHSU Standard | 🔧 Free Setup      │
 │                     [Add to Consultation] [Learn More]   │
 ├─────────────────────────────────────────────────────────┤
 │ GL10 Grand Piano                                        │
@@ -131,7 +131,7 @@ Social Proof Architecture:
 │   ├── Name, neighborhood, and piano model purchased
 │   ├── Specific achievement or benefit highlight
 │   └── Star rating and recommendation strength
-├── TSU Student Performance Videos
+├── SHSU Student Performance Videos
 │   ├── Embedded high-quality performance clips
 │   ├── Student introduction and musical journey
 │   ├── Piano quality and sound demonstration
@@ -140,7 +140,7 @@ Social Proof Architecture:
 │   ├── "500+ Houston Families Trust Our Expertise"
 │   ├── "Over 200 Students Achieving Musical Excellence"
 │   ├── "15+ Years Serving the Houston Music Community"
-│   └── "TSU Partnership Since [Year]"
+│   └── "SHSU Partnership Since [Year]"
 ├── Google Reviews Integration
 │   ├── Live review feed with 5-star ratings
 │   ├── Review excerpt highlights and key phrases
@@ -172,7 +172,7 @@ Limited Availability Framework:
 │   ├── Appointment slot availability display
 │   └── Registration deadline countdown
 ├── Exclusive Access Positioning
-│   ├── "TSU Community Members Get Priority Selection"
+│   ├── "SHSU Community Members Get Priority Selection"
 │   ├── "First-Come, First-Served Piano Selection"
 │   ├── "Exclusive Partnership Pricing Not Available Elsewhere"
 │   └── "Limited Community Access - Registration Required"
@@ -194,7 +194,7 @@ Calendly Section Structure:
 ├── Section Headline
 │   ├── "Schedule Your Personal Piano Consultation"
 │   ├── "Free & No Obligation Expert Guidance"
-│   ├── "TSU-Endorsed Selection Process"
+│   ├── "SHSU-Endorsed Selection Process"
 │   └── "Secure Your Sale Event Access"
 ├── Consultation Benefits Listed
 │   ├── ✓ Expert piano assessment and personalized recommendation
@@ -202,7 +202,7 @@ Calendly Section Structure:
 │   ├── ✓ No-pressure environment with family-friendly atmosphere
 │   ├── ✓ On-site financing options with same-day approval
 │   ├── ✓ Free piano setup and delivery within Houston metro
-│   └── ✓ TSU faculty expertise and educational guidance
+│   └── ✓ SHSU faculty expertise and educational guidance
 ├── Embedded Calendly Calendar Features
 │   ├── 30-minute consultation appointment slots
 │   ├── Multiple time zone accommodation
@@ -224,13 +224,13 @@ Calendly Section Structure:
 **Comprehensive FAQ Framework**
 ```
 ❓ What makes this sale event special?
-✅ Our exclusive TSU partnership brings institutional credibility and specially 
+✅ Our exclusive SHSU partnership brings institutional credibility and specially 
    negotiated pricing unavailable elsewhere. The Music Department chair personally 
    endorses our quality selection.
 
 ❓ Are these genuine new Kawai pianos?
 ✅ All pianos are factory-new or certified pre-owned with full manufacturer 
-   warranties and TSU Music Department quality approval. Every piano meets 
+   warranties and SHSU Music Department quality approval. Every piano meets 
    institutional performance standards.
 
 ❓ What's included in the 10-year warranty?
@@ -252,7 +252,7 @@ Calendly Section Structure:
    to make the right decision without pressure. No obligation to purchase.
 
 ❓ How do I know I'm getting the best piano for my needs?
-✅ Our TSU-endorsed consultants have decades of experience and access to faculty 
+✅ Our SHSU-endorsed consultants have decades of experience and access to faculty 
    expertise. We match pianos to individual needs, not sales quotas.
 
 ❓ What about delivery and setup?
@@ -334,7 +334,7 @@ A/B Testing Structure:
 │   ├── Price-conscious audience appeal
 │   └── Immediate value proposition
 ├── Version B: Authority-Focused
-│   ├── "TSU Music Department Recommended Piano Sale"
+│   ├── "SHSU Music Department Recommended Piano Sale"
 │   ├── Institutional credibility emphasis
 │   ├── Quality and expert endorsement
 │   └── Educational authority positioning
@@ -354,7 +354,7 @@ A/B Testing Structure:
 ```
 Call-to-Action Optimization:
 ├── Low Commitment CTAs
-│   ├── "Learn More About TSU Partnership"
+│   ├── "Learn More About SHSU Partnership"
 │   ├── "Download Free Piano Guide"
 │   ├── "Get Expert Advice"
 │   └── "Explore Piano Options"
@@ -419,4 +419,4 @@ CRO Performance Expectations:
 - **Appointment Completion**: 90% booking-to-show rate
 - **Sales Conversion**: 30% appointment-to-sale rate
 
-This comprehensive landing page strategy ensures maximum conversion optimization while maintaining authentic TSU partnership positioning and educational authority credibility.
+This comprehensive landing page strategy ensures maximum conversion optimization while maintaining authentic SHSU partnership positioning and educational authority credibility.

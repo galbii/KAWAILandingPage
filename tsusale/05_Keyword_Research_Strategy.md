@@ -9,25 +9,25 @@
 |---------|---------------|-------------|---------|-------------------|
 | digital piano vs acoustic piano | 8,100 | Medium | Research | Comprehensive comparison guide |
 | best piano for beginners | 6,600 | High | Research | Beginner selection guide |
-| piano lessons benefits children | 4,800 | Medium | Educational | TSU research-backed benefits |
+| piano lessons benefits children | 4,800 | Medium | Educational | SHSU research-backed benefits |
 | how to choose first piano | 2,900 | Low | Research | Piano buying guide |
 | piano practice tips | 2,400 | Medium | Educational | Student success content |
 
 **Long-Tail Educational Keywords (Targeted)**
-| Keyword | Monthly Volume | Competition | Intent | TSU Campaign Focus |
+| Keyword | Monthly Volume | Competition | Intent | SHSU Campaign Focus |
 |---------|---------------|-------------|---------|-------------------|
 | what age should child start piano lessons | 1,200 | Low | Research | Age-appropriate guidance |
 | digital piano weighted keys vs unweighted | 890 | Low | Technical | Product comparison |
 | piano practice time recommendations children | 650 | Low | Educational | Practice guidance |
 | benefits of piano education cognitive development | 520 | Low | Research | Academic backing |
-| piano lessons improve academic performance | 410 | Low | Educational | TSU research integration |
+| piano lessons improve academic performance | 410 | Low | Educational | SHSU research integration |
 
 **Content Strategy for Educational Keywords**:
 ```
 Educational Content Calendar:
 ├── "The Ultimate Piano Buying Guide for Houston Families" (3,000+ words)
 ├── "Digital vs Acoustic Piano: Which Is Right for Your Child?" 
-├── "5 Cognitive Benefits of Piano Education (TSU Research-Backed)"
+├── "5 Cognitive Benefits of Piano Education (SHSU Research-Backed)"
 ├── "Piano Lessons Age Guide: When Should Your Child Start?"
 ├── "Practice Time Guidelines: Building Musical Discipline"
 └── "Academic Success Through Music: The Science Behind Piano Education"
@@ -61,7 +61,7 @@ Consideration Stage Content:
 ├── "Best Piano Dealers in Houston: Complete Comparison Guide"
 ├── "Kawai Piano Models Explained: ES120 vs ES520 vs K200"
 ├── "Piano Financing Options: How to Afford Your Dream Piano"
-├── "Why Choose a TSU-Endorsed Piano Dealer?"
+├── "Why Choose a SHSU-Endorsed Piano Dealer?"
 ├── "New vs Used Pianos: Making the Right Investment"
 └── "Piano Delivery and Setup: What to Expect"
 ```
@@ -76,7 +76,7 @@ Consideration Stage Content:
 | buy Kawai ES120 Houston | 890 | Low | Purchase | Product-specific ads |
 | Kawai ES520 best price Texas | 650 | Low | Purchase | Price comparison |
 | piano sale April 2025 | 520 | Low | Purchase | Event-specific |
-| Texas Southern University piano | 320 | Low | Brand | Partnership-specific |
+| Sam Houston State University piano | 320 | Low | Brand | Partnership-specific |
 | piano discount Houston | 590 | Medium | Purchase | Promotional content |
 
 **Seasonal Transactional Keywords**
@@ -90,11 +90,11 @@ Consideration Stage Content:
 **Transactional Content Strategy**:
 ```
 Decision Stage Content:
-├── "Kawai Piano Sale Houston: Exclusive TSU Partnership Event"
+├── "Kawai Piano Sale Houston: Exclusive SHSU Partnership Event"
 ├── "Limited Time: Premium Piano Deals April 3-6, 2025"
-├── "Book Your Piano Consultation: TSU-Endorsed Selection Process"
+├── "Book Your Piano Consultation: SHSU-Endorsed Selection Process"
 ├── "Houston Piano Sale: University-Approved Quality Selection"
-├── "Exclusive Pricing: TSU Community Piano Event Details"
+├── "Exclusive Pricing: SHSU Community Piano Event Details"
 └── "Last Chance: April Piano Sale Registration Closing Soon"
 ```
 
@@ -164,17 +164,17 @@ Evergreen Keyword Opportunities:
 ```
 GMB Strategy Components:
 ├── Business Information Optimization
-│   ├── "Official Piano Partner of Texas Southern University"
+│   ├── "Official Piano Partner of Sam Houston State University"
 │   ├── Complete service and product descriptions
 │   ├── High-quality interior and piano showcase photos
-│   └── Regular posting schedule with TSU partnership highlights
+│   └── Regular posting schedule with SHSU partnership highlights
 ├── Review Management Strategy
 │   ├── Customer testimonial collection and response
 │   ├── Photo reviews featuring satisfied customers
 │   ├── Professional response to all feedback
 │   └── Review generation campaign integration
 ├── Local Content Posting
-│   ├── TSU partnership milestone announcements
+│   ├── SHSU partnership milestone announcements
 │   ├── Student success story features
 │   ├── Piano education tip sharing
 │   └── Event and sale announcements
@@ -194,7 +194,7 @@ Citation Building Strategy:
 │   ├── National Piano Foundation
 │   └── Local music education organizations
 ├── Educational Directories
-│   ├── TSU vendor/partner directory
+│   ├── SHSU vendor/partner directory
 │   ├── Houston ISD resource listings
 │   └── Private school music program directories
 ```
@@ -220,12 +220,12 @@ Week 2: Product Focus (Commercial Keywords)
 Week 3: Local Focus (Local SEO Keywords)
 ├── Monday: "Houston Piano Community Events and Opportunities"
 ├── Wednesday: "Local Music Teachers and Piano Education Resources"
-├── Friday: "TSU Music Department News and Student Achievements"
+├── Friday: "SHSU Music Department News and Student Achievements"
 
 Week 4: Conversion Focus (Transactional Keywords)
 ├── Monday: "Piano Sale Preparation: What to Expect"
 ├── Wednesday: "Booking Your Piano Consultation: Complete Guide"
-├── Friday: "Exclusive TSU Partnership Benefits and Access"
+├── Friday: "Exclusive SHSU Partnership Benefits and Access"
 ```
 
 ### Technical SEO Optimization
@@ -261,7 +261,7 @@ Content SEO Best Practices:
 ├── Internal Linking Strategy
 │   ├── Topic clusters around piano education benefits
 │   ├── Product comparison linking structure
-│   ├── TSU partnership authority page linking
+│   ├── SHSU partnership authority page linking
 │   └── Conversion page funnel optimization
 ├── User Experience Optimization
 │   ├── 3-second page load speed target
@@ -307,12 +307,12 @@ Competitor Keyword Analysis:
 ├── Content Gap Analysis
 │   ├── Piano education topics not well covered
 │   ├── Local Houston content opportunities
-│   ├── TSU partnership unique content potential
+│   ├── SHSU partnership unique content potential
 │   └── Technical piano information needs
 ├── Backlink Opportunity Analysis
 │   ├── Local Houston business linking opportunities
 │   ├── Music education website partnership potential
-│   ├── TSU website linking and partnership integration
+│   ├── SHSU website linking and partnership integration
 │   └── Industry authority site relationship building
 ```
 

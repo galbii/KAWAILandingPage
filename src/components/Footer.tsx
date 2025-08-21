@@ -44,36 +44,28 @@ export function Footer() {
               Crafting exceptional pianos for over 95 years. Experience the harmony of 
               traditional Japanese craftsmanship and innovative technology.
             </p>
-            <div className="text-sm text-kawai-neutral/80 mb-6">
+            <div className="text-sm text-kawai-neutral/80">
               <div className="mb-2">Est. 1927 • Hamamatsu, Japan</div>
               <div>&ldquo;Making beautiful music accessible to all&rdquo;</div>
             </div>
-            
-            {/* Contact Info */}
+          </div>
+
+          {/* Contact Info */}
+          <div>
+            <h3 className="font-semibold text-lg mb-4 text-kawai-pearl">Contact Us</h3>
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-kawai-red" />
-                <span>(555) 123-4567</span>
+                <span>(713) 904-0001</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-kawai-red" />
-                <span>info@kawaipianocenter.com</span>
+                <span>info@kawaipianoshouston.com</span>
               </div>
               <div className="flex items-center space-x-3">
                 <MapPin className="h-5 w-5 text-kawai-red" />
-                <span>123 Music Lane, Piano City, PC 12345</span>
+                <span>5800 Richmond Ave, Houston, TX 77057</span>
               </div>
-            </div>
-          </div>
-
-          {/* Our Values */}
-          <div>
-            <h3 className="font-semibold text-lg mb-4 text-kawai-pearl">Our Values</h3>
-            <div className="space-y-2 text-sm text-kawai-neutral">
-              <div>• Uncompromising quality and craftsmanship</div>
-              <div>• Innovation rooted in tradition</div>
-              <div>• Making music accessible to everyone</div>
-              <div>• Sustainable manufacturing practices</div>
             </div>
           </div>
 

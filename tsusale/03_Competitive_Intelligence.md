@@ -15,7 +15,7 @@
 - Price-match guarantee within 45 days
 - Free shipping on orders over $49
 
-**Key Takeaways for TSU Campaign**:
+**Key Takeaways for SHSU Campaign**:
 - Seasonal promotions must be competitive (15-50% range)
 - Multi-channel integration essential for reach
 - Rewards/loyalty programs drive repeat engagement
@@ -39,8 +39,8 @@
 - Long-term relationship focus vs. transactional approach
 - Quality standards and certification requirements
 
-**Application to TSU Campaign**:
-- TSU partnership provides similar institutional credibility
+**Application to SHSU Campaign**:
+- SHSU partnership provides similar institutional credibility
 - Educational integration opportunities with music department
 - Scholarship or community investment possibilities
 - Quality standards positioning vs. commercial competitors
@@ -85,11 +85,11 @@
 - **Teacher Network Development**: Relationships with private instructors and music educators
 - **Family Engagement**: Parent education programs and family music experiences
 
-### TSU Partnership Competitive Advantages
+### SHSU Partnership Competitive Advantages
 
 **Unique Positioning Opportunities**:
 ```
-TSU-Specific Advantages:
+SHSU-Specific Advantages:
 ├── HBCU Heritage and Community Pride
 ├── Houston-Area Market Leadership
 ├── Music Department Academic Authority
@@ -152,7 +152,7 @@ Proven Emotional Triggers:
 **Local Houston Piano Dealers**:
 - **Strengths**: Established relationships, local presence, service capabilities
 - **Weaknesses**: Limited educational authority, generic positioning, price-focused competition
-- **Opportunities**: TSU partnership differentiation, educational authority positioning
+- **Opportunities**: SHSU partnership differentiation, educational authority positioning
 - **Threats**: Established customer base, potential price competition response
 
 **National Chain Competitors**:
@@ -160,12 +160,12 @@ Proven Emotional Triggers:
 - **Competitive Response**: Quality and authority positioning vs. commodity approach
 - **Differentiation Strategy**: Educational partnership, consultation-based sales, community focus
 
-### TSU Campaign Competitive Advantages
+### SHSU Campaign Competitive Advantages
 
 **Unique Value Propositions**:
 ```
 Competitive Differentiation Matrix:
-├── Authority: TSU Music Department endorsement (unique)
+├── Authority: SHSU Music Department endorsement (unique)
 ├── Community: HBCU heritage and local pride (differentiated)
 ├── Quality: Institutional selection standards (superior)
 ├── Education: Academic program integration (exclusive)
@@ -176,7 +176,7 @@ Competitive Differentiation Matrix:
 **Competitive Response Strategy**:
 - **Price Competition**: Quality and value positioning vs. lowest price
 - **Marketing Noise**: Authority and educational focus vs. generic promotion
-- **Relationship Depth**: TSU partnership cannot be easily replicated
+- **Relationship Depth**: SHSU partnership cannot be easily replicated
 - **Community Connection**: HBCU pride and local values differentiation
 
 ---
@@ -187,12 +187,12 @@ Competitive Differentiation Matrix:
 
 **Adult Learning Market**:
 - **Gap**: Limited focus on adult beginner and returning players
-- **Opportunity**: "It's Never Too Late" messaging with TSU adult education support
+- **Opportunity**: "It's Never Too Late" messaging with SHSU adult education support
 - **Differentiation**: Professional consultation and age-appropriate learning support
 
 **HBCU Community Connection**:
 - **Gap**: No competitors leveraging HBCU heritage and pride
-- **Opportunity**: Exclusive TSU partnership and alumni network engagement
+- **Opportunity**: Exclusive SHSU partnership and alumni network engagement
 - **Community Value**: Cultural authenticity and educational excellence alignment
 
 **Educational Authority Positioning**:
@@ -209,7 +209,7 @@ Competitive Differentiation Matrix:
 - **Consultation Excellence**: Expert guidance vs. pressure sales tactics
 
 **Market Development Potential**:
-- **Geographic Expansion**: Suburban Houston markets with TSU alumni presence
+- **Geographic Expansion**: Suburban Houston markets with SHSU alumni presence
 - **Demographic Expansion**: Adult learner and professional musician segments
 - **Program Integration**: Music teacher networks and educational institution partnerships
 - **Cultural Positioning**: HBCU pride and African-American music heritage celebration
@@ -223,16 +223,16 @@ Competitive Differentiation Matrix:
 **Price Competition Response**:
 - **Expected**: Aggressive pricing and discount matching attempts
 - **Counter-Strategy**: Value and quality positioning, educational benefits emphasis
-- **Advantage**: TSU partnership authority cannot be price-matched
+- **Advantage**: SHSU partnership authority cannot be price-matched
 
 **Marketing Message Copying**:
 - **Expected**: Educational positioning and university partnership claims
-- **Counter-Strategy**: Authentic TSU relationship depth and documentation
+- **Counter-Strategy**: Authentic SHSU relationship depth and documentation
 - **Legal Protection**: Exclusive partnership agreements and trademark protection
 
 **Service Enhancement Competition**:
 - **Expected**: Improved customer service and consultation offerings
-- **Counter-Strategy**: TSU faculty expertise and academic authority advantage
+- **Counter-Strategy**: SHSU faculty expertise and academic authority advantage
 - **Differentiation**: Institutional backing vs. commercial service improvements
 
 ### Defensive Strategy Framework
@@ -240,7 +240,7 @@ Competitive Differentiation Matrix:
 **Competitive Moat Building**:
 ```
 Sustainable Competitive Advantages:
-├── TSU Partnership Exclusivity (Legal protection)
+├── SHSU Partnership Exclusivity (Legal protection)
 ├── Community Relationship Depth (Time investment)
 ├── Educational Authority Credibility (Institutional backing)
 ├── Quality Selection Standards (Expertise differentiation)
@@ -249,7 +249,7 @@ Sustainable Competitive Advantages:
 ```
 
 **Proactive Market Protection**:
-- **Relationship Strengthening**: Deepen TSU partnership with additional programs
+- **Relationship Strengthening**: Deepen SHSU partnership with additional programs
 - **Community Investment**: Increase local music education support and visibility
 - **Customer Loyalty**: Exceptional service and ongoing relationship development
 - **Brand Authority**: Thought leadership and educational content creation

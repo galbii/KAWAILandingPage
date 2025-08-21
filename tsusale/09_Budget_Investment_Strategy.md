@@ -14,7 +14,7 @@ Break-even Point: 17 piano sales (achieved in Phase 1)
 ### Investment Justification
 - **Market Opportunity**: $633,570+ projected revenue from 192+ piano sales
 - **Customer Lifetime Value**: $4,200 average including accessories and services
-- **Competitive Advantage**: Exclusive TSU partnership cannot be replicated
+- **Competitive Advantage**: Exclusive SHSU partnership cannot be replicated
 - **Long-term Asset Building**: SEO authority, email database, community relationships
 - **Brand Equity Development**: Market positioning for future growth and expansion
 
@@ -28,7 +28,7 @@ Break-even Point: 17 piano sales (achieved in Phase 1)
 ```
 Google Ads Budget Allocation:
 ├── Search Campaigns - $20,000 (74% of Google budget)
-│   ├── Brand Protection & TSU Keywords: $3,000
+│   ├── Brand Protection & SHSU Keywords: $3,000
 │   ├── Educational/Information Keywords: $5,000
 │   ├── Commercial Intent Keywords: $7,000
 │   └── High-Intent Purchase Keywords: $5,000
@@ -57,7 +57,7 @@ Meta Advertising Strategy:
 │   ├── Houston metro area geographic focus
 │   └── Interest-based targeting (music education, children's activities)
 ├── Video View Campaigns - $3,500 (26% of Meta budget)
-│   ├── TSU student performance videos
+│   ├── SHSU student performance videos
 │   ├── Faculty testimonial and endorsement content
 │   ├── Behind-the-scenes piano selection process
 │   └── Customer success story showcases
@@ -83,7 +83,7 @@ Bing Advertising Focus:
 │   ├── Higher income household targeting
 │   └── Educational and classical music keyword focus
 ├── LinkedIn Advertising - $1,000 (22% of Bing budget)
-│   ├── TSU alumni network targeting
+│   ├── SHSU alumni network targeting
 │   ├── Houston business professionals
 │   ├── Music educators and industry professionals
 │   └── High-income professional demographic focus
@@ -100,16 +100,16 @@ Content Development Investment:
 ├── Professional Blog Writing - $6,000 (50% of content budget)
 │   ├── 24 comprehensive blog posts over 8 months
 │   ├── SEO-optimized educational content
-│   ├── TSU partnership and authority content
+│   ├── SHSU partnership and authority content
 │   └── Product comparison and buying guides
 ├── Video Production - $4,000 (33% of content budget)
-│   ├── TSU student performance video features
+│   ├── SHSU student performance video features
 │   ├── Faculty interview and testimonial production
 │   ├── Piano demonstration and comparison videos
 │   └── Customer success story documentation
 ├── Photography and Graphic Design - $2,000 (17% of content budget)
 │   ├── Professional piano photography for website and ads
-│   ├── TSU partnership marketing materials
+│   ├── SHSU partnership marketing materials
 │   ├── Social media graphic design and templates
 │   └── Email marketing visual assets and templates
 
@@ -222,7 +222,7 @@ Creative Production Tools:
 ├── Stock Photography and Graphics - $600
 │   ├── High-quality piano and music imagery
 │   ├── Family and education-focused photography
-│   ├── TSU and Houston-specific imagery
+│   ├── SHSU and Houston-specific imagery
 │   └── Professional lifestyle and community photos
 ├── Video Editing and Production Tools - $600
 │   ├── Professional video editing software
@@ -318,7 +318,7 @@ January Investment: $10,000
 February Investment: $8,750
 ├── Google Ads sustained engagement: $4,000
 ├── Facebook relationship and community focus: $2,000
-├── TSU alumni network activation: $1,500
+├── SHSU alumni network activation: $1,500
 ├── Email marketing optimization: $1,250
 ```
 
@@ -421,7 +421,7 @@ Payback Period: 4.2 months average
 - **Email Database**: 2,850+ qualified leads for future campaigns
 - **SEO Authority**: Ongoing organic traffic worth $60,000+ annually
 - **Brand Recognition**: Houston market penetration and awareness
-- **Community Relationships**: TSU partnership and referral network
+- **Community Relationships**: SHSU partnership and referral network
 - **Customer Base**: 225+ customers for service revenue and referrals
 
 This comprehensive budget strategy ensures optimal resource allocation across all channels while maintaining flexibility for performance-based optimization and competitive response.

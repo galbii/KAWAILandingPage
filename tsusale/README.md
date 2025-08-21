@@ -1,8 +1,8 @@
-# Texas Southern University Piano Sale Campaign Strategy
+# Sam Houston State University Piano Sale Campaign Strategy
 
 ## 📋 Document Overview
 
-This comprehensive marketing strategy encompasses an 8-month campaign (August 2024 - April 2025) designed to maximize appointment bookings and conversions for an exclusive piano sale event partnering with Texas Southern University Music Department.
+This comprehensive marketing strategy encompasses an 8-month campaign (August 2024 - April 2025) designed to maximize appointment bookings and conversions for an exclusive piano sale event partnering with Sam Houston State University Music Department.
 
 ## 📁 Document Structure
 
@@ -36,7 +36,7 @@ This comprehensive marketing strategy encompasses an 8-month campaign (August 20
 - **750+ Appointment Bookings** over 8-month campaign
 - **225+ Piano Sales** with 30% appointment-to-sale conversion
 - **$1,012,500 Revenue Generation** with 13.5x ROI
-- **Market Authority Establishment** through TSU partnership
+- **Market Authority Establishment** through SHSU partnership
 
 ### Key Success Metrics
 - Cost Per Appointment (CPA): <$50
@@ -46,7 +46,7 @@ This comprehensive marketing strategy encompasses an 8-month campaign (August 20
 
 ---
 
-## 🏛️ TSU Partnership Advantages
+## 🏛️ SHSU Partnership Advantages
 
 ### Unique Positioning
 - **Academic Authority**: Music Department endorsement and credibility
@@ -81,7 +81,7 @@ This comprehensive marketing strategy encompasses an 8-month campaign (August 20
 ## 📅 Campaign Timeline
 
 ### Phase 1: Foundation Building (August-September)
-- Establish TSU partnership credibility
+- Establish SHSU partnership credibility
 - Capture back-to-school momentum
 - Build email list and content foundation
 - **Budget**: 20% allocation
@@ -95,7 +95,7 @@ This comprehensive marketing strategy encompasses an 8-month campaign (August 20
 ### Phase 3: New Year Push (January-February)
 - Adult learning and resolution targeting
 - Post-holiday money capture
-- TSU alumni network activation
+- SHSU alumni network activation
 - **Budget**: 25% allocation
 
 ### Phase 4: Final Sprint (March-April 3)
@@ -175,7 +175,7 @@ $1,012,500 Total Revenue
 ## 🚀 Getting Started
 
 ### Immediate Next Steps
-1. **Finalize TSU Partnership Agreement** - Legal documentation and endorsement letter
+1. **Finalize SHSU Partnership Agreement** - Legal documentation and endorsement letter
 2. **Set Up Technical Infrastructure** - Analytics, tracking, and advertising platforms
 3. **Develop Initial Creative Assets** - Landing pages, video content, and photography
 4. **Launch Phase 1 Campaigns** - Foundation building and authority establishment

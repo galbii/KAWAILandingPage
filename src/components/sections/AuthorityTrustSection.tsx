@@ -8,7 +8,7 @@ export default function AuthorityTrustSection() {
         <div className="text-center mb-16 space-y-4">
           <div className="inline-flex items-center gap-3 bg-amber-50 border border-amber-200 rounded-full px-4 py-2">
             <div className="w-6 h-6 bg-amber-500 rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-xs">TSU</span>
+              <span className="text-white font-bold text-xs">SHSU</span>
             </div>
             <span className="text-amber-800 font-medium text-sm">Official Partnership</span>
           </div>
@@ -16,22 +16,22 @@ export default function AuthorityTrustSection() {
             Trusted by <span className="text-kawai-red">Music Professionals</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Our exclusive partnership with Texas Southern University Music Department brings you institutional credibility and expert-approved piano selections.
+            Our exclusive partnership with Sam Houston State University Music Department brings you institutional credibility and expert-approved piano selections.
           </p>
         </div>
 
         {/* Testimonial & Credentials */}
         <div className="grid lg:grid-cols-2 gap-12 mb-16">
-          {/* TSU Endorsement */}
+          {/* SHSU Endorsement */}
           <Card className="p-6">
             <CardHeader className="pb-4">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 bg-amber-500 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">TSU</span>
+                  <span className="text-white font-bold text-sm">SHSU</span>
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold">Music Department Chair</h3>
-                  <p className="text-sm text-amber-600">Texas Southern University</p>
+                  <p className="text-sm text-amber-600">Sam Houston State University</p>
                 </div>
               </div>
             </CardHeader>

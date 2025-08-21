@@ -13,10 +13,10 @@ export default function SocialProofSection() {
             Join the <span className="text-amber-300">Musical Community</span>
           </h2>
           <p className="text-amber-200 text-lg">
-            April 3-6, 2025 • Limited Appointment Slots Available
+            September 11-14, 2025 • Limited Appointment Slots Available
           </p>
           <p className="text-slate-300 max-w-3xl mx-auto">
-            Be part of Houston&apos;s exclusive piano community with TSU-endorsed expert guidance and premium instrument selection
+            Be part of Houston&apos;s exclusive piano community with SHSU-endorsed expert guidance and premium instrument selection
           </p>
         </div>
 
@@ -33,7 +33,7 @@ export default function SocialProofSection() {
           <Card className="bg-white/10 border-white/20 text-center">
             <CardContent className="pt-6">
               <div className="text-4xl font-bold text-amber-300 mb-2">200+</div>
-              <div className="text-white text-sm font-medium mb-1">TSU Students</div>
+              <div className="text-white text-sm font-medium mb-1">SHSU Students</div>
               <div className="text-gray-300 text-xs">Musical excellence</div>
             </CardContent>
           </Card>
@@ -83,7 +83,7 @@ export default function SocialProofSection() {
                 
                 <div className="space-y-3 text-white/90 text-sm">
                   <div className="flex justify-between">
-                    <span>TSU student inquiry for ES520</span>
+                    <span>SHSU student inquiry for ES520</span>
                     <span className="text-amber-300 text-xs">15 min ago</span>
                   </div>
                   <div className="flex justify-between">
@@ -138,7 +138,7 @@ export default function SocialProofSection() {
           <Card className="bg-white/10 border-white/20 max-w-3xl mx-auto">
             <CardContent className="pt-8">
               <h3 className="text-white text-2xl font-bold mb-4">Reserve Your Exclusive Access</h3>
-              <p className="text-white/90 mb-6">Join hundreds of satisfied Houston families in the TSU piano community</p>
+              <p className="text-white/90 mb-6">Join hundreds of satisfied Houston families in the SHSU piano community</p>
               
               <Button size="lg" className="bg-kawai-red hover:bg-kawai-red-dark text-white font-bold text-lg px-12 py-4 mb-6">
                 BOOK YOUR CONSULTATION NOW

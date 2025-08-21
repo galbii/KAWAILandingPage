@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 
 const playfairDisplay = Playfair_Display({
@@ -15,8 +16,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "KAWAI Piano Sale | TSU Partnership | April 3-6, 2025 | Houston",
-  description: "Exclusive KAWAI piano sale in partnership with Texas Southern University. Save up to $6,000 on premium pianos. Book your private consultation for April 3-6, 2025 in Houston.",
+  title: "KAWAI Piano Sale | SHSU Partnership | September 11-14, 2025 | Houston",
+  description: "Exclusive KAWAI piano sale in partnership with Sam Houston State University. Save up to $6,000 on premium pianos. Book your private consultation for September 11-14, 2025 in Houston.",
 };
 
 export default function RootLayout({
@@ -31,6 +32,7 @@ export default function RootLayout({
       >
         {children}
       </body>
+      <GoogleAnalytics gaId="G-P91EKWK0XB" />
     </html>
   );
 }

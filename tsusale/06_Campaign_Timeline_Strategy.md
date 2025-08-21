@@ -20,7 +20,7 @@
 ### Primary Objectives
 ```
 Foundation Phase Goals:
-├── Establish TSU Partnership Credibility and Market Awareness
+├── Establish SHSU Partnership Credibility and Market Awareness
 ├── Capture Back-to-School Piano Interest and Educational Focus
 ├── Build Email List and Retargeting Audience Foundation
 ├── Create Content Library and SEO Authority Foundation
@@ -32,14 +32,14 @@ Foundation Phase Goals:
 **Week 1-2: Partnership Launch**
 ```
 Launch Activities:
-├── TSU Partnership Announcement
+├── SHSU Partnership Announcement
 │   ├── Press release distribution to Houston media
 │   ├── Social media announcement with faculty endorsement
 │   ├── Website integration and authority page creation
 │   └── Email announcement to existing customer base
 ├── Authority Content Creation
 │   ├── Music department chair endorsement video
-│   ├── TSU student testimonial collection
+│   ├── SHSU student testimonial collection
 │   ├── Faculty interview and credential highlighting
 │   └── Partnership legitimacy documentation
 ├── Technical Infrastructure Setup
@@ -56,7 +56,7 @@ Content Marketing Activation:
 │   ├── "5 Reasons Piano Lessons Transform Children's Education"
 │   ├── "The Science Behind Piano and Academic Success"
 │   ├── "Age-Appropriate Piano Learning: A Parent's Guide"
-│   └── "TSU Music Department's Approach to Piano Education"
+│   └── "SHSU Music Department's Approach to Piano Education"
 ├── Back-to-School Targeting
 │   ├── "Piano Lessons for Academic Year Success" campaign
 │   ├── Parent-focused social media advertising
@@ -72,7 +72,7 @@ Content Marketing Activation:
 **Week 5-6: Student Showcase Campaign**
 ```
 Social Proof Development:
-├── TSU Student Video Series
+├── SHSU Student Video Series
 │   ├── Student performance showcases
 │   ├── Musical journey testimonials
 │   ├── Academic achievement correlations
@@ -119,7 +119,7 @@ Foundation Phase Results:
 ├── Social Media Following: 500+ engaged followers
 ├── SEO Foundation: Top 20 rankings for 5+ target keywords
 ├── Brand Awareness: Initial Houston market recognition
-└── Partnership Credibility: Established TSU relationship authority
+└── Partnership Credibility: Established SHSU relationship authority
 ```
 
 ---
@@ -150,7 +150,7 @@ October Campaign Focus:
 │   ├── "The Gift of Music" campaign introduction
 │   ├── Family bonding and tradition messaging
 │   ├── Early holiday planning positioning
-│   └── TSU student family story features
+│   └── SHSU student family story features
 ├── Halloween/Fall Engagement
 │   ├── "Spook-tacular Piano Deals Coming" teaser campaign
 │   ├── Fall recital season content creation
@@ -159,7 +159,7 @@ October Campaign Focus:
 ├── Competitive Positioning
 │   ├── Holiday pricing strategy development
 │   ├── Gift positioning vs. competitors
-│   ├── TSU partnership differentiation emphasis
+│   ├── SHSU partnership differentiation emphasis
 │   └── Quality and value proposition strengthening
 ```
 
@@ -173,7 +173,7 @@ November Campaign Intensification:
 │   └── Holiday gift planning consultation offers
 ├── Thanksgiving Gratitude Campaign
 │   ├── Customer success story highlighting
-│   ├── Community appreciation and TSU partnership celebration
+│   ├── Community appreciation and SHSU partnership celebration
 │   ├── Family music tradition content
 │   └── Gratitude-based email marketing sequence
 ├── Maximum Advertising Spend Activation
@@ -197,7 +197,7 @@ December Campaign Climax:
 │   ├── Virtual consultation gift options
 │   └── Flexible payment plan holiday offerings
 ├── Year-End Reflection and Future Planning
-│   ├── 2024 TSU partnership success highlights
+│   ├── 2024 SHSU partnership success highlights
 │   ├── Student achievement showcases
 │   ├── Community impact demonstrations
 │   └── 2025 April sale event anticipation building
@@ -207,14 +207,14 @@ December Campaign Climax:
 ```
 Creative Asset Development:
 ├── Video Content Series
-│   ├── TSU student holiday performance videos
+│   ├── SHSU student holiday performance videos
 │   ├── Family piano tradition testimonials
 │   ├── Faculty holiday message and endorsements
 │   └── Piano quality and craftsmanship showcases
 ├── Visual Creative Assets
 │   ├── Holiday-themed social media graphics
 │   ├── Family-focused piano photography
-│   ├── TSU partnership celebration materials
+│   ├── SHSU partnership celebration materials
 │   └── Gift-giving visualization content
 ├── Email Marketing Creative
 │   ├── Holiday newsletter design templates
@@ -252,7 +252,7 @@ New Year Phase Goals:
 ├── Target Adult Learning Resolutions and Personal Development
 ├── Maintain Engagement Momentum Leading into Final Phase
 ├── Convert Holiday Engagement into Committed April Prospects
-└── Strengthen TSU Partnership Through Alumni Success Stories
+└── Strengthen SHSU Partnership Through Alumni Success Stories
 ```
 
 ### Key Strategies & Tactics
@@ -280,7 +280,7 @@ January Campaign Focus:
 **February: Sustained Engagement**
 ```
 February Campaign Development:
-├── TSU Alumni Success Story Campaign
+├── SHSU Alumni Success Story Campaign
 │   ├── Alumni musical achievement highlighting
 │   ├── Career and personal success correlations
 │   ├── Community leadership and contribution features
@@ -312,7 +312,7 @@ Adult-Focused Messaging Strategy:
 │   └── Family integration and support
 ├── Success Validation
 │   ├── Adult student achievement showcases
-│   ├── TSU alumni continued learning examples
+│   ├── SHSU alumni continued learning examples
 │   ├── Professional development correlations
 │   └── Personal fulfillment testimonials
 ```
@@ -325,7 +325,7 @@ New Year Phase Results:
 ├── Appointment Bookings: 50+ consultations
 ├── Direct Sales: 20+ piano purchases
 ├── Adult Demographic Expansion: 40% increase in adult engagement
-├── TSU Alumni Network Activation: 200+ alumni connections
+├── SHSU Alumni Network Activation: 200+ alumni connections
 ├── Content Library Growth: 15+ adult-focused content pieces
 └── Pre-Sale Registration: 300+ committed April prospects
 ```
@@ -361,7 +361,7 @@ March Campaign Intensification:
 │   └── Urgency-driven email marketing sequences
 ├── Social Proof Maximization
 │   ├── Customer testimonial video releases
-│   ├── TSU faculty public recommendation letters
+│   ├── SHSU faculty public recommendation letters
 │   ├── Community endorsement showcase
 │   └── Success story amplification campaign
 ├── Appointment Booking Intensification
@@ -405,7 +405,7 @@ Scarcity Marketing Implementation:
 │   ├── Registration deadline enforcement
 │   └── "Last chance" messaging implementation
 ├── Exclusivity Positioning
-│   ├── "TSU Community Priority Access"
+│   ├── "SHSU Community Priority Access"
 │   ├── "First-come, first-served selection"
 │   ├── "Limited community member benefits"
 │   └── "Exclusive partnership pricing"
@@ -431,7 +431,7 @@ Final Sprint Results:
 ### Consistent Brand Messaging
 ```
 Unified Campaign Elements:
-├── TSU Partnership Authority (Threading through all phases)
+├── SHSU Partnership Authority (Threading through all phases)
 ├── Quality and Educational Excellence (Consistent value proposition)
 ├── Community Investment and Pride (HBCU heritage emphasis)
 ├── Family Musical Tradition (Emotional connection building)

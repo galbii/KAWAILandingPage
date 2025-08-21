@@ -233,7 +233,7 @@ export function FeaturedDeals() {
               <div className="bg-red-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
                 LIMITED TIME
               </div>
-              <span className="text-red-600 font-semibold">April 3rd - 6th, 2025</span>
+              <span className="text-red-600 font-semibold">September 11th - 14th, 2025</span>
             </div>
           </div>
           <p className={`text-base md:text-lg leading-relaxed text-kawai-black/70 max-w-2xl mx-auto transition-all duration-700 ease-out delay-200 ${
@@ -241,7 +241,7 @@ export function FeaturedDeals() {
               ? 'opacity-100 translate-y-0' 
               : 'opacity-0 translate-y-8'
           }`}>
-            Special reduced prices for our community - alumni, friends, and early birds before public sale. Your purchase directly benefits the talented students and faculty of TSU&apos;s Music Department.
+            Special reduced prices for our community - alumni, friends, and early birds before public sale. Your purchase directly benefits the talented students and faculty of SHSU&apos;s Music Department.
           </p>
         </div>
       </section>

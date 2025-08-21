@@ -82,13 +82,13 @@ Campaign Tracking Structure:
 │   ├── phase2_holiday (October-December campaigns)
 │   ├── phase3_newyear (January-February campaigns)
 │   ├── phase4_final (March-April campaigns)
-│   └── tsu_partnership (TSU-specific content)
+│   └── tsu_partnership (SHSU-specific content)
 ├── Content Variation (utm_content)
 │   ├── headline_discount (Price-focused messaging)
-│   ├── headline_authority (TSU partnership emphasis)
+│   ├── headline_authority (SHSU partnership emphasis)
 │   ├── cta_book_consultation (Primary call-to-action)
 │   ├── video_testimonial (Customer success stories)
-│   └── image_student_piano (TSU student imagery)
+│   └── image_student_piano (SHSU student imagery)
 ├── Keyword Tracking (utm_term)
 │   ├── Specific keywords for paid search campaigns
 │   ├── A/B testing variation identification
@@ -251,7 +251,7 @@ Monthly Performance Dashboard:
 Customer Journey Touchpoint Tracking:
 ├── Awareness Stage (First Touch)
 │   ├── Organic search discovery: "piano lessons Houston"
-│   ├── Social media content engagement: TSU student video
+│   ├── Social media content engagement: SHSU student video
 │   ├── Word-of-mouth referral: Friend recommendation
 │   └── Content consumption: Piano buying guide blog post
 ├── Consideration Stage (Middle Touches)
@@ -259,7 +259,7 @@ Customer Journey Touchpoint Tracking:
 │   ├── Multiple website visits and content consumption
 │   ├── Social media retargeting ad engagement
 │   ├── Comparison shopping and competitor research
-│   └── TSU partnership credibility verification
+│   └── SHSU partnership credibility verification
 ├── Decision Stage (Final Touches)
 │   ├── Consultation booking form completion
 │   ├── Phone call for additional information

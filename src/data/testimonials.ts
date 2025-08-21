@@ -9,7 +9,7 @@ export const reviews: Review[] = [
   {
     name: "Jennifer M.",
     location: "Katy", 
-    text: "Outstanding service! The TSU partnership really shows in the quality and expertise. Our daughter loves her new Kawai piano.",
+    text: "Outstanding service! The SHSU partnership really shows in the quality and expertise. Our daughter loves her new Kawai piano.",
     timeAgo: "1 week ago"
   },
   {
@@ -21,7 +21,7 @@ export const reviews: Review[] = [
   {
     name: "Maria R.",
     location: "Houston",
-    text: "The consultation was invaluable. Their expertise and the TSU connection gave us confidence in our investment.",
+    text: "The consultation was invaluable. Their expertise and the SHSU connection gave us confidence in our investment.",
     timeAgo: "3 weeks ago"
   }
 ];

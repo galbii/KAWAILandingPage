@@ -27,15 +27,15 @@ export default function AboutEventSection() {
             
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p className="text-base">
-                For over five years, our exclusive partnership with Texas Southern University&apos;s Music Department has brought Houston families access to premium Kawai pianos at specially negotiated pricing.
+                For over five years, our exclusive partnership with Sam Houston State University&apos;s Music Department has brought Houston families access to premium Kawai pianos at specially negotiated pricing.
               </p>
               
               <p className="text-base">
-                This four-day exclusive event features carefully selected instruments that meet TSU&apos;s rigorous quality standards. Each piano has been chosen by the university&apos;s music faculty for its exceptional sound quality, build craftsmanship, and educational value.
+                This four-day exclusive event features carefully selected instruments that meet SHSU&apos;s rigorous quality standards. Each piano has been chosen by the university&apos;s music faculty for its exceptional sound quality, build craftsmanship, and educational value.
               </p>
               
               <p className="text-base">
-                Whether you&apos;re a TSU student, Houston resident, or music enthusiast, this event offers a rare opportunity to acquire professional-grade instruments with the confidence that comes from institutional endorsement.
+                Whether you&apos;re a SHSU student, Houston resident, or music enthusiast, this event offers a rare opportunity to acquire professional-grade instruments with the confidence that comes from institutional endorsement.
               </p>
             </div>
 
@@ -74,7 +74,7 @@ export default function AboutEventSection() {
           <div className="relative scroll-animate-right">
             <img 
               src="/images/letter.png"
-              alt="TSU Piano Sale Letter"
+              alt="SHSU Piano Sale Letter"
               className="w-full h-auto object-contain opacity-90"
             />
           </div>

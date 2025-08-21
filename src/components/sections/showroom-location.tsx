@@ -5,19 +5,19 @@ import { GoogleMapsEmbed } from '@next/third-parties/google';
 export function ShowroomLocation() {
 
   const showroomInfo = {
-    name: 'Sam Houston State University',
-    address: '1905 University Ave, Huntsville, TX 77340',
-    website: 'https://www.shsu.edu/',
-    phone: '(936) 294-1111',
-    serviceArea: 'Serving Huntsville, Texas and surrounding areas',
+    name: 'Kawai Piano Gallery Houston',
+    address: '5800 Richmond Ave, Houston, TX 77057',
+    website: 'https://www.kawaipianoshouston.com/',
+    phone: '(713) 904-0001',
+    serviceArea: 'Serving Houston, Texas and surrounding areas',
     hours: [
-      { day: 'Monday', time: '8:00 am–5:00 pm' },
-      { day: 'Tuesday', time: '8:00 am–5:00 pm' },
-      { day: 'Wednesday', time: '8:00 am–5:00 pm' },
-      { day: 'Thursday', time: '8:00 am–5:00 pm' },
-      { day: 'Friday', time: '8:00 am–5:00 pm' },
-      { day: 'Saturday', time: 'Closed' },
-      { day: 'Sunday', time: 'Closed' }
+      { day: 'Monday', time: '10:00 am–7:00 pm' },
+      { day: 'Tuesday', time: '10:00 am–7:00 pm' },
+      { day: 'Wednesday', time: '10:00 am–7:00 pm' },
+      { day: 'Thursday', time: '10:00 am–7:00 pm' },
+      { day: 'Friday', time: '10:00 am–7:00 pm' },
+      { day: 'Saturday', time: '10:00 am–6:00 pm' },
+      { day: 'Sunday', time: '1:00 pm–5:00 pm' }
     ]
   };
 
@@ -42,7 +42,7 @@ export function ShowroomLocation() {
                 height={600}
                 width="100%"
                 mode="place"
-                q="1905 University Ave, Huntsville, TX 77340"
+                q="5800 Richmond Ave, Houston, TX 77057"
                 zoom="15"
               />
               {/* Subtle overlay gradient */}
@@ -113,15 +113,15 @@ export function ShowroomLocation() {
                 <div className="space-y-2 text-sm text-kawai-black/70">
                   <div className="flex justify-between">
                     <span>Monday – Friday</span>
-                    <span>8:00am – 5:00pm</span>
+                    <span>10:00am – 7:00pm</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Saturday</span>
-                    <span>Closed</span>
+                    <span>10:00am – 6:00pm</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Sunday</span>
-                    <span>Closed</span>
+                    <span>1:00pm – 5:00pm</span>
                   </div>
                 </div>
               </div>
