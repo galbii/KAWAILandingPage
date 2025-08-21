@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { WebVitals } from "@/components/WebVitals";
 import "./globals.css";
 
 const playfairDisplay = Playfair_Display({
@@ -31,6 +32,7 @@ export default function RootLayout({
         className={`${playfairDisplay.variable} ${inter.variable} antialiased`}
       >
         {children}
+        <WebVitals />
       </body>
       <GoogleAnalytics gaId="G-P91EKWK0XB" />
     </html>

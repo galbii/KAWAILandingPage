@@ -5,7 +5,7 @@ import { sendGAEvent } from '@next/third-parties/google'
 // Analytics tracking utility for button clicks and user interactions
 export const trackEvent = {
   // CTA button clicks
-  buttonClick: (buttonText: string, location: string, additionalData?: Record<string, any>) => {
+  buttonClick: (buttonText: string, location: string, additionalData?: Record<string, string | number | boolean>) => {
     sendGAEvent('event', 'click', {
       event_category: 'engagement',
       button_text: buttonText,
@@ -15,7 +15,7 @@ export const trackEvent = {
   },
 
   // Lead generation events (high-value actions)
-  generateLead: (action: string, location: string, additionalData?: Record<string, any>) => {
+  generateLead: (action: string, location: string, additionalData?: Record<string, string | number | boolean>) => {
     sendGAEvent('event', 'generate_lead', {
       event_category: 'lead_generation', 
       action: action,
@@ -26,7 +26,7 @@ export const trackEvent = {
   },
 
   // Contact interactions
-  contact: (method: 'phone' | 'email' | 'form', location: string, additionalData?: Record<string, any>) => {
+  contact: (method: 'phone' | 'email' | 'form', location: string, additionalData?: Record<string, string | number | boolean>) => {
     sendGAEvent('event', 'contact', {
       event_category: 'contact',
       contact_method: method,
@@ -36,7 +36,7 @@ export const trackEvent = {
   },
 
   // Newsletter signup
-  signUp: (location: string, additionalData?: Record<string, any>) => {
+  signUp: (location: string, additionalData?: Record<string, string | number | boolean>) => {
     sendGAEvent('event', 'sign_up', {
       event_category: 'engagement',
       signup_type: 'newsletter',
@@ -46,12 +46,112 @@ export const trackEvent = {
   },
 
   // Information requests
-  viewInfo: (contentType: string, location: string, additionalData?: Record<string, any>) => {
+  viewInfo: (contentType: string, location: string, additionalData?: Record<string, string | number | boolean>) => {
     sendGAEvent('event', 'view_item', {
       event_category: 'engagement',
       content_type: contentType,
       location: location,
       ...additionalData
+    })
+  }
+}
+
+// Page engagement and behavior tracking
+export const trackPageEvent = {
+  // Engagement time tracking
+  engagementTime: (timeSpent: number, pageSection?: string) => {
+    sendGAEvent('event', 'page_engagement', {
+      event_category: 'engagement',
+      engagement_time_msec: Math.round(timeSpent * 1000),
+      page_section: pageSection || 'page',
+      value: Math.round(timeSpent) // Time in seconds
+    })
+  },
+
+  // Scroll depth tracking
+  scrollDepth: (percentage: number, pageSection?: string) => {
+    sendGAEvent('event', 'scroll', {
+      event_category: 'engagement',
+      scroll_depth: percentage,
+      page_section: pageSection || 'page',
+      value: percentage
+    })
+  },
+
+  // Session quality scoring
+  sessionQuality: (score: number, interactionCount: number, timeSpent: number) => {
+    sendGAEvent('event', 'session_quality', {
+      event_category: 'engagement',
+      quality_score: score,
+      interaction_count: interactionCount,
+      session_time: Math.round(timeSpent),
+      value: score
+    })
+  },
+
+  // Content interaction tracking
+  contentInteraction: (contentType: string, elementId?: string, timeToInteraction?: number) => {
+    sendGAEvent('event', 'content_interaction', {
+      event_category: 'engagement',
+      content_type: contentType,
+      element_id: elementId || 'unknown',
+      time_to_interaction: timeToInteraction ? Math.round(timeToInteraction) : undefined
+    })
+  },
+
+  // Page section visibility tracking
+  sectionView: (sectionName: string, timeInView: number, isFullyVisible: boolean) => {
+    sendGAEvent('event', 'section_view', {
+      event_category: 'engagement',
+      section_name: sectionName,
+      time_in_view: Math.round(timeInView),
+      fully_visible: isFullyVisible,
+      value: Math.round(timeInView)
+    })
+  },
+
+  // Exit intent detection
+  exitIntent: (timeOnPage: number, scrollDepth: number, interactionCount: number) => {
+    sendGAEvent('event', 'exit_intent', {
+      event_category: 'engagement',
+      time_on_page: Math.round(timeOnPage),
+      max_scroll_depth: scrollDepth,
+      interaction_count: interactionCount
+    })
+  },
+
+  // Custom page timing events
+  timing: (eventName: string, timingValue: number, category: string = 'performance') => {
+    sendGAEvent('event', 'timing_complete', {
+      event_category: category,
+      name: eventName,
+      value: Math.round(timingValue)
+    })
+  }
+}
+
+// Web Vitals tracking for performance monitoring
+export const trackWebVitals = {
+  // Core Web Vitals
+  coreVital: (name: string, value: number, rating: 'good' | 'needs-improvement' | 'poor', id: string) => {
+    sendGAEvent('event', 'web_vital', {
+      event_category: 'performance',
+      metric_name: name,
+      metric_value: Math.round(name === 'CLS' ? value * 1000 : value),
+      metric_rating: rating,
+      metric_id: id,
+      value: Math.round(name === 'CLS' ? value * 1000 : value)
+    })
+  },
+
+  // Custom Next.js metrics
+  nextjsMetric: (name: string, value: number, navigationType?: string) => {
+    sendGAEvent('event', 'nextjs_metric', {
+      event_category: 'performance',
+      metric_name: name,
+      metric_value: Math.round(value),
+      navigation_type: navigationType || 'unknown',
+      value: Math.round(value)
     })
   }
 }

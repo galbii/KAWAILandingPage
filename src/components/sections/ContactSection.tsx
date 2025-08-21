@@ -5,6 +5,8 @@ import { trackKawaiEvent } from '@/lib/analytics';
 import PianoConsultationDialog from '@/components/PianoConsultationDialog';
 
 export default function ContactSection() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
   return (
     <section id="contact" className="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-gold to-accent"></div>
@@ -103,7 +105,10 @@ export default function ContactSection() {
                 Get Directions
               </button>
               <button 
-                onClick={() => trackKawaiEvent.scheduleTour('contact_section')}
+                onClick={() => {
+                  trackKawaiEvent.scheduleTour('contact_section');
+                  setIsModalOpen(true);
+                }}
                 className="w-full border-2 border-primary text-primary font-semibold py-3 px-6 rounded-xl hover:bg-primary hover:text-white transition-all duration-300"
               >
                 Schedule Private Tour
@@ -159,6 +164,12 @@ export default function ContactSection() {
           </div>
         </div>
       </div>
+      
+      {/* Piano Consultation Dialog */}
+      <PianoConsultationDialog 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
     </section>
   );
 }
