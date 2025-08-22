@@ -49,7 +49,7 @@ export default function AboutEventSection() {
             {/* Mobile Letter Image - Shown on mobile right after title */}
             <div className="lg:hidden relative mb-8 scroll-animate">
               <Image 
-                src="/images/optimized/misc/letter_800.webp"
+                src="/images/letter.png"
                 alt="SHSU Houston Piano Sale Event Letter - Piano Deals Houston"
                 width={800}
                 height={600}
@@ -102,7 +102,7 @@ export default function AboutEventSection() {
           {/* Desktop Letter Image - Hidden on mobile */}
           <div className="hidden lg:block relative scroll-animate-right">
             <Image 
-              src="/images/optimized/misc/letter_800.webp"
+              src="/images/letter.png"
               alt="SHSU Houston Piano Sale Event Letter - Piano Deals Houston"
               width={800}
               height={600}
