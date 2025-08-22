@@ -11,7 +11,7 @@ interface FAQItem {
 const faqData: FAQItem[] = [
   {
     question: "Where can I find piano sales in Houston?",
-    answer: "Our KAWAI piano sales Houston event at Sam Houston State University offers the best selection of digital and acoustic pianos in the Greater Houston Area. We're Houston's trusted piano dealer with over 5 years of partnership with SHSU."
+    answer: "Our KAWAI piano sales Houston event at our dealership offers the best selection of digital and acoustic pianos in the Greater Houston Area. We're Houston's trusted piano dealer with over 5 years of partnership with SHSU."
   },
   {
     question: "Do you have used pianos for sale in Houston?",
@@ -27,7 +27,7 @@ const faqData: FAQItem[] = [
   },
   {
     question: "Where is your Houston piano store located?",
-    answer: "Our Houston piano sale event takes place at Sam Houston State University. As a mobile piano dealer Houston trusts, we bring our showroom directly to the SHSU campus, making it convenient for Greater Houston Area families to shop for pianos."
+    answer: "Our Houston piano sale event takes place at our KAWAI Piano Gallery Houston showroom at 5800 Richmond Ave. As Houston's premier piano dealer, our convenient location makes it easy for Greater Houston Area families to shop for pianos."
   },
   {
     question: "What types of pianos are available at your Houston location?",
@@ -39,7 +39,7 @@ const faqData: FAQItem[] = [
   },
   {
     question: "What makes your Houston piano sale different from other dealers?",
-    answer: "Our partnership with Sam Houston State University's Music Department ensures every piano meets institutional quality standards. Unlike other piano dealers Houston offers, our instruments are faculty-approved and your purchase directly supports SHSU's music programs."
+    answer: "Our partnership with Sam Houston State University's Music Department ensures every piano meets institutional quality standards. Unlike other piano dealers Houston offers, our instruments are faculty-approved and your purchase directly supports SHSU's music programs through our ongoing partnership."
   }
 ];
 
