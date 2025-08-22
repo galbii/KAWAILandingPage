@@ -81,8 +81,8 @@ export function useScrollAnimations() {
       });
     }, observerOptions);
 
-    // Observe all scroll-animate elements
-    const animateElements = document.querySelectorAll('.scroll-animate, .scroll-animate-left, .scroll-animate-right, .scroll-animate-scale');
+    // Observe all scroll-animate elements including value proposition animations
+    const animateElements = document.querySelectorAll('.scroll-animate, .scroll-animate-left, .scroll-animate-right, .scroll-animate-scale, .value-prop-left, .value-prop-center, .value-prop-right, .value-prop-cta-section');
     animateElements.forEach((el) => observer.observe(el));
 
     // Add scroll listener

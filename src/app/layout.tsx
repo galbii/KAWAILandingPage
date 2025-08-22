@@ -19,6 +19,22 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Piano Sales Houston | KAWAI Piano Deals & Used Pianos | SHSU Event Sept 2025",
   description: "Houston piano sales event featuring KAWAI digital & acoustic pianos. Save up to $6,000 on new & used pianos. Piano deals Houston - SHSU partnership Sept 11-14, 2025. Free delivery!",
+  icons: {
+    icon: '/images/kawai-logo-red-1x.png',
+  },
+  openGraph: {
+    title: "Piano Sales Houston | KAWAI Piano Deals & Used Pianos | SHSU Event Sept 2025",
+    description: "Houston piano sales event featuring KAWAI digital & acoustic pianos. Save up to $6,000 on new & used pianos. Piano deals Houston - SHSU partnership Sept 11-14, 2025. Free delivery!",
+    images: [
+      {
+        url: '/images/kawai-piano-hands.jpeg',
+        width: 1200,
+        height: 630,
+        alt: 'KAWAI Piano Sales Event - Premium Piano Collection',
+      },
+    ],
+    type: 'website',
+  },
 };
 
 export default function RootLayout({

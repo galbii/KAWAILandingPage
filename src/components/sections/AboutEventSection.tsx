@@ -7,28 +7,49 @@ import PianoConsultationDialog from '@/components/PianoConsultationDialog';
 export default function AboutEventSection() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
-    <section id="about-event" className="py-24 bg-muted/30 scroll-container">
-      <div className="max-w-7xl mx-auto px-6">
-
-        {/* Piano Types Header */}
-        <div className="text-center mb-12 scroll-animate">
-          <h2 className="text-sm md:text-base font-normal text-gray-500 tracking-wider leading-relaxed opacity-80">
+    <>
+      {/* Piano Types Header - Moved higher to separate sections */}
+      <div className="py-8 bg-white border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-6 text-center scroll-animate">
+          {/* Desktop version - normal text */}
+          <h2 className="hidden md:block text-sm md:text-base font-normal text-gray-500 tracking-wider leading-relaxed opacity-80">
             HOUSTON PIANO SALES | BABY GRANDS | UPRIGHTS | DIGITALS | <span className="text-kawai-red">USED PIANOS HOUSTON</span> | FINANCING AVAILABLE
           </h2>
+          {/* Mobile version - scrolling text */}
+          <div className="md:hidden overflow-hidden relative w-full">
+            <div className="animate-scroll-mobile">
+              <h2 className="text-sm font-normal text-gray-500 tracking-wider leading-relaxed opacity-80 whitespace-nowrap inline-block">
+                HOUSTON PIANO SALES | BABY GRANDS | UPRIGHTS | DIGITALS | <span className="text-kawai-red">USED PIANOS HOUSTON</span> | FINANCING AVAILABLE
+              </h2>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <section id="about-event" className="py-24 bg-muted/30 scroll-container">
+        <div className="max-w-7xl mx-auto px-6">
 
         {/* Event Description */}
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6 scroll-animate-left">
             <div className="flex flex-col items-center text-center mb-6">
               <img 
-                src="/images/kawai-logo-red-1x.png"
+                src="/images/Kawai (Red).png"
                 alt="KAWAI Piano Sales Houston - Premium Piano Dealer"
                 className="h-16 w-auto mb-4"
               />
               <h3 className="text-2xl md:text-3xl font-bold tracking-tight">
                 Houston&apos;s Premier <span className="text-kawai-red">Piano Sale Event</span>
               </h3>
+            </div>
+
+            {/* Mobile Letter Image - Shown on mobile right after title */}
+            <div className="lg:hidden relative mb-8 scroll-animate">
+              <img 
+                src="/images/letter.png"
+                alt="SHSU Houston Piano Sale Event Letter - Piano Deals Houston"
+                className="w-full h-auto object-contain opacity-90 max-w-md mx-auto"
+              />
             </div>
             
             <div className="space-y-4 text-muted-foreground leading-relaxed">
@@ -47,20 +68,15 @@ export default function AboutEventSection() {
 
             <div className="bg-gradient-to-r from-kawai-red/5 to-tsu-blue/5 rounded-lg p-6 border border-kawai-red/20">
               <div className="text-center">
-                <h4 className="text-lg font-semibold text-kawai-red mb-2">Secure Your Access to Our Early Bird Inventory</h4>
+                <h4 className="text-lg font-semibold text-black mb-2">Secure Your Savings</h4>
                 <p className="text-sm text-muted-foreground mb-4">Don&apos;t miss out on exclusive deals, <span className="text-kawai-red/80 font-medium">priority access to our premium selection</span>, <span className="text-kawai-red font-medium">free delivery and tuning</span></p>
                 <div className="space-y-3">
                   <button 
                     onClick={() => setIsModalOpen(true)}
-                    className="bg-kawai-red text-white px-6 py-3 rounded-lg font-medium hover:bg-kawai-red/90 transition-colors"
+                    className="block w-full bg-red-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-red-700 transition-colors"
+                    style={{backgroundColor: '#CC0000', color: '#FFFFFF'}}
                   >
-                    Secure Your Savings and Find Deals
-                  </button>
-                  <button 
-                    onClick={() => setIsModalOpen(true)}
-                    className="block w-full bg-red-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-red-700 transition-colors border-2 border-red-700"
-                  >
-                    Secure Your Spot
+                    Secure Your Savings
                   </button>
                   <button 
                     onClick={() => {
@@ -78,7 +94,8 @@ export default function AboutEventSection() {
             </div>
           </div>
 
-          <div className="relative scroll-animate-right">
+          {/* Desktop Letter Image - Hidden on mobile */}
+          <div className="hidden lg:block relative scroll-animate-right">
             <img 
               src="/images/letter.png"
               alt="SHSU Houston Piano Sale Event Letter - Piano Deals Houston"
@@ -163,11 +180,12 @@ export default function AboutEventSection() {
         </div>
       </div>
       
-      {/* Piano Consultation Dialog */}
-      <PianoConsultationDialog 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-      />
-    </section>
+        {/* Piano Consultation Dialog */}
+        <PianoConsultationDialog 
+          isOpen={isModalOpen} 
+          onClose={() => setIsModalOpen(false)} 
+        />
+      </section>
+    </>
   );
 }

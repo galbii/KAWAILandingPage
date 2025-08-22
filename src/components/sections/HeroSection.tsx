@@ -31,7 +31,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center text-white pt-8 hero-parallax scroll-container overflow-hidden">
+    <section className="relative min-h-screen flex items-start justify-center text-white pt-16 hero-parallax scroll-container overflow-hidden">
       {/* Video Background */}
       <video
         autoPlay
@@ -52,34 +52,32 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-black/30"></div>
       </div>
       
-      <div className="relative z-10 max-w-6xl mx-auto px-6 text-center hero-content">
+      <div className="relative z-10 max-w-6xl mx-auto px-6 text-center hero-content mt-16">
         
-        {/* SHSU Logo - Prominent at top of hero */}
-        <div className="-mb-8 scroll-animate-scale">
-          <div className="relative w-40 h-40 md:w-64 md:h-64 lg:w-80 lg:h-80 mx-auto">
-            <Image
-              src="/images/d58176959ed0e21ad2d59eb2fc3a6c0f-2439863838.png"
-              alt="Sam Houston State University Houston Piano Sales Event"
-              fill
-              className="object-contain filter drop-shadow-lg"
-              priority
-            />
-          </div>
+        
+        {/* KAWAI Logo */}
+        <div className="relative mb-8 scroll-animate-scale pt-8">
+          <Image
+            src="/images/Kawai (Red).png"
+            alt="KAWAI Logo"
+            width={200}
+            height={80}
+            className="mx-auto"
+          />
         </div>
-        
+
         {/* Main Header */}
-        <div className="relative mb-8 scroll-animate-scale">
+        <div className="relative mb-6 scroll-animate-scale">
           {/* Top Line */}
-          <div className="w-full h-1 bg-white/60 mb-8 scroll-animate-left"></div>
+          <div className="w-full h-1 bg-white/60 mb-4 scroll-animate-left"></div>
           
-          <h1 className="font-heading text-3xl md:text-5xl lg:text-6xl text-white tracking-wider leading-tight scroll-animate">
-            <span className="font-normal">HOUSTON PIANO SALES</span>
-            <br />
-            <span className="font-bold">SAM HOUSTON STATE UNIVERSITY EVENT</span>
+          <h1 className="font-heading text-white tracking-wider leading-tight scroll-animate">
+            <span className="font-black text-3xl md:text-6xl lg:text-8xl tracking-wide block mb-2 drop-shadow-2xl" style={{ color: '#FF4500', textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>SAM HOUSTON STATE UNIVERSITY</span>
+            <span className="font-normal text-2xl md:text-4xl lg:text-5xl block">HOUSTON PIANO SALES EVENT</span>
           </h1>
           
           {/* Bottom Line */}
-          <div className="w-full h-1 bg-white/60 mt-8 scroll-animate-right"></div>
+          <div className="w-full h-1 bg-white/60 mt-4 scroll-animate-right"></div>
           
           {/* Subtitle */}
           <p className="font-body text-sm md:text-base text-white/90 mt-6 scroll-animate">
@@ -106,15 +104,6 @@ export default function HeroSection() {
             </Button>
           </div>
           
-          {/* Early Bird Incentive */}
-          <div className="mt-8 scroll-animate">
-            <p className="font-body text-base md:text-lg text-white font-medium tracking-wide">
-              <span className="italic">Book now for early bird access to our premium inventory</span>
-              <br className="hidden sm:block" />
-              <span className="sm:inline block mt-1 sm:mt-0"> — </span>
-              <span className="font-semibold">plus free tuning and delivery</span>
-            </p>
-          </div>
         </div>
       </div>
       

@@ -12,6 +12,7 @@ import { ShowroomLocation } from '@/components/sections/showroom-location';
 import { Footer } from '@/components/Footer';
 import { StructuredData } from '@/components/SEO/StructuredData';
 import FAQSection from '@/components/sections/FAQSection';
+import { CountdownTimer } from '@/components/CountdownTimer';
 
 export default function ClientHomePage() {
   useScrollAnimations();
@@ -31,13 +32,14 @@ export default function ClientHomePage() {
       <StructuredData />
       <Header />
       <HeroSection />
-      <ValuePropositionSection />
       <AboutEventSection />
+      <ValuePropositionSection />
       <FeaturedDeals />
       <BookingSection />
       <FAQSection />
       <ShowroomLocation />
       <Footer />
+      <CountdownTimer />
     </div>
   );
 }
