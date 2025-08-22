@@ -51,6 +51,7 @@ export async function POST(request: NextRequest) {
 }
 
 // Example function to save to a JSON file (for testing)
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function _saveToFile(_bookingData: BookingData) {
   
   const filePath = path.join(process.cwd(), 'bookings.json');
@@ -72,6 +73,7 @@ async function _saveToFile(_bookingData: BookingData) {
 }
 
 // Example function to save to a database
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function _saveToDatabase(_bookingData: BookingData) {
   // Example with Prisma/PostgreSQL:
   /*
@@ -96,6 +98,7 @@ async function _saveToDatabase(_bookingData: BookingData) {
 }
 
 // Example function to send to external service
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function _sendToExternalService(_bookingData: BookingData) {
   // Example with Airtable:
   /*

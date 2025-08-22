@@ -4,10 +4,8 @@ import { useEffect } from 'react';
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
 } from '@/components/ui/dialog';
+import { initializeCalendlyTracking, cleanupCalendlyTracking } from '@/lib/calendly-tracking';
 
 interface PianoConsultationDialogProps {
   isOpen: boolean;
@@ -23,12 +21,18 @@ export default function PianoConsultationDialog({ isOpen, onClose }: PianoConsul
       script.async = true;
       document.head.appendChild(script);
 
+      // Initialize Calendly tracking for modal
+      initializeCalendlyTracking('modal');
+
       return () => {
         // Clean up script when dialog closes
         const existingScript = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
         if (existingScript) {
           document.head.removeChild(existingScript);
         }
+        
+        // Clean up Calendly tracking
+        cleanupCalendlyTracking();
       };
     }
   }, [isOpen]);

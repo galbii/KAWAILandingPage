@@ -1,10 +1,10 @@
 {
   "app/page.tsx -> ./client-page": {
-    "id": 7093,
+    "id": 6349,
     "files": [
       "static/chunks/125-e43f79ad7f5b3edb.js",
-      "static/chunks/88.0984c1e7d5daca8b.js",
-      "static/chunks/93.d43c1ca0f0019c37.js"
+      "static/chunks/88.20170d27f86cde55.js",
+      "static/chunks/349.581dfc4af3709c24.js"
     ]
   }
 }

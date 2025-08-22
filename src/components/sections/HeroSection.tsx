@@ -41,7 +41,7 @@ export default function HeroSection() {
         className="absolute inset-0 w-full h-full object-cover z-0"
         onLoadedData={(e) => {
           const video = e.target as HTMLVideoElement;
-          video.currentTime = 10.10;
+          video.currentTime = 13.10;
         }}
       >
         <source src="/videos/CA.mp4" type="video/mp4" />
@@ -58,7 +58,7 @@ export default function HeroSection() {
         {/* KAWAI Logo */}
         <div className="relative mb-8 scroll-animate-scale pt-8">
           <Image
-            src="/images/Kawai (Red).png"
+            src="/images/optimized/logos/Kawai-Red.webp"
             alt="KAWAI Logo"
             width={200}
             height={80}

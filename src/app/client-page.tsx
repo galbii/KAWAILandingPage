@@ -18,7 +18,7 @@ export default function ClientHomePage() {
   useScrollAnimations();
   
   // Enable comprehensive page tracking for the KAWAI piano sale landing page
-  const { trackContentInteraction } = usePageTracking({
+  usePageTracking({
     pageName: 'kawai_piano_sale_landing',
     enableScrollTracking: true,
     enableTimeTracking: true,

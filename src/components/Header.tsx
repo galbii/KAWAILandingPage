@@ -11,7 +11,7 @@ export default function Header() {
           <div className="flex items-end gap-4">
             <div className="relative w-32 h-10 sm:w-40 sm:h-12 lg:w-48 lg:h-14 header-logo">
               <Image
-                src="/images/Kawai (Red).png"
+                src="/images/optimized/logos/Kawai-Red.webp"
                 alt="KAWAI"
                 fill
                 className="object-contain"

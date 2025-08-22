@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -28,11 +29,13 @@ export default function PianoShowcase() {
               <div className="grid lg:grid-cols-3 gap-6">
                 {/* Piano Image and Info */}
                 <div className="lg:col-span-1">
-                  <div className="h-48 bg-muted overflow-hidden rounded-t-lg">
-                    <img
-                      src="/images/pianos/es120.jpeg"
-                      alt="Piano"
-                      className="object-cover w-full h-full"
+                  <div className="h-48 bg-muted overflow-hidden rounded-t-lg relative">
+                    <Image
+                      src={piano.image}
+                      alt={piano.name}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover"
                     />
                   </div>
                   <CardHeader className="pb-4">

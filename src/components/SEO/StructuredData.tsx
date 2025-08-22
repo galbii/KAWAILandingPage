@@ -24,9 +24,9 @@ export function StructuredData() {
           longitude: "-95.5527",
         }}
         images={[
-          "/images/pianos/es120.jpeg",
-          "/images/pianos/K-200_EP_styling.jpg",
-          "/images/pianos/GL10.jpg",
+          "/images/optimized/pianos/es120.webp",
+          "/images/optimized/pianos/K-200_EP_styling_1200.webp",
+          "/images/optimized/pianos/GL10_1200.webp",
         ]}
         sameAs={[
           "https://www.kawai-global.com",
@@ -91,9 +91,9 @@ export function StructuredData() {
         }}
         url="https://www.kawai-piano-sale-houston.com"
         images={[
-          "/images/pianos/es120.jpeg",
-          "/images/pianos/K-200_EP_styling.jpg",
-          "/images/pianos/GL10.jpg",
+          "/images/optimized/pianos/es120.webp",
+          "/images/optimized/pianos/K-200_EP_styling_1200.webp",
+          "/images/optimized/pianos/GL10_1200.webp",
         ]}
         offers={[
           {

@@ -34,7 +34,7 @@ export function Footer() {
           <div>
             <div className="mb-6">
               <Image
-                src="/images/kawai-logo-red-1x.png"
+                src="/images/optimized/logos/kawai-logo-red-1x.webp"
                 alt="Kawai Piano"
                 width={120}
                 height={40}

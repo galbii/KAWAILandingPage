@@ -2,6 +2,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import PianoConsultationDialog from '@/components/PianoConsultationDialog';
 
 export default function AboutEventSection() {
@@ -33,9 +34,11 @@ export default function AboutEventSection() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6 scroll-animate-left">
             <div className="flex flex-col items-center text-center mb-6">
-              <img 
-                src="/images/Kawai (Red).png"
+              <Image 
+                src="/images/optimized/logos/Kawai-Red.webp"
                 alt="KAWAI Piano Sales Houston - Premium Piano Dealer"
+                width={120}
+                height={64}
                 className="h-16 w-auto mb-4"
               />
               <h3 className="text-2xl md:text-3xl font-bold tracking-tight">
@@ -45,9 +48,11 @@ export default function AboutEventSection() {
 
             {/* Mobile Letter Image - Shown on mobile right after title */}
             <div className="lg:hidden relative mb-8 scroll-animate">
-              <img 
-                src="/images/letter.png"
+              <Image 
+                src="/images/optimized/misc/letter_800.webp"
                 alt="SHSU Houston Piano Sale Event Letter - Piano Deals Houston"
+                width={800}
+                height={600}
                 className="w-full h-auto object-contain opacity-90 max-w-md mx-auto"
               />
             </div>
@@ -96,9 +101,11 @@ export default function AboutEventSection() {
 
           {/* Desktop Letter Image - Hidden on mobile */}
           <div className="hidden lg:block relative scroll-animate-right">
-            <img 
-              src="/images/letter.png"
+            <Image 
+              src="/images/optimized/misc/letter_800.webp"
               alt="SHSU Houston Piano Sale Event Letter - Piano Deals Houston"
+              width={800}
+              height={600}
               className="w-full h-auto object-contain opacity-90"
             />
           </div>
@@ -109,70 +116,84 @@ export default function AboutEventSection() {
           <div className="grid grid-cols-6 gap-0 h-[40rem]">
             {/* KAWAI CA901 - Hero */}
             <div className="col-span-3 row-span-2 relative overflow-hidden scroll-animate" style={{ animationDelay: '0.1s' }}>
-              <img 
-                src="/images/gallery/KAWAI-CA901B-24 copy.webp"
+              <Image 
+                src="/images/optimized/gallery/KAWAI-CA901B-24 copy_800.webp"
                 alt="KAWAI CA901 Digital Piano"
-                className="w-full h-full object-cover opacity-0 animate-fade-in-slow"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover opacity-0 animate-fade-in-slow"
                 style={{ animationDelay: '0.2s' }}
               />
             </div>
 
             {/* KAWAI CA501 */}
             <div className="col-span-3 row-span-1 relative overflow-hidden scroll-animate" style={{ animationDelay: '0.3s' }}>
-              <img 
-                src="/images/gallery/KAWAI-CA501W-39 copy.webp"
+              <Image 
+                src="/images/optimized/gallery/KAWAI-CA501W-39 copy_800.webp"
                 alt="KAWAI CA501 Digital Piano"
-                className="w-full h-full object-cover opacity-0 animate-fade-in-slow"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover opacity-0 animate-fade-in-slow"
                 style={{ animationDelay: '0.6s' }}
               />
             </div>
 
             {/* KAWAI CA401 */}
             <div className="col-span-2 row-span-1 relative overflow-hidden scroll-animate" style={{ animationDelay: '0.5s' }}>
-              <img 
-                src="/images/gallery/KAWAI_CA401B-43 copy.webp"
+              <Image 
+                src="/images/optimized/gallery/KAWAI_CA401B-43 copy_800.webp"
                 alt="KAWAI CA401 Digital Piano"
-                className="w-full h-full object-cover opacity-0 animate-fade-in-slow"
+                fill
+                sizes="(max-width: 768px) 100vw, 33vw"
+                className="object-cover opacity-0 animate-fade-in-slow"
                 style={{ animationDelay: '1.0s' }}
               />
             </div>
 
             {/* Connectivity */}
             <div className="col-span-1 row-span-1 relative overflow-hidden scroll-animate" style={{ animationDelay: '0.7s' }}>
-              <img 
-                src="/images/gallery/connectivity.webp"
+              <Image 
+                src="/images/optimized/gallery/connectivity_800.webp"
                 alt="Connectivity Features"
-                className="w-full h-full object-cover opacity-0 animate-fade-in-slow"
+                fill
+                sizes="(max-width: 768px) 100vw, 16vw"
+                className="object-cover opacity-0 animate-fade-in-slow"
                 style={{ animationDelay: '1.4s' }}
               />
             </div>
 
             {/* CA401 Supplement */}
             <div className="col-span-3 row-span-1 relative overflow-hidden scroll-animate" style={{ animationDelay: '0.9s' }}>
-              <img 
-                src="/images/gallery/CA401 Supplement Image.webp"
+              <Image 
+                src="/images/optimized/gallery/CA401 Supplement Image_800.webp"
                 alt="KAWAI CA401 Supplement"
-                className="w-full h-full object-cover opacity-0 animate-fade-in-slow"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover opacity-0 animate-fade-in-slow"
                 style={{ animationDelay: '1.8s' }}
               />
             </div>
 
             {/* CA701R */}
             <div className="col-span-2 row-span-1 relative overflow-hidden scroll-animate" style={{ animationDelay: '1.1s' }}>
-              <img 
-                src="/images/gallery/CA701R-43 copy.webp"
+              <Image 
+                src="/images/optimized/gallery/CA701R-43 copy_800.webp"
                 alt="KAWAI CA701R Digital Piano"
-                className="w-full h-full object-cover opacity-0 animate-fade-in-slow"
+                fill
+                sizes="(max-width: 768px) 100vw, 33vw"
+                className="object-cover opacity-0 animate-fade-in-slow"
                 style={{ animationDelay: '2.2s' }}
               />
             </div>
 
             {/* SK Series */}
             <div className="col-span-1 row-span-1 relative overflow-hidden scroll-animate" style={{ animationDelay: '1.3s' }}>
-              <img 
-                src="/images/gallery/SK.webp"
+              <Image 
+                src="/images/optimized/gallery/SK_800.webp"
                 alt="KAWAI SK Series"
-                className="w-full h-full object-cover opacity-0 animate-fade-in-slow"
+                fill
+                sizes="(max-width: 768px) 100vw, 16vw"
+                className="object-cover opacity-0 animate-fade-in-slow"
                 style={{ animationDelay: '2.6s' }}
               />
             </div>

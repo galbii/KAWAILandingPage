@@ -10,6 +10,8 @@ export interface Piano {
   features: string[];
   badge: string;
   image: string;
+  webpImage?: string;
+  fallbackImage?: string;
 }
 
 export const pianos: Piano[] = [
@@ -24,7 +26,9 @@ export const pianos: Piano[] = [
     remaining: 12,
     features: ["88 Weighted Keys", "Premium Sound Engine", "Bluetooth Ready", "SHSU Approved"],
     badge: "STUDENT FAVORITE",
-    image: "/images/pianos/es120.jpeg"
+    image: "/images/optimized/pianos/es120.webp",
+    webpImage: "/images/optimized/pianos/es120.webp",
+    fallbackImage: "/images/optimized/pianos/es120.jpg"
   },
   {
     name: "Kawai ES520 Digital Piano",
@@ -37,7 +41,9 @@ export const pianos: Piano[] = [
     remaining: 8,
     features: ["88 Keys", "Bluetooth Ready", "App Compatible", "Faculty Choice"],
     badge: "BEST VALUE",
-    image: "/images/pianos/ES520W_above.png"
+    image: "/images/optimized/pianos/ES520W_above_1200.webp",
+    webpImage: "/images/optimized/pianos/ES520W_above_1200.webp",
+    fallbackImage: "/images/optimized/pianos/ES520W_above_1200.jpg"
   },
   {
     name: "K200 Upright Acoustic Piano",
@@ -50,7 +56,9 @@ export const pianos: Piano[] = [
     remaining: 4,
     features: ["Perfect Home Size", "Rich Acoustic Tone", "SHSU Standard", "Free Setup"],
     badge: "FAMILY FAVORITE",
-    image: "/images/pianos/K-200_EP_styling.jpg"
+    image: "/images/optimized/pianos/K-200_EP_styling_1200.webp",
+    webpImage: "/images/optimized/pianos/K-200_EP_styling_1200.webp",
+    fallbackImage: "/images/optimized/pianos/K-200_EP_styling_1200.jpg"
   },
   {
     name: "GL10 Grand Piano",
@@ -63,6 +71,8 @@ export const pianos: Piano[] = [
     remaining: 2,
     features: ["Performance Grade", "Concert Quality", "Faculty Approved", "White Glove Delivery"],
     badge: "PREMIUM SELECTION",
-    image: "/images/pianos/GL10.jpg"
+    image: "/images/optimized/pianos/GL10_1200.webp",
+    webpImage: "/images/optimized/pianos/GL10_1200.webp",
+    fallbackImage: "/images/optimized/pianos/GL10_1200.jpg"
   }
 ];

@@ -1,10 +1,42 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { initializeCalendlyTracking, cleanupCalendlyTracking } from '@/lib/calendly-tracking';
 
 export default function BookingSection() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
+
+  // Preload Calendly script immediately when component mounts
+  useEffect(() => {
+    const existingScript = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
+    
+    if (!existingScript) {
+      const script = document.createElement('script');
+      script.src = 'https://assets.calendly.com/assets/external/widget.js';
+      script.async = true;
+      script.onload = () => {
+        // Initialize Calendly tracking once script is loaded
+        initializeCalendlyTracking('booking_section');
+      };
+      script.onerror = () => console.warn('Failed to load Calendly script');
+      document.head.appendChild(script);
+    } else {
+      // Initialize tracking if script already exists
+      initializeCalendlyTracking('booking_section');
+    }
+
+    return () => {
+      // Clean up script when component unmounts
+      const scriptToRemove = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
+      if (scriptToRemove) {
+        document.head.removeChild(scriptToRemove);
+      }
+      
+      // Clean up Calendly tracking
+      cleanupCalendlyTracking();
+    };
+  }, []);
 
   // Intersection observer for scroll animations
   useEffect(() => {
@@ -23,24 +55,6 @@ export default function BookingSection() {
 
     return () => observer.disconnect();
   }, []);
-
-  // Load Calendly script when component becomes visible
-  useEffect(() => {
-    if (isVisible) {
-      const script = document.createElement('script');
-      script.src = 'https://assets.calendly.com/assets/external/widget.js';
-      script.async = true;
-      document.head.appendChild(script);
-
-      return () => {
-        // Clean up script when component unmounts
-        const existingScript = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
-        if (existingScript) {
-          document.head.removeChild(existingScript);
-        }
-      };
-    }
-  }, [isVisible]);
 
 
   return (

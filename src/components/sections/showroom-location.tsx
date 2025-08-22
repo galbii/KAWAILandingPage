@@ -5,19 +5,55 @@ import { useState, useEffect } from 'react';
 import Script from 'next/script';
 
 export function ShowroomLocation() {
-  const [formLoaded, setFormLoaded] = useState(false);
   const [showFallback, setShowFallback] = useState(false);
+  const [formLoaded, setFormLoaded] = useState(false);
 
   useEffect(() => {
+    // Preload and initialize Constant Contact form immediately
+    const initializeForm = () => {
+      // Check if Constant Contact widget is available
+      if (typeof (window as Record<string, unknown>).ConstantContact !== 'undefined') {
+        setFormLoaded(true);
+        // Force initialization of the form
+        const formElement = document.querySelector('.ctct-inline-form');
+        if (formElement && (window as Record<string, unknown>).ConstantContact) {
+          try {
+            ((window as Record<string, unknown>).ConstantContact as { init: () => void }).init();
+          } catch (error) {
+            console.warn('Constant Contact initialization error:', error);
+          }
+        }
+      }
+    };
+
+    // Try to initialize immediately if script is already loaded
+    initializeForm();
+
     // Set a timeout to show fallback form if Constant Contact doesn't load
     const timer = setTimeout(() => {
       const formElement = document.querySelector('.ctct-inline-form');
       if (formElement && formElement.children.length === 0) {
         setShowFallback(true);
       }
-    }, 5000); // Wait 5 seconds for Constant Contact to load
+    }, 3000); // Reduced from 5 seconds to 3 seconds for faster fallback
 
-    return () => clearTimeout(timer);
+    // Listen for the script load event
+    const handleScriptLoad = () => {
+      setTimeout(initializeForm, 100); // Small delay to ensure script is fully loaded
+    };
+
+    // Check if script is already loaded, otherwise listen for it
+    const script = document.querySelector('script[src*="signup-form-widget"]');
+    if (script) {
+      script.addEventListener('load', handleScriptLoad);
+    }
+
+    return () => {
+      clearTimeout(timer);
+      if (script) {
+        script.removeEventListener('load', handleScriptLoad);
+      }
+    };
   }, []);
   const showroomInfo = {
     name: 'Kawai Piano Gallery Houston',
@@ -50,10 +86,25 @@ export function ShowroomLocation() {
       />
       <Script 
         id="signupScript"
-        src="//static.ctctcdn.com/js/signup-form-widget/current/signup-form-widget.min.js"
+        src="https://static.ctctcdn.com/js/signup-form-widget/current/signup-form-widget.min.js"
         strategy="afterInteractive"
-        async
-        defer
+        onLoad={() => {
+          // Initialize form as soon as script loads
+          setTimeout(() => {
+            if (typeof (window as Record<string, unknown>).ConstantContact !== 'undefined') {
+              try {
+                ((window as Record<string, unknown>).ConstantContact as { init: () => void }).init();
+              } catch (error) {
+                console.warn('Constant Contact initialization error:', error);
+                setShowFallback(true);
+              }
+            }
+          }, 500);
+        }}
+        onError={() => {
+          console.warn('Failed to load Constant Contact script');
+          setShowFallback(true);
+        }}
       />
       
       <section className="relative bg-gradient-to-b from-white via-kawai-pearl/20 to-kawai-pearl/40">

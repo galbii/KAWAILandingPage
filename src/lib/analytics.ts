@@ -5,6 +5,27 @@ import { sendGAEvent } from '@next/third-parties/google'
 // Check if running in browser
 const isBrowser = typeof window !== 'undefined'
 
+// Type for pixel parameters
+type PixelParameters = Record<string, string | number | boolean>
+
+// Meta Pixel helper function
+function trackMetaPixel(eventName: string, parameters?: PixelParameters) {
+  if (!isBrowser || typeof window.fbq !== 'function') return
+  
+  try {
+    window.fbq('track', eventName, parameters)
+  } catch (error) {
+    console.warn('Meta Pixel tracking error:', error)
+  }
+}
+
+// Declare fbq function for TypeScript
+declare global {
+  interface Window {
+    fbq: (action: string, event: string, parameters?: PixelParameters) => void
+  }
+}
+
 // Analytics tracking utility for button clicks and user interactions
 export const trackEvent = {
   // CTA button clicks
@@ -21,6 +42,8 @@ export const trackEvent = {
   // Lead generation events (high-value actions)
   generateLead: (action: string, location: string, additionalData?: Record<string, string | number | boolean>) => {
     if (!isBrowser) return
+    
+    // Google Analytics
     sendGAEvent('event', 'generate_lead', {
       event_category: 'lead_generation', 
       action: action,
@@ -28,15 +51,35 @@ export const trackEvent = {
       value: 1, // Assign value to lead generation events
       ...additionalData
     })
+    
+    // Meta Pixel
+    trackMetaPixel('Lead', {
+      content_name: action,
+      content_category: 'lead_generation',
+      source: location,
+      value: 1,
+      currency: 'USD',
+      ...additionalData
+    })
   },
 
   // Contact interactions
   contact: (method: 'phone' | 'email' | 'form', location: string, additionalData?: Record<string, string | number | boolean>) => {
     if (!isBrowser) return
+    
+    // Google Analytics
     sendGAEvent('event', 'contact', {
       event_category: 'contact',
       contact_method: method,
       location: location,
+      ...additionalData
+    })
+    
+    // Meta Pixel
+    trackMetaPixel('Contact', {
+      content_name: `contact_${method}`,
+      content_category: 'contact',
+      source: location,
       ...additionalData
     })
   },
@@ -229,6 +272,44 @@ export const trackKawaiEvent = {
   subscribeNewsletter: (source: string) => {
     trackEvent.signUp(source, {
       subscription_type: 'kawai_updates'
+    })
+  },
+
+  // Calendly-specific tracking functions
+  calendlyConversion: (source: 'modal' | 'booking_section' | 'unknown') => {
+    // Track the main conversion - appointment scheduled
+    trackEvent.generateLead('calendly_appointment_scheduled', source, {
+      event_type: 'piano_consultation',
+      event_date: 'september_2025',
+      calendly_source: source,
+      conversion_value: 50 // Higher value for actual appointments
+    })
+    
+    // Additional Meta Pixel event for appointment booking
+    trackMetaPixel('Schedule', {
+      content_name: 'piano_consultation_appointment',
+      content_category: 'appointment',
+      source: source,
+      value: 50,
+      currency: 'USD',
+      appointment_type: 'piano_consultation'
+    })
+  },
+
+  calendlyInteraction: (interaction: string, source: 'modal' | 'booking_section' | 'unknown') => {
+    // Track user interactions within Calendly widget
+    trackEvent.buttonClick(`calendly_${interaction}`, source, {
+      interaction_type: interaction,
+      calendly_source: source,
+      event_type: 'calendly_engagement'
+    })
+    
+    // Meta Pixel custom event for engagement
+    trackMetaPixel('CustomizeProduct', {
+      content_name: `calendly_${interaction}`,
+      content_category: 'calendly_interaction',
+      source: source,
+      interaction_type: interaction
     })
   }
 }

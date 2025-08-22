@@ -19,7 +19,6 @@ export function CountdownTimer() {
   const [isVisible, setIsVisible] = useState(false);
   const [isMinimized, setIsMinimized] = useState(true); // Start minimized
   const [hasScrolled, setHasScrolled] = useState(false);
-  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     setMounted(true);
