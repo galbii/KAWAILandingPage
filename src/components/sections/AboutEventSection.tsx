@@ -13,7 +13,7 @@ export default function AboutEventSection() {
         {/* Piano Types Header */}
         <div className="text-center mb-12 scroll-animate">
           <h2 className="text-sm md:text-base font-normal text-gray-500 tracking-wider leading-relaxed opacity-80">
-            BABY GRANDS | MUSIC ROOM GRANDS | UPRIGHTS | STUDIOS | CONSOLES | <span className="text-kawai-red">PREMIUM DIGITALS</span> | FINANCING AVAILABLE
+            HOUSTON PIANO SALES | BABY GRANDS | UPRIGHTS | DIGITALS | <span className="text-kawai-red">USED PIANOS HOUSTON</span> | FINANCING AVAILABLE
           </h2>
         </div>
 
@@ -23,25 +23,25 @@ export default function AboutEventSection() {
             <div className="flex flex-col items-center text-center mb-6">
               <img 
                 src="/images/kawai-logo-red-1x.png"
-                alt="KAWAI Logo"
+                alt="KAWAI Piano Sales Houston - Premium Piano Dealer"
                 className="h-16 w-auto mb-4"
               />
               <h3 className="text-2xl md:text-3xl font-bold tracking-tight">
-                A Partnership Built on <span className="text-kawai-red">Musical Excellence</span>
+                Houston&apos;s Premier <span className="text-kawai-red">Piano Sale Event</span>
               </h3>
             </div>
             
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p className="text-base">
-                For over five years, our exclusive partnership with Sam Houston State University&apos;s Music Department has brought Houston families access to premium Kawai pianos at specially negotiated pricing.
+                For over five years, our exclusive partnership with Sam Houston State University has made us Houston&apos;s trusted piano dealer, bringing Greater Houston Area families access to premium KAWAI piano sales at specially negotiated pricing.
               </p>
               
               <p className="text-base">
-                This four-day exclusive event features carefully selected instruments that meet SHSU&apos;s rigorous quality standards. Each piano has been chosen by the university&apos;s music faculty for its exceptional sound quality, build craftsmanship, and educational value.
+                This four-day exclusive Houston piano sale event features carefully selected digital and acoustic instruments. From used pianos Houston families love to brand new grand pianos, each instrument meets SHSU&apos;s rigorous quality standards for exceptional sound and craftsmanship.
               </p>
               
               <p className="text-base">
-                Whether you&apos;re a SHSU student, Houston resident, or music enthusiast, this event offers a rare opportunity to acquire professional-grade instruments with the confidence that comes from institutional endorsement.
+                Whether you&apos;re seeking piano deals Houston residents can trust, need piano lessons Houston area, or want professional-grade instruments, this event offers unmatched piano sales Houston has to offer with institutional endorsement.
               </p>
             </div>
 
@@ -81,7 +81,7 @@ export default function AboutEventSection() {
           <div className="relative scroll-animate-right">
             <img 
               src="/images/letter.png"
-              alt="SHSU Piano Sale Letter"
+              alt="SHSU Houston Piano Sale Event Letter - Piano Deals Houston"
               className="w-full h-auto object-contain opacity-90"
             />
           </div>

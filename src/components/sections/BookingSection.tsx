@@ -45,7 +45,7 @@ export default function BookingSection() {
 
   return (
     <section ref={sectionRef} id="booking-consultation" className="bg-white py-16">
-      <div className="max-w-4xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6">
         <div className={`transition-all duration-700 ease-out ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
@@ -59,18 +59,16 @@ export default function BookingSection() {
             </p>
           </div>
 
-          {/* Calendly Widget Container */}
-          <div className="bg-kawai-pearl p-6 rounded-2xl shadow-lg">
-            <div 
-              className="calendly-inline-widget" 
-              data-url="https://calendly.com/kawaipianogallery/shsu-piano-sale" 
-              style={{ 
-                minWidth: '320px', 
-                height: '700px',
-                width: '100%'
-              }}
-            />
-          </div>
+          {/* Calendly Widget */}
+          <div 
+            className="calendly-inline-widget" 
+            data-url="https://calendly.com/kawaipianogallery/shsu-piano-sale" 
+            data-resize="true"
+            style={{ 
+              minWidth: '320px',
+              width: '100%'
+            }}
+          />
         </div>
       </div>
     </section>

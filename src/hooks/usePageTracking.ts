@@ -54,6 +54,7 @@ export function usePageTracking(options: UsePageTrackingOptions = {}) {
 
   // Handle visibility changes
   const handleVisibilityChange = useCallback(() => {
+    if (typeof window === 'undefined' || typeof document === 'undefined') return
     const isVisible = !document.hidden
     
     if (isVisible && !isVisibleRef.current) {
@@ -70,6 +71,7 @@ export function usePageTracking(options: UsePageTrackingOptions = {}) {
   // Handle scroll tracking
   const handleScroll = useCallback(() => {
     if (!enableScrollTracking) return
+    if (typeof window === 'undefined' || typeof document === 'undefined') return
 
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop
     const windowHeight = window.innerHeight
@@ -148,6 +150,8 @@ export function usePageTracking(options: UsePageTrackingOptions = {}) {
   }, [handleScroll])
 
   useEffect(() => {
+    if (typeof window === 'undefined' || typeof document === 'undefined') return
+    
     const throttledScrollHandler = throttledScroll()
 
     // Add event listeners

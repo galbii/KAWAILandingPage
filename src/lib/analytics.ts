@@ -2,10 +2,14 @@
 
 import { sendGAEvent } from '@next/third-parties/google'
 
+// Check if running in browser
+const isBrowser = typeof window !== 'undefined'
+
 // Analytics tracking utility for button clicks and user interactions
 export const trackEvent = {
   // CTA button clicks
   buttonClick: (buttonText: string, location: string, additionalData?: Record<string, string | number | boolean>) => {
+    if (!isBrowser) return
     sendGAEvent('event', 'click', {
       event_category: 'engagement',
       button_text: buttonText,
@@ -16,6 +20,7 @@ export const trackEvent = {
 
   // Lead generation events (high-value actions)
   generateLead: (action: string, location: string, additionalData?: Record<string, string | number | boolean>) => {
+    if (!isBrowser) return
     sendGAEvent('event', 'generate_lead', {
       event_category: 'lead_generation', 
       action: action,
@@ -27,6 +32,7 @@ export const trackEvent = {
 
   // Contact interactions
   contact: (method: 'phone' | 'email' | 'form', location: string, additionalData?: Record<string, string | number | boolean>) => {
+    if (!isBrowser) return
     sendGAEvent('event', 'contact', {
       event_category: 'contact',
       contact_method: method,
@@ -37,6 +43,7 @@ export const trackEvent = {
 
   // Newsletter signup
   signUp: (location: string, additionalData?: Record<string, string | number | boolean>) => {
+    if (!isBrowser) return
     sendGAEvent('event', 'sign_up', {
       event_category: 'engagement',
       signup_type: 'newsletter',
@@ -47,6 +54,7 @@ export const trackEvent = {
 
   // Information requests
   viewInfo: (contentType: string, location: string, additionalData?: Record<string, string | number | boolean>) => {
+    if (!isBrowser) return
     sendGAEvent('event', 'view_item', {
       event_category: 'engagement',
       content_type: contentType,
@@ -60,6 +68,7 @@ export const trackEvent = {
 export const trackPageEvent = {
   // Engagement time tracking
   engagementTime: (timeSpent: number, pageSection?: string) => {
+    if (!isBrowser) return
     sendGAEvent('event', 'page_engagement', {
       event_category: 'engagement',
       engagement_time_msec: Math.round(timeSpent * 1000),
@@ -70,6 +79,7 @@ export const trackPageEvent = {
 
   // Scroll depth tracking
   scrollDepth: (percentage: number, pageSection?: string) => {
+    if (!isBrowser) return
     sendGAEvent('event', 'scroll', {
       event_category: 'engagement',
       scroll_depth: percentage,
@@ -80,6 +90,7 @@ export const trackPageEvent = {
 
   // Session quality scoring
   sessionQuality: (score: number, interactionCount: number, timeSpent: number) => {
+    if (!isBrowser) return
     sendGAEvent('event', 'session_quality', {
       event_category: 'engagement',
       quality_score: score,
@@ -91,6 +102,7 @@ export const trackPageEvent = {
 
   // Content interaction tracking
   contentInteraction: (contentType: string, elementId?: string, timeToInteraction?: number) => {
+    if (!isBrowser) return
     sendGAEvent('event', 'content_interaction', {
       event_category: 'engagement',
       content_type: contentType,
@@ -101,6 +113,7 @@ export const trackPageEvent = {
 
   // Page section visibility tracking
   sectionView: (sectionName: string, timeInView: number, isFullyVisible: boolean) => {
+    if (!isBrowser) return
     sendGAEvent('event', 'section_view', {
       event_category: 'engagement',
       section_name: sectionName,
@@ -112,6 +125,7 @@ export const trackPageEvent = {
 
   // Exit intent detection
   exitIntent: (timeOnPage: number, scrollDepth: number, interactionCount: number) => {
+    if (!isBrowser) return
     sendGAEvent('event', 'exit_intent', {
       event_category: 'engagement',
       time_on_page: Math.round(timeOnPage),
@@ -122,6 +136,7 @@ export const trackPageEvent = {
 
   // Custom page timing events
   timing: (eventName: string, timingValue: number, category: string = 'performance') => {
+    if (!isBrowser) return
     sendGAEvent('event', 'timing_complete', {
       event_category: category,
       name: eventName,
@@ -134,6 +149,7 @@ export const trackPageEvent = {
 export const trackWebVitals = {
   // Core Web Vitals
   coreVital: (name: string, value: number, rating: 'good' | 'needs-improvement' | 'poor', id: string) => {
+    if (!isBrowser) return
     sendGAEvent('event', 'web_vital', {
       event_category: 'performance',
       metric_name: name,
@@ -146,6 +162,7 @@ export const trackWebVitals = {
 
   // Custom Next.js metrics
   nextjsMetric: (name: string, value: number, navigationType?: string) => {
+    if (!isBrowser) return
     sendGAEvent('event', 'nextjs_metric', {
       event_category: 'performance',
       metric_name: name,

@@ -10,6 +10,8 @@ import { FeaturedDeals } from '@/components/sections/piano-gallery';
 import BookingSection from '@/components/sections/BookingSection';
 import { ShowroomLocation } from '@/components/sections/showroom-location';
 import { Footer } from '@/components/Footer';
+import { StructuredData } from '@/components/SEO/StructuredData';
+import FAQSection from '@/components/sections/FAQSection';
 
 export default function Home() {
   useScrollAnimations();
@@ -26,12 +28,14 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
+      <StructuredData />
       <Header />
       <HeroSection />
       <ValuePropositionSection />
       <AboutEventSection />
       <FeaturedDeals />
       <BookingSection />
+      <FAQSection />
       <ShowroomLocation />
       <Footer />
     </div>

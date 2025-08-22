@@ -59,7 +59,7 @@ export default function HeroSection() {
           <div className="relative w-40 h-40 md:w-64 md:h-64 lg:w-80 lg:h-80 mx-auto">
             <Image
               src="/images/d58176959ed0e21ad2d59eb2fc3a6c0f-2439863838.png"
-              alt="Sam Houston State University"
+              alt="Sam Houston State University Houston Piano Sales Event"
               fill
               className="object-contain filter drop-shadow-lg"
               priority
@@ -73,9 +73,9 @@ export default function HeroSection() {
           <div className="w-full h-1 bg-white/60 mb-8 scroll-animate-left"></div>
           
           <h1 className="font-heading text-3xl md:text-5xl lg:text-6xl text-white tracking-wider leading-tight scroll-animate">
-            <span className="font-normal">SAM HOUSTON STATE UNIVERSITY</span>
+            <span className="font-normal">HOUSTON PIANO SALES</span>
             <br />
-            <span className="font-bold">PIANO SALE EVENT</span>
+            <span className="font-bold">SAM HOUSTON STATE UNIVERSITY EVENT</span>
           </h1>
           
           {/* Bottom Line */}
@@ -83,7 +83,7 @@ export default function HeroSection() {
           
           {/* Subtitle */}
           <p className="font-body text-sm md:text-base text-white/90 mt-6 scroll-animate">
-          Special reduced prices for our community - alumni, friends, and early birds before public sale. Your purchase directly benefits the talented students and faculty of SHSU&apos;s Music Department.
+          Premium piano deals Houston - digital & acoustic pianos at special reduced prices. KAWAI piano sales for our community with savings up to $6,000. Your purchase supports SHSU&apos;s Music Department.
           </p>
           
         </div>

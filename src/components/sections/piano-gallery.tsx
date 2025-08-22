@@ -23,7 +23,7 @@ const featuredPianos: FeaturedPiano[] = [
     id: "es-120",
     model: "ES-120",
     title: "Kawai ES-120",
-    description: "Compact digital piano with Responsive Hammer Compact action, 88 weighted keys, and premium piano sounds. Perfect for home practice, lessons, and portable performances.",
+    description: "Compact digital piano with Responsive Hammer Compact action, 88 weighted keys, and premium piano sounds. Perfect for Houston piano lessons, home practice, and portable performances.",
     image: "/images/pianos/es120.jpeg",
     category: "Digital Piano",
     originalPrice: 1099,
@@ -49,7 +49,7 @@ const featuredPianos: FeaturedPiano[] = [
     id: "k-200",
     model: "K-200",
     title: "Kawai K-200",
-    description: "Professional upright piano with premium spruce soundboard, responsive action, and rich, resonant tone. Ideal for serious students, teachers, and music institutions.",
+    description: "Professional upright piano with premium spruce soundboard, responsive action, and rich, resonant tone. Popular choice for Houston piano families, serious students, teachers, and music institutions.",
     image: "/images/pianos/K-200_EP_styling.jpg",
     category: "Upright Piano",
     originalPrice: 8395,
@@ -182,7 +182,7 @@ function PianoSection({ piano, index }: PianoSectionProps) {
             }`}>
               <Image
                 src={piano.image}
-                alt={piano.title}
+                alt={`${piano.title} - Houston Piano Sales - Available at KAWAI Piano Store Houston`}
                 width={800}
                 height={600}
                 className="w-full h-auto object-cover"
@@ -229,7 +229,7 @@ export function FeaturedDeals() {
               : 'opacity-0 translate-y-8'
           }`}>
             <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-kawai-black mb-2">
-              FEATURED DEALS
+              HOUSTON PIANO DEALS
             </h1>
             <div className="flex items-center justify-center gap-3 mb-4">
               <div className="bg-red-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
@@ -243,7 +243,7 @@ export function FeaturedDeals() {
               ? 'opacity-100 translate-y-0' 
               : 'opacity-0 translate-y-8'
           }`}>
-            Special reduced prices for our community - alumni, friends, and early birds before public sale. Your purchase directly benefits the talented students and faculty of SHSU&apos;s Music Department.
+            Exclusive piano sales Houston event featuring digital and acoustic pianos at special reduced prices. Used pianos Houston families trust, available at our Greater Houston Area showroom. Your purchase supports SHSU&apos;s Music Department.
           </p>
         </div>
       </section>

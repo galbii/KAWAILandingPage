@@ -17,8 +17,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "KAWAI Piano Sale | SHSU Partnership | September 11-14, 2025 | Houston",
-  description: "Exclusive KAWAI piano sale in partnership with Sam Houston State University. Save up to $6,000 on premium pianos. Book your private consultation for September 11-14, 2025 in Houston.",
+  title: "Piano Sales Houston | KAWAI Piano Deals & Used Pianos | SHSU Event Sept 2025",
+  description: "Houston piano sales event featuring KAWAI digital & acoustic pianos. Save up to $6,000 on new & used pianos. Piano deals Houston - SHSU partnership Sept 11-14, 2025. Free delivery!",
 };
 
 export default function RootLayout({
