@@ -19,10 +19,26 @@ function trackMetaPixel(eventName: string, parameters?: PixelParameters) {
   }
 }
 
-// Declare fbq function for TypeScript
+// Google Ads conversion tracking helper function
+function trackGoogleAdsConversion(conversionLabel?: string) {
+  if (!isBrowser || typeof window.gtag !== 'function') return
+  
+  try {
+    window.gtag('event', 'conversion', {
+      'send_to': `AW-755074614${conversionLabel ? `/${conversionLabel}` : ''}`,
+      'value': 1.0,
+      'currency': 'USD'
+    })
+  } catch (error) {
+    console.warn('Google Ads conversion tracking error:', error)
+  }
+}
+
+// Declare global functions for TypeScript
 declare global {
   interface Window {
     fbq: (action: string, event: string, parameters?: PixelParameters) => void
+    gtag: (command: string, targetId: string, config?: Record<string, unknown>) => void
   }
 }
 
@@ -224,6 +240,18 @@ export const trackKawaiEvent = {
       event_type: 'piano_consultation',
       event_date: 'september_2025'
     })
+    
+    // Facebook Pixel CompleteRegistration tracking
+    trackMetaPixel('CompleteRegistration', {
+      content_name: 'piano_consultation_booking',
+      content_category: 'consultation',
+      source: source,
+      value: 100,
+      currency: 'USD'
+    })
+    
+    // Google Ads conversion tracking
+    trackGoogleAdsConversion()
   },
 
   // Piano browsing
@@ -239,6 +267,18 @@ export const trackKawaiEvent = {
       event_type: 'sale_event_registration',
       event_date: 'september_2025'
     })
+    
+    // Facebook Pixel CompleteRegistration tracking
+    trackMetaPixel('CompleteRegistration', {
+      content_name: 'piano_sale_event_registration',
+      content_category: 'event_registration',
+      source: source,
+      value: 75,
+      currency: 'USD'
+    })
+    
+    // Google Ads conversion tracking
+    trackGoogleAdsConversion()
   },
 
   // Contact actions
@@ -266,6 +306,18 @@ export const trackKawaiEvent = {
     trackEvent.generateLead('private_tour_request', source, {
       event_type: 'showroom_tour'
     })
+    
+    // Facebook Pixel CompleteRegistration tracking
+    trackMetaPixel('CompleteRegistration', {
+      content_name: 'private_tour_scheduling',
+      content_category: 'tour_request',
+      source: source,
+      value: 50,
+      currency: 'USD'
+    })
+    
+    // Google Ads conversion tracking
+    trackGoogleAdsConversion()
   },
 
   // Newsletter signup
@@ -285,6 +337,16 @@ export const trackKawaiEvent = {
       conversion_value: 50 // Higher value for actual appointments
     })
     
+    // Facebook Pixel CompleteRegistration tracking for Calendly conversion
+    trackMetaPixel('CompleteRegistration', {
+      content_name: 'calendly_appointment_scheduled',
+      content_category: 'appointment',
+      source: source,
+      value: 100,
+      currency: 'USD',
+      appointment_type: 'piano_consultation'
+    })
+    
     // Additional Meta Pixel event for appointment booking
     trackMetaPixel('Schedule', {
       content_name: 'piano_consultation_appointment',
@@ -294,6 +356,9 @@ export const trackKawaiEvent = {
       currency: 'USD',
       appointment_type: 'piano_consultation'
     })
+    
+    // Google Ads conversion tracking for Calendly
+    trackGoogleAdsConversion()
   },
 
   calendlyInteraction: (interaction: string, source: 'modal' | 'booking_section' | 'unknown') => {

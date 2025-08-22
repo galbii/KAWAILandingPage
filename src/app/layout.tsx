@@ -53,6 +53,20 @@ export default function RootLayout({
         {children}
         <WebVitals />
         
+        {/* Google Ads Conversion Tracking */}
+        <Script 
+          src="https://www.googletagmanager.com/gtag/js?id=AW-755074614" 
+          strategy="afterInteractive"
+        />
+        <Script id="google-ads" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-755074614');
+          `}
+        </Script>
+        
         {/* Meta Pixel */}
         <Script id="meta-pixel" strategy="afterInteractive">
           {`
