@@ -376,5 +376,31 @@ export const trackKawaiEvent = {
       source: source,
       interaction_type: interaction
     })
+  },
+
+  // Modal CTA button tracking
+  openModal: (ctaText: string, location: string, modalType: string, intendedAction: string) => {
+    if (!isBrowser) return
+    
+    // Google Analytics - custom modal_open event
+    sendGAEvent('event', 'modal_open', {
+      event_category: 'modal_interaction',
+      cta_text: ctaText,
+      cta_location: location,
+      modal_type: modalType,
+      intended_action: intendedAction,
+      event_type: 'modal_open',
+      event_date: 'september_2025'
+    })
+    
+    // Meta Pixel - ViewContent event for modal engagement
+    trackMetaPixel('ViewContent', {
+      content_name: `modal_${modalType}`,
+      content_category: 'modal_interaction',
+      source: location,
+      cta_text: ctaText,
+      intended_action: intendedAction,
+      modal_type: modalType
+    })
   }
 }
