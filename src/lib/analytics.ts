@@ -357,6 +357,16 @@ export const trackKawaiEvent = {
       appointment_type: 'piano_consultation'
     })
     
+    // Meta Pixel SubmitApplication event for consultation application
+    trackMetaPixel('SubmitApplication', {
+      content_name: 'piano_consultation_application',
+      content_category: 'consultation_application',
+      source: source,
+      value: 75,
+      currency: 'USD',
+      application_type: 'piano_consultation'
+    })
+    
     // Google Ads conversion tracking for Calendly
     trackGoogleAdsConversion()
   },

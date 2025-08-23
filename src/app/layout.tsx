@@ -21,8 +21,6 @@ export const metadata: Metadata = {
   title: "Piano Sales Houston | KAWAI Piano Deals & Used Pianos | SHSU Event Sept 2025",
   description: "Houston piano sales event featuring KAWAI digital & acoustic pianos. Save up to $6,000 on new & used pianos. Piano deals Houston - SHSU partnership Sept 11-14, 2025. Free delivery!",
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
     apple: '/images/optimized/logos/Kawai-Red.webp',
   },
   openGraph: {
@@ -52,6 +50,49 @@ export default function RootLayout({
       >
         {children}
         <WebVitals />
+        
+        {/* Global Storage Access Initialization */}
+        <Script id="storage-access-init" strategy="afterInteractive">
+          {`
+            // Initialize comprehensive storage access for all third-party services
+            (function() {
+              if (typeof window !== 'undefined') {
+                // Request storage access as soon as possible
+                const initStorageAccess = async () => {
+                  try {
+                    if ('storage' in navigator && 'requestStorageAccess' in document) {
+                      const hasAccess = await document.hasStorageAccess();
+                      if (!hasAccess) {
+                        console.log('Requesting comprehensive storage access...');
+                        await document.requestStorageAccess();
+                        console.log('Global storage access granted!');
+                      } else {
+                        console.log('Global storage access already available');
+                      }
+                    }
+                    
+                    // Enable partitioned cookies
+                    try {
+                      document.cookie = 'global_partitioned=1; SameSite=None; Secure; Partitioned';
+                    } catch (e) {
+                      console.log('Partitioned cookies not supported');
+                    }
+                  } catch (error) {
+                    console.log('Global storage access initialization:', error);
+                  }
+                };
+                
+                // Run immediately if possible, otherwise on user interaction
+                if (document.readyState === 'complete') {
+                  initStorageAccess();
+                } else {
+                  window.addEventListener('load', initStorageAccess);
+                  document.addEventListener('click', initStorageAccess, { once: true });
+                }
+              }
+            })();
+          `}
+        </Script>
         
         {/* Google Ads Conversion Tracking */}
         <Script 
