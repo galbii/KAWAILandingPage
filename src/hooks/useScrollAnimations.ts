@@ -4,8 +4,6 @@ import { useEffect } from 'react';
 
 export function useScrollAnimations() {
   useEffect(() => {
-    // Scroll animations disabled
-    return;
 
     // Header scroll effect with enhanced animations and hide/show behavior
     const header = document.querySelector('header');

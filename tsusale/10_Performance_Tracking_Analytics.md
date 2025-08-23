@@ -128,11 +128,11 @@ GA4 Implementation Strategy:
 │   ├── Consultation booking funnel analysis
 │   └── Customer journey mapping and touchpoint analysis
 ├── Custom Conversions and Goals
-│   ├── Appointment Booking (Primary conversion)
-│   ├── Email Newsletter Signup (Lead generation)
-│   ├── Piano Brochure Download (Content engagement)
-│   ├── Video Completion >75% (Content quality)
-│   └── Phone Call Button Click (Direct contact)
+│   ├── Appointment Booking (Primary conversion - generate_lead)
+│   ├── Email Newsletter Signup (Lead generation - sign_up)
+│   ├── Piano Brochure Download (Content engagement - view_item)
+│   ├── Video Completion >75% (Content quality - video_complete)
+│   └── Phone Call Button Click (Direct contact - contact)
 ├── Audience Segmentation
 │   ├── Traffic Source Segments (Google, Facebook, Email, etc.)
 │   ├── Engagement Level Segments (High, Medium, Low activity)
@@ -238,6 +238,109 @@ Monthly Performance Dashboard:
 │   ├── Keyword ranking position changes and opportunities
 │   ├── Market share analysis and growth opportunities
 │   └── Industry trend impact and strategic implications
+```
+
+---
+
+## Updated Event Tracking Implementation
+
+### Consolidated Calendly Tracking System
+
+**Event Hierarchy for Funnel Analysis**
+```
+Conversion Funnel Tracking:
+├── Level 1: CTA Button Clicks (Engagement)
+│   ├── Event: modal_open
+│   ├── Tracks: Which CTAs generate modal opens
+│   ├── Parameters: cta_text, cta_location, modal_type, intended_action
+│   └── Purpose: Measure initial interest and CTA effectiveness
+├── Level 2: Button Interactions (Intent)
+│   ├── Event: click (via trackEvent.buttonClick)
+│   ├── Functions: bookConsultation(), secureSpot(), scheduleTour()
+│   ├── Parameters: button_text, button_location, cta_intent
+│   └── Purpose: Track user intent without false lead attribution
+├── Level 3: Form Engagement (Interaction)
+│   ├── Event: calendly_engagement
+│   ├── Types: profile_viewed, event_type_viewed, time_selected
+│   ├── Parameters: interaction_type, calendly_source, event_type
+│   └── Purpose: Monitor form usage and interaction depth
+├── Level 4: Actual Conversion (Lead Generation)
+│   ├── Event: generate_lead (ONLY from calendly.invitee_scheduled)
+│   ├── Function: calendlyConversion()
+│   ├── Parameters: action=calendly_appointment_scheduled, location, value
+│   └── Purpose: Track genuine appointments, not button clicks
+```
+
+**Fixed Event Attribution Issues**
+```
+Previous Issues (RESOLVED):
+├── False Positive Problem
+│   ├── Issue: Button CTAs fired generate_lead events
+│   ├── Impact: Inflated lead metrics by 300-400%
+│   ├── Solution: Changed to trackEvent.buttonClick()
+│   └── Result: Accurate conversion tracking
+├── Calendly Event Bug
+│   ├── Issue: Listening for calendly.event_scheduled (wrong event)
+│   ├── Impact: Missed actual form submissions
+│   ├── Solution: Updated to calendly.invitee_scheduled
+│   └── Result: Proper conversion detection
+├── Attribution Confusion
+│   ├── Issue: Multiple functions tracking same outcome
+│   ├── Impact: Unclear conversion sources
+│   ├── Solution: Single conversion point via Calendly postMessage
+│   └── Result: Clean attribution chain
+```
+
+**Analytics Event Structure**
+```
+Google Analytics Events:
+├── modal_open
+│   ├── Category: modal_interaction
+│   ├── Purpose: Track CTA button -> modal opens
+│   └── Attribution: Initial engagement measurement
+├── click
+│   ├── Category: engagement  
+│   ├── Purpose: Track button interactions (not conversions)
+│   └── Attribution: Intent and interest measurement
+├── calendly_engagement
+│   ├── Category: form_interaction
+│   ├── Purpose: Track Calendly widget usage
+│   └── Attribution: Form engagement measurement
+├── generate_lead
+│   ├── Category: lead_generation
+│   ├── Purpose: ONLY actual Calendly form submissions
+│   └── Attribution: True conversion measurement
+
+Meta Pixel Events:
+├── ViewContent (modal_open, calendly_engagement)
+├── CompleteRegistration (generate_lead only)
+└── Schedule (generate_lead for appointment booking)
+
+Google Ads Conversions:
+├── Triggered ONLY on generate_lead events
+├── Value: Variable by intent (consultation=100, tour=50)
+└── Attribution: Calendly form completion only
+```
+
+**Conversion Ratio Tracking**
+```
+Funnel Analysis Capabilities:
+├── CTA Effectiveness Ratio
+│   ├── Modal Opens ÷ Button Clicks = CTA engagement rate
+│   ├── Identifies highest-performing CTA copy and placement
+│   └── Optimization: Test different CTA messaging
+├── Form Engagement Ratio  
+│   ├── Calendly Interactions ÷ Modal Opens = Form usage rate
+│   ├── Identifies modal -> form transition effectiveness
+│   └── Optimization: Improve modal content and Calendly placement
+├── Submission Conversion Ratio
+│   ├── Generate_Lead ÷ Calendly Interactions = Form completion rate
+│   ├── Shows actual appointment booking success rate
+│   └── Optimization: Improve form UX and reduce friction
+├── Overall Conversion Funnel
+│   ├── Visitors -> CTA Clicks -> Modal Opens -> Form Use -> Submissions
+│   ├── Identifies biggest drop-off points in customer journey
+│   └── Enables targeted optimization at each funnel stage
 ```
 
 ---

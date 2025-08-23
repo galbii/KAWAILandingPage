@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        // Apply these headers to all routes for maximum third-party compatibility
+        // Apply these headers to all routes
         source: '/(.*)',
         headers: [
           {
@@ -23,23 +23,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: 'Permissions-Policy',
-            value: 'storage-access=*, unpartitioned-storage-access=*, cross-origin-isolated=(), camera=(), microphone=(), geolocation=()'
-          },
-          {
-            key: 'Cross-Origin-Resource-Policy',
-            value: 'cross-origin'
-          },
-          {
-            key: 'Cross-Origin-Opener-Policy',
-            value: 'unsafe-none'
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'unsafe-url'
-          },
-          {
-            key: 'Access-Control-Allow-Credentials',
-            value: 'true'
+            value: 'camera=(), microphone=(), geolocation=(), payment=()'
           }
         ],
       },

@@ -1,7 +1,6 @@
 'use client'
 
 import { trackKawaiEvent } from './analytics'
-import { requestStorageAccess } from './storage-access'
 
 // Check if running in browser
 const isBrowser = typeof window !== 'undefined'
@@ -66,15 +65,8 @@ function handleCalendlyEvent(event: CalendlyEvent) {
 }
 
 // Initialize Calendly event listener
-export async function initializeCalendlyTracking(source: 'modal' | 'booking_section') {
+export function initializeCalendlyTracking(source: 'modal' | 'booking_section') {
   if (!isBrowser) return
-
-  // Request storage access for third-party cookies
-  try {
-    await requestStorageAccess()
-  } catch (error) {
-    console.warn('Could not request storage access:', error)
-  }
 
   // Set the source for attribution
   calendlySource = source
