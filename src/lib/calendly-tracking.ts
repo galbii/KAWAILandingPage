@@ -11,7 +11,7 @@ type CalendlyEventType =
   | 'calendly.profile_page_viewed'
   | 'calendly.event_type_viewed'
   | 'calendly.date_and_time_selected'
-  | 'calendly.event_scheduled'
+  | 'calendly.invitee_scheduled'
 
 interface CalendlyEvent {
   event: CalendlyEventType
@@ -54,7 +54,7 @@ function handleCalendlyEvent(event: CalendlyEvent) {
       trackKawaiEvent.calendlyInteraction('time_selected', calendlySource)
       break
 
-    case 'calendly.event_scheduled':
+    case 'calendly.invitee_scheduled':
       // This is the main conversion event - user completed booking
       trackKawaiEvent.calendlyConversion(calendlySource)
       break

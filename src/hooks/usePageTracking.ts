@@ -15,7 +15,7 @@ interface UsePageTrackingOptions {
 export function usePageTracking(options: UsePageTrackingOptions = {}) {
   const {
     pageName = 'unknown',
-    enableScrollTracking = true,
+    enableScrollTracking = false,
     enableTimeTracking = true,
     enableExitIntent = true,
     scrollThresholds = [25, 50, 75, 90],

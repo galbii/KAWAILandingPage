@@ -4,9 +4,8 @@ import { useEffect } from 'react';
 
 export function useScrollAnimations() {
   useEffect(() => {
-    // Check for reduced motion preference
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) return;
+    // Scroll animations disabled
+    return;
 
     // Header scroll effect with enhanced animations and hide/show behavior
     const header = document.querySelector('header');

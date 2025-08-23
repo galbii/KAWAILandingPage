@@ -125,38 +125,22 @@ export const trackEvent = {
 
 // Page engagement and behavior tracking
 export const trackPageEvent = {
-  // Engagement time tracking
+  // Engagement time tracking (disabled)
   engagementTime: (timeSpent: number, pageSection?: string) => {
-    if (!isBrowser) return
-    sendGAEvent('event', 'page_engagement', {
-      event_category: 'engagement',
-      engagement_time_msec: Math.round(timeSpent * 1000),
-      page_section: pageSection || 'page',
-      value: Math.round(timeSpent) // Time in seconds
-    })
+    // Engagement time tracking disabled
+    return
   },
 
-  // Scroll depth tracking
+  // Scroll depth tracking (disabled)
   scrollDepth: (percentage: number, pageSection?: string) => {
-    if (!isBrowser) return
-    sendGAEvent('event', 'scroll', {
-      event_category: 'engagement',
-      scroll_depth: percentage,
-      page_section: pageSection || 'page',
-      value: percentage
-    })
+    // Scroll tracking disabled
+    return
   },
 
-  // Session quality scoring
+  // Session quality scoring (disabled)
   sessionQuality: (score: number, interactionCount: number, timeSpent: number) => {
-    if (!isBrowser) return
-    sendGAEvent('event', 'session_quality', {
-      event_category: 'engagement',
-      quality_score: score,
-      interaction_count: interactionCount,
-      session_time: Math.round(timeSpent),
-      value: score
-    })
+    // Session quality tracking disabled
+    return
   },
 
   // Content interaction tracking
@@ -234,24 +218,13 @@ export const trackWebVitals = {
 
 // Convenience functions for common KAWAI piano sale events
 export const trackKawaiEvent = {
-  // Consultation booking (highest priority conversion)
+  // Consultation booking CTA click (engagement, not conversion)
   bookConsultation: (source: string) => {
-    trackEvent.generateLead('consultation_booking', source, {
+    trackEvent.buttonClick('Book Consultation', source, {
       event_type: 'piano_consultation',
-      event_date: 'september_2025'
+      event_date: 'september_2025',
+      cta_intent: 'consultation_booking'
     })
-    
-    // Facebook Pixel CompleteRegistration tracking
-    trackMetaPixel('CompleteRegistration', {
-      content_name: 'piano_consultation_booking',
-      content_category: 'consultation',
-      source: source,
-      value: 100,
-      currency: 'USD'
-    })
-    
-    // Google Ads conversion tracking
-    trackGoogleAdsConversion()
   },
 
   // Piano browsing
@@ -261,24 +234,13 @@ export const trackKawaiEvent = {
     })
   },
 
-  // Event registration  
+  // Event registration CTA click (engagement, not conversion)
   secureSpot: (source: string) => {
-    trackEvent.generateLead('event_registration', source, {
+    trackEvent.buttonClick('Secure Your Spot', source, {
       event_type: 'sale_event_registration',
-      event_date: 'september_2025'
+      event_date: 'september_2025',
+      cta_intent: 'event_registration'
     })
-    
-    // Facebook Pixel CompleteRegistration tracking
-    trackMetaPixel('CompleteRegistration', {
-      content_name: 'piano_sale_event_registration',
-      content_category: 'event_registration',
-      source: source,
-      value: 75,
-      currency: 'USD'
-    })
-    
-    // Google Ads conversion tracking
-    trackGoogleAdsConversion()
   },
 
   // Contact actions
@@ -301,23 +263,12 @@ export const trackKawaiEvent = {
     })
   },
 
-  // Private tour scheduling
+  // Private tour scheduling CTA click (engagement, not conversion)
   scheduleTour: (source: string) => {
-    trackEvent.generateLead('private_tour_request', source, {
-      event_type: 'showroom_tour'
+    trackEvent.buttonClick('Schedule Private Tour', source, {
+      event_type: 'showroom_tour',
+      cta_intent: 'private_tour_request'
     })
-    
-    // Facebook Pixel CompleteRegistration tracking
-    trackMetaPixel('CompleteRegistration', {
-      content_name: 'private_tour_scheduling',
-      content_category: 'tour_request',
-      source: source,
-      value: 50,
-      currency: 'USD'
-    })
-    
-    // Google Ads conversion tracking
-    trackGoogleAdsConversion()
   },
 
   // Newsletter signup

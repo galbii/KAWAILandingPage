@@ -30,24 +30,19 @@ export function CountdownTimer() {
     setIsVisible(true); // Always visible as dot
   }, [mounted]);
 
-  // Scroll detection effect for expansion
+  // Auto-expansion effect (no scroll detection)
   useEffect(() => {
     if (!mounted) return;
-
-    const handleScroll = () => {
-      console.log('Scroll detected, scrollY:', window.scrollY, 'hasScrolled:', hasScrolled);
-      if (!hasScrolled && window.scrollY > 100) {
-        console.log('Setting hasScrolled to true, starting 2 second timer');
-        setHasScrolled(true);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    // Set hasScrolled to true after a short delay (no scroll required)
+    const timeout = setTimeout(() => {
+      setHasScrolled(true);
+    }, 1000);
     
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timeout);
     };
-  }, [mounted, hasScrolled]);
+  }, [mounted]);
 
   // Separate effect to handle expansion after scroll
   useEffect(() => {
