@@ -96,7 +96,12 @@ class PostHogAnalytics {
     bookingSource: 'modal' | 'booking_section'
     calendlyStatus: 'opened' | 'time_selected' | 'completed' | 'abandoned'
     abandonmentStage?: string
-    sessionData?: any
+    sessionData?: {
+      qualityScore?: number
+      isReturning?: boolean
+      modelsViewedCount?: number
+      totalInteractions?: number
+    }
   }) {
     if (!this.initialized) return
     

@@ -2,15 +2,42 @@
 
 import { useCallback, useEffect, useRef } from 'react'
 import { postHogAnalytics } from '@/lib/posthog'
+import { eventMonitor } from '@/lib/posthog-validation'
+import { POSTHOG_CONFIG } from '@/lib/posthog-config'
 import type { PianoModel, ConsultationEvent, PianoInteractionEvent } from '@/lib/posthog'
+
+interface BookingAttemptData {
+  bookingSource: 'modal' | 'booking_section'
+  calendlyStatus: 'opened' | 'time_selected' | 'completed' | 'abandoned'
+  abandonmentStage?: string
+}
+
+interface PianoBehaviorData {
+  timeSpent: number
+  scrollDepth: number
+  interactions: number
+}
+
+interface EventInterestData {
+  eventDates: string
+  location: string
+  interactionType: 'view' | 'save_date' | 'directions'
+}
+
+interface UserData {
+  email?: string
+  phone?: string
+  consultationBooked?: boolean
+  pianoPreferences?: string[]
+}
 
 interface UsePostHogReturn {
   trackPianoView: (model: PianoInteractionEvent) => void
   trackConsultationIntent: (event: ConsultationEvent) => void
-  trackBookingAttempt: (data: any) => void
-  trackPianoInterest: (pianos: PianoModel[], behavior: any) => void
-  trackEventInterest: (data: any) => void
-  identifyUser: (userData: any) => void
+  trackBookingAttempt: (data: BookingAttemptData) => void
+  trackPianoInterest: (pianos: PianoModel[], behavior: PianoBehaviorData) => void
+  trackEventInterest: (data: EventInterestData) => void
+  identifyUser: (userData: UserData) => void
   getFeatureFlag: (flagName: string) => string | boolean
 }
 
@@ -20,13 +47,21 @@ export function usePostHog(): UsePostHogReturn {
   const modelsViewed = useRef<PianoModel[]>([])
 
   const trackPianoView = useCallback((model: PianoInteractionEvent) => {
-    postHogAnalytics.trackPianoModelViewed(model)
+    // Track with validation
+    eventMonitor.capture(POSTHOG_CONFIG.EVENTS.PIANO_MODEL_VIEWED, {
+      model_name: model.model,
+      model_price: model.price,
+      model_category: model.category,
+      time_spent_seconds: model.timeSpent,
+      source_section: model.sourceSection,
+      interaction_type: model.interactionType
+    })
     
     // Add to models viewed for session tracking
     const piano: PianoModel = {
       name: model.model,
       price: model.price,
-      category: model.category
+      category: model.category as 'Digital' | 'Acoustic' | 'Hybrid'
     }
     
     if (!modelsViewed.current.find(p => p.name === piano.name)) {
@@ -50,32 +85,36 @@ export function usePostHog(): UsePostHogReturn {
     postHogAnalytics.trackConsultationIntent(sessionData)
   }, [])
 
-  const trackBookingAttempt = useCallback((data: any) => {
-    const enhancedData = {
-      ...data,
-      sessionData: {
-        qualityScore: calculateSessionQuality(),
-        isReturning: localStorage.getItem('kawai_returning_user') === 'true',
-        modelsViewedCount: modelsViewed.current.length,
-        totalInteractions: interactionCount.current,
-      }
-    }
+  const trackBookingAttempt = useCallback((data: BookingAttemptData) => {
+    const sessionQuality = calculateSessionQuality()
+    const isReturning = typeof localStorage !== 'undefined' ? localStorage.getItem('kawai_returning_user') === 'true' : false
     
-    postHogAnalytics.trackConsultationBookingAttempt(enhancedData)
+    // Track with validation
+    eventMonitor.capture(POSTHOG_CONFIG.EVENTS.CONSULTATION_BOOKING_ATTEMPT, {
+      booking_source: data.bookingSource,
+      calendly_status: data.calendlyStatus,
+      abandonment_stage: data.abandonmentStage,
+      session_quality: sessionQuality,
+      user_type: isReturning ? 'returning' : 'new',
+      models_viewed_count: modelsViewed.current.length,
+      total_interactions: interactionCount.current
+    })
     
     // Mark as returning user
-    localStorage.setItem('kawai_returning_user', 'true')
-  }, [])
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('kawai_returning_user', 'true')
+    }
+  }, []);
 
-  const trackPianoInterest = useCallback((pianos: PianoModel[], behavior: any) => {
+  const trackPianoInterest = useCallback((pianos: PianoModel[], behavior: PianoBehaviorData) => {
     postHogAnalytics.trackPianoInterest(pianos, behavior)
   }, [])
 
-  const trackEventInterest = useCallback((data: any) => {
+  const trackEventInterest = useCallback((data: EventInterestData) => {
     postHogAnalytics.trackEventAttendance(data)
   }, [])
 
-  const identifyUser = useCallback((userData: any) => {
+  const identifyUser = useCallback((userData: UserData) => {
     const enhancedUserData = {
       ...userData,
       pianoPreferences: modelsViewed.current.map(p => p.name),

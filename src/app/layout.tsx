@@ -3,6 +3,7 @@ import { Playfair_Display, Inter } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { WebVitals } from "@/components/WebVitals";
 import { PostHogProvider } from "@/components/PostHogProvider";
+import PostHogDebugDashboard from "@/components/PostHogDebugDashboard";
 import Script from "next/script";
 import "./globals.css";
 
@@ -87,6 +88,7 @@ height="0" width="0" style={{display:'none',visibility:'hidden'}}></iframe></nos
         <PostHogProvider>
           {children}
         </PostHogProvider>
+        <PostHogDebugDashboard />
         <WebVitals />
         
         {/* Google Ads Conversion Tracking */}

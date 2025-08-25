@@ -2,6 +2,8 @@
 
 import { sendGAEvent } from '@next/third-parties/google'
 import { postHogAnalytics } from './posthog'
+import { eventMonitor } from './posthog-validation'
+import { POSTHOG_CONFIG } from './posthog-config'
 
 // Check if running in browser
 const isBrowser = typeof window !== 'undefined'
@@ -242,13 +244,14 @@ export const trackKawaiEvent = {
       cta_intent: 'consultation_booking'
     })
     
-    // PostHog consultation intent tracking
-    postHogAnalytics.trackConsultationIntent({
-      trigger: source.includes('hero') ? 'hero_cta' : source.includes('booking') ? 'booking_section' : 'gallery_cta',
-      modelsViewed: 0, // Will be updated by the hook
-      sessionDuration: Math.floor(performance.now() / 1000),
-      engagementScore: 75, // High intent signal
-      timeToIntent: Math.floor(performance.now() / 1000)
+    // PostHog consultation intent tracking with validation
+    eventMonitor.capture(POSTHOG_CONFIG.EVENTS.CONSULTATION_INTENT_SIGNAL, {
+      trigger_source: source.includes('hero') ? 'hero_cta' : source.includes('booking') ? 'booking_section' : 'gallery_cta',
+      models_viewed_count: 0, // Will be updated by the hook
+      session_duration_seconds: Math.floor(performance.now() / 1000),
+      engagement_score: 75, // High intent signal
+      time_to_intent_seconds: Math.floor(performance.now() / 1000),
+      high_intent: true
     })
   },
 
@@ -258,14 +261,14 @@ export const trackKawaiEvent = {
       event_type: 'piano_discovery'
     })
     
-    // PostHog piano interest tracking
-    postHogAnalytics.trackPianoModelViewed({
-      model: 'piano_gallery_browse',
-      price: 'various',
-      category: 'Digital',
-      timeSpent: 0,
-      sourceSection: source,
-      interactionType: 'view'
+    // PostHog piano interest tracking with validation
+    eventMonitor.capture(POSTHOG_CONFIG.EVENTS.PIANO_MODEL_VIEWED, {
+      model_name: 'piano_gallery_browse',
+      model_price: 'various',
+      model_category: 'Digital',
+      time_spent_seconds: 0,
+      source_section: source,
+      interaction_type: 'view'
     })
   },
 
@@ -277,11 +280,12 @@ export const trackKawaiEvent = {
       cta_intent: 'event_registration'
     })
     
-    // PostHog event interest tracking
-    postHogAnalytics.trackEventAttendance({
-      eventDates: 'September 11-14, 2025',
-      location: 'Houston, TX',
-      interactionType: 'save_date'
+    // PostHog event interest tracking with validation
+    eventMonitor.capture(POSTHOG_CONFIG.EVENTS.KAWAI_EVENT_INTEREST, {
+      event_dates: 'September 11-14, 2025',
+      event_location: 'Houston, TX',
+      interaction_type: 'save_date',
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
     })
   },
 
@@ -408,6 +412,42 @@ export const trackKawaiEvent = {
       intended_action: intendedAction,
       modal_type: modalType,
       engagement_level: 'high_intent'
+    })
+  },
+
+  // Houston event information request
+  requestEventInfo: (data: { source: string; houstonArea?: string; pianoInterest?: string }) => {
+    if (!isBrowser) return
+    
+    // Track as lead generation - this is a high-value action
+    trackEvent.generateLead('houston_event_info_request', data.source, {
+      event_type: 'event_information_request',
+      houston_area: data.houstonArea || 'not_specified',
+      piano_interest: data.pianoInterest || 'not_specified',
+      event_date: 'september_2025'
+    })
+    
+    // Meta Pixel Lead event
+    trackMetaPixel('Lead', {
+      content_name: 'houston_event_information_request',
+      content_category: 'information_request',
+      content_type: 'event_inquiry',
+      source: data.source,
+      houston_area: data.houstonArea || 'not_specified',
+      piano_interest: data.pianoInterest || 'not_specified',
+      value: 25, // Medium value - information request
+      currency: 'USD',
+      event_location: 'houston_texas',
+      lead_type: 'event_information'
+    })
+    
+    // PostHog tracking
+    postHogAnalytics.trackConsultationIntent({
+      trigger: 'hero_cta',
+      modelsViewed: 0,
+      sessionDuration: Math.floor(performance.now() / 1000),
+      engagementScore: 50, // Medium intent signal
+      timeToIntent: Math.floor(performance.now() / 1000)
     })
   }
 }

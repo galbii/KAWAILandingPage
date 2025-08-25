@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { usePostHog } from '@/hooks/usePostHog'
+import type { Piano } from '@/data/pianos'
 
 // Example component demonstrating PostHog feature flags
 export function HeroSectionWithFeatureFlags({ children }: { children: React.ReactNode }) {
@@ -42,7 +43,7 @@ export function HeroSectionWithFeatureFlags({ children }: { children: React.Reac
 }
 
 // Piano gallery layout variations
-export function PianoGalleryWithFeatureFlags({ pianos }: { pianos: any[] }) {
+export function PianoGalleryWithFeatureFlags({ pianos }: { pianos: Piano[] }) {
   const { getFeatureFlag } = usePostHog()
   const [layout, setLayout] = useState<string>('grid')
 
@@ -79,7 +80,7 @@ export function PianoGalleryWithFeatureFlags({ pianos }: { pianos: any[] }) {
         <div key={index} className="border rounded-lg p-4 flex justify-between items-center">
           <div>
             <h3 className="font-bold">{piano.name}</h3>
-            <p className="text-gray-600">{piano.description}</p>
+            <p className="text-gray-600">{piano.model}</p>
           </div>
           <p className="text-kawai-red font-bold text-xl">{piano.price}</p>
         </div>
@@ -149,8 +150,10 @@ export function CTAButtonWithVariations({
   )
 }
 
-export default {
+const PostHogFeatures = {
   HeroSectionWithFeatureFlags,
   PianoGalleryWithFeatureFlags,
   CTAButtonWithVariations
 }
+
+export default PostHogFeatures

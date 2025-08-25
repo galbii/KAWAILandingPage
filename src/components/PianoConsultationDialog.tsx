@@ -21,8 +21,7 @@ export default function PianoConsultationDialog({ isOpen, onClose }: PianoConsul
       // PostHog: Track consultation modal opened
       trackBookingAttempt({
         bookingSource: 'modal',
-        calendlyStatus: 'opened',
-        timestamp: new Date().toISOString()
+        calendlyStatus: 'opened'
       });
 
       // Load Calendly script when dialog opens

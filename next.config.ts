@@ -6,7 +6,16 @@ const nextConfig: NextConfig = {
     deviceSizes: [640, 768, 1024, 1280, 1600],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
+  // Performance optimizations
+  experimental: {
+    optimizePackageImports: ['lucide-react'],
+  },
+  // Compress responses
+  compress: true,
   async headers() {
     return [
       {
@@ -25,6 +34,36 @@ const nextConfig: NextConfig = {
             key: 'Permissions-Policy',
             value: 'camera=(), microphone=(), geolocation=(), payment=()'
           }
+        ],
+      },
+      {
+        // Cache static assets
+        source: '/((?!_next/image)(?!_next/static)(?!api/)(?!videos/).*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        // Cache images and videos more aggressively
+        source: '/(.*)\.(jpg|jpeg|png|gif|ico|svg|webp|mp4|webm)$',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        // Preload key resources
+        source: '/',
+        headers: [
+          {
+            key: 'Link',
+            value: '</videos/CA.mp4>; rel=preload; as=video; type="video/mp4"',
+          },
         ],
       },
     ];

@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 interface OptimizedImageProps {
   src: string;
@@ -15,6 +15,10 @@ interface OptimizedImageProps {
   quality?: number;
   webpSrc?: string;
   fallbackSrc?: string;
+  placeholder?: 'blur' | 'empty';
+  blurDataURL?: string;
+  loading?: 'lazy' | 'eager';
+  onLoad?: () => void;
 }
 
 export function OptimizedImage({
@@ -25,14 +29,23 @@ export function OptimizedImage({
   fill = false,
   className = '',
   priority = false,
-  sizes,
+  sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw',
   quality = 85,
   webpSrc,
   fallbackSrc,
+  placeholder = 'blur',
+  blurDataURL,
+  loading = 'lazy',
+  onLoad,
   ...props
 }: OptimizedImageProps) {
   const [imgSrc, setImgSrc] = useState(webpSrc || src);
   const [hasError, setHasError] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  // Generate a simple blur data URL if none provided
+  const defaultBlurDataURL = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2Y5ZmFmYiIvPjwvc3ZnPg==';
 
   const handleError = () => {
     if (!hasError) {
@@ -41,13 +54,42 @@ export function OptimizedImage({
     }
   };
 
+  const handleLoad = () => {
+    setIsLoaded(true);
+    onLoad?.();
+  };
+
+  // Intersection observer for performance tracking
+  useEffect(() => {
+    const img = imgRef.current;
+    if (!img || priority) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // Image is now visible - could track this for analytics
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(img);
+    return () => observer.disconnect();
+  }, [priority]);
+
   const imageProps = {
+    ref: imgRef,
     src: imgSrc,
     alt,
-    className,
+    className: `${className} ${!isLoaded && !priority ? 'opacity-0 transition-opacity duration-300' : 'opacity-100'}`,
     priority,
     quality,
+    loading: priority ? 'eager' : loading,
+    placeholder: placeholder === 'blur' ? ('blur' as const) : undefined,
+    blurDataURL: placeholder === 'blur' ? (blurDataURL || defaultBlurDataURL) : undefined,
     onError: handleError,
+    onLoad: handleLoad,
     ...props,
   };
 
