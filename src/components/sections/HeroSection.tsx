@@ -1,14 +1,11 @@
+import Image from 'next/image';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { OptimizedImage } from '@/components/ui/optimized-image';
-import { OptimizedVideo } from '@/components/ui/optimized-video';
 import PianoConsultationDialog from '@/components/PianoConsultationDialog';
-import HoustonEventInfoDialog from '@/components/HoustonEventInfoDialog';
 import { trackKawaiEvent } from '@/lib/analytics';
 
 export default function HeroSection() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isEventInfoModalOpen, setIsEventInfoModalOpen] = useState(false);
 
   const handleFindPianoClick = () => {
     // Track the analytics event
@@ -33,30 +30,22 @@ export default function HeroSection() {
     setIsModalOpen(true);
   };
 
-  const handleRequestEventInfoClick = () => {
-    // Track the analytics event
-    trackKawaiEvent.openModal('Request Houston Event Information', 'hero', 'event_info', 'information_request');
-    
-    // Open the Houston event info dialog
-    setIsEventInfoModalOpen(true);
-  };
-
   return (
     <section className="relative min-h-screen flex items-start justify-center text-white pt-16 hero-parallax scroll-container overflow-hidden">
-      {/* Optimized Video Background */}
-      <OptimizedVideo
-        src="/videos/CA.mp4"
-        webmSrc="/optimized/videos/CA_optimized.webm"
-        fallbackSrc="/optimized/videos/CA_optimized.mp4"
-        className="absolute inset-0 w-full h-full object-cover z-0"
+      {/* Video Background */}
+      <video
         autoPlay
         muted
         loop
         playsInline
-        startTime={13.10}
-        priority={true}
-        preload="metadata"
-      />
+        className="absolute inset-0 w-full h-full object-cover z-0"
+        onLoadedData={(e) => {
+          const video = e.target as HTMLVideoElement;
+          video.currentTime = 13.10;
+        }}
+      >
+        <source src="/videos/CA.mp4" type="video/mp4" />
+      </video>
       
       {/* Background Layer for Parallax */}
       <div className="hero-background parallax-element parallax-slow">
@@ -68,16 +57,12 @@ export default function HeroSection() {
         
         {/* KAWAI Logo */}
         <div className="relative mb-8 scroll-animate-scale pt-8">
-          <OptimizedImage
+          <Image
             src="/images/optimized/logos/Kawai-Red.webp"
-            fallbackSrc="/images/optimized/logos/Kawai-Red.png"
             alt="KAWAI Logo"
             width={200}
             height={80}
             className="mx-auto"
-            priority={true}
-            quality={95}
-            sizes="200px"
           />
         </div>
 
@@ -106,27 +91,16 @@ export default function HeroSection() {
           <p className="font-body text-lg text-white/90 scroll-animate tracking-wide">September 11-14, 2025</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center scroll-animate">
             <Button 
+              onClick={handleFindPianoClick}
+              className="bg-white text-black hover:bg-gray-100 px-8 py-3 text-lg font-semibold"
+            >
+              Find Your Piano
+            </Button>
+            <Button 
               onClick={handleSecureSpotClick}
               className="bg-red-700 text-white hover:bg-red-600 px-8 py-3 text-lg font-semibold"
             >
-              Schedule Your Consultation
-            </Button>
-            <Button 
-              onClick={handleRequestEventInfoClick}
-              className="bg-white text-black hover:bg-gray-100 px-8 py-3 text-lg font-semibold border-2 border-white"
-            >
-              Request Houston Event Information
-            </Button>
-          </div>
-          
-          {/* Secondary Find Piano CTA */}
-          <div className="mt-4 scroll-animate">
-            <Button 
-              onClick={handleFindPianoClick}
-              variant="ghost"
-              className="text-white/80 hover:text-white hover:bg-white/10 px-6 py-2 text-base font-medium underline decoration-white/60 hover:decoration-white"
-            >
-              Browse Piano Selection
+              Secure Your Spot
             </Button>
           </div>
           
@@ -137,12 +111,6 @@ export default function HeroSection() {
       <PianoConsultationDialog 
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 
-      />
-      
-      {/* Houston Event Information Dialog */}
-      <HoustonEventInfoDialog 
-        isOpen={isEventInfoModalOpen} 
-        onClose={() => setIsEventInfoModalOpen(false)} 
       />
     </section>
   );
