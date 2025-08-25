@@ -8,14 +8,27 @@ const isBrowser = typeof window !== 'undefined'
 // Type for pixel parameters
 type PixelParameters = Record<string, string | number | boolean>
 
-// Meta Pixel helper function
+// Meta Pixel helper function with enhanced debugging
 function trackMetaPixel(eventName: string, parameters?: PixelParameters) {
-  if (!isBrowser || typeof window.fbq !== 'function') return
+  if (!isBrowser || typeof window.fbq !== 'function') {
+    console.warn('Meta Pixel not available:', { isBrowser, fbqExists: typeof window?.fbq })
+    return
+  }
   
   try {
-    window.fbq('track', eventName, parameters)
+    // Clean parameters to ensure Meta Pixel compatibility
+    const cleanParameters = parameters ? {
+      ...parameters,
+      // Ensure value is a number if present
+      ...(parameters.value && { value: Number(parameters.value) }),
+      // Ensure currency is a string if present
+      ...(parameters.currency && { currency: String(parameters.currency) })
+    } : undefined
+    
+    console.log('Meta Pixel tracking:', eventName, cleanParameters)
+    window.fbq('track', eventName, cleanParameters)
   } catch (error) {
-    console.warn('Meta Pixel tracking error:', error)
+    console.error('Meta Pixel tracking error:', error, { eventName, parameters })
   }
 }
 
@@ -44,13 +57,15 @@ declare global {
 
 // Analytics tracking utility for button clicks and user interactions
 export const trackEvent = {
-  // CTA button clicks
+  // CTA button clicks (using GA4 recommended select_content event)
   buttonClick: (buttonText: string, location: string, additionalData?: Record<string, string | number | boolean>) => {
     if (!isBrowser) return
-    sendGAEvent('event', 'click', {
-      event_category: 'engagement',
-      button_text: buttonText,
+    sendGAEvent('event', 'select_content', {
+      content_type: 'button',
+      item_name: buttonText,
+      item_category: 'cta_button',
       button_location: location,
+      interaction_type: 'button_click',
       ...additionalData
     })
   },
@@ -68,34 +83,41 @@ export const trackEvent = {
       ...additionalData
     })
     
-    // Meta Pixel
+    // Meta Pixel - Enhanced Lead tracking
     trackMetaPixel('Lead', {
       content_name: action,
       content_category: 'lead_generation',
+      content_type: 'consultation',
       source: location,
       value: 1,
       currency: 'USD',
+      predicted_ltv: 500, // Lifetime value prediction for piano consultation leads
       ...additionalData
     })
   },
 
-  // Contact interactions
+  // Contact interactions (improved GA4 event with better categorization)
   contact: (method: 'phone' | 'email' | 'form', location: string, additionalData?: Record<string, string | number | boolean>) => {
     if (!isBrowser) return
     
-    // Google Analytics
-    sendGAEvent('event', 'contact', {
-      event_category: 'contact',
+    // Google Analytics - using select_content for contact interactions
+    sendGAEvent('event', 'select_content', {
+      content_type: 'contact_method',
+      item_name: `contact_${method}`,
+      item_category: 'contact',
       contact_method: method,
-      location: location,
+      contact_location: location,
+      interaction_type: 'contact_initiation',
       ...additionalData
     })
     
-    // Meta Pixel
+    // Meta Pixel - Contact tracking
     trackMetaPixel('Contact', {
       content_name: `contact_${method}`,
       content_category: 'contact',
+      content_type: 'customer_service',
       source: location,
+      method: method,
       ...additionalData
     })
   },
@@ -126,43 +148,35 @@ export const trackEvent = {
 // Page engagement and behavior tracking
 export const trackPageEvent = {
   // Engagement time tracking (disabled)
-  engagementTime: (timeSpent: number, pageSection?: string) => {
-    // Engagement time tracking disabled
-    return
-  },
+  engagementTime: null as ((timeSpent: number, pageSection?: string) => void) | null,
 
   // Scroll depth tracking (disabled)
-  scrollDepth: (percentage: number, pageSection?: string) => {
-    // Scroll tracking disabled
-    return
-  },
+  scrollDepth: null as ((percentage: number, pageSection?: string) => void) | null,
 
   // Session quality scoring (disabled)
-  sessionQuality: (score: number, interactionCount: number, timeSpent: number) => {
-    // Session quality tracking disabled
-    return
-  },
+  sessionQuality: null as ((score: number, interactionCount: number, timeSpent: number) => void) | null,
 
-  // Content interaction tracking
+  // Content interaction tracking (using GA4 recommended select_content event)
   contentInteraction: (contentType: string, elementId?: string, timeToInteraction?: number) => {
     if (!isBrowser) return
-    sendGAEvent('event', 'content_interaction', {
-      event_category: 'engagement',
+    sendGAEvent('event', 'select_content', {
       content_type: contentType,
-      element_id: elementId || 'unknown',
-      time_to_interaction: timeToInteraction ? Math.round(timeToInteraction) : undefined
+      item_id: elementId || 'unknown',
+      time_to_interaction: timeToInteraction ? Math.round(timeToInteraction) : undefined,
+      interaction_type: 'content_interaction'
     })
   },
 
-  // Page section visibility tracking
+  // Page section visibility tracking (using GA4 recommended view_item event)
   sectionView: (sectionName: string, timeInView: number, isFullyVisible: boolean) => {
     if (!isBrowser) return
-    sendGAEvent('event', 'section_view', {
-      event_category: 'engagement',
-      section_name: sectionName,
+    sendGAEvent('event', 'view_item', {
+      item_name: sectionName,
+      item_category: 'page_section',
+      value: Math.round(timeInView),
       time_in_view: Math.round(timeInView),
       fully_visible: isFullyVisible,
-      value: Math.round(timeInView)
+      interaction_type: 'section_view'
     })
   },
 
@@ -170,10 +184,10 @@ export const trackPageEvent = {
   exitIntent: (timeOnPage: number, scrollDepth: number, interactionCount: number) => {
     if (!isBrowser) return
     sendGAEvent('event', 'exit_intent', {
-      event_category: 'engagement',
       time_on_page: Math.round(timeOnPage),
       max_scroll_depth: scrollDepth,
-      interaction_count: interactionCount
+      interaction_count: interactionCount,
+      event_category: 'user_behavior'
     })
   },
 
@@ -182,7 +196,8 @@ export const trackPageEvent = {
     if (!isBrowser) return
     sendGAEvent('event', 'timing_complete', {
       event_category: category,
-      name: eventName,
+      timing_name: eventName,
+      timing_value: Math.round(timingValue),
       value: Math.round(timingValue)
     })
   }
@@ -288,34 +303,32 @@ export const trackKawaiEvent = {
       conversion_value: 50 // Higher value for actual appointments
     })
     
-    // Facebook Pixel CompleteRegistration tracking for Calendly conversion
+    // Meta Pixel CompleteRegistration - Primary conversion event
     trackMetaPixel('CompleteRegistration', {
-      content_name: 'calendly_appointment_scheduled',
+      content_name: 'piano_consultation_appointment',
       content_category: 'appointment',
+      content_type: 'consultation_booking',
       source: source,
       value: 100,
       currency: 'USD',
-      appointment_type: 'piano_consultation'
+      num_items: 1,
+      appointment_type: 'piano_consultation',
+      event_month: 'september',
+      event_year: '2025',
+      business_type: 'piano_dealer'
     })
     
-    // Additional Meta Pixel event for appointment booking
+    // Meta Pixel Schedule - Secondary appointment tracking
     trackMetaPixel('Schedule', {
-      content_name: 'piano_consultation_appointment',
-      content_category: 'appointment',
+      content_name: 'calendly_appointment_booked',
+      content_category: 'scheduling',
+      content_type: 'appointment',
       source: source,
       value: 50,
       currency: 'USD',
-      appointment_type: 'piano_consultation'
-    })
-    
-    // Meta Pixel SubmitApplication event for consultation application
-    trackMetaPixel('SubmitApplication', {
-      content_name: 'piano_consultation_application',
-      content_category: 'consultation_application',
-      source: source,
-      value: 75,
-      currency: 'USD',
-      application_type: 'piano_consultation'
+      appointment_duration: 60,
+      appointment_type: 'piano_consultation',
+      booking_platform: 'calendly'
     })
     
     // Google Ads conversion tracking for Calendly
@@ -330,12 +343,15 @@ export const trackKawaiEvent = {
       event_type: 'calendly_engagement'
     })
     
-    // Meta Pixel custom event for engagement
-    trackMetaPixel('CustomizeProduct', {
+    // Meta Pixel ViewContent for Calendly engagement
+    trackMetaPixel('ViewContent', {
       content_name: `calendly_${interaction}`,
-      content_category: 'calendly_interaction',
+      content_category: 'appointment_scheduling',
+      content_type: 'booking_interface',
       source: source,
-      interaction_type: interaction
+      interaction_type: interaction,
+      booking_step: interaction,
+      platform: 'calendly'
     })
   },
 
@@ -343,25 +359,28 @@ export const trackKawaiEvent = {
   openModal: (ctaText: string, location: string, modalType: string, intendedAction: string) => {
     if (!isBrowser) return
     
-    // Google Analytics - custom modal_open event
-    sendGAEvent('event', 'modal_open', {
-      event_category: 'modal_interaction',
+    // Google Analytics - using GA4 recommended select_content event for modal interactions
+    sendGAEvent('event', 'select_content', {
+      content_type: 'modal',
+      item_name: modalType,
+      item_id: `modal_${modalType}`,
       cta_text: ctaText,
       cta_location: location,
-      modal_type: modalType,
       intended_action: intendedAction,
-      event_type: 'modal_open',
+      interaction_type: 'modal_open',
       event_date: 'september_2025'
     })
     
-    // Meta Pixel - ViewContent event for modal engagement
+    // Meta Pixel - ViewContent event for modal engagement  
     trackMetaPixel('ViewContent', {
       content_name: `modal_${modalType}`,
-      content_category: 'modal_interaction',
+      content_category: 'user_interface',
+      content_type: 'modal_popup',
       source: location,
       cta_text: ctaText,
       intended_action: intendedAction,
-      modal_type: modalType
+      modal_type: modalType,
+      engagement_level: 'high_intent'
     })
   }
 }

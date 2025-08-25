@@ -20,6 +20,9 @@ interface CalendlyEvent {
 // Track the source of the Calendly widget for attribution
 let calendlySource: 'modal' | 'booking_section' | 'unknown' = 'unknown'
 
+// Track processed appointments to prevent duplicate events
+const processedAppointments = new Set<string>()
+
 // Check if message is from Calendly
 function isCalendlyEvent(e: MessageEvent): e is MessageEvent<CalendlyEvent> {
   return (
@@ -55,7 +58,28 @@ function handleCalendlyEvent(event: CalendlyEvent) {
 
     case 'calendly.invitee_scheduled':
       // This is the main conversion event - user completed booking
-      trackKawaiEvent.calendlyConversion(calendlySource)
+      // Generate unique ID for this booking to prevent duplicates
+      const bookingId = `${event.event}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+      
+      // Check if we've already processed this type of booking recently (within 5 seconds)
+      const recentBookings = Array.from(processedAppointments).filter(id => {
+        const timestamp = parseInt(id.split('-')[1])
+        return Date.now() - timestamp < 5000 // 5 seconds
+      })
+      
+      if (recentBookings.length === 0) {
+        // Only track if no recent duplicates
+        processedAppointments.add(bookingId)
+        trackKawaiEvent.calendlyConversion(calendlySource)
+        
+        // Clean up old entries to prevent memory leaks (keep last 10)
+        if (processedAppointments.size > 10) {
+          const oldestId = Array.from(processedAppointments)[0]
+          processedAppointments.delete(oldestId)
+        }
+      } else {
+        console.log('Duplicate Calendly conversion detected and prevented')
+      }
       break
 
     default:
@@ -64,6 +88,9 @@ function handleCalendlyEvent(event: CalendlyEvent) {
   }
 }
 
+// Track if listener is already active to prevent multiple listeners
+let isListenerActive = false
+
 // Initialize Calendly event listener
 export function initializeCalendlyTracking(source: 'modal' | 'booking_section') {
   if (!isBrowser) return
@@ -71,13 +98,14 @@ export function initializeCalendlyTracking(source: 'modal' | 'booking_section') 
   // Set the source for attribution
   calendlySource = source
 
-  // Remove existing listener if any
-  window.removeEventListener('message', handleCalendlyMessage)
-  
-  // Add new listener
-  window.addEventListener('message', handleCalendlyMessage)
-  
-  console.log(`Calendly tracking initialized for source: ${source}`)
+  // Only add listener if not already active
+  if (!isListenerActive) {
+    window.addEventListener('message', handleCalendlyMessage)
+    isListenerActive = true
+    console.log(`Calendly tracking initialized for source: ${source}`)
+  } else {
+    console.log(`Calendly tracking already active, updated source to: ${source}`)
+  }
 }
 
 // Message event handler
@@ -91,8 +119,13 @@ function handleCalendlyMessage(e: MessageEvent) {
 export function cleanupCalendlyTracking() {
   if (!isBrowser) return
   
-  window.removeEventListener('message', handleCalendlyMessage)
+  if (isListenerActive) {
+    window.removeEventListener('message', handleCalendlyMessage)
+    isListenerActive = false
+  }
+  
   calendlySource = 'unknown'
+  processedAppointments.clear()
   
   console.log('Calendly tracking cleaned up')
 }

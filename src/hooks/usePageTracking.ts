@@ -90,7 +90,11 @@ export function usePageTracking(options: UsePageTrackingOptions = {}) {
     scrollThresholds.forEach(threshold => {
       if (scrollPercentage >= threshold && !scrollMilestonesRef.current.has(threshold)) {
         scrollMilestonesRef.current.add(threshold)
-        trackPageEvent.scrollDepth(threshold, pageName)
+        
+        // Check if scrollDepth function is enabled
+        if (trackPageEvent.scrollDepth) {
+          trackPageEvent.scrollDepth(threshold, pageName)
+        }
       }
     })
 
@@ -123,20 +127,26 @@ export function usePageTracking(options: UsePageTrackingOptions = {}) {
     const totalTime = activeTimeRef.current / 1000
     
     if (totalTime > 0) {
-      trackPageEvent.engagementTime(totalTime, pageName)
+      // Check if engagementTime function is enabled
+      if (trackPageEvent.engagementTime) {
+        trackPageEvent.engagementTime(totalTime, pageName)
+      }
       
-      // Calculate session quality score (0-100)
-      const timeScore = Math.min(totalTime / 60, 1) * 40 // Up to 40 points for time
-      const scrollScore = Math.min(maxScrollDepthRef.current, 100) * 0.3 // Up to 30 points for scroll
-      const interactionScore = Math.min(interactionCountRef.current * 5, 30) // Up to 30 points for interactions
-      
-      const qualityScore = Math.round(timeScore + scrollScore + interactionScore)
-      
-      trackPageEvent.sessionQuality(
-        qualityScore,
-        interactionCountRef.current,
-        totalTime
-      )
+      // Check if sessionQuality function is enabled
+      if (trackPageEvent.sessionQuality) {
+        // Calculate session quality score (0-100)
+        const timeScore = Math.min(totalTime / 60, 1) * 40 // Up to 40 points for time
+        const scrollScore = Math.min(maxScrollDepthRef.current, 100) * 0.3 // Up to 30 points for scroll
+        const interactionScore = Math.min(interactionCountRef.current * 5, 30) // Up to 30 points for interactions
+        
+        const qualityScore = Math.round(timeScore + scrollScore + interactionScore)
+        
+        trackPageEvent.sessionQuality(
+          qualityScore,
+          interactionCountRef.current,
+          totalTime
+        )
+      }
     }
   }, [enableTimeTracking, updateEngagementTime, pageName])
 
