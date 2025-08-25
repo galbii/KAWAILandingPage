@@ -53,11 +53,27 @@ const EVENT_ATTENDANCE_SCHEMA = {
   timezone: { type: 'string', required: false, maxLength: 50 }
 }
 
+const CALENDLY_APPOINTMENT_SCHEMA = {
+  booking_id: { type: 'string', required: true, maxLength: 100 },
+  invitee_name: { type: 'string', required: true, maxLength: 100 },
+  invitee_email: { type: 'string', required: true, maxLength: 200 },
+  invitee_phone: { type: 'string', required: false, maxLength: 20 },
+  event_type_name: { type: 'string', required: true, maxLength: 100 },
+  scheduled_time: { type: 'string', required: true, maxLength: 50 },
+  duration_minutes: { type: 'number', required: false, min: 1, max: 480 },
+  location_type: { type: 'string', required: false, maxLength: 50 },
+  booking_source: { type: 'string', required: false, enum: ['modal', 'booking_section', 'direct'] },
+  calendly_event_type: { type: 'string', required: false, maxLength: 100 },
+  additional_notes: { type: 'string', required: false, maxLength: 500 },
+  lead_score: { type: 'number', required: false, min: 0, max: 100 }
+}
+
 const EVENT_SCHEMAS: Record<string, Record<string, unknown>> = {
   [POSTHOG_CONFIG.EVENTS.PIANO_MODEL_VIEWED]: PIANO_MODEL_SCHEMA,
   [POSTHOG_CONFIG.EVENTS.CONSULTATION_INTENT_SIGNAL]: CONSULTATION_INTENT_SCHEMA,
   [POSTHOG_CONFIG.EVENTS.CONSULTATION_BOOKING_ATTEMPT]: BOOKING_ATTEMPT_SCHEMA,
-  [POSTHOG_CONFIG.EVENTS.KAWAI_EVENT_INTEREST]: EVENT_ATTENDANCE_SCHEMA
+  [POSTHOG_CONFIG.EVENTS.KAWAI_EVENT_INTEREST]: EVENT_ATTENDANCE_SCHEMA,
+  [POSTHOG_CONFIG.EVENTS.CALENDLY_APPOINTMENT_BOOKED]: CALENDLY_APPOINTMENT_SCHEMA
 }
 
 // Validation functions

@@ -1,6 +1,8 @@
 'use client'
 
 import { trackKawaiEvent } from './analytics'
+import { eventMonitor } from './posthog-validation'
+import { POSTHOG_CONFIG } from './posthog-config'
 
 // Check if running in browser
 const isBrowser = typeof window !== 'undefined'
@@ -71,6 +73,19 @@ function handleCalendlyEvent(event: CalendlyEvent) {
         // Only track if no recent duplicates
         processedAppointments.add(bookingId)
         trackKawaiEvent.calendlyConversion(calendlySource)
+        
+        // Also track with PostHog (client-side)
+        eventMonitor.capture(POSTHOG_CONFIG.EVENTS.CONSULTATION_BOOKING_ATTEMPT, {
+          booking_source: calendlySource,
+          calendly_status: 'completed',
+          user_type: localStorage.getItem('kawai_returning_user') === 'true' ? 'returning' : 'new',
+          completion_timestamp: new Date().toISOString(),
+          calendly_event_data: event
+        })
+        
+        // Store booking source in localStorage for webhook attribution
+        localStorage.setItem('kawai_last_booking_source', calendlySource)
+        localStorage.setItem('kawai_last_booking_time', Date.now().toString())
         
         // Clean up old entries to prevent memory leaks (keep last 10)
         if (processedAppointments.size > 10) {

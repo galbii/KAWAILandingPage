@@ -22,6 +22,7 @@ export const POSTHOG_CONFIG = {
     CONSULTATION_BOOKING_ATTEMPT: 'consultation_booking_attempt',
     CONSULTATION_COMPLETED: 'consultation_completed',
     CONSULTATION_ABANDONED: 'consultation_abandoned',
+    CALENDLY_APPOINTMENT_BOOKED: 'calendly_appointment_booked',
     
     // Event attendance events
     KAWAI_EVENT_INTEREST: 'kawai_event_interest',
