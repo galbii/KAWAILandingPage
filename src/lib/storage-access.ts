@@ -27,7 +27,7 @@ export async function requestStorageAccess(): Promise<boolean> {
       try {
         document.cookie = 'test_partitioned=1; SameSite=None; Secure; Partitioned'
         console.log('Partitioned cookie support enabled')
-      } catch (e) {
+      } catch {
         console.log('Partitioned cookie not supported')
       }
       

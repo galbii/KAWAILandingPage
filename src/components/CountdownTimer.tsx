@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Calendar, X } from 'lucide-react';
 import PianoConsultationDialog from '@/components/PianoConsultationDialog';

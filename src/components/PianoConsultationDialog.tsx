@@ -6,6 +6,7 @@ import {
   DialogContent,
 } from '@/components/ui/dialog';
 import { initializeCalendlyTracking, cleanupCalendlyTracking } from '@/lib/calendly-tracking';
+import { usePostHog } from '@/hooks/usePostHog';
 
 interface PianoConsultationDialogProps {
   isOpen: boolean;
@@ -13,8 +14,17 @@ interface PianoConsultationDialogProps {
 }
 
 export default function PianoConsultationDialog({ isOpen, onClose }: PianoConsultationDialogProps) {
+  const { trackBookingAttempt } = usePostHog();
+  
   useEffect(() => {
     if (isOpen) {
+      // PostHog: Track consultation modal opened
+      trackBookingAttempt({
+        bookingSource: 'modal',
+        calendlyStatus: 'opened',
+        timestamp: new Date().toISOString()
+      });
+
       // Load Calendly script when dialog opens
       const script = document.createElement('script');
       script.src = 'https://assets.calendly.com/assets/external/widget.js';
@@ -25,6 +35,13 @@ export default function PianoConsultationDialog({ isOpen, onClose }: PianoConsul
       initializeCalendlyTracking('modal');
 
       return () => {
+        // PostHog: Track consultation modal closed/abandoned
+        trackBookingAttempt({
+          bookingSource: 'modal',
+          calendlyStatus: 'abandoned',
+          abandonmentStage: 'modal_close'
+        });
+
         // Clean up script when dialog closes
         const existingScript = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
         if (existingScript) {
@@ -35,7 +52,7 @@ export default function PianoConsultationDialog({ isOpen, onClose }: PianoConsul
         cleanupCalendlyTracking();
       };
     }
-  }, [isOpen]);
+  }, [isOpen, trackBookingAttempt]);
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>

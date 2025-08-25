@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { WebVitals } from "@/components/WebVitals";
+import { PostHogProvider } from "@/components/PostHogProvider";
 import Script from "next/script";
 import "./globals.css";
 
@@ -83,7 +84,9 @@ src="https://www.facebook.com/tr?id=783258114117252&ev=PageView&noscript=1"
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NN27CTQX"
 height="0" width="0" style={{display:'none',visibility:'hidden'}}></iframe></noscript>
         {/* End Google Tag Manager (noscript) */}
-        {children}
+        <PostHogProvider>
+          {children}
+        </PostHogProvider>
         <WebVitals />
         
         {/* Google Ads Conversion Tracking */}

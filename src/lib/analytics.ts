@@ -1,6 +1,7 @@
 'use client'
 
 import { sendGAEvent } from '@next/third-parties/google'
+import { postHogAnalytics } from './posthog'
 
 // Check if running in browser
 const isBrowser = typeof window !== 'undefined'
@@ -51,7 +52,7 @@ function trackGoogleAdsConversion(conversionLabel?: string) {
 declare global {
   interface Window {
     fbq: (action: string, event: string, parameters?: PixelParameters) => void
-    gtag: (command: string, targetId: string, config?: Record<string, unknown>) => void
+    gtag: (command: string, targetId?: string | Date, config?: Record<string, unknown>) => void
   }
 }
 
@@ -240,12 +241,31 @@ export const trackKawaiEvent = {
       event_date: 'september_2025',
       cta_intent: 'consultation_booking'
     })
+    
+    // PostHog consultation intent tracking
+    postHogAnalytics.trackConsultationIntent({
+      trigger: source.includes('hero') ? 'hero_cta' : source.includes('booking') ? 'booking_section' : 'gallery_cta',
+      modelsViewed: 0, // Will be updated by the hook
+      sessionDuration: Math.floor(performance.now() / 1000),
+      engagementScore: 75, // High intent signal
+      timeToIntent: Math.floor(performance.now() / 1000)
+    })
   },
 
   // Piano browsing
   findPiano: (source: string) => {
     trackEvent.buttonClick('Find Your Piano', source, {
       event_type: 'piano_discovery'
+    })
+    
+    // PostHog piano interest tracking
+    postHogAnalytics.trackPianoModelViewed({
+      model: 'piano_gallery_browse',
+      price: 'various',
+      category: 'Digital',
+      timeSpent: 0,
+      sourceSection: source,
+      interactionType: 'view'
     })
   },
 
@@ -255,6 +275,13 @@ export const trackKawaiEvent = {
       event_type: 'sale_event_registration',
       event_date: 'september_2025',
       cta_intent: 'event_registration'
+    })
+    
+    // PostHog event interest tracking
+    postHogAnalytics.trackEventAttendance({
+      eventDates: 'September 11-14, 2025',
+      location: 'Houston, TX',
+      interactionType: 'save_date'
     })
   },
 

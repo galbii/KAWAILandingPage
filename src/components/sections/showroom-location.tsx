@@ -6,14 +6,12 @@ import Script from 'next/script';
 
 export function ShowroomLocation() {
   const [showFallback, setShowFallback] = useState(false);
-  const [formLoaded, setFormLoaded] = useState(false);
 
   useEffect(() => {
     // Preload and initialize Constant Contact form immediately
     const initializeForm = () => {
       // Check if Constant Contact widget is available
       if (typeof (window as Record<string, unknown>).ConstantContact !== 'undefined') {
-        setFormLoaded(true);
         // Force initialization of the form
         const formElement = document.querySelector('.ctct-inline-form');
         if (formElement && (window as Record<string, unknown>).ConstantContact) {

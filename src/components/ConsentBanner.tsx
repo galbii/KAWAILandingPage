@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Script from 'next/script'
 
 interface ConsentPreferences {
@@ -15,32 +15,7 @@ export function ConsentBanner() {
   const [consent, setConsent] = useState<ConsentPreferences | null>(null)
   const [scriptsLoaded, setScriptsLoaded] = useState(false)
 
-  useEffect(() => {
-    // Check for existing consent
-    const storedConsent = localStorage.getItem('kawai_consent_preferences')
-    if (storedConsent) {
-      try {
-        const parsed = JSON.parse(storedConsent) as ConsentPreferences
-        // Check if consent is less than 1 year old
-        const oneYear = 365 * 24 * 60 * 60 * 1000
-        if (Date.now() - parsed.timestamp < oneYear) {
-          setConsent(parsed)
-          updateConsentMode(parsed)
-          if (parsed.analytics || parsed.advertising) {
-            loadTrackingScripts(parsed)
-          }
-          return
-        }
-      } catch (e) {
-        console.warn('Invalid consent preferences in localStorage')
-      }
-    }
-    
-    // Show banner if no valid consent found
-    setShowBanner(true)
-  }, [])
-
-  const updateConsentMode = (preferences: ConsentPreferences) => {
+  const updateConsentMode = useCallback((preferences: ConsentPreferences) => {
     if (typeof window !== 'undefined' && window.gtag) {
       window.gtag('consent', 'update', {
         'analytics_storage': preferences.analytics ? 'granted' : 'denied',
@@ -49,9 +24,9 @@ export function ConsentBanner() {
         'ad_personalization': preferences.advertising ? 'granted' : 'denied'
       })
     }
-  }
+  }, [])
 
-  const loadTrackingScripts = (preferences: ConsentPreferences) => {
+  const loadTrackingScripts = useCallback((preferences: ConsentPreferences) => {
     if (scriptsLoaded) return
     
     // Load Google Ads if advertising consent given
@@ -63,7 +38,7 @@ export function ConsentBanner() {
 
       gtagScript.onload = () => {
         if (window.gtag) {
-          window.gtag('js', new Date())
+          (window.gtag as (...args: unknown[]) => void)('js', new Date())
           window.gtag('config', 'AW-755074614')
         }
       }
@@ -86,7 +61,32 @@ export function ConsentBanner() {
     }
 
     setScriptsLoaded(true)
-  }
+  }, [scriptsLoaded])
+
+  useEffect(() => {
+    // Check for existing consent
+    const storedConsent = localStorage.getItem('kawai_consent_preferences')
+    if (storedConsent) {
+      try {
+        const parsed = JSON.parse(storedConsent) as ConsentPreferences
+        // Check if consent is less than 1 year old
+        const oneYear = 365 * 24 * 60 * 60 * 1000
+        if (Date.now() - parsed.timestamp < oneYear) {
+          setConsent(parsed)
+          updateConsentMode(parsed)
+          if (parsed.analytics || parsed.advertising) {
+            loadTrackingScripts(parsed)
+          }
+          return
+        }
+      } catch {
+        console.warn('Invalid consent preferences in localStorage')
+      }
+    }
+    
+    // Show banner if no valid consent found
+    setShowBanner(true)
+  }, [loadTrackingScripts, updateConsentMode])
 
   const handleConsent = (preferences: Partial<ConsentPreferences>) => {
     const consentData: ConsentPreferences = {
@@ -149,7 +149,7 @@ export function ConsentBanner() {
                 and advertising to show you relevant content. You can manage your preferences at any time.
               </p>
               <p className="text-xs text-gray-500 mt-2">
-                By clicking "Accept All", you consent to our use of cookies for analytics and advertising. 
+                By clicking &quot;Accept All&quot;, you consent to our use of cookies for analytics and advertising. 
                 Essential cookies are always active for basic site functionality.
               </p>
             </div>
@@ -238,11 +238,3 @@ export const hasAdvertisingConsent = (): boolean => {
   }
 }
 
-// Declare global gtag and fbq functions
-declare global {
-  interface Window {
-    gtag: (command: string, targetId: string | Date, config?: Record<string, any>) => void
-    fbq: (action: string, event: string, parameters?: Record<string, any>) => void
-    dataLayer: any[]
-  }
-}
