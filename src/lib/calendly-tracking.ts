@@ -19,9 +19,17 @@ type CalendlyEventType =
   | 'calendly.page_height'      // Height change events
 
 interface CalendlyEvent {
-  event: CalendlyEventType
-  _retryCount?: number
-  [key: string]: string | number | boolean
+  event: CalendlyEventType | string
+  payload?: {
+    event?: {
+      uri?: string
+    }
+    invitee?: {
+      uri?: string
+    }
+    [key: string]: unknown
+  }
+  [key: string]: unknown
 }
 
 // Track the source of the Calendly widget for attribution
@@ -53,15 +61,8 @@ function handleCalendlyEvent(event: CalendlyEvent) {
       isLoaded: posthog?.__loaded,
       hasCaptureMethod: typeof posthog?.capture === 'function'
     })
-    // Store event for potential retry (max 10 retries)
-    if (!event._retryCount) event._retryCount = 0
-    if (event._retryCount < 10) {
-      event._retryCount++
-      setTimeout(() => handleCalendlyEvent(event), 500) // Retry after 500ms
-    } else {
-      console.error('❌ PostHog never became ready, dropping Calendly event:', event.event)
-    }
-    return
+    // Continue with tracking anyway - PostHog may initialize later
+    console.log('⚠️ Proceeding with event tracking despite PostHog not being ready')
   }
 
   console.log('✅ Calendly event detected:', event)

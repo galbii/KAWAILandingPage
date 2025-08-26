@@ -31,6 +31,8 @@ Event tracking integrated directly into React components
 - **Phone Calls** - Clicks to 713-904-0001
 - **Email Contacts** - Clicks to info@kawaipianoshouston.com
 - **Private Tour Scheduling** - Showroom visit requests
+- **Calendly Appointment Bookings** - Piano consultation scheduling (HIGHEST VALUE)
+- **Calendly Funnel Tracking** - Widget load → Event browsing → Time selection → Booking completed
 - **Newsletter Signups** - Email list growth
 
 ### 2. User Engagement & Behavior
@@ -104,6 +106,12 @@ trackKawaiEvent.scheduleTour(source)
 
 // Newsletter subscription
 trackKawaiEvent.subscribeNewsletter(source)
+
+// Calendly conversion tracking (HIGHEST PRIORITY)
+trackKawaiEvent.calendlyConversion(source)
+
+// Calendly interaction tracking (funnel steps)
+trackKawaiEvent.calendlyInteraction(interaction, source)
 ```
 
 ### GA4 Event Structure Examples
@@ -140,6 +148,29 @@ trackKawaiEvent.subscribeNewsletter(source)
   interaction_count: 12,
   session_time: 180,
   value: 85
+}
+
+// Calendly appointment booking (HIGHEST VALUE)
+{
+  event: 'generate_lead',
+  event_category: 'lead_generation',
+  action: 'calendly_appointment_scheduled',
+  location: 'modal', // or 'booking_section'
+  value: 50,
+  event_type: 'piano_consultation',
+  event_date: 'september_2025',
+  calendly_source: 'modal',
+  conversion_value: 50
+}
+
+// Calendly funnel step tracking
+{
+  event: 'select_content',
+  content_type: 'booking_interface',
+  item_name: 'calendly_time_selected',
+  interaction_type: 'time_selected',
+  calendly_source: 'booking_section',
+  event_type: 'calendly_engagement'
 }
 ```
 
@@ -226,6 +257,176 @@ const handleFindPianoClick = () => {
 - Custom event validation through GA4 DebugView
 - Performance metrics tracked via Core Web Vitals
 
+## Calendly Integration & Conversion Tracking
+
+### Overview
+The Calendly booking system provides **the highest value conversion tracking** on the site. It includes comprehensive funnel tracking from initial widget load through completed appointment booking.
+
+### Calendly Tracking Architecture
+
+**Two Integration Points:**
+1. **Modal Popup** - Triggered by CTA buttons across the page
+2. **Inline Widget** - Dedicated booking section on the page
+
+**Both locations track the complete funnel with proper source attribution.**
+
+### Calendly Event Flow & Tracking
+
+#### 1. Widget Load (`calendly.profile_page_viewed`)
+**Google Analytics:**
+```javascript
+{
+  event: 'select_content',
+  content_type: 'booking_interface', 
+  interaction_type: 'widget_load'
+}
+```
+
+**Meta Pixel:**
+```javascript
+fbq('track', 'ViewContent', {
+  content_category: 'appointment_scheduling',
+  content_type: 'booking_interface'
+})
+```
+
+**PostHog:**
+```javascript
+{
+  event: 'calendly_widget_loaded',
+  booking_source: 'modal' | 'booking_section',
+  funnel_step: 'widget_load'
+}
+```
+
+#### 2. Event Browsing (`calendly.event_type_viewed`)
+**Google Analytics:**
+```javascript
+{
+  event: 'select_content',
+  content_type: 'booking_interface',
+  item_name: 'calendly_event_type_viewed'
+}
+```
+
+**Meta Pixel:**
+```javascript
+fbq('track', 'ViewContent', {
+  content_name: 'calendly_event_type_viewed',
+  content_category: 'appointment_scheduling'
+})
+```
+
+#### 3. Time Selection (`calendly.date_and_time_selected`)
+**Google Analytics:**
+```javascript
+{
+  event: 'select_content',
+  content_type: 'booking_interface',
+  item_name: 'calendly_time_selected',
+  interaction_type: 'time_selected'
+}
+```
+
+**Meta Pixel:**
+```javascript
+fbq('track', 'ViewContent', {
+  content_name: 'calendly_time_selected',
+  booking_step: 'time_selected'
+})
+```
+
+**PostHog:**
+```javascript
+{
+  event: 'consultation_booking_attempt',
+  calendly_status: 'time_selected',
+  funnel_step: 'time_selection',
+  engagement_level: 'high'
+}
+```
+
+#### 4. Appointment Booking (`calendly.invitee_scheduled`)
+**Google Analytics (Primary Conversion):**
+```javascript
+{
+  event: 'generate_lead',
+  event_category: 'lead_generation',
+  action: 'calendly_appointment_scheduled',
+  value: 50,
+  conversion_value: 50
+}
+```
+
+**Meta Pixel (Primary Conversion):**
+```javascript
+fbq('track', 'CompleteRegistration', {
+  content_name: 'piano_consultation_appointment',
+  value: 100,
+  currency: 'USD',
+  appointment_type: 'piano_consultation'
+})
+
+fbq('track', 'Schedule', {
+  content_name: 'calendly_appointment_booked',
+  value: 50,
+  booking_platform: 'calendly'
+})
+```
+
+**Google Ads Conversion:**
+```javascript
+gtag('event', 'conversion', {
+  'send_to': 'AW-755074614',
+  'value': 1.0,
+  'currency': 'USD'
+})
+```
+
+### Server-Side Webhook Tracking
+**Additional tracking occurs via Calendly webhooks** when appointments are actually confirmed:
+
+**PostHog Server Event:**
+```javascript
+{
+  event: 'calendly_appointment_booked',
+  booking_source: 'modal' | 'booking_section' | 'direct',
+  invitee_name: 'Customer Name',
+  invitee_email: 'customer@email.com',
+  scheduled_time: '2025-09-15T14:00:00Z',
+  lead_score: 85, // Calculated quality score
+  $server_side: true
+}
+```
+
+### Funnel Analysis & Attribution
+
+**Complete Conversion Funnel:**
+1. **Widget Load** → Initial interest
+2. **Event Browsing** → Engagement with service details  
+3. **Time Selection** → High intent signal
+4. **Appointment Booking** → Conversion completed
+5. **Webhook Confirmation** → Server-side verification
+
+**Source Attribution:**
+- `modal` - Bookings from CTA button popups
+- `booking_section` - Bookings from inline section
+- `direct` - Direct Calendly links (if any)
+
+### Key Performance Indicators
+
+**Primary Metrics:**
+- **Calendly Conversion Rate** - Appointments booked / Widget loads
+- **Funnel Drop-off Analysis** - Step-by-step completion rates
+- **Source Performance** - Modal vs inline booking rates
+- **Lead Quality Score** - Average qualification of booked appointments
+
+**Advanced Metrics:**
+- Time from widget load to booking completion
+- Mobile vs desktop conversion rates
+- Return visitor booking rates
+- Cross-session booking behavior
+
 ## Data Flow
 
 **Complete tracking flow from user action to GA4:**
@@ -240,7 +441,9 @@ const handleFindPianoClick = () => {
 ## Key Metrics Dashboard
 
 ### Conversion Metrics
-- Consultation booking rate
+- **Calendly appointment booking rate** (PRIMARY CONVERSION)
+- Calendly funnel completion rate (Widget Load → Time Selection → Booking)
+- Consultation booking rate (overall)
 - Event registration conversions
 - Phone call click-through rate
 - Email contact engagement
@@ -261,6 +464,83 @@ const handleFindPianoClick = () => {
 
 ---
 
-**Last Updated:** January 2025  
+---
+
+## Implementation Files & Dependencies
+
+### Core Analytics Files
+- **`src/lib/analytics.ts`** - Main analytics wrapper with Google Analytics, Meta Pixel, and Google Ads integration
+- **`src/lib/calendly-tracking.ts`** - Calendly PostMessage event handling and tracking
+- **`src/lib/posthog.ts`** - PostHog client-side integration
+- **`src/lib/posthog-server.ts`** - PostHog server-side tracking for webhooks
+- **`src/lib/posthog-validation.ts`** - Event validation and monitoring system
+- **`src/hooks/usePageTracking.ts`** - Automated behavioral tracking hook
+- **`src/components/WebVitals.tsx`** - Performance monitoring component
+
+### Calendly Integration Files
+- **`src/components/sections/BookingSection.tsx`** - Inline Calendly widget implementation
+- **`src/components/PianoConsultationDialog.tsx`** - Modal Calendly widget implementation
+- **`src/app/api/bookings/route.ts`** - Webhook endpoint for server-side tracking
+
+### Configuration Files
+- **`next.config.ts`** - CSP headers configured for Calendly iframe support
+- **`CALENDLY_WEBHOOK_SETUP.md`** - Complete webhook configuration guide
+
+## Platform Integration Status
+
+### ✅ Active Tracking Platforms
+- **Google Analytics 4** (Property: `G-P91EKWK0XB`) - Complete conversion and funnel tracking
+- **Meta Pixel** - Lead generation and conversion optimization
+- **Google Ads** (Account: `AW-755074614`) - Conversion tracking and attribution
+- **PostHog** - Advanced funnel analysis and user behavior tracking
+- **Campaign Performance Analytics** - Custom attribution and ROI tracking
+
+### 🎯 Conversion Values & Attribution
+- **Calendly Appointments**: GA4 value: 50, Meta Pixel value: $100 USD
+- **Lead Generation Events**: GA4 value: 1, Meta Pixel value: $1 USD + $500 predicted LTV
+- **Google Ads Conversions**: $1.00 USD per appointment booking
+- **Source Attribution**: Modal vs Booking Section vs Direct tracking
+
+## Testing & Validation
+
+### Development Testing
+```javascript
+// Available in browser console during development:
+window.postHogDebug.status()                    // Check PostHog initialization
+window.postHogDebug.monitor.getEvents()         // View captured events
+window.postHogDebug.testEvents()               // Run validation tests
+
+// Manual event testing:
+window.postMessage({
+  event: 'calendly.date_and_time_selected',
+  payload: { test: true }
+}, '*')
+```
+
+### Production Monitoring
+- **GA4 Real-time Reports** - Immediate conversion visibility
+- **GA4 DebugView** - Event structure validation
+- **Meta Pixel Helper** - Facebook tracking verification
+- **PostHog Session Recordings** - User journey analysis (high-intent sessions only)
+
+## Privacy & Compliance
+
+### Data Collection Standards
+- **GDPR Compliant** - User consent management via ConsentBanner component
+- **Cookie Classification** - Strictly necessary, functional, performance, targeting
+- **Data Retention** - Standard platform retention policies
+- **PII Protection** - Email addresses used as PostHog distinct IDs only for legitimate business purposes
+
+### Security Measures  
+- **Webhook Signature Verification** - HMAC-SHA256 validation for Calendly webhooks
+- **CSP Headers** - Strict content security policy with Calendly exceptions
+- **Server-side Validation** - All webhook data validated before tracking
+- **Client-side Sanitization** - Event properties cleaned and validated
+
+---
+
+**Last Updated:** August 2025  
 **GA4 Property:** G-P91EKWK0XB  
-**Implementation Files:** `src/lib/analytics.ts`, `src/hooks/usePageTracking.ts`, `src/components/WebVitals.tsx`
+**Meta Pixel ID:** Active (configured in analytics.ts)  
+**Google Ads ID:** AW-755074614  
+**PostHog Integration:** Active with event monitoring

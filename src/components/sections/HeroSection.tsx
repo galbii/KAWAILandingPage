@@ -9,21 +9,6 @@ export default function HeroSection() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEventInfoModalOpen, setIsEventInfoModalOpen] = useState(false);
 
-  const handleFindPianoClick = () => {
-    // Track the analytics event
-    trackKawaiEvent.findPiano('hero');
-    
-    // Scroll to featured deals section
-    const featuredDealsSection = document.getElementById('featured-deals');
-    if (featuredDealsSection) {
-      featuredDealsSection.scrollIntoView({ behavior: 'smooth' });
-    }
-    // Open modal after a short delay
-    setTimeout(() => {
-      setIsModalOpen(true);
-    }, 800);
-  };
-
   const handleExploreCollectionClick = () => {
     console.log('Explore Collection clicked');
     // Track the analytics event

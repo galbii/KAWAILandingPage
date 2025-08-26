@@ -3,20 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { LoadingSkeleton } from '@/components/ui/loading-skeleton';
 import { initializeCalendlyTracking, cleanupCalendlyTracking } from '@/lib/calendly-tracking';
-
-// Declare global Calendly object for TypeScript
-declare global {
-  interface Window {
-    Calendly: {
-      initInlineWidget: (options: {
-        url: string;
-        parentElement: HTMLElement;
-        utm?: Record<string, string>;
-        prefill?: Record<string, unknown>;
-      }) => void;
-    };
-  }
-}
+import '@/types/calendly';
 
 export default function BookingSection() {
   const [isVisible, setIsVisible] = useState(false);

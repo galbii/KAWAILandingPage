@@ -274,8 +274,10 @@ export function shutdownServerPostHog(): void {
 // Export the server client for direct use if needed
 export { serverPostHog }
 
-export default {
+const postHogServerExports = {
   captureServerEvent,
   trackCalendlyAppointment,
   shutdownServerPostHog
 }
+
+export default postHogServerExports

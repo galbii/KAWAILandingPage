@@ -7,20 +7,7 @@ import {
 } from '@/components/ui/dialog';
 import { initializeCalendlyTracking, cleanupCalendlyTracking } from '@/lib/calendly-tracking';
 import { usePostHog } from '@/hooks/usePostHog';
-
-// Declare global Calendly object for TypeScript
-declare global {
-  interface Window {
-    Calendly: {
-      initInlineWidget: (options: {
-        url: string;
-        parentElement: HTMLElement;
-        utm?: Record<string, string>;
-        prefill?: Record<string, unknown>;
-      }) => void;
-    };
-  }
-}
+import '@/types/calendly';
 
 interface PianoConsultationDialogProps {
   isOpen: boolean;
