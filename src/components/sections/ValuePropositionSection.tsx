@@ -3,7 +3,7 @@ import { trackKawaiEvent } from '@/lib/analytics';
 
 export default function ValuePropositionSection() {
   return (
-    <section className="relative overflow-hidden value-prop-section-mobile py-4 lg:py-6">
+    <section className="relative overflow-hidden value-prop-section-mobile py-4 lg:py-6 w-full">
       
       {/* Enhanced Background Image with Fixed Attachment */}
       <div className="value-prop-background-fixed"></div>
@@ -11,7 +11,7 @@ export default function ValuePropositionSection() {
       {/* Elegant Dark Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70 value-prop-overlay"></div>
     
-      <div className="relative z-10 max-w-7xl mx-auto px-6">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full">
         {/* Value Propositions Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6 value-prop-grid-mobile">
           

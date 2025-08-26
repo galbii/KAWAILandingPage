@@ -74,28 +74,31 @@ export const trackEvent = {
     })
   },
 
-  // Lead generation events (high-value actions)
+  // Lead generation events (ACTUAL CONVERSIONS ONLY - primarily Calendly appointment scheduling)
   generateLead: (action: string, location: string, additionalData?: Record<string, string | number | boolean>) => {
     if (!isBrowser) return
     
-    // Google Analytics
+    // IMPORTANT: This function should ONLY be used for actual conversions (Calendly appointment scheduling)
+    // All other interactions should use buttonClick() or other engagement tracking functions
+    
+    // Google Analytics - Generate Lead (actual conversion)
     sendGAEvent('event', 'generate_lead', {
       event_category: 'lead_generation', 
       action: action,
       location: location,
-      value: 1, // Assign value to lead generation events
+      value: additionalData?.is_actual_conversion ? 50 : 1, // Higher value for actual conversions
       ...additionalData
     })
     
-    // Meta Pixel - Enhanced Lead tracking
+    // Meta Pixel - Enhanced Lead tracking (actual conversion)
     trackMetaPixel('Lead', {
       content_name: action,
       content_category: 'lead_generation',
       content_type: 'consultation',
       source: location,
-      value: 1,
+      value: additionalData?.is_actual_conversion ? 50 : 1,
       currency: 'USD',
-      predicted_ltv: 500, // Lifetime value prediction for piano consultation leads
+      predicted_ltv: additionalData?.is_actual_conversion ? 2000 : 500, // Higher LTV for actual conversions
       ...additionalData
     })
   },
@@ -237,12 +240,13 @@ export const trackWebVitals = {
 
 // Convenience functions for common KAWAI piano sale events
 export const trackKawaiEvent = {
-  // Consultation booking CTA click (engagement, not conversion)
+  // Consultation booking CTA click (engagement, not conversion - only actual Calendly scheduling is conversion)
   bookConsultation: (source: string) => {
     trackEvent.buttonClick('Book Consultation', source, {
       event_type: 'piano_consultation',
       event_date: 'september_2025',
-      cta_intent: 'consultation_booking'
+      cta_intent: 'consultation_booking',
+      interaction_type: 'consultation_interest'
     })
     
     // PostHog consultation intent tracking with validation
@@ -281,12 +285,13 @@ export const trackKawaiEvent = {
     })
   },
 
-  // Event registration CTA click (engagement, not conversion)
+  // Event registration CTA click (engagement, not conversion - only actual Calendly scheduling is conversion)
   secureSpot: (source: string) => {
     trackEvent.buttonClick('Secure Your Spot', source, {
       event_type: 'sale_event_registration',
       event_date: 'september_2025',
-      cta_intent: 'event_registration'
+      cta_intent: 'event_registration',
+      interaction_type: 'event_interest'
     })
     
     // PostHog event interest tracking with validation
@@ -318,11 +323,12 @@ export const trackKawaiEvent = {
     })
   },
 
-  // Private tour scheduling CTA click (engagement, not conversion)
+  // Private tour scheduling CTA click (engagement, not conversion - only actual Calendly scheduling is conversion)
   scheduleTour: (source: string) => {
     trackEvent.buttonClick('Schedule Private Tour', source, {
       event_type: 'showroom_tour',
-      cta_intent: 'private_tour_request'
+      cta_intent: 'private_tour_request',
+      interaction_type: 'tour_interest'
     })
   },
 
@@ -335,12 +341,13 @@ export const trackKawaiEvent = {
 
   // Calendly-specific tracking functions
   calendlyConversion: (source: 'modal' | 'booking_section' | 'unknown') => {
-    // Track the main conversion - appointment scheduled
+    // Track the main conversion - ONLY actual Calendly appointment scheduling is tracked as conversion
     trackEvent.generateLead('calendly_appointment_scheduled', source, {
       event_type: 'piano_consultation',
       event_date: 'september_2025',
       calendly_source: source,
-      conversion_value: 50 // Higher value for actual appointments
+      conversion_value: 50, // Higher value for actual appointments
+      is_actual_conversion: true // Flag to distinguish from engagement tracking
     })
     
     // Meta Pixel CompleteRegistration - Primary conversion event
@@ -434,26 +441,26 @@ export const trackKawaiEvent = {
   requestEventInfo: (data: { source: string; houstonArea?: string; pianoInterest?: string }) => {
     if (!isBrowser) return
     
-    // Track as lead generation - this is a high-value action
-    trackEvent.generateLead('houston_event_info_request', data.source, {
+    // Track as high-value engagement (not conversion - only Calendly scheduling is conversion)
+    trackEvent.buttonClick('Houston Event Information Request', data.source, {
       event_type: 'event_information_request',
       houston_area: data.houstonArea || 'not_specified',
       piano_interest: data.pianoInterest || 'not_specified',
-      event_date: 'september_2025'
+      event_date: 'september_2025',
+      interaction_type: 'information_request',
+      engagement_level: 'high'
     })
     
-    // Meta Pixel Lead event
-    trackMetaPixel('Lead', {
+    // Meta Pixel ViewContent event (engagement, not Lead conversion)
+    trackMetaPixel('ViewContent', {
       content_name: 'houston_event_information_request',
       content_category: 'information_request',
       content_type: 'event_inquiry',
       source: data.source,
       houston_area: data.houstonArea || 'not_specified',
       piano_interest: data.pianoInterest || 'not_specified',
-      value: 25, // Medium value - information request
-      currency: 'USD',
       event_location: 'houston_texas',
-      lead_type: 'event_information'
+      engagement_type: 'information_request'
     })
     
     // PostHog tracking

@@ -43,7 +43,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative h-screen flex items-center justify-center text-white hero-parallax scroll-container overflow-hidden">
+    <section className="relative h-screen flex items-center justify-center text-white hero-parallax scroll-container overflow-hidden w-full">
       {/* Video Background */}
       <video
         autoPlay
@@ -77,7 +77,7 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/15 to-black/25"></div>
       </div>
       
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 text-center hero-content pt-20 sm:pt-24">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 text-center hero-content pt-20 sm:pt-24">
         
         {/* Partnership Branding */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-8 animate-float-gentle">
@@ -105,8 +105,8 @@ export default function HeroSection() {
         {/* Main Headlines */}
         <div className="space-y-4 mb-6">
           <h1 className="font-heading leading-tight scroll-animate">
-            <span className="block text-8xl md:text-8xl lg:text-9xl font-black text-white tracking-tight animate-delay-200">KAWAI</span>
-            <span className="block text-7xl md:text-7xl lg:text-8xl font-light text-white tracking-wide animate-delay-400">SHOWCASE</span>
+            <span className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-white tracking-tight animate-delay-200">KAWAI</span>
+            <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light text-white tracking-wide animate-delay-400">SHOWCASE</span>
           </h1>
           
           {/* Premium Value Proposition */}

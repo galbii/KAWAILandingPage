@@ -79,7 +79,7 @@ src="https://www.facebook.com/tr?id=783258114117252&ev=PageView&noscript=1"
         {/* End Meta Pixel Code */}
       </head>
       <body
-        className={`${playfairDisplay.variable} ${inter.variable} antialiased`}
+        className={`${playfairDisplay.variable} ${inter.variable} antialiased overflow-x-hidden`}
       >
         {/* Google Tag Manager (noscript) */}
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NN27CTQX"

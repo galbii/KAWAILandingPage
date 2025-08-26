@@ -23,19 +23,28 @@ Event tracking integrated directly into React components
 
 ## Tracking Categories
 
-### 1. High-Value Conversions
-**Primary business objectives tracked:**
+### 1. Actual Conversions (Revenue-Generating Actions)
+**ONLY Calendly appointment scheduling is tracked as actual conversion:**
 
-- **Consultation Bookings** - Primary conversion goal
-- **Event Registration** - "Secure Your Spot" actions  
-- **Phone Calls** - Clicks to 713-904-0001
-- **Email Contacts** - Clicks to info@kawaipianoshouston.com
-- **Private Tour Scheduling** - Showroom visit requests
-- **Calendly Appointment Bookings** - Piano consultation scheduling (HIGHEST VALUE)
-- **Calendly Funnel Tracking** - Widget load → Event browsing → Time selection → Booking completed
+- **Calendly Appointment Bookings** - Piano consultation scheduling (**ONLY TRUE CONVERSION**)
+  - Triggered by `calendly.invitee_scheduled` and `calendly.event_scheduled` events
+  - GA4 `generate_lead` event with `value: 50`
+  - Meta Pixel `CompleteRegistration` + `Schedule` events
+  - Google Ads conversion tracking
+  - PostHog server-side webhook confirmation
+
+### 2. High-Value Engagement (Lead Intent Signals)
+**User actions indicating strong interest but not actual conversions:**
+
+- **Consultation Booking CTAs** - "Book Consultation" button clicks (intent signal)
+- **Event Registration CTAs** - "Secure Your Spot" clicks (intent signal)
+- **Information Requests** - Houston event info requests  
+- **Phone/Email Clicks** - Contact method interactions
+- **Private Tour Scheduling CTAs** - Showroom visit interest
 - **Newsletter Signups** - Email list growth
+- **Calendly Funnel Engagement** - Widget load → Event browsing → Time selection (pre-conversion)
 
-### 2. User Engagement & Behavior
+### 3. User Engagement & Behavior
 **Comprehensive user interaction tracking:**
 
 - **Scroll Depth** - Tracked at 25%, 50%, 75%, 90% thresholds
@@ -45,7 +54,7 @@ Event tracking integrated directly into React components
 - **Interaction Counting** - Clicks, keystrokes, mouse movement
 - **Content Interaction** - Time-to-interaction for specific elements
 
-### 3. Performance Monitoring
+### 4. Performance Monitoring
 **Technical performance metrics:**
 
 - **Core Web Vitals** - LCP, FID, CLS, INP, TTFB, FCP
@@ -53,7 +62,7 @@ Event tracking integrated directly into React components
 - **Next.js Metrics** - Framework-specific performance data
 - **Custom Timing Events** - Application-specific performance markers
 
-### 4. Piano Sale-Specific Events
+### 5. Piano Sale-Specific Events
 **Business-specific tracking:**
 
 - **Piano Discovery** - "Find Your Piano" interactions
@@ -116,16 +125,34 @@ trackKawaiEvent.calendlyInteraction(interaction, source)
 
 ### GA4 Event Structure Examples
 
-#### High-Value Conversion
+#### Actual Conversion (ONLY Calendly Appointment Scheduling)
 ```javascript
 {
   event: 'generate_lead',
   event_category: 'lead_generation',
-  action: 'consultation_booking',
-  location: 'hero',
-  value: 1,
+  action: 'calendly_appointment_scheduled',
+  location: 'modal', // or 'booking_section'
+  value: 50, // Higher value for actual conversion
   event_type: 'piano_consultation',
-  event_date: 'september_2025'
+  event_date: 'september_2025',
+  calendly_source: 'modal',
+  conversion_value: 50,
+  is_actual_conversion: true
+}
+```
+
+#### High-Value Engagement (Intent Signals)
+```javascript
+{
+  event: 'select_content',
+  content_type: 'button',
+  item_name: 'Book Consultation',
+  item_category: 'cta_button',
+  button_location: 'hero',
+  interaction_type: 'consultation_interest',
+  event_type: 'piano_consultation',
+  event_date: 'september_2025',
+  cta_intent: 'consultation_booking'
 }
 ```
 
@@ -440,16 +467,24 @@ gtag('event', 'conversion', {
 
 ## Key Metrics Dashboard
 
-### Conversion Metrics
-- **Calendly appointment booking rate** (PRIMARY CONVERSION)
-- Calendly funnel completion rate (Widget Load → Time Selection → Booking)
-- Consultation booking rate (overall)
-- Event registration conversions
-- Phone call click-through rate
-- Email contact engagement
-- Newsletter subscription rate
+### Conversion Metrics (Revenue-Focused)
+- **Calendly appointment booking rate** (**ONLY TRUE CONVERSION METRIC**)
+  - Triggered only by `calendly.invitee_scheduled`/`calendly.event_scheduled` events
+  - GA4 `generate_lead` events with `is_actual_conversion: true`
+  - Meta Pixel `CompleteRegistration` events
+  - Google Ads conversion events
+- **Calendly funnel completion rate** (Widget Load → Time Selection → Booking)
+- **Conversion value per appointment** (GA4: $50, Meta Pixel: $100)
 
-### Engagement Metrics
+### Engagement Metrics (Intent & Interest Signals)
+- **Consultation booking CTA click rate** (intent signals)
+- **Event registration CTA engagement** (intent signals)  
+- **Information request completion rate** (lead intent)
+- **Phone call click-through rate** (contact intent)
+- **Email contact engagement** (contact intent)
+- **Newsletter subscription rate** (ongoing interest)
+
+### User Behavior Metrics
 - Average session duration (active time)
 - Scroll depth distribution
 - Session quality score distribution

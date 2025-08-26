@@ -12,13 +12,13 @@ export default function Header() {
 
   return (
     <header 
-      className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100/50 header-enhanced cursor-pointer group header-clickable"
+      className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100/50 header-enhanced cursor-pointer group header-clickable w-full overflow-x-hidden"
       onClick={scrollToTop}
       role="button"
       aria-label="Scroll to top"
     >
-      <div className="max-w-7xl mx-auto">
-        <div className="flex items-center h-16 sm:h-18 lg:h-20 header-content pl-2">
+      <div className="max-w-7xl mx-auto w-full">
+        <div className="flex items-center h-16 sm:h-18 lg:h-20 header-content px-4 w-full">
           {/* KAWAI Logo with Tagline */}
           <div className="flex items-end gap-4">
             <div className="relative w-32 h-10 sm:w-40 sm:h-12 lg:w-48 lg:h-14 header-logo transform transition-all duration-300 group-hover:scale-105 group-hover:-translate-y-1">
