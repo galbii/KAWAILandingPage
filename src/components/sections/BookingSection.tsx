@@ -4,34 +4,117 @@ import { useState, useEffect, useRef } from 'react';
 import { LoadingSkeleton } from '@/components/ui/loading-skeleton';
 import { initializeCalendlyTracking, cleanupCalendlyTracking } from '@/lib/calendly-tracking';
 
+// Declare global Calendly object for TypeScript
+declare global {
+  interface Window {
+    Calendly: {
+      initInlineWidget: (options: {
+        url: string;
+        parentElement: HTMLElement;
+        utm?: Record<string, string>;
+        prefill?: Record<string, unknown>;
+      }) => void;
+    };
+  }
+}
+
 export default function BookingSection() {
   const [isVisible, setIsVisible] = useState(false);
   const [isCalendlyLoaded, setIsCalendlyLoaded] = useState(false);
   const [shouldLoadCalendly, setShouldLoadCalendly] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const calendlyContainerRef = useRef<HTMLDivElement>(null);
 
   // Optimized Calendly loading - only when section becomes visible
   useEffect(() => {
     if (!shouldLoadCalendly) return;
 
+    console.log('🔄 Starting Calendly loading process...');
+    console.log('Container ref available:', !!calendlyContainerRef.current);
+
     const existingScript = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
+    console.log('Existing Calendly script found:', !!existingScript);
+    
+    const initializeWidget = () => {
+      console.log('🔧 Attempting widget initialization...');
+      console.log('Window.Calendly available:', !!window.Calendly);
+      console.log('Container available:', !!calendlyContainerRef.current);
+      
+      if (calendlyContainerRef.current && window.Calendly && window.Calendly.initInlineWidget) {
+        console.log('🚀 Initializing Calendly inline widget with JavaScript API');
+        
+        // Clear any existing content
+        calendlyContainerRef.current.innerHTML = '';
+        
+        try {
+          window.Calendly.initInlineWidget({
+            url: 'https://calendly.com/kawaipianogallery/shsu-piano-sale',
+            parentElement: calendlyContainerRef.current,
+            utm: {
+              utmSource: 'kawai-landing-page',
+              utmMedium: 'booking-section',
+              utmCampaign: 'shsu-piano-sale-2025'
+            }
+          });
+          
+          console.log('✅ Calendly widget initialized successfully');
+        } catch (error) {
+          console.error('❌ Failed to initialize Calendly widget:', error);
+        }
+      } else {
+        console.warn('⚠️ Missing dependencies for widget initialization');
+        console.warn('  - Container:', !!calendlyContainerRef.current);
+        console.warn('  - Calendly object:', !!window.Calendly);
+        console.warn('  - initInlineWidget method:', !!window.Calendly?.initInlineWidget);
+      }
+    };
     
     if (!existingScript) {
+      console.log('📥 Loading new Calendly script...');
       const script = document.createElement('script');
       script.src = 'https://assets.calendly.com/assets/external/widget.js';
       script.async = true;
       script.onload = () => {
+        console.log('✅ Calendly script loaded successfully');
         setIsCalendlyLoaded(true);
+        
+        // Initialize tracking
         initializeCalendlyTracking('booking_section');
+        
+        // Small delay to ensure script is fully initialized
+        setTimeout(initializeWidget, 100);
       };
-      script.onerror = () => {
-        console.warn('Failed to load Calendly script');
+      script.onerror = (error) => {
+        console.error('❌ Failed to load Calendly script:', error);
         setIsCalendlyLoaded(false);
       };
       document.head.appendChild(script);
     } else {
+      console.log('📦 Calendly script already loaded, checking availability...');
       setIsCalendlyLoaded(true);
       initializeCalendlyTracking('booking_section');
+      
+      // Check if Calendly is available, if not wait a bit
+      if (window.Calendly) {
+        initializeWidget();
+      } else {
+        console.log('⏳ Calendly object not ready, waiting...');
+        const checkInterval = setInterval(() => {
+          if (window.Calendly) {
+            console.log('✅ Calendly object now available');
+            clearInterval(checkInterval);
+            initializeWidget();
+          }
+        }, 100);
+        
+        // Stop checking after 5 seconds
+        setTimeout(() => {
+          clearInterval(checkInterval);
+          if (!window.Calendly) {
+            console.error('❌ Calendly object never became available');
+          }
+        }, 5000);
+      }
     }
 
     return () => {
@@ -60,6 +143,16 @@ export default function BookingSection() {
     }
 
     return () => observer.disconnect();
+  }, []);
+
+  // Debug: Force load Calendly for testing (remove this in production)
+  useEffect(() => {
+    // Load immediately for testing
+    setTimeout(() => {
+      console.log('🧪 Debug: Force loading Calendly for testing');
+      setShouldLoadCalendly(true);
+      setIsVisible(true);
+    }, 1000);
   }, []);
 
 
@@ -92,15 +185,17 @@ export default function BookingSection() {
           
           {isCalendlyLoaded && (
             <div 
-              className="calendly-inline-widget" 
-              data-url="https://calendly.com/kawaipianogallery/shsu-piano-sale" 
-              data-resize="true"
+              ref={calendlyContainerRef}
+              className="calendly-inline-widget-container"
               style={{ 
                 minWidth: '320px',
                 width: '100%',
-                height: '600px'
+                height: '600px',
+                position: 'relative'
               }}
-            />
+            >
+              {/* Container will be populated by Calendly.initInlineWidget */}
+            </div>
           )}
           
           {!shouldLoadCalendly && (

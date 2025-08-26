@@ -1,12 +1,26 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import {
   Dialog,
   DialogContent,
 } from '@/components/ui/dialog';
 import { initializeCalendlyTracking, cleanupCalendlyTracking } from '@/lib/calendly-tracking';
 import { usePostHog } from '@/hooks/usePostHog';
+
+// Declare global Calendly object for TypeScript
+declare global {
+  interface Window {
+    Calendly: {
+      initInlineWidget: (options: {
+        url: string;
+        parentElement: HTMLElement;
+        utm?: Record<string, string>;
+        prefill?: Record<string, unknown>;
+      }) => void;
+    };
+  }
+}
 
 interface PianoConsultationDialogProps {
   isOpen: boolean;
@@ -15,6 +29,7 @@ interface PianoConsultationDialogProps {
 
 export default function PianoConsultationDialog({ isOpen, onClose }: PianoConsultationDialogProps) {
   const { trackBookingAttempt } = usePostHog();
+  const calendlyContainerRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
     if (isOpen) {
@@ -28,10 +43,36 @@ export default function PianoConsultationDialog({ isOpen, onClose }: PianoConsul
       const script = document.createElement('script');
       script.src = 'https://assets.calendly.com/assets/external/widget.js';
       script.async = true;
+      
+      script.onload = () => {
+        console.log('✅ Calendly script loaded in modal');
+        
+        // Initialize tracking before widget
+        initializeCalendlyTracking('modal');
+        
+        // Initialize Calendly inline widget with JavaScript API
+        if (calendlyContainerRef.current && window.Calendly) {
+          console.log('🚀 Initializing Calendly modal widget with JavaScript API');
+          
+          window.Calendly.initInlineWidget({
+            url: 'https://calendly.com/kawaipianogallery/shsu-piano-sale',
+            parentElement: calendlyContainerRef.current,
+            utm: {
+              utmSource: 'kawai-landing-page',
+              utmMedium: 'modal',
+              utmCampaign: 'shsu-piano-sale-2025'
+            }
+          });
+          
+          console.log('✅ Calendly modal widget initialized');
+        }
+      };
+      
+      script.onerror = () => {
+        console.error('❌ Failed to load Calendly script in modal');
+      };
+      
       document.head.appendChild(script);
-
-      // Initialize Calendly tracking for modal
-      initializeCalendlyTracking('modal');
 
       return () => {
         // PostHog: Track consultation modal closed/abandoned
@@ -59,14 +100,17 @@ export default function PianoConsultationDialog({ isOpen, onClose }: PianoConsul
         <div className="h-full overflow-hidden">
           {/* Calendly inline widget */}
           <div 
-            className="calendly-inline-widget" 
-            data-url="https://calendly.com/kawaipianogallery/shsu-piano-sale" 
+            ref={calendlyContainerRef}
+            className="calendly-inline-widget-container" 
             style={{ 
               minWidth: '320px', 
               height: '100%',
-              width: '100%'
+              width: '100%',
+              position: 'relative'
             }}
-          />
+          >
+            {/* Container will be populated by Calendly.initInlineWidget */}
+          </div>
         </div>
       </DialogContent>
     </Dialog>
