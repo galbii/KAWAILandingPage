@@ -3,6 +3,7 @@
 import { useEffect, Suspense } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { postHogAnalytics } from '@/lib/posthog'
+import { campaignAttribution, getAttributionForEvent } from '@/lib/campaign-attribution'
 import posthog from 'posthog-js'
 
 function PostHogProviderInner({ children }: { children: React.ReactNode }) {
@@ -12,6 +13,14 @@ function PostHogProviderInner({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     // Initialize PostHog
     postHogAnalytics.init()
+    
+    // Initialize campaign attribution (happens automatically in constructor)
+    // campaignAttribution is already initialized when imported
+    
+    // Debug campaign attribution in development
+    if (process.env.NODE_ENV === 'development') {
+      setTimeout(() => campaignAttribution.debug(), 1000)
+    }
   }, [])
 
   useEffect(() => {
@@ -27,10 +36,9 @@ function PostHogProviderInner({ children }: { children: React.ReactNode }) {
         posthog.capture('$pageview', {
           $current_url: window.location.href,
           page_type: 'kawai_landing',
-          utm_source: searchParams.get('utm_source'),
-          utm_medium: searchParams.get('utm_medium'),
-          utm_campaign: searchParams.get('utm_campaign'),
           time_based_pageview: true,
+          // Campaign attribution now automatically included via validation system
+          ...getAttributionForEvent(true)
         })
         clearInterval(timer)
       }
@@ -42,10 +50,9 @@ function PostHogProviderInner({ children }: { children: React.ReactNode }) {
         posthog.capture('$pageview', {
           $current_url: window.location.href,
           page_type: 'kawai_landing',
-          utm_source: searchParams.get('utm_source'),
-          utm_medium: searchParams.get('utm_medium'),
-          utm_campaign: searchParams.get('utm_campaign'),
           scroll_based_pageview: true,
+          // Campaign attribution now automatically included via validation system
+          ...getAttributionForEvent(true)
         })
         clearInterval(timer)
       }

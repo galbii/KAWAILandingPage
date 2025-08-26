@@ -4,9 +4,29 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import PianoConsultationDialog from '@/components/PianoConsultationDialog';
+import ImageModal from '@/components/ImageModal';
 
 export default function AboutEventSection() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [imageModal, setImageModal] = useState<{
+    isOpen: boolean;
+    src: string;
+    alt: string;
+    width?: number;
+    height?: number;
+  }>({
+    isOpen: false,
+    src: '',
+    alt: '',
+  });
+
+  const openImageModal = (src: string, alt: string, width?: number, height?: number) => {
+    setImageModal({ isOpen: true, src, alt, width, height });
+  };
+
+  const closeImageModal = () => {
+    setImageModal({ isOpen: false, src: '', alt: '' });
+  };
   return (
     <>
       {/* Piano Types Header - Moved higher to separate sections */}
@@ -53,7 +73,8 @@ export default function AboutEventSection() {
                 alt="SHSU Houston Piano Sale Event Letter - Piano Deals Houston"
                 width={800}
                 height={600}
-                className="w-full h-auto object-contain opacity-90 max-w-md mx-auto"
+                className="w-full h-auto object-contain opacity-90 max-w-md mx-auto cursor-pointer hover:opacity-100 transition-opacity"
+                onClick={() => openImageModal("/images/letter.png", "SHSU Houston Piano Sale Event Letter - Piano Deals Houston", 800, 600)}
               />
             </div>
             
@@ -106,7 +127,8 @@ export default function AboutEventSection() {
               alt="SHSU Houston Piano Sale Event Letter - Piano Deals Houston"
               width={800}
               height={600}
-              className="w-full h-auto object-contain opacity-90"
+              className="w-full h-auto object-contain opacity-90 cursor-pointer hover:opacity-100 transition-opacity"
+              onClick={() => openImageModal("/images/letter.png", "SHSU Houston Piano Sale Event Letter - Piano Deals Houston", 800, 600)}
             />
           </div>
         </div>
@@ -115,7 +137,7 @@ export default function AboutEventSection() {
         <div className="mt-16">
           <div className="grid grid-cols-6 gap-0 h-[40rem]">
             {/* KAWAI CA901 - Hero */}
-            <div className="col-span-3 row-span-2 relative overflow-hidden scroll-animate" style={{ animationDelay: '0.1s' }}>
+            <div className="col-span-3 row-span-2 relative overflow-hidden scroll-animate cursor-pointer hover:scale-105 transition-transform duration-300" style={{ animationDelay: '0.1s' }}>
               <Image 
                 src="/images/optimized/gallery/KAWAI-CA901B-24 copy_800.webp"
                 alt="KAWAI CA901 Digital Piano"
@@ -123,11 +145,12 @@ export default function AboutEventSection() {
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover opacity-0 animate-fade-in-slow"
                 style={{ animationDelay: '0.2s' }}
+                onClick={() => openImageModal("/images/optimized/gallery/KAWAI-CA901B-24 copy_800.webp", "KAWAI CA901 Digital Piano")}
               />
             </div>
 
             {/* KAWAI CA501 */}
-            <div className="col-span-3 row-span-1 relative overflow-hidden scroll-animate" style={{ animationDelay: '0.3s' }}>
+            <div className="col-span-3 row-span-1 relative overflow-hidden scroll-animate cursor-pointer hover:scale-105 transition-transform duration-300" style={{ animationDelay: '0.3s' }}>
               <Image 
                 src="/images/optimized/gallery/KAWAI-CA501W-39 copy_800.webp"
                 alt="KAWAI CA501 Digital Piano"
@@ -135,11 +158,12 @@ export default function AboutEventSection() {
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover opacity-0 animate-fade-in-slow"
                 style={{ animationDelay: '0.6s' }}
+                onClick={() => openImageModal("/images/optimized/gallery/KAWAI-CA501W-39 copy_800.webp", "KAWAI CA501 Digital Piano")}
               />
             </div>
 
             {/* KAWAI CA401 */}
-            <div className="col-span-2 row-span-1 relative overflow-hidden scroll-animate" style={{ animationDelay: '0.5s' }}>
+            <div className="col-span-2 row-span-1 relative overflow-hidden scroll-animate cursor-pointer hover:scale-105 transition-transform duration-300" style={{ animationDelay: '0.5s' }}>
               <Image 
                 src="/images/optimized/gallery/KAWAI_CA401B-43 copy_800.webp"
                 alt="KAWAI CA401 Digital Piano"
@@ -147,11 +171,12 @@ export default function AboutEventSection() {
                 sizes="(max-width: 768px) 100vw, 33vw"
                 className="object-cover opacity-0 animate-fade-in-slow"
                 style={{ animationDelay: '1.0s' }}
+                onClick={() => openImageModal("/images/optimized/gallery/KAWAI_CA401B-43 copy_800.webp", "KAWAI CA401 Digital Piano")}
               />
             </div>
 
             {/* Connectivity */}
-            <div className="col-span-1 row-span-1 relative overflow-hidden scroll-animate" style={{ animationDelay: '0.7s' }}>
+            <div className="col-span-1 row-span-1 relative overflow-hidden scroll-animate cursor-pointer hover:scale-105 transition-transform duration-300" style={{ animationDelay: '0.7s' }}>
               <Image 
                 src="/images/optimized/gallery/connectivity_800.webp"
                 alt="Connectivity Features"
@@ -159,11 +184,12 @@ export default function AboutEventSection() {
                 sizes="(max-width: 768px) 100vw, 16vw"
                 className="object-cover opacity-0 animate-fade-in-slow"
                 style={{ animationDelay: '1.4s' }}
+                onClick={() => openImageModal("/images/optimized/gallery/connectivity_800.webp", "Connectivity Features")}
               />
             </div>
 
             {/* CA401 Supplement */}
-            <div className="col-span-3 row-span-1 relative overflow-hidden scroll-animate" style={{ animationDelay: '0.9s' }}>
+            <div className="col-span-3 row-span-1 relative overflow-hidden scroll-animate cursor-pointer hover:scale-105 transition-transform duration-300" style={{ animationDelay: '0.9s' }}>
               <Image 
                 src="/images/optimized/gallery/CA401 Supplement Image_800.webp"
                 alt="KAWAI CA401 Supplement"
@@ -171,11 +197,12 @@ export default function AboutEventSection() {
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover opacity-0 animate-fade-in-slow"
                 style={{ animationDelay: '1.8s' }}
+                onClick={() => openImageModal("/images/optimized/gallery/CA401 Supplement Image_800.webp", "KAWAI CA401 Supplement")}
               />
             </div>
 
             {/* CA701R */}
-            <div className="col-span-2 row-span-1 relative overflow-hidden scroll-animate" style={{ animationDelay: '1.1s' }}>
+            <div className="col-span-2 row-span-1 relative overflow-hidden scroll-animate cursor-pointer hover:scale-105 transition-transform duration-300" style={{ animationDelay: '1.1s' }}>
               <Image 
                 src="/images/optimized/gallery/CA701R-43 copy_800.webp"
                 alt="KAWAI CA701R Digital Piano"
@@ -183,11 +210,12 @@ export default function AboutEventSection() {
                 sizes="(max-width: 768px) 100vw, 33vw"
                 className="object-cover opacity-0 animate-fade-in-slow"
                 style={{ animationDelay: '2.2s' }}
+                onClick={() => openImageModal("/images/optimized/gallery/CA701R-43 copy_800.webp", "KAWAI CA701R Digital Piano")}
               />
             </div>
 
             {/* SK Series */}
-            <div className="col-span-1 row-span-1 relative overflow-hidden scroll-animate" style={{ animationDelay: '1.3s' }}>
+            <div className="col-span-1 row-span-1 relative overflow-hidden scroll-animate cursor-pointer hover:scale-105 transition-transform duration-300" style={{ animationDelay: '1.3s' }}>
               <Image 
                 src="/images/optimized/gallery/SK_800.webp"
                 alt="KAWAI SK Series"
@@ -195,6 +223,7 @@ export default function AboutEventSection() {
                 sizes="(max-width: 768px) 100vw, 16vw"
                 className="object-cover opacity-0 animate-fade-in-slow"
                 style={{ animationDelay: '2.6s' }}
+                onClick={() => openImageModal("/images/optimized/gallery/SK_800.webp", "KAWAI SK Series")}
               />
             </div>
           </div>
@@ -205,6 +234,16 @@ export default function AboutEventSection() {
         <PianoConsultationDialog 
           isOpen={isModalOpen} 
           onClose={() => setIsModalOpen(false)} 
+        />
+        
+        {/* Image Modal */}
+        <ImageModal
+          isOpen={imageModal.isOpen}
+          onClose={closeImageModal}
+          src={imageModal.src}
+          alt={imageModal.alt}
+          width={imageModal.width}
+          height={imageModal.height}
         />
       </section>
     </>

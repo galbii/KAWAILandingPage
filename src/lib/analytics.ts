@@ -4,6 +4,7 @@ import { sendGAEvent } from '@next/third-parties/google'
 import { postHogAnalytics } from './posthog'
 import { eventMonitor } from './posthog-validation'
 import { POSTHOG_CONFIG } from './posthog-config'
+import { campaignAnalytics } from './campaign-performance'
 
 // Check if running in browser
 const isBrowser = typeof window !== 'undefined'
@@ -270,6 +271,14 @@ export const trackKawaiEvent = {
       source_section: source,
       interaction_type: 'view'
     })
+    
+    // Campaign performance tracking
+    campaignAnalytics.trackPianoView({
+      model: 'piano_gallery_browse',
+      price: 'various',
+      category: 'Digital',
+      source: source
+    })
   },
 
   // Event registration CTA click (engagement, not conversion)
@@ -347,6 +356,12 @@ export const trackKawaiEvent = {
       event_month: 'september',
       event_year: '2025',
       business_type: 'piano_dealer'
+    })
+    
+    // Campaign performance tracking for consultation conversion
+    campaignAnalytics.trackConsultationBooked({
+      source: source,
+      calendlyStatus: 'completed'
     })
     
     // Meta Pixel Schedule - Secondary appointment tracking

@@ -2,6 +2,7 @@
 
 import posthog from 'posthog-js'
 import { POSTHOG_CONFIG } from './posthog-config'
+import { getAttributionForEvent } from './campaign-attribution'
 
 export interface PostHogEventValidation {
   isValid: boolean
@@ -232,7 +233,10 @@ export async function captureWithValidation(
       $validation_passed: validation.isValid,
       $session_id: typeof window !== 'undefined' ? posthog.sessionRecording?.sessionId : undefined,
       $page_url: typeof window !== 'undefined' ? window.location.href : undefined,
-      $user_agent: typeof window !== 'undefined' ? window.navigator.userAgent : undefined
+      $user_agent: typeof window !== 'undefined' ? window.navigator.userAgent : undefined,
+      
+      // Campaign Attribution - Always use original attribution for campaign analysis
+      ...getAttributionForEvent(true)
     }
 
     // Capture event with PostHog

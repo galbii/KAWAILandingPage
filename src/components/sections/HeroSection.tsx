@@ -2,10 +2,12 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import PianoConsultationDialog from '@/components/PianoConsultationDialog';
+import HoustonEventInfoDialog from '@/components/HoustonEventInfoDialog';
 import { trackKawaiEvent } from '@/lib/analytics';
 
 export default function HeroSection() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEventInfoModalOpen, setIsEventInfoModalOpen] = useState(false);
 
   const handleFindPianoClick = () => {
     // Track the analytics event
@@ -30,18 +32,37 @@ export default function HeroSection() {
     setIsModalOpen(true);
   };
 
+  const handleExploreCollectionClick = () => {
+    // Track the analytics event
+    trackKawaiEvent.findPiano('hero');
+    
+    // Scroll to featured deals section
+    const featuredDealsSection = document.getElementById('featured-deals');
+    if (featuredDealsSection) {
+      featuredDealsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <section className="relative min-h-screen flex items-start justify-center text-white pt-16 hero-parallax scroll-container overflow-hidden">
+    <section className="relative h-screen flex items-center justify-center text-white hero-parallax scroll-container overflow-hidden">
       {/* Video Background */}
       <video
         autoPlay
         muted
         loop
         playsInline
+        preload="metadata"
+        webkit-playsinline="true"
+        controls={false}
+        disablePictureInPicture
         className="absolute inset-0 w-full h-full object-cover z-0"
+        style={{ pointerEvents: 'none' }}
         onLoadedData={(e) => {
           const video = e.target as HTMLVideoElement;
           video.currentTime = 13.10;
+          video.play().catch(() => {
+            // Fallback if autoplay fails
+          });
         }}
       >
         <source src="/videos/CA.mp4" type="video/mp4" />
@@ -49,61 +70,87 @@ export default function HeroSection() {
       
       {/* Background Layer for Parallax */}
       <div className="hero-background parallax-element parallax-slow">
-        <div className="absolute inset-0 bg-black/30"></div>
+        <div className="absolute inset-0 bg-black/15"></div>
       </div>
       
-      <div className="relative z-10 max-w-6xl mx-auto px-6 text-center hero-content mt-16">
+      {/* Premium Content Backdrop */}
+      <div className="absolute inset-0 z-5">
+        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/15 to-black/25"></div>
+      </div>
+      
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 text-center hero-content pt-20 sm:pt-24">
         
+        {/* Partnership Branding */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-8 animate-float-gentle">
+          <div className="flex items-center gap-4">
+            <Image
+              src="/images/optimized/logos/Kawai-Red.webp"
+              alt="KAWAI"
+              width={160}
+              height={64}
+              className="drop-shadow-lg"
+              priority
+            />
+            <div className="hidden sm:block w-px h-12 bg-gradient-to-b from-transparent via-orange-400/60 to-transparent"></div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-orange-500">SHSU</div>
+              <div className="text-xs text-orange-400 tracking-wide">PARTNERSHIP</div>
+            </div>
+          </div>
+        </div>
         
-        {/* KAWAI Logo */}
-        <div className="relative mb-8 scroll-animate-scale pt-8">
-          <Image
-            src="/images/optimized/logos/Kawai-Red.webp"
-            alt="KAWAI Logo"
-            width={200}
-            height={80}
-            className="mx-auto"
-          />
+        <div className="space-y-2 mb-4">
+          <div className="text-xs md:text-sm text-orange-500 font-medium tracking-wider uppercase">Sam Houston State University is proud to present</div>
         </div>
 
-        {/* Main Header */}
-        <div className="relative mb-6 scroll-animate-scale">
-          {/* Top Line */}
-          <div className="w-full h-1 bg-white/60 mb-4 scroll-animate-left"></div>
-          
-          <h1 className="font-heading text-white tracking-wider leading-tight scroll-animate">
-            <span className="font-black text-3xl md:text-6xl lg:text-8xl tracking-wide block mb-2 drop-shadow-2xl" style={{ color: '#FF4500', textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>SAM HOUSTON STATE UNIVERSITY</span>
-            <span className="font-normal text-2xl md:text-4xl lg:text-5xl block">HOUSTON PIANO SALES EVENT</span>
+        {/* Main Headlines */}
+        <div className="space-y-4 mb-6">
+          <h1 className="font-heading leading-tight scroll-animate">
+            <span className="block text-8xl md:text-6xl lg:text-7xl font-black text-white tracking-tight animate-delay-200">KAWAI</span>
+            <span className="block text-7xl md:text-5xl lg:text-6xl font-light text-white tracking-wide animate-delay-400">SHOWCASE</span>
           </h1>
           
-          {/* Bottom Line */}
-          <div className="w-full h-1 bg-white/60 mt-4 scroll-animate-right"></div>
-          
-          {/* Subtitle */}
-          <p className="font-body text-sm md:text-base text-white/90 mt-6 scroll-animate">
-          Premium piano deals Houston - digital & acoustic pianos at special reduced prices. KAWAI piano sales for our community with savings up to $6,000. Your purchase supports SHSU&apos;s Music Department.
-          </p>
-          
+          {/* Premium Value Proposition */}
+          <div className="space-y-4">
+            <div className="text-lg md:text-xl text-white font-light">Modern Technology • Special University Pricing</div>
+          </div>
         </div>
         
-        {/* Essential Info - Centered */}
-        <div className="space-y-8 max-w-2xl mx-auto">
-          <p className="font-body text-lg text-white/90 scroll-animate tracking-wide">September 11-14, 2025</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center scroll-animate">
+        {/* Event Details & CTA */}
+        <div className="space-y-6 max-w-4xl mx-auto">
+          
+          {/* Event Timing with Urgency */}
+          <div className="space-y-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-red-600/20 backdrop-blur-sm rounded-full border border-red-400/30">
+              <div className="w-2 h-2 bg-red-400 rounded-full animate-pulse"></div>
+              <span className="text-red-300 font-semibold tracking-wide text-xs">4 DAYS ONLY</span>
+            </div>
+            <div className="text-lg md:text-xl font-light text-white tracking-wider">September 11-14, 2025</div>
+            <div className="text-sm text-white">Houston • While Selection Lasts</div>
+          </div>
+          
+          {/* Primary Call to Action */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button 
-              onClick={handleFindPianoClick}
-              className="bg-white text-black hover:bg-gray-100 px-8 py-3 text-lg font-semibold"
+              onClick={handleExploreCollectionClick}
+              className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-6 py-2 text-base font-bold rounded-lg shadow-2xl transform transition-all duration-300 hover:scale-105 animate-breathe border-2 border-red-400/50 w-full sm:w-auto"
             >
-              Find Your Piano
+              Explore Exclusive Collection
             </Button>
+            
             <Button 
               onClick={handleSecureSpotClick}
-              className="bg-red-700 text-white hover:bg-red-600 px-8 py-3 text-lg font-semibold"
+              variant="outline"
+              className="bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 px-6 py-2 text-base font-medium rounded-lg w-full sm:w-auto"
             >
-              Secure Your Spot
+              Reserve Private Consultation
             </Button>
           </div>
           
+          {/* Supporting Message */}
+          <div className="text-sm text-white italic">
+            Your purchase supports the SHSU Music Department
+          </div>
         </div>
       </div>
       
@@ -111,6 +158,12 @@ export default function HeroSection() {
       <PianoConsultationDialog 
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 
+      />
+      
+      {/* Houston Event Information Dialog */}
+      <HoustonEventInfoDialog 
+        isOpen={isEventInfoModalOpen} 
+        onClose={() => setIsEventInfoModalOpen(false)} 
       />
     </section>
   );

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { eventMonitor, debugPostHogStatus, testEventCapture } from '@/lib/posthog-validation'
+import { campaignReporting } from '@/lib/campaign-performance'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 
@@ -29,6 +30,7 @@ export default function PostHogDebugDashboard() {
   const [events, setEvents] = useState<DebugEvent[]>([])
   const [isOpen, setIsOpen] = useState(false)
   const [errors, setErrors] = useState<ValidationError[]>([])
+  const [campaignData, setCampaignData] = useState<any>(null)
 
   // Only render in development
   const isDevelopment = process.env.NODE_ENV === 'development'
@@ -48,6 +50,7 @@ export default function PostHogDebugDashboard() {
   const refreshEvents = () => {
     setEvents(eventMonitor.getEvents())
     setErrors(eventMonitor.getValidationErrors())
+    setCampaignData(campaignReporting.getCampaignSummary())
   }
 
   const handleTestEvents = async () => {
@@ -136,6 +139,39 @@ export default function PostHogDebugDashboard() {
             </Card>
           </div>
         </div>
+
+        {/* Campaign Attribution */}
+        {campaignData && (
+          <div className="mb-4">
+            <h4 className="font-semibold text-purple-600 text-sm mb-2">Campaign Attribution:</h4>
+            <Card className="p-2">
+              <div className="grid grid-cols-2 gap-2 text-xs">
+                <div>
+                  <div className="font-semibold text-gray-700">Campaign:</div>
+                  <div className="truncate">{campaignData.campaign}</div>
+                </div>
+                <div>
+                  <div className="font-semibold text-gray-700">Source:</div>
+                  <div className="truncate">{campaignData.source}</div>
+                </div>
+                <div>
+                  <div className="font-semibold text-gray-700">Medium:</div>
+                  <div className="truncate">{campaignData.medium}</div>
+                </div>
+                <div>
+                  <div className="font-semibold text-gray-700">Type:</div>
+                  <div className="truncate">{campaignData.isNewVisitor ? 'New' : 'Returning'}</div>
+                </div>
+              </div>
+              {campaignData.referrer && (
+                <div className="mt-2 text-xs">
+                  <div className="font-semibold text-gray-700">Referrer:</div>
+                  <div className="truncate text-gray-600">{campaignData.referrer}</div>
+                </div>
+              )}
+            </Card>
+          </div>
+        )}
 
         {/* Validation Errors */}
         {errors.length > 0 && (

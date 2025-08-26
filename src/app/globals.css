@@ -1116,6 +1116,87 @@ body {
   }
 }
 
+/* Enhanced Engaging Animations */
+@keyframes floatGentle {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(204, 0, 0, 0.2);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(204, 0, 0, 0.4);
+    transform: scale(1.02);
+  }
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1) rotate(180deg);
+  }
+}
+
+@keyframes morphBounce {
+  0% {
+    transform: scale(1) rotate(0deg);
+    border-radius: 20px;
+  }
+  25% {
+    transform: scale(1.05) rotate(2deg);
+    border-radius: 25px;
+  }
+  50% {
+    transform: scale(0.95) rotate(-1deg);
+    border-radius: 15px;
+  }
+  75% {
+    transform: scale(1.02) rotate(1deg);
+    border-radius: 22px;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    border-radius: 20px;
+  }
+}
+
+@keyframes liquidMove {
+  0%, 100% {
+    transform: translateX(0px) scaleX(1);
+  }
+  25% {
+    transform: translateX(5px) scaleX(1.1);
+  }
+  50% {
+    transform: translateX(-3px) scaleX(0.9);
+  }
+  75% {
+    transform: translateX(2px) scaleX(1.05);
+  }
+}
+
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.03);
+    opacity: 1;
+  }
+}
+
 /* Mobile CTA Optimizations */
 @media (max-width: 768px) {
   .elegant-cta-card {
@@ -1406,8 +1487,10 @@ body {
 
 /* Header Scroll States */
 .header-enhanced {
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: background-color, backdrop-filter, box-shadow, transform;
+  transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+              backdrop-filter 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+              box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: background-color, backdrop-filter, box-shadow;
 }
 
 /* Header at top - bigger size */
@@ -1437,17 +1520,25 @@ body {
 /* Header hide/show states */
 .header-hidden {
   transform: translateY(-100%) !important;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 .header-visible {
   transform: translateY(0) !important;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-/* Header element transitions - simplified */
+/* Header element transitions - enhanced */
 .header-logo,
 .header-connector,
 .header-cta {
   transition: all 0.3s ease-out;
+}
+
+/* Enhanced header click animation */
+.header-clickable:active {
+  filter: brightness(0.95);
+  transition: filter 0.1s ease-out;
 }
 
 /* Minimal scroll effects */
@@ -1595,6 +1686,44 @@ html {
 .animate-delay-600 { animation-delay: 0.6s; }
 .animate-delay-700 { animation-delay: 0.7s; }
 .animate-delay-800 { animation-delay: 0.8s; }
+
+/* Enhanced Animation Classes */
+.animate-float-gentle {
+  animation: floatGentle 4s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+.animate-sparkle {
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+.animate-morph-bounce {
+  animation: morphBounce 6s ease-in-out infinite;
+}
+
+.animate-liquid-move {
+  animation: liquidMove 5s ease-in-out infinite;
+}
+
+.animate-breathe {
+  animation: breathe 4s ease-in-out infinite;
+}
+
+/* Hover-triggered animations */
+.hover-animate-float:hover {
+  animation: floatGentle 0.8s ease-out;
+}
+
+.hover-animate-glow:hover {
+  animation: pulseGlow 0.6s ease-out;
+}
+
+.hover-animate-bounce:hover {
+  animation: morphBounce 1s ease-out;
+}
 
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
