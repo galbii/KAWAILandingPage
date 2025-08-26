@@ -137,93 +137,114 @@ export default function AboutEventSection() {
         <div className="mt-16">
           <div className="grid grid-cols-6 gap-0 h-[40rem]">
             {/* KAWAI CA901 - Hero */}
-            <div className="col-span-3 row-span-2 relative overflow-hidden scroll-animate cursor-pointer hover:scale-105 transition-transform duration-300" style={{ animationDelay: '0.1s' }}>
+            <div 
+              className="col-span-3 row-span-2 relative overflow-hidden scroll-animate cursor-pointer hover:scale-105 transition-transform duration-300" 
+              style={{ animationDelay: '0.1s' }}
+              onClick={() => openImageModal("/images/optimized/gallery/KAWAI-CA901B-24 copy_800.webp", "KAWAI CA901 Digital Piano", 800, 600)}
+            >
               <Image 
                 src="/images/optimized/gallery/KAWAI-CA901B-24 copy_800.webp"
                 alt="KAWAI CA901 Digital Piano"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover opacity-0 animate-fade-in-slow"
+                className="object-cover opacity-0 animate-fade-in-slow pointer-events-none"
                 style={{ animationDelay: '0.2s' }}
-                onClick={() => openImageModal("/images/optimized/gallery/KAWAI-CA901B-24 copy_800.webp", "KAWAI CA901 Digital Piano")}
               />
             </div>
 
             {/* KAWAI CA501 */}
-            <div className="col-span-3 row-span-1 relative overflow-hidden scroll-animate cursor-pointer hover:scale-105 transition-transform duration-300" style={{ animationDelay: '0.3s' }}>
+            <div 
+              className="col-span-3 row-span-1 relative overflow-hidden scroll-animate cursor-pointer hover:scale-105 transition-transform duration-300" 
+              style={{ animationDelay: '0.3s' }}
+              onClick={() => openImageModal("/images/optimized/gallery/KAWAI-CA501W-39 copy_800.webp", "KAWAI CA501 Digital Piano", 800, 600)}
+            >
               <Image 
                 src="/images/optimized/gallery/KAWAI-CA501W-39 copy_800.webp"
                 alt="KAWAI CA501 Digital Piano"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover opacity-0 animate-fade-in-slow"
+                className="object-cover opacity-0 animate-fade-in-slow pointer-events-none"
                 style={{ animationDelay: '0.6s' }}
-                onClick={() => openImageModal("/images/optimized/gallery/KAWAI-CA501W-39 copy_800.webp", "KAWAI CA501 Digital Piano")}
               />
             </div>
 
             {/* KAWAI CA401 */}
-            <div className="col-span-2 row-span-1 relative overflow-hidden scroll-animate cursor-pointer hover:scale-105 transition-transform duration-300" style={{ animationDelay: '0.5s' }}>
+            <div 
+              className="col-span-2 row-span-1 relative overflow-hidden scroll-animate cursor-pointer hover:scale-105 transition-transform duration-300" 
+              style={{ animationDelay: '0.5s' }}
+              onClick={() => openImageModal("/images/optimized/gallery/KAWAI_CA401B-43 copy_800.webp", "KAWAI CA401 Digital Piano", 800, 600)}
+            >
               <Image 
                 src="/images/optimized/gallery/KAWAI_CA401B-43 copy_800.webp"
                 alt="KAWAI CA401 Digital Piano"
                 fill
                 sizes="(max-width: 768px) 100vw, 33vw"
-                className="object-cover opacity-0 animate-fade-in-slow"
+                className="object-cover opacity-0 animate-fade-in-slow pointer-events-none"
                 style={{ animationDelay: '1.0s' }}
-                onClick={() => openImageModal("/images/optimized/gallery/KAWAI_CA401B-43 copy_800.webp", "KAWAI CA401 Digital Piano")}
               />
             </div>
 
             {/* Connectivity */}
-            <div className="col-span-1 row-span-1 relative overflow-hidden scroll-animate cursor-pointer hover:scale-105 transition-transform duration-300" style={{ animationDelay: '0.7s' }}>
+            <div 
+              className="col-span-1 row-span-1 relative overflow-hidden scroll-animate cursor-pointer hover:scale-105 transition-transform duration-300" 
+              style={{ animationDelay: '0.7s' }}
+              onClick={() => openImageModal("/images/optimized/gallery/connectivity_800.webp", "Connectivity Features", 800, 600)}
+            >
               <Image 
                 src="/images/optimized/gallery/connectivity_800.webp"
                 alt="Connectivity Features"
                 fill
                 sizes="(max-width: 768px) 100vw, 16vw"
-                className="object-cover opacity-0 animate-fade-in-slow"
+                className="object-cover opacity-0 animate-fade-in-slow pointer-events-none"
                 style={{ animationDelay: '1.4s' }}
-                onClick={() => openImageModal("/images/optimized/gallery/connectivity_800.webp", "Connectivity Features")}
               />
             </div>
 
             {/* CA401 Supplement */}
-            <div className="col-span-3 row-span-1 relative overflow-hidden scroll-animate cursor-pointer hover:scale-105 transition-transform duration-300" style={{ animationDelay: '0.9s' }}>
+            <div 
+              className="col-span-3 row-span-1 relative overflow-hidden scroll-animate cursor-pointer hover:scale-105 transition-transform duration-300" 
+              style={{ animationDelay: '0.9s' }}
+              onClick={() => openImageModal("/images/optimized/gallery/CA401 Supplement Image_800.webp", "KAWAI CA401 Supplement", 800, 600)}
+            >
               <Image 
                 src="/images/optimized/gallery/CA401 Supplement Image_800.webp"
                 alt="KAWAI CA401 Supplement"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover opacity-0 animate-fade-in-slow"
+                className="object-cover opacity-0 animate-fade-in-slow pointer-events-none"
                 style={{ animationDelay: '1.8s' }}
-                onClick={() => openImageModal("/images/optimized/gallery/CA401 Supplement Image_800.webp", "KAWAI CA401 Supplement")}
               />
             </div>
 
             {/* CA701R */}
-            <div className="col-span-2 row-span-1 relative overflow-hidden scroll-animate cursor-pointer hover:scale-105 transition-transform duration-300" style={{ animationDelay: '1.1s' }}>
+            <div 
+              className="col-span-2 row-span-1 relative overflow-hidden scroll-animate cursor-pointer hover:scale-105 transition-transform duration-300" 
+              style={{ animationDelay: '1.1s' }}
+              onClick={() => openImageModal("/images/optimized/gallery/CA701R-43 copy_800.webp", "KAWAI CA701R Digital Piano", 800, 600)}
+            >
               <Image 
                 src="/images/optimized/gallery/CA701R-43 copy_800.webp"
                 alt="KAWAI CA701R Digital Piano"
                 fill
                 sizes="(max-width: 768px) 100vw, 33vw"
-                className="object-cover opacity-0 animate-fade-in-slow"
+                className="object-cover opacity-0 animate-fade-in-slow pointer-events-none"
                 style={{ animationDelay: '2.2s' }}
-                onClick={() => openImageModal("/images/optimized/gallery/CA701R-43 copy_800.webp", "KAWAI CA701R Digital Piano")}
               />
             </div>
 
             {/* SK Series */}
-            <div className="col-span-1 row-span-1 relative overflow-hidden scroll-animate cursor-pointer hover:scale-105 transition-transform duration-300" style={{ animationDelay: '1.3s' }}>
+            <div 
+              className="col-span-1 row-span-1 relative overflow-hidden scroll-animate cursor-pointer hover:scale-105 transition-transform duration-300" 
+              style={{ animationDelay: '1.3s' }}
+              onClick={() => openImageModal("/images/optimized/gallery/SK_800.webp", "KAWAI SK Series", 800, 600)}
+            >
               <Image 
                 src="/images/optimized/gallery/SK_800.webp"
                 alt="KAWAI SK Series"
                 fill
                 sizes="(max-width: 768px) 100vw, 16vw"
-                className="object-cover opacity-0 animate-fade-in-slow"
+                className="object-cover opacity-0 animate-fade-in-slow pointer-events-none"
                 style={{ animationDelay: '2.6s' }}
-                onClick={() => openImageModal("/images/optimized/gallery/SK_800.webp", "KAWAI SK Series")}
               />
             </div>
           </div>

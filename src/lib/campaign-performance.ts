@@ -17,7 +17,7 @@ export interface CampaignPerformanceData {
 // Track campaign-specific conversions
 async function trackCampaignConversion(
   conversionType: 'consultation_booked' | 'piano_viewed' | 'event_info_requested' | 'newsletter_signup',
-  additionalData: Record<string, any> = {}
+  additionalData: Record<string, unknown> = {}
 ) {
   const attribution = campaignAttribution.getCurrentAttribution()
   
@@ -62,7 +62,7 @@ async function trackCampaignConversion(
 // Track campaign performance metrics
 async function trackCampaignEngagement(
   engagementType: 'page_view' | 'cta_click' | 'section_view' | 'video_play',
-  engagementData: Record<string, any> = {}
+  engagementData: Record<string, unknown> = {}
 ) {
   const attribution = campaignAttribution.getCurrentAttribution()
   
@@ -200,7 +200,7 @@ export const campaignReporting = {
 
 // Expose utilities for development
 if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
-  (window as any).campaignPerformance = {
+  (window as Record<string, unknown>).campaignPerformance = {
     trackConversion: trackCampaignConversion,
     trackEngagement: trackCampaignEngagement,
     analytics: campaignAnalytics,

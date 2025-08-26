@@ -71,6 +71,35 @@ export function usePostHog(): UsePostHogReturn {
     interactionCount.current += 1
   }, [])
 
+  // Helper function to calculate session quality
+  const calculateSessionQuality = useCallback(() => {
+    const sessionDuration = Math.floor((Date.now() - viewStartTime.current) / 1000)
+    const scrollDepth = Math.min(
+      (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100,
+      100
+    )
+    
+    let score = 0
+    
+    // Time-based scoring (0-40 points)
+    if (sessionDuration > 120) score += 40
+    else if (sessionDuration > 60) score += 30
+    else if (sessionDuration > 30) score += 20
+    else if (sessionDuration > 15) score += 10
+    
+    // Scroll-based scoring (0-30 points)
+    if (scrollDepth > 75) score += 30
+    else if (scrollDepth > 50) score += 20
+    else if (scrollDepth > 25) score += 10
+    
+    // Interaction-based scoring (0-30 points)
+    if (interactionCount.current > 5) score += 30
+    else if (interactionCount.current > 2) score += 20
+    else if (interactionCount.current > 0) score += 10
+    
+    return Math.min(score, 100)
+  }, [])
+
   const trackConsultationIntent = useCallback((event: ConsultationEvent) => {
     postHogAnalytics.trackConsultationIntent(event)
     
@@ -104,7 +133,7 @@ export function usePostHog(): UsePostHogReturn {
     if (typeof localStorage !== 'undefined') {
       localStorage.setItem('kawai_returning_user', 'true')
     }
-  }, []);
+  }, [calculateSessionQuality]);
 
   const trackPianoInterest = useCallback((pianos: PianoModel[], behavior: PianoBehaviorData) => {
     postHogAnalytics.trackPianoInterest(pianos, behavior)
@@ -122,40 +151,12 @@ export function usePostHog(): UsePostHogReturn {
     }
     
     postHogAnalytics.identifyUser(enhancedUserData)
-  }, [])
+  }, [calculateSessionQuality])
 
   const getFeatureFlag = useCallback((flagName: string) => {
     return postHogAnalytics.shouldShowVariation(flagName)
   }, [])
 
-  // Helper function to calculate session quality
-  const calculateSessionQuality = useCallback(() => {
-    const sessionDuration = Math.floor((Date.now() - viewStartTime.current) / 1000)
-    const scrollDepth = Math.min(
-      (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100,
-      100
-    )
-    
-    let score = 0
-    
-    // Time-based scoring (0-40 points)
-    if (sessionDuration > 120) score += 40
-    else if (sessionDuration > 60) score += 30
-    else if (sessionDuration > 30) score += 20
-    else if (sessionDuration > 15) score += 10
-    
-    // Scroll-based scoring (0-30 points)
-    if (scrollDepth > 75) score += 30
-    else if (scrollDepth > 50) score += 20
-    else if (scrollDepth > 25) score += 10
-    
-    // Interaction-based scoring (0-30 points)
-    if (interactionCount.current > 5) score += 30
-    else if (interactionCount.current > 2) score += 20
-    else if (interactionCount.current > 0) score += 10
-    
-    return Math.min(score, 100)
-  }, [])
 
   // Track engagement metrics periodically
   useEffect(() => {

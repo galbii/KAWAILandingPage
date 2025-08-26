@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
+import type { MouseEvent } from 'react';
 import PianoConsultationDialog from '@/components/PianoConsultationDialog';
 import HoustonEventInfoDialog from '@/components/HoustonEventInfoDialog';
 import { trackKawaiEvent } from '@/lib/analytics';
@@ -24,23 +24,37 @@ export default function HeroSection() {
     }, 800);
   };
 
-  const handleSecureSpotClick = () => {
+  const handleExploreCollectionClick = () => {
+    console.log('Explore Collection clicked');
+    // Track the analytics event
+    trackKawaiEvent.findPiano('hero');
+    
+    // Try multiple selectors to find the piano deals section
+    let featuredDealsSection = document.getElementById('featured-deals');
+    if (!featuredDealsSection) {
+      featuredDealsSection = document.querySelector('[id="featured-deals"]');
+    }
+    if (!featuredDealsSection) {
+      featuredDealsSection = document.querySelector('.piano-gallery, .featured-deals');
+    }
+    
+    console.log('Found featured deals section:', featuredDealsSection);
+    if (featuredDealsSection) {
+      featuredDealsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      console.error('Could not find featured deals section');
+    }
+  };
+
+  const handleReserveConsultationClick = (e: MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('Reserve Consultation clicked');
     // Track the analytics event
     trackKawaiEvent.secureSpot('hero');
     
     // Open the piano consultation dialog
     setIsModalOpen(true);
-  };
-
-  const handleExploreCollectionClick = () => {
-    // Track the analytics event
-    trackKawaiEvent.findPiano('hero');
-    
-    // Scroll to featured deals section
-    const featuredDealsSection = document.getElementById('featured-deals');
-    if (featuredDealsSection) {
-      featuredDealsSection.scrollIntoView({ behavior: 'smooth' });
-    }
   };
 
   return (
@@ -69,12 +83,12 @@ export default function HeroSection() {
       </video>
       
       {/* Background Layer for Parallax */}
-      <div className="hero-background parallax-element parallax-slow">
+      <div className="hero-background parallax-element parallax-slow" style={{ pointerEvents: 'none' }}>
         <div className="absolute inset-0 bg-black/15"></div>
       </div>
       
       {/* Premium Content Backdrop */}
-      <div className="absolute inset-0 z-5">
+      <div className="absolute inset-0 z-5" style={{ pointerEvents: 'none' }}>
         <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/15 to-black/25"></div>
       </div>
       
@@ -106,8 +120,8 @@ export default function HeroSection() {
         {/* Main Headlines */}
         <div className="space-y-4 mb-6">
           <h1 className="font-heading leading-tight scroll-animate">
-            <span className="block text-8xl md:text-6xl lg:text-7xl font-black text-white tracking-tight animate-delay-200">KAWAI</span>
-            <span className="block text-7xl md:text-5xl lg:text-6xl font-light text-white tracking-wide animate-delay-400">SHOWCASE</span>
+            <span className="block text-8xl md:text-8xl lg:text-9xl font-black text-white tracking-tight animate-delay-200">KAWAI</span>
+            <span className="block text-7xl md:text-7xl lg:text-8xl font-light text-white tracking-wide animate-delay-400">SHOWCASE</span>
           </h1>
           
           {/* Premium Value Proposition */}
@@ -131,20 +145,23 @@ export default function HeroSection() {
           
           {/* Primary Call to Action */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button 
+            <button 
               onClick={handleExploreCollectionClick}
-              className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-6 py-2 text-base font-bold rounded-lg shadow-2xl transform transition-all duration-300 hover:scale-105 animate-breathe border-2 border-red-400/50 w-full sm:w-auto"
+              className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-6 py-2 text-base font-bold rounded-lg shadow-2xl transform transition-all duration-300 hover:scale-105 border-2 border-red-400/50 w-full sm:w-auto cursor-pointer relative"
+              style={{ pointerEvents: 'auto', zIndex: 50 }}
+              type="button"
             >
               Explore Exclusive Collection
-            </Button>
+            </button>
             
-            <Button 
-              onClick={handleSecureSpotClick}
-              variant="outline"
-              className="bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 px-6 py-2 text-base font-medium rounded-lg w-full sm:w-auto"
+            <button 
+              onClick={handleReserveConsultationClick}
+              className="bg-white/10 backdrop-blur-sm border border-white/30 text-white hover:bg-white/20 px-6 py-2 text-base font-medium rounded-lg w-full sm:w-auto cursor-pointer relative"
+              style={{ pointerEvents: 'auto', zIndex: 50 }}
+              type="button"
             >
               Reserve Private Consultation
-            </Button>
+            </button>
           </div>
           
           {/* Supporting Message */}

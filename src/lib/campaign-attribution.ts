@@ -53,7 +53,7 @@ class CampaignAttributionManager {
 
   private initializeAttribution() {
     // Try to get existing session attribution first
-    const sessionAttribution = this.getSessionAttribution()
+    const sessionAttribution = this.getStoredSessionAttribution()
     
     if (sessionAttribution) {
       this.attribution = sessionAttribution
@@ -204,7 +204,7 @@ class CampaignAttributionManager {
     }
   }
 
-  private getSessionAttribution(): SessionAttribution | null {
+  private getStoredSessionAttribution(): SessionAttribution | null {
     try {
       const stored = sessionStorage.getItem(this.SESSION_KEY)
       return stored ? JSON.parse(stored) : null
@@ -235,7 +235,7 @@ class CampaignAttributionManager {
   }
 
   // Get attribution properties for event tracking
-  getAttributionProperties(useOriginal: boolean = false): Record<string, any> {
+  getAttributionProperties(useOriginal: boolean = false): Record<string, unknown> {
     const attribution = useOriginal ? this.getOriginalAttribution() : this.getCurrentAttribution()
     
     if (!attribution) {
@@ -303,7 +303,7 @@ class CampaignAttributionManager {
 export const campaignAttribution = new CampaignAttributionManager()
 
 // Utility functions
-export function getAttributionForEvent(useOriginal: boolean = true): Record<string, any> {
+export function getAttributionForEvent(useOriginal: boolean = true): Record<string, unknown> {
   return campaignAttribution.getAttributionProperties(useOriginal)
 }
 
@@ -333,7 +333,7 @@ export function getTrafficSource(): string {
 
 // Development helper
 if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
-  (window as any).campaignAttribution = {
+  (window as Record<string, unknown>).campaignAttribution = {
     manager: campaignAttribution,
     getAttributionForEvent,
     getCampaignString,

@@ -30,7 +30,7 @@ export default function PostHogDebugDashboard() {
   const [events, setEvents] = useState<DebugEvent[]>([])
   const [isOpen, setIsOpen] = useState(false)
   const [errors, setErrors] = useState<ValidationError[]>([])
-  const [campaignData, setCampaignData] = useState<any>(null)
+  const [campaignData, setCampaignData] = useState<Record<string, unknown> | null>(null)
 
   // Only render in development
   const isDevelopment = process.env.NODE_ENV === 'development'
@@ -148,27 +148,32 @@ export default function PostHogDebugDashboard() {
               <div className="grid grid-cols-2 gap-2 text-xs">
                 <div>
                   <div className="font-semibold text-gray-700">Campaign:</div>
-                  <div className="truncate">{campaignData.campaign}</div>
+                  <div className="truncate">{campaignData && typeof campaignData === 'object' && 'campaign' in campaignData ? String(campaignData.campaign || 'N/A') : 'N/A'}</div>
                 </div>
                 <div>
                   <div className="font-semibold text-gray-700">Source:</div>
-                  <div className="truncate">{campaignData.source}</div>
+                  <div className="truncate">{campaignData && typeof campaignData === 'object' && 'source' in campaignData ? String(campaignData.source || 'N/A') : 'N/A'}</div>
                 </div>
                 <div>
                   <div className="font-semibold text-gray-700">Medium:</div>
-                  <div className="truncate">{campaignData.medium}</div>
+                  <div className="truncate">{campaignData && typeof campaignData === 'object' && 'medium' in campaignData ? String(campaignData.medium || 'N/A') : 'N/A'}</div>
                 </div>
                 <div>
                   <div className="font-semibold text-gray-700">Type:</div>
-                  <div className="truncate">{campaignData.isNewVisitor ? 'New' : 'Returning'}</div>
+                  <div className="truncate">{campaignData && typeof campaignData === 'object' && 'isNewVisitor' in campaignData ? (Boolean(campaignData.isNewVisitor) ? 'New' : 'Returning') : 'Unknown'}</div>
                 </div>
               </div>
-              {campaignData.referrer && (
-                <div className="mt-2 text-xs">
-                  <div className="font-semibold text-gray-700">Referrer:</div>
-                  <div className="truncate text-gray-600">{campaignData.referrer}</div>
-                </div>
-              )}
+              {(() => {
+                if (campaignData && typeof campaignData === 'object' && 'referrer' in campaignData && campaignData.referrer) {
+                  return (
+                    <div className="mt-2 text-xs">
+                      <div className="font-semibold text-gray-700">Referrer:</div>
+                      <div className="truncate text-gray-600">{String(campaignData.referrer || 'N/A')}</div>
+                    </div>
+                  )
+                }
+                return null
+              })()}
             </Card>
           </div>
         )}

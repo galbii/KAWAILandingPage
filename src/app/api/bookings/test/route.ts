@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { trackCalendlyAppointment } from '@/lib/posthog-server'
 
 // Test endpoint to verify webhook tracking works correctly
-export async function POST(request: NextRequest) {
+export async function POST(_request: NextRequest) {
   if (process.env.NODE_ENV !== 'development') {
     return NextResponse.json({ error: 'Test endpoint only available in development' }, { status: 403 })
   }
