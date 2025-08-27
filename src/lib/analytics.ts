@@ -350,10 +350,25 @@ export const trackKawaiEvent = {
       is_actual_conversion: true // Flag to distinguish from engagement tracking
     })
     
-    // Meta Pixel CompleteRegistration - Primary conversion event
+    // Meta Pixel SubmitApplication - Primary application event for consultation
+    trackMetaPixel('SubmitApplication', {
+      content_name: 'piano_consultation_application',
+      content_category: 'consultation_services',
+      content_type: 'service',
+      source: source,
+      value: 50,
+      currency: 'USD',
+      service_type: 'piano_consultation',
+      application_type: 'consultation_booking',
+      event_month: 'september',
+      event_year: '2025',
+      business_type: 'piano_dealer'
+    })
+    
+    // Meta Pixel CompleteRegistration - Secondary confirmation event
     trackMetaPixel('CompleteRegistration', {
       content_name: 'piano_consultation_appointment',
-      content_category: 'appointment',
+      content_category: 'appointment_confirmation',
       content_type: 'consultation_booking',
       source: source,
       value: 100,
@@ -371,41 +386,20 @@ export const trackKawaiEvent = {
       calendlyStatus: 'completed'
     })
     
-    // Meta Pixel Schedule - Secondary appointment tracking
-    trackMetaPixel('Schedule', {
-      content_name: 'calendly_appointment_booked',
-      content_category: 'scheduling',
-      content_type: 'appointment',
-      source: source,
-      value: 50,
-      currency: 'USD',
-      appointment_duration: 60,
-      appointment_type: 'piano_consultation',
-      booking_platform: 'calendly'
-    })
-    
     // Google Ads conversion tracking for Calendly
     trackGoogleAdsConversion()
   },
 
   calendlyInteraction: (interaction: string, source: 'modal' | 'booking_section' | 'unknown') => {
-    // Track user interactions within Calendly widget
+    // Track user interactions within Calendly widget - GA tracking only
     trackEvent.buttonClick(`calendly_${interaction}`, source, {
       interaction_type: interaction,
       calendly_source: source,
       event_type: 'calendly_engagement'
     })
     
-    // Meta Pixel ViewContent for Calendly engagement
-    trackMetaPixel('ViewContent', {
-      content_name: `calendly_${interaction}`,
-      content_category: 'appointment_scheduling',
-      content_type: 'booking_interface',
-      source: source,
-      interaction_type: interaction,
-      booking_step: interaction,
-      platform: 'calendly'
-    })
+    // Meta Pixel ViewContent removed - focusing on conversions only
+    console.log(`Calendly interaction tracked: ${interaction} from ${source}`)
   },
 
   // Modal CTA button tracking
@@ -424,17 +418,8 @@ export const trackKawaiEvent = {
       event_date: 'september_2025'
     })
     
-    // Meta Pixel - ViewContent event for modal engagement  
-    trackMetaPixel('ViewContent', {
-      content_name: `modal_${modalType}`,
-      content_category: 'user_interface',
-      content_type: 'modal_popup',
-      source: location,
-      cta_text: ctaText,
-      intended_action: intendedAction,
-      modal_type: modalType,
-      engagement_level: 'high_intent'
-    })
+    // Meta Pixel ViewContent removed - focusing on conversions only
+    console.log(`Modal opened: ${modalType} from ${location}`)
   },
 
   // Houston event information request
@@ -451,17 +436,8 @@ export const trackKawaiEvent = {
       engagement_level: 'high'
     })
     
-    // Meta Pixel ViewContent event (engagement, not Lead conversion)
-    trackMetaPixel('ViewContent', {
-      content_name: 'houston_event_information_request',
-      content_category: 'information_request',
-      content_type: 'event_inquiry',
-      source: data.source,
-      houston_area: data.houstonArea || 'not_specified',
-      piano_interest: data.pianoInterest || 'not_specified',
-      event_location: 'houston_texas',
-      engagement_type: 'information_request'
-    })
+    // Meta Pixel ViewContent removed - focusing on conversions only
+    console.log(`Event info requested from ${data.source}`)
     
     // PostHog tracking
     postHogAnalytics.trackConsultationIntent({

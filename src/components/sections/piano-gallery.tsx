@@ -107,16 +107,16 @@ function PianoSection({ piano, index }: PianoSectionProps) {
               </div>
               
               {/* Pricing Section */}
-              <div className="space-y-2">
-                <div className="flex items-center gap-3">
-                  <span className="text-lg text-gray-500 line-through">
+              <div className={`space-y-2 transition-all duration-600 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                <div className={`flex items-center gap-3 transition-all duration-500 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}>
+                  <span className="text-lg text-gray-500 line-through transition-all duration-300 hover:scale-105">
                     ${piano.originalPrice.toLocaleString()}
                   </span>
-                  <span className="text-2xl md:text-3xl font-bold text-red-600">
+                  <span className="text-2xl md:text-3xl font-bold text-red-600 transition-all duration-300 hover:scale-110 hover:text-red-700">
                     ${piano.salePrice.toLocaleString()}
                   </span>
                 </div>
-                <div className="inline-flex items-center bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">
+                <div className={`inline-flex items-center bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold transition-all duration-500 delay-400 hover:bg-green-200 hover:scale-105 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
                   Save ${piano.savings.toLocaleString()}
                 </div>
               </div>

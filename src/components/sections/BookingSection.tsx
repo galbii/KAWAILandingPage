@@ -12,115 +12,213 @@ export default function BookingSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const calendlyContainerRef = useRef<HTMLDivElement>(null);
 
-  // Optimized Calendly loading - only when section becomes visible
+  // Initialize Calendly when section should load
   useEffect(() => {
     if (!shouldLoadCalendly) return;
 
-    console.log('🔄 Starting Calendly loading process...');
+    console.log('🔄 Starting standalone Calendly initialization...');
     console.log('Container ref available:', !!calendlyContainerRef.current);
 
-    const existingScript = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
-    console.log('Existing Calendly script found:', !!existingScript);
+    // Initialize tracking first
+    initializeCalendlyTracking('booking_section');
+    
+    // Add error handlers for common issues
+    const originalError = console.error;
+    console.error = (...args) => {
+      const errorMessage = args.join(' ');
+      if (errorMessage.includes('ReCaptcha') || errorMessage.includes('recaptcha')) {
+        console.warn('🔒 ReCAPTCHA issue detected. This is usually caused by:');
+        console.warn('- Ad blockers blocking Google domains');
+        console.warn('- Network restrictions');
+        console.warn('- Privacy extensions');
+        console.warn('- Corporate firewall settings');
+        console.warn('The booking form should still work, but may require manual verification.');
+      }
+      originalError.apply(console, args);
+    };
     
     const initializeWidget = () => {
-      console.log('🔧 Attempting widget initialization...');
+      console.log('🔧 Attempting standalone widget initialization...');
       console.log('Window.Calendly available:', !!window.Calendly);
       console.log('Container available:', !!calendlyContainerRef.current);
+      console.log('initInlineWidget method:', !!window.Calendly?.initInlineWidget);
       
       if (calendlyContainerRef.current && window.Calendly && window.Calendly.initInlineWidget) {
-        console.log('🚀 Initializing Calendly inline widget with JavaScript API');
+        console.log('🚀 Initializing Calendly inline widget standalone');
         
         try {
-          // Clear any existing content
-          calendlyContainerRef.current.innerHTML = '';
-          
-          window.Calendly.initInlineWidget({
-            url: 'https://calendly.com/kawaipianogallery/shsu-piano-sale',
-            parentElement: calendlyContainerRef.current,
-            utm: {
-              utmSource: 'kawai-landing-page',
-              utmMedium: 'booking-section',
-              utmCampaign: 'shsu-piano-sale-2025'
+          // Safe DOM cleanup - only clear if container has content
+          if (calendlyContainerRef.current.hasChildNodes()) {
+            console.log('🧹 Cleaning existing content from container...');
+            // Use safer cleanup method
+            while (calendlyContainerRef.current.firstChild) {
+              calendlyContainerRef.current.removeChild(calendlyContainerRef.current.firstChild);
             }
-          });
+          }
           
-          console.log('✅ Calendly widget initialized successfully');
+          // Wait a moment for DOM to settle
+          setTimeout(() => {
+            if (calendlyContainerRef.current && window.Calendly?.initInlineWidget) {
+              try {
+                console.log('🚀 Initializing Calendly widget...');
+                
+                // Initialize the Calendly widget
+                window.Calendly.initInlineWidget({
+                  url: 'https://calendly.com/kawaipianogallery/shsu-piano-sale',
+                  parentElement: calendlyContainerRef.current,
+                  utm: {
+                    utmSource: 'kawai-landing-page',
+                    utmMedium: 'booking-section',
+                    utmCampaign: 'shsu-piano-sale-2025'
+                  }
+                });
+                
+                console.log('📞 Calendly initInlineWidget called, waiting for content...');
+                
+                // Don't set loaded immediately - wait for actual content
+                checkForWidgetContent();
+                
+              } catch (initError) {
+                console.error('❌ Failed during Calendly widget initialization:', initError);
+                setIsCalendlyLoaded(false);
+              }
+            }
+          }, 100); // Small delay to ensure DOM is ready
+          
+          // Function to check if widget content actually appeared
+          const checkForWidgetContent = () => {
+            let attempts = 0;
+            const maxAttempts = 50; // 10 seconds
+            
+            const checkContent = () => {
+              attempts++;
+              
+              if (!calendlyContainerRef.current) {
+                console.log('❌ Container ref lost');
+                return;
+              }
+              
+              // Look for Calendly iframe or widget content
+              const iframe = calendlyContainerRef.current.querySelector('iframe');
+              const calendlyDiv = calendlyContainerRef.current.querySelector('.calendly-wrapper');
+              const hasContent = calendlyContainerRef.current.children.length > 0;
+              
+              console.log(`🔍 Content check ${attempts}:`, {
+                hasIframe: !!iframe,
+                hasCalendlyDiv: !!calendlyDiv,
+                totalChildren: calendlyContainerRef.current.children.length,
+                innerHTML: calendlyContainerRef.current.innerHTML.slice(0, 200)
+              });
+              
+              if (iframe || calendlyDiv || (hasContent && attempts > 10)) {
+                console.log('✅ Calendly widget content detected!');
+                setIsCalendlyLoaded(true);
+                
+                // Check for any ReCAPTCHA errors in the widget
+                setTimeout(() => {
+                  const errorMessages = calendlyContainerRef.current?.querySelectorAll('[class*="error"], [class*="warning"]');
+                  if (errorMessages && errorMessages.length > 0) {
+                    console.warn('⚠️ Potential issues detected in Calendly widget:', Array.from(errorMessages).map(el => el.textContent));
+                  }
+                }, 2000);
+                
+                return;
+              }
+              
+              if (attempts >= maxAttempts) {
+                console.error('❌ Calendly widget content never appeared');
+                console.error('This might be due to:');
+                console.error('- Network connectivity issues');
+                console.error('- ReCAPTCHA loading problems');
+                console.error('- Invalid Calendly URL');
+                console.error('- CSP or security policy blocks');
+                setIsCalendlyLoaded(false);
+                return;
+              }
+              
+              // Keep checking
+              setTimeout(checkContent, 200);
+            };
+            
+            checkContent();
+          };
+          
         } catch (error) {
-          console.error('❌ Failed to initialize Calendly widget:', error);
+          console.error('❌ Failed to prepare container for Calendly widget:', error);
+          setIsCalendlyLoaded(false);
         }
       } else {
-        console.warn('⚠️ Missing dependencies for widget initialization');
-        console.warn('  - Container:', !!calendlyContainerRef.current);
-        console.warn('  - Calendly object:', !!window.Calendly);
-        console.warn('  - initInlineWidget method:', !!window.Calendly?.initInlineWidget);
+        console.warn('⚠️ Missing dependencies for standalone widget initialization:');
+        console.warn('  - Container exists:', !!calendlyContainerRef.current);
+        console.warn('  - Calendly object exists:', !!window.Calendly);
+        console.warn('  - initInlineWidget method exists:', !!window.Calendly?.initInlineWidget);
         
-        // Retry after a short delay if Calendly object is missing
-        if (!window.Calendly && calendlyContainerRef.current) {
-          console.log('⏳ Retrying widget initialization in 200ms...');
-          setTimeout(initializeWidget, 200);
+        // If container exists but Calendly doesn't, keep trying
+        if (calendlyContainerRef.current && !window.Calendly) {
+          console.log('⏳ Container ready, waiting for Calendly script...');
         }
       }
     };
     
-    if (!existingScript) {
-      console.log('📥 Loading new Calendly script...');
-      const script = document.createElement('script');
-      script.src = 'https://assets.calendly.com/assets/external/widget.js';
-      script.async = true;
-      script.onload = () => {
-        console.log('✅ Calendly script loaded successfully');
-        setIsCalendlyLoaded(true);
-        
-        // Initialize tracking
-        initializeCalendlyTracking('booking_section');
-        
-        // Small delay to ensure script is fully initialized
-        setTimeout(initializeWidget, 100);
-      };
-      script.onerror = (error) => {
-        console.error('❌ Failed to load Calendly script:', error);
-        setIsCalendlyLoaded(false);
-      };
-      document.head.appendChild(script);
-    } else {
-      console.log('📦 Calendly script already loaded, checking availability...');
-      setIsCalendlyLoaded(true);
-      initializeCalendlyTracking('booking_section');
+    // Wait for Calendly script to be available
+    let attempts = 0;
+    const maxAttempts = 100; // 10 seconds total
+    
+    const waitForCalendly = () => {
+      attempts++;
+      console.log(`⏳ Attempt ${attempts}: Waiting for Calendly object...`);
       
-      // Check if Calendly is available, if not wait a bit
-      if (window.Calendly) {
+      if (window.Calendly && typeof window.Calendly.initInlineWidget === 'function') {
+        console.log('✅ Calendly object and methods now available!');
         initializeWidget();
+      } else if (attempts >= maxAttempts) {
+        console.error('❌ Calendly never became available after maximum attempts');
+        console.error('Final state:', {
+          windowCalendly: !!window.Calendly,
+          initInlineWidget: !!window.Calendly?.initInlineWidget,
+          container: !!calendlyContainerRef.current
+        });
+        setIsCalendlyLoaded(false);
       } else {
-        console.log('⏳ Calendly object not ready, waiting...');
-        const checkInterval = setInterval(() => {
-          if (window.Calendly) {
-            console.log('✅ Calendly object now available');
-            clearInterval(checkInterval);
-            initializeWidget();
-          }
-        }, 100);
-        
-        // Stop checking after 5 seconds
-        setTimeout(() => {
-          clearInterval(checkInterval);
-          if (!window.Calendly) {
-            console.error('❌ Calendly object never became available');
-          }
-        }, 5000);
+        // Keep trying every 100ms
+        setTimeout(waitForCalendly, 100);
       }
-    }
+    };
+    
+    // Start waiting for Calendly
+    waitForCalendly();
 
     return () => {
+      // Clean up tracking
       cleanupCalendlyTracking();
+      
+      // Safe DOM cleanup on unmount
+      if (calendlyContainerRef.current) {
+        try {
+          // Clear container content safely
+          while (calendlyContainerRef.current.firstChild) {
+            calendlyContainerRef.current.removeChild(calendlyContainerRef.current.firstChild);
+          }
+          console.log('🧹 Cleaned up Calendly container on unmount');
+        } catch (cleanupError) {
+          console.warn('⚠️ Error during cleanup (non-critical):', cleanupError);
+        }
+      }
     };
   }, [shouldLoadCalendly]);
 
-  // Intersection observer for lazy loading
+  // Intersection observer for lazy loading (disabled for debugging - loads immediately)
   useEffect(() => {
+    // For debugging: load immediately instead of waiting for intersection
+    console.log('🔄 Loading Calendly immediately for debugging...');
+    setShouldLoadCalendly(true);
+    
+    // Original intersection observer code (commented out for debugging)
+    /*
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          // Start loading Calendly when section comes into view
+          console.log('📍 Booking section came into view');
           setShouldLoadCalendly(true);
         }
       },
@@ -135,6 +233,7 @@ export default function BookingSection() {
     }
 
     return () => observer.disconnect();
+    */
   }, []);
 
 
@@ -144,7 +243,7 @@ export default function BookingSection() {
       <div className="max-w-7xl mx-auto px-6">
         <div>
           {/* Header */}
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
             <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-kawai-black mb-4">
               Schedule Your Piano Consultation
             </h2>
@@ -153,36 +252,42 @@ export default function BookingSection() {
             </p>
           </div>
 
-          {/* Calendly Widget with Loading State */}
-          {!isCalendlyLoaded && shouldLoadCalendly && (
-            <div className="space-y-4">
-              <LoadingSkeleton className="h-8 w-64 mx-auto" />
-              <LoadingSkeleton className="h-96 w-full" />
-              <div className="text-center text-gray-500 text-sm">
-                Loading booking calendar...
-              </div>
-            </div>
-          )}
-          
-          {isCalendlyLoaded && (
-            <div 
-              ref={calendlyContainerRef}
-              className="calendly-inline-widget-container"
-              style={{ 
-                minWidth: '320px',
-                width: '100%',
-                height: '600px',
-                position: 'relative'
-              }}
-            >
-              {/* Container will be populated by Calendly.initInlineWidget */}
-            </div>
-          )}
-          
+          {/* Loading state - only show when nothing is ready */}
           {!shouldLoadCalendly && (
-            <div className="bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
-              <p className="text-gray-600 mb-4">Loading booking system...</p>
-              <div className="w-8 h-8 border-2 border-kawai-red border-t-transparent rounded-full animate-spin mx-auto" />
+            <div className="bg-gray-50 border border-gray-200 rounded-lg p-8 text-center">
+              <div className="w-8 h-8 border-2 border-kawai-red border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+              <p className="text-gray-600">Loading booking system...</p>
+            </div>
+          )}
+
+          {/* Calendly Widget Container - only show when ready to load */}
+          {shouldLoadCalendly && (
+            <div className="calendly-widget-wrapper">
+              {/* Primary: HTML-based widget (official Calendly pattern) */}
+              <div 
+                className="calendly-inline-widget" 
+                data-url="https://calendly.com/kawaipianogallery/shsu-piano-sale?utm_source=kawai-landing-page&utm_medium=booking-section&utm_campaign=shsu-piano-sale-2025"
+                style={{
+                  minWidth: '320px',
+                  height: isCalendlyLoaded ? '0px' : '630px', // Hide HTML widget when JS loads
+                  width: '100%',
+                  overflow: 'hidden',
+                  display: isCalendlyLoaded ? 'none' : 'block'
+                }}
+              />
+
+              {/* Backup: JavaScript initialization container */}
+              <div 
+                ref={calendlyContainerRef}
+                className="calendly-js-container"
+                style={{ 
+                  minWidth: '320px',
+                  width: '100%',
+                  height: '630px',
+                  position: 'relative',
+                  display: isCalendlyLoaded ? 'block' : 'none'
+                }}
+              />
             </div>
           )}
         </div>

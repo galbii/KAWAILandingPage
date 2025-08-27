@@ -38,13 +38,23 @@ const nextConfig: NextConfig = {
                 https://assets.calendly.com 
                 https://static.ctctcdn.com 
                 https://cdnjs.cloudflare.com
+                https://www.google.com
+                https://www.gstatic.com
                 https://www.googletagmanager.com 
+                https://tagmanager.google.com 
+                https://tagassistant.google.com
                 https://connect.facebook.net 
+                https://business.facebook.com
+                https://www.facebook.com
                 https://www.google-analytics.com 
                 https://ssl.google-analytics.com 
                 https://static.xx.fbcdn.net 
                 https://googleads.g.doubleclick.net 
-                https://www.googleadservices.com;
+                https://www.googleadservices.com
+                https://us.posthog.com 
+                https://app.posthog.com 
+                https://us.i.posthog.com 
+                https://us-assets.i.posthog.com;
               connect-src 'self' 
                 https://api.calendly.com 
                 https://calendly.com 
@@ -56,9 +66,15 @@ const nextConfig: NextConfig = {
                 https://visitor.constantcontact.com 
                 https://www.google-analytics.com 
                 https://www.google.com
+                https://www.gstatic.com
+                https://recaptcha.google.com
+                https://tagmanager.google.com 
+                https://tagassistant.google.com
                 https://stats.g.doubleclick.net 
                 https://graph.facebook.com 
                 https://connect.facebook.net 
+                https://business.facebook.com
+                https://www.facebook.com
                 https://googleads.g.doubleclick.net 
                 https://www.googleadservices.com;
               img-src 'self' data: blob: 
@@ -68,15 +84,25 @@ const nextConfig: NextConfig = {
                 https://static.xx.fbcdn.net 
                 https://googleads.g.doubleclick.net 
                 https://www.googleadservices.com
-                https://www.google.com;
+                https://www.google.com
+                https://www.gstatic.com;
               frame-src 'self' 
                 https://calendly.com 
                 https://assets.calendly.com 
                 https://www.google.com 
                 https://maps.google.com 
                 https://www.googletagmanager.com
+                https://tagmanager.google.com 
+                https://tagassistant.google.com
+                https://recaptcha.google.com
                 https://static.ctctcdn.com 
-                https://visitor.constantcontact.com;
+                https://visitor.constantcontact.com
+                https://us.posthog.com 
+                https://app.posthog.com 
+                https://us.i.posthog.com 
+                https://us-assets.i.posthog.com
+                https://business.facebook.com
+                https://www.facebook.com;
               style-src 'self' 'unsafe-inline';
               font-src 'self' data:;
               object-src 'none';

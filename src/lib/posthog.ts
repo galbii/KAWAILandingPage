@@ -33,6 +33,7 @@ class PostHogAnalytics {
         person_profiles: 'identified_only', // Only create profiles for identified users
         capture_pageview: false, // We'll handle this manually to avoid duplication with GA4
         capture_pageleave: true,
+        debug: true, // Enable debug mode and toolbar
         session_recording: {
           maskAllInputs: true,
           maskInputOptions: {

@@ -4,7 +4,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import { WebVitals } from "@/components/WebVitals";
 import { PostHogProvider } from "@/components/PostHogProvider";
 import PostHogDebugDashboard from "@/components/PostHogDebugDashboard";
-import CalendlyPreloader from "@/components/CalendlyPreloader";
+// Removed CalendlyPreloader - using inline widget in BookingSection instead
 import Script from "next/script";
 import "./globals.css";
 
@@ -49,8 +49,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Calendly Resources Preloading for Performance */}
+        {/* Viewport for mobile Calendly support - per official docs */}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        
+        {/* Calendly Resources - exact format from official docs */}
         <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+        
+        {/* Google ReCAPTCHA Resources for Calendly */}
+        <link rel="preconnect" href="https://www.google.com" />
+        <link rel="preconnect" href="https://www.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.google.com/recaptcha/" />
+        <link rel="dns-prefetch" href="https://www.gstatic.com/recaptcha/" />
         
         {/* Google Tag Manager */}
         <Script id="google-tag-manager" strategy="afterInteractive">
@@ -72,8 +81,7 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '783258114117252');
-fbq('track', 'PageView');`
+fbq('init', '783258114117252');`
         }} />
         <noscript dangerouslySetInnerHTML={{
           __html: `<img height="1" width="1" style="display:none"
@@ -91,7 +99,6 @@ height="0" width="0" style={{display:'none',visibility:'hidden'}}></iframe></nos
         {/* End Google Tag Manager (noscript) */}
         <PostHogProvider>
           {children}
-          <CalendlyPreloader />
         </PostHogProvider>
         <PostHogDebugDashboard />
         <WebVitals />
