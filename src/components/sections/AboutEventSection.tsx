@@ -68,10 +68,10 @@ export default function AboutEventSection() {
           <div className="space-y-6">
             <div className="flex flex-col items-center text-center mb-6">
               <Image 
-                src="/images/optimized/logos/Kawai-Red.webp"
+                src="/images/Kawai (Red)(2).png"
                 alt="KAWAI Piano Sales Houston - Premium Piano Dealer"
-                width={120}
-                height={64}
+                width={240}
+                height={60}
                 className={`h-16 w-auto mb-4 transition-all duration-600 delay-200 ${contentVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
               />
               <h3 className={`text-2xl md:text-3xl font-bold tracking-tight transition-all duration-600 delay-400 ${contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>

@@ -106,10 +106,10 @@ export default function HeroSection() {
         <div className="space-y-6 mb-12">
           <h1 className="font-heading leading-tight">
             <div className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-white tracking-tight mb-4 animate-hero-entrance-subtle animate-delay-1500">
-              KAWAI
+              EXCLUSIVE
             </div>
             <div className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light text-white tracking-wide animate-hero-entrance-subtle animate-delay-2000">
-              SHOWCASE
+              PIANO SALE
             </div>
           </h1>
           

@@ -15,7 +15,7 @@ export default function PianoShowcase() {
           </Badge>
           
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
-            Featured <span className="text-kawai-red">Piano Deals</span>
+            Featured <span className="text-kawai-red">Piano Sale</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             Specially negotiated pricing through our SHSU partnership &ndash; unavailable elsewhere
