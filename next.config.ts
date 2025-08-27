@@ -109,7 +109,11 @@ const nextConfig: NextConfig = {
                 https://business.facebook.com
                 https://www.facebook.com;
               style-src 'self' 'unsafe-inline' 
-                https://static.ctctcdn.com;
+                https://static.ctctcdn.com
+                https://us.posthog.com 
+                https://app.posthog.com 
+                https://us.i.posthog.com 
+                https://us-assets.i.posthog.com;
               font-src 'self' data:;
               object-src 'none';
               base-uri 'self';

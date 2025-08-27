@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST="{}"
+self.__REACT_LOADABLE_MANIFEST="{\"app/page.tsx -> ./client-page\":{\"id\":\"app/page.tsx -> ./client-page\",\"files\":[\"static/chunks/_app-pages-browser_src_app_client-page_tsx.js\"]},\"lib/analytics.ts -> @/lib/posthog\":{\"id\":\"lib/analytics.ts -> @/lib/posthog\",\"files\":[]}}"

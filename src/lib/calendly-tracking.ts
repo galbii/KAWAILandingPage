@@ -1,7 +1,7 @@
 'use client'
 
 import posthog from 'posthog-js'
-import { trackKawaiEvent } from './analytics'
+import { trackKawaiEvent, trackDemographics } from './analytics'
 import { eventMonitor } from './posthog-validation'
 import { POSTHOG_CONFIG } from './posthog-config'
 

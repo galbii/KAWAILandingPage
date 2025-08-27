@@ -1,8 +1,10 @@
 'use client';
 
+import { useEffect } from 'react';
 import Header from '@/components/Header';
 import { useScrollAnimations } from '@/hooks/useScrollAnimations';
 import { usePageTracking } from '@/hooks/usePageTracking';
+import { trackDemographics } from '@/lib/analytics';
 import HeroSection from '@/components/sections/HeroSection';
 import ValuePropositionSection from '@/components/sections/ValuePropositionSection';
 import AboutEventSection from '@/components/sections/AboutEventSection';
@@ -26,6 +28,20 @@ export default function ClientHomePage() {
     scrollThresholds: [25, 50, 75, 90],
     timeUpdateInterval: 30000 // Update every 30 seconds
   });
+
+  // Initialize enhanced demographic tracking
+  useEffect(() => {
+    // Enable Google Analytics demographic collection
+    trackDemographics.enableGoogleDemographics();
+    
+    // Set initial user segmentation for piano sale visitors
+    trackDemographics.setUserSegment({
+      customer_type: 'first_time', // Assume first time unless we have data otherwise
+      engagement_level: 'medium',  // Will be updated based on behavior
+      piano_interest: 'both',      // Piano sale event covers both digital and acoustic
+      budget_range: 'mid_range'    // KAWAI targets mid to premium market
+    });
+  }, []);
 
   return (
     <div className="min-h-screen w-full overflow-x-hidden">

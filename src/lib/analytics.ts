@@ -56,6 +56,254 @@ declare global {
   interface Window {
     fbq: (action: string, event: string, parameters?: PixelParameters) => void
     gtag: (command: string, targetId?: string | Date, config?: Record<string, unknown>) => void
+    posthog: {
+      identify: (distinctId: string, properties?: Record<string, any>) => void
+      capture: (eventName: string, properties?: Record<string, any>) => void
+      setPersonProperties: (properties: Record<string, any>, propertiesOnce?: Record<string, any>) => void
+    }
+  }
+}
+
+// Enhanced demographic tracking utilities
+export const trackDemographics = {
+  // Enable Google Analytics enhanced demographic data collection
+  enableGoogleDemographics: () => {
+    if (!isBrowser || typeof window.gtag !== 'function') return
+    
+    // Enable Google Signals for demographic data
+    window.gtag('config', 'G-P91EKWK0XB', {
+      'allow_google_signals': true,
+      'allow_ad_personalization_signals': true
+    })
+    
+    console.log('Google Analytics demographics enabled')
+  },
+
+  // Meta Pixel Advanced Matching - enhances demographic targeting
+  enhanceMetaMatching: (userData?: {
+    email?: string
+    firstName?: string
+    lastName?: string
+    phone?: string
+    city?: string
+    state?: string
+    zipCode?: string
+    country?: string
+    gender?: 'f' | 'm'
+    birthDate?: string // Format: YYYYMMDD
+  }) => {
+    if (!isBrowser || typeof window.fbq !== 'function' || !userData) return
+    
+    try {
+      // Meta Pixel automatically hashes this data for privacy
+      const advancedMatchingData: Record<string, string> = {}
+      
+      if (userData.email) advancedMatchingData.em = userData.email.toLowerCase()
+      if (userData.firstName) advancedMatchingData.fn = userData.firstName.toLowerCase()
+      if (userData.lastName) advancedMatchingData.ln = userData.lastName.toLowerCase()
+      if (userData.phone) advancedMatchingData.ph = userData.phone.replace(/\D/g, '') // digits only
+      if (userData.city) advancedMatchingData.ct = userData.city.toLowerCase().replace(/\s/g, '')
+      if (userData.state) advancedMatchingData.st = userData.state.toLowerCase()
+      if (userData.zipCode) advancedMatchingData.zp = userData.zipCode
+      if (userData.country) advancedMatchingData.country = userData.country.toLowerCase()
+      if (userData.gender) advancedMatchingData.ge = userData.gender
+      if (userData.birthDate) advancedMatchingData.db = userData.birthDate
+      
+      // Re-initialize pixel with advanced matching
+      window.fbq('init', '783258114117252', advancedMatchingData)
+      
+      console.log('Meta Pixel advanced matching enhanced')
+    } catch (error) {
+      console.error('Meta advanced matching error:', error)
+    }
+  },
+
+  // Set Google Analytics user properties for segmentation
+  setUserSegment: (properties: {
+    customer_type?: 'first_time' | 'returning' | 'vip'
+    engagement_level?: 'low' | 'medium' | 'high'
+    piano_interest?: 'digital' | 'acoustic' | 'both'
+    budget_range?: 'budget' | 'mid_range' | 'premium'
+    experience_level?: 'beginner' | 'intermediate' | 'advanced'
+  }) => {
+    if (!isBrowser || typeof window.gtag !== 'function') return
+    
+    window.gtag('set', 'user_properties', {
+      customer_type: properties.customer_type,
+      engagement_level: properties.engagement_level,
+      piano_interest: properties.piano_interest,
+      budget_range: properties.budget_range,
+      experience_level: properties.experience_level
+    })
+    
+    console.log('User segment properties set:', properties)
+  },
+
+  // PostHog demographic and person properties tracking
+  setPostHogDemographics: (userData?: {
+    // Basic identifying info (will trigger person profile creation)
+    email?: string
+    phone?: string
+    name?: string
+    
+    // Demographic attributes
+    age_group?: '18-24' | '25-34' | '35-44' | '45-54' | '55-64' | '65+'
+    gender?: 'male' | 'female' | 'other' | 'prefer_not_to_say'
+    income_range?: 'under_50k' | '50k_75k' | '75k_100k' | '100k_150k' | 'over_150k'
+    education?: 'high_school' | 'some_college' | 'college' | 'graduate' | 'post_graduate'
+    occupation?: string
+    
+    // Location (supplements automatic GeoIP data)
+    city?: string
+    state?: string
+    zip_code?: string
+    country?: string
+    
+    // Piano-specific demographics
+    musical_experience?: 'none' | 'beginner' | 'intermediate' | 'advanced' | 'professional'
+    piano_ownership?: 'none' | 'acoustic' | 'digital' | 'both'
+    household_type?: 'single' | 'couple' | 'family_with_children' | 'retired'
+    home_type?: 'apartment' | 'house' | 'condo' | 'other'
+    
+    // Interest and behavioral segments
+    piano_budget?: 'under_2k' | '2k_5k' | '5k_10k' | '10k_20k' | 'over_20k'
+    purchase_timeline?: 'immediate' | 'within_3_months' | 'within_6_months' | 'over_6_months'
+    primary_use?: 'learning' | 'teaching' | 'performance' | 'hobby' | 'family'
+    
+    // Lead qualification
+    consultation_interest?: 'high' | 'medium' | 'low'
+    event_attendance_likelihood?: 'definitely' | 'probably' | 'maybe' | 'unlikely'
+  }) => {
+    if (!isBrowser || !userData) return
+    
+    try {
+      // Import PostHog dynamically if not already available
+      import('@/lib/posthog').then(({ postHogAnalytics }) => {
+        // If we have identifying info, identify the user and set person properties
+        if (userData.email || userData.phone) {
+          postHogAnalytics.identifyUser({
+            email: userData.email,
+            phone: userData.phone,
+            // Add piano-specific attributes
+            pianoPreferences: userData.piano_ownership ? [userData.piano_ownership] : undefined
+          })
+        }
+        
+        // Set person properties using PostHog's $set method
+        const personProperties: Record<string, any> = {}
+        
+        // Basic demographics
+        if (userData.age_group) personProperties.age_group = userData.age_group
+        if (userData.gender) personProperties.gender = userData.gender
+        if (userData.income_range) personProperties.income_range = userData.income_range
+        if (userData.education) personProperties.education_level = userData.education
+        if (userData.occupation) personProperties.occupation = userData.occupation
+        
+        // Location (supplements GeoIP)
+        if (userData.city) personProperties.city = userData.city
+        if (userData.state) personProperties.state = userData.state
+        if (userData.zip_code) personProperties.zip_code = userData.zip_code
+        if (userData.country) personProperties.country = userData.country
+        
+        // Piano-specific demographics
+        if (userData.musical_experience) personProperties.musical_experience = userData.musical_experience
+        if (userData.piano_ownership) personProperties.current_piano_ownership = userData.piano_ownership
+        if (userData.household_type) personProperties.household_type = userData.household_type
+        if (userData.home_type) personProperties.home_type = userData.home_type
+        
+        // Interest and behavioral data
+        if (userData.piano_budget) personProperties.piano_budget_range = userData.piano_budget
+        if (userData.purchase_timeline) personProperties.purchase_timeline = userData.purchase_timeline
+        if (userData.primary_use) personProperties.piano_primary_use = userData.primary_use
+        
+        // Lead qualification scores
+        if (userData.consultation_interest) personProperties.consultation_interest_level = userData.consultation_interest
+        if (userData.event_attendance_likelihood) personProperties.event_attendance_likelihood = userData.event_attendance_likelihood
+        
+        // Set properties using PostHog's setPersonProperties (recommended method)
+        if (typeof window !== 'undefined' && window.posthog) {
+          window.posthog.setPersonProperties(personProperties)
+        }
+        
+        // Also capture as an event for immediate analysis
+        import('@/lib/posthog').then(({ default: posthog }) => {
+          posthog.capture('demographic_profile_updated', {
+            $set: personProperties,
+            profile_completeness: Object.keys(personProperties).length,
+            data_source: 'user_provided'
+          })
+        })
+        
+        console.log('PostHog demographic properties set:', personProperties)
+      })
+    } catch (error) {
+      console.error('PostHog demographic tracking error:', error)
+    }
+  },
+
+  // Unified demographic tracking across all platforms
+  setAllPlatformDemographics: (userData: {
+    // Core identifying info
+    email?: string
+    firstName?: string
+    lastName?: string
+    phone?: string
+    
+    // Demographics for all platforms
+    age_group?: '18-24' | '25-34' | '35-44' | '45-54' | '55-64' | '65+'
+    gender?: 'male' | 'female' | 'other'
+    city?: string
+    state?: string
+    zipCode?: string
+    country?: string
+    
+    // Piano buyer segments
+    customer_type?: 'first_time' | 'returning' | 'vip'
+    piano_interest?: 'digital' | 'acoustic' | 'both'
+    budget_range?: 'budget' | 'mid_range' | 'premium'
+    musical_experience?: 'beginner' | 'intermediate' | 'advanced'
+  }) => {
+    // Google Analytics user properties
+    trackDemographics.setUserSegment({
+      customer_type: userData.customer_type,
+      piano_interest: userData.piano_interest,
+      budget_range: userData.budget_range,
+      experience_level: userData.musical_experience
+    })
+    
+    // Meta Pixel advanced matching
+    trackDemographics.enhanceMetaMatching({
+      email: userData.email,
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+      phone: userData.phone,
+      city: userData.city,
+      state: userData.state,
+      zipCode: userData.zipCode,
+      country: userData.country,
+      gender: userData.gender === 'male' ? 'm' : userData.gender === 'female' ? 'f' : undefined
+    })
+    
+    // PostHog person properties
+    trackDemographics.setPostHogDemographics({
+      email: userData.email,
+      name: userData.firstName && userData.lastName ? `${userData.firstName} ${userData.lastName}` : undefined,
+      phone: userData.phone,
+      age_group: userData.age_group,
+      gender: userData.gender,
+      city: userData.city,
+      state: userData.state,
+      zip_code: userData.zipCode,
+      country: userData.country,
+      musical_experience: userData.musical_experience === 'beginner' ? 'beginner' : 
+                           userData.musical_experience === 'intermediate' ? 'intermediate' : 
+                           userData.musical_experience === 'advanced' ? 'advanced' : undefined,
+      piano_budget: userData.budget_range === 'budget' ? 'under_2k' :
+                    userData.budget_range === 'mid_range' ? '2k_5k' :
+                    userData.budget_range === 'premium' ? 'over_20k' : undefined
+    })
+    
+    console.log('Cross-platform demographic tracking completed')
   }
 }
 

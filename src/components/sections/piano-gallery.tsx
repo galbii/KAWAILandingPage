@@ -117,7 +117,7 @@ function PianoSection({ piano, index }: PianoSectionProps) {
                   </span>
                 </div>
                 <div className={`inline-flex items-center bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold transition-all duration-500 delay-400 hover:bg-green-200 hover:scale-105 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
-                  Save ${piano.savings.toLocaleString()}
+                  Save up to $6,045 on open-box deals
                 </div>
               </div>
               
@@ -172,27 +172,48 @@ function PianoSection({ piano, index }: PianoSectionProps) {
 export function FeaturedDeals() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
+  const { ref: headerRef, isVisible: headerVisible } = useIntersectionAnimation({
+    threshold: 0.2,
+    rootMargin: '0px 0px -100px 0px'
+  });
 
   return (
     <div id="featured-deals" className="bg-kawai-pearl">
       {/* Section Header */}
-      <section ref={heroRef} className="py-6 text-center">
-        <div className="max-w-3xl mx-auto px-6">
-          <div>
-            <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-kawai-black mb-2">
-              HOUSTON PIANO DEALS
-            </h1>
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <div className="bg-red-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
-                LIMITED TIME
+      <section ref={headerRef} className="py-12 text-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-kawai-pearl via-white to-kawai-pearl opacity-50"></div>
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
+          <div className={`mb-8 transition-all duration-600 ${headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+            {/* Premium Gallery Title */}
+            <div className={`relative inline-block mb-6 transition-all duration-600 delay-200 ${headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+              <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-kawai-black mb-2">
+                HOUSTON PIANO GALLERY
+              </h1>
+              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-red-600 to-red-700 rounded-full shadow-lg"></div>
+            </div>
+            
+            {/* Premium Subtitle */}
+            <div className={`space-y-4 mb-6 transition-all duration-600 delay-400 ${headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+              <p className="text-xl md:text-2xl font-semibold text-gray-700 tracking-wide">
+                Premium Collection • Exclusive Prices
+              </p>
+              <div className="flex items-center justify-center gap-4 flex-wrap">
+                <div className="bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                  LIMITED TIME EVENT
+                </div>
+                <span className="text-red-600 font-bold text-lg">September 11th - 14th, 2025</span>
               </div>
-              <span className="text-red-600 font-semibold">September 11th - 14th, 2025</span>
             </div>
           </div>
-          <p className="text-base md:text-lg leading-relaxed text-kawai-black/70 max-w-2xl mx-auto">
-            Exclusive piano sales Houston event featuring digital and acoustic pianos at special reduced prices. Used pianos Houston families trust, available at our Greater Houston Area showroom. Your purchase supports SHSU&apos;s Music Department.
+          
+          <p className={`text-base md:text-lg leading-relaxed text-kawai-black/70 max-w-3xl mx-auto transition-all duration-600 delay-600 ${headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+            Discover our curated collection of digital and acoustic pianos at exclusive pricing. Each instrument represents the pinnacle of KAWAI craftsmanship, available at our Greater Houston Area showroom. Your purchase supports SHSU&apos;s Music Department.
           </p>
         </div>
+        
+        {/* Decorative Elements */}
+        <div className="absolute top-4 left-4 w-20 h-20 bg-gradient-to-br from-red-100 to-red-200 rounded-full opacity-30 animate-pulse"></div>
+        <div className="absolute bottom-4 right-4 w-16 h-16 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full opacity-20 animate-pulse delay-1000"></div>
       </section>
 
       {/* Piano Models */}
