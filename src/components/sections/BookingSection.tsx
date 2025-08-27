@@ -3,10 +3,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { LoadingSkeleton } from '@/components/ui/loading-skeleton';
 import { initializeCalendlyTracking, cleanupCalendlyTracking } from '@/lib/calendly-tracking';
+import '@/lib/calendly-debug'; // Load debug utilities
 import '@/types/calendly';
 
 export default function BookingSection() {
-  const [isVisible, setIsVisible] = useState(false);
   const [isCalendlyLoaded, setIsCalendlyLoaded] = useState(false);
   const [shouldLoadCalendly, setShouldLoadCalendly] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -30,10 +30,10 @@ export default function BookingSection() {
       if (calendlyContainerRef.current && window.Calendly && window.Calendly.initInlineWidget) {
         console.log('🚀 Initializing Calendly inline widget with JavaScript API');
         
-        // Clear any existing content
-        calendlyContainerRef.current.innerHTML = '';
-        
         try {
+          // Clear any existing content
+          calendlyContainerRef.current.innerHTML = '';
+          
           window.Calendly.initInlineWidget({
             url: 'https://calendly.com/kawaipianogallery/shsu-piano-sale',
             parentElement: calendlyContainerRef.current,
@@ -53,6 +53,12 @@ export default function BookingSection() {
         console.warn('  - Container:', !!calendlyContainerRef.current);
         console.warn('  - Calendly object:', !!window.Calendly);
         console.warn('  - initInlineWidget method:', !!window.Calendly?.initInlineWidget);
+        
+        // Retry after a short delay if Calendly object is missing
+        if (!window.Calendly && calendlyContainerRef.current) {
+          console.log('⏳ Retrying widget initialization in 200ms...');
+          setTimeout(initializeWidget, 200);
+        }
       }
     };
     
@@ -109,12 +115,11 @@ export default function BookingSection() {
     };
   }, [shouldLoadCalendly]);
 
-  // Intersection observer for scroll animations and lazy loading
+  // Intersection observer for lazy loading
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
           // Start loading Calendly when section comes into view
           setShouldLoadCalendly(true);
         }
@@ -132,23 +137,12 @@ export default function BookingSection() {
     return () => observer.disconnect();
   }, []);
 
-  // Debug: Force load Calendly for testing (remove this in production)
-  useEffect(() => {
-    // Load immediately for testing
-    setTimeout(() => {
-      console.log('🧪 Debug: Force loading Calendly for testing');
-      setShouldLoadCalendly(true);
-      setIsVisible(true);
-    }, 1000);
-  }, []);
 
 
   return (
     <section ref={sectionRef} id="booking-consultation" className="bg-white py-16">
       <div className="max-w-7xl mx-auto px-6">
-        <div className={`transition-all duration-700 ease-out ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
+        <div>
           {/* Header */}
           <div className="text-center mb-12">
             <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-kawai-black mb-4">

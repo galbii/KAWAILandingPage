@@ -80,7 +80,7 @@ export default function HeroSection() {
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 text-center hero-content pt-20 sm:pt-24">
         
         {/* Partnership Branding */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-8 animate-float-gentle">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-12 animate-premium-float animate-hero-entrance-subtle animate-delay-500">
           <div className="flex items-center gap-4">
             <Image
               src="/images/optimized/logos/Kawai-Red.webp"
@@ -98,19 +98,23 @@ export default function HeroSection() {
           </div>
         </div>
         
-        <div className="space-y-2 mb-4">
+        <div className="space-y-2 mb-8 animate-hero-entrance-subtle animate-delay-1000">
           <div className="text-xs md:text-sm text-orange-500 font-medium tracking-wider uppercase">Sam Houston State University is proud to present</div>
         </div>
 
         {/* Main Headlines */}
-        <div className="space-y-4 mb-6">
-          <h1 className="font-heading leading-tight scroll-animate">
-            <span className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-white tracking-tight animate-delay-200">KAWAI</span>
-            <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light text-white tracking-wide animate-delay-400">SHOWCASE</span>
+        <div className="space-y-6 mb-12">
+          <h1 className="font-heading leading-tight">
+            <div className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-white tracking-tight mb-4 animate-hero-entrance-subtle animate-delay-1500">
+              KAWAI
+            </div>
+            <div className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light text-white tracking-wide animate-hero-entrance-subtle animate-delay-2000">
+              SHOWCASE
+            </div>
           </h1>
           
           {/* Premium Value Proposition */}
-          <div className="space-y-4">
+          <div className="space-y-4 animate-hero-entrance-subtle animate-delay-2500">
             <div className="text-lg md:text-xl text-white font-light">Modern Technology • Special University Pricing</div>
           </div>
         </div>
@@ -119,20 +123,20 @@ export default function HeroSection() {
         <div className="space-y-6 max-w-4xl mx-auto">
           
           {/* Event Timing with Urgency */}
-          <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-red-600/20 backdrop-blur-sm rounded-full border border-red-400/30">
+          <div className="space-y-3 animate-hero-entrance-subtle animate-delay-3000">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-red-600/20 backdrop-blur-sm rounded-full border border-red-400/30">
               <div className="w-2 h-2 bg-red-400 rounded-full animate-pulse"></div>
-              <span className="text-red-300 font-semibold tracking-wide text-xs">4 DAYS ONLY</span>
+              <span className="text-red-300 font-semibold tracking-wide text-sm">4 DAYS ONLY</span>
             </div>
-            <div className="text-lg md:text-xl font-light text-white tracking-wider">September 11-14, 2025</div>
-            <div className="text-sm text-white">Houston • While Selection Lasts</div>
+            <div className="text-xl md:text-2xl font-light text-white tracking-wider">September 11-14, 2025</div>
+            <div className="text-base text-white/90">Houston • While Selection Lasts</div>
           </div>
           
           {/* Primary Call to Action */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-hero-entrance-subtle animate-delay-3500">
             <button 
               onClick={handleExploreCollectionClick}
-              className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-6 py-2 text-base font-bold rounded-lg shadow-2xl transform transition-all duration-300 hover:scale-105 border-2 border-red-400/50 w-full sm:w-auto cursor-pointer relative"
+              className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-8 py-3 text-lg font-bold rounded-lg shadow-2xl transition-all duration-300 hover:scale-105 border-2 border-red-400/50 w-full sm:w-auto cursor-pointer relative"
               style={{ pointerEvents: 'auto', zIndex: 50 }}
               type="button"
             >
@@ -141,7 +145,7 @@ export default function HeroSection() {
             
             <button 
               onClick={handleReserveConsultationClick}
-              className="bg-white/10 backdrop-blur-sm border border-white/30 text-white hover:bg-white/20 px-6 py-2 text-base font-medium rounded-lg w-full sm:w-auto cursor-pointer relative"
+              className="bg-white/10 backdrop-blur-sm border border-white/30 text-white hover:bg-white/20 px-8 py-3 text-lg font-medium rounded-lg transition-all duration-300 hover:scale-105 w-full sm:w-auto cursor-pointer relative"
               style={{ pointerEvents: 'auto', zIndex: 50 }}
               type="button"
             >
@@ -150,7 +154,7 @@ export default function HeroSection() {
           </div>
           
           {/* Supporting Message */}
-          <div className="text-sm text-white italic">
+          <div className="text-base text-white/80 italic animate-hero-entrance-subtle animate-delay-4000">
             Your purchase supports the SHSU Music Department
           </div>
         </div>

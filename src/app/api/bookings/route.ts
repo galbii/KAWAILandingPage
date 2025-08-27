@@ -84,32 +84,49 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// Helper function to determine booking source from available data
+// Enhanced helper function to determine booking source with better attribution
 function determineBookingSource(bookingData: BookingData, request: NextRequest): 'modal' | 'booking_section' | 'direct' {
   // Check for custom fields or UTM parameters that might indicate source
   const referer = request.headers.get('referer') || '';
   const userAgent = request.headers.get('user-agent') || '';
   
-  // Check if booking came from the landing page
-  if (referer.includes(process.env.NEXT_PUBLIC_SITE_URL || 'kawaipianoshouston.com')) {
-    // Check for any custom fields in booking data that might indicate modal vs section
-    if (bookingData.additionalNotes?.includes('modal') || 
-        bookingData.additionalNotes?.includes('popup')) {
-      return 'modal';
-    }
-    if (bookingData.additionalNotes?.includes('section') || 
-        bookingData.additionalNotes?.includes('booking')) {
-      return 'booking_section';
-    }
-    // Default to booking_section for landing page bookings
+  // First priority: Check for attribution data in booking notes or custom fields
+  const notes = bookingData.additionalNotes?.toLowerCase() || '';
+  
+  // Look for direct attribution markers in booking notes
+  if (notes.includes('source:modal') || notes.includes('modal')) {
+    console.log('📍 Booking source determined from notes: modal');
+    return 'modal';
+  }
+  if (notes.includes('source:booking_section') || notes.includes('booking-section')) {
+    console.log('📍 Booking source determined from notes: booking_section');
     return 'booking_section';
   }
   
-  // Check if it's a mobile booking (might indicate modal usage)
-  if (userAgent.includes('Mobile')) {
-    return 'modal'; // Mobile users more likely to use modal
+  // Second priority: Check UTM parameters in notes
+  if (notes.includes('utm_medium=modal')) {
+    console.log('📍 Booking source determined from UTM: modal');
+    return 'modal';
+  }
+  if (notes.includes('utm_medium=booking-section')) {
+    console.log('📍 Booking source determined from UTM: booking_section');
+    return 'booking_section';
   }
   
+  // Third priority: Referer analysis
+  if (referer.includes(process.env.NEXT_PUBLIC_SITE_URL || 'kawaipianoshouston.com')) {
+    console.log('📍 Booking from landing page, defaulting to: booking_section');
+    return 'booking_section';
+  }
+  
+  // Fourth priority: User agent analysis (mobile users more likely to use modal)
+  if (userAgent.includes('Mobile') && referer) {
+    console.log('📍 Mobile booking with referer, likely: modal');
+    return 'modal';
+  }
+  
+  // Default: Direct booking
+  console.log('📍 No clear source indicators, marking as: direct');
   return 'direct';
 }
 

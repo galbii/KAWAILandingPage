@@ -1,6 +1,5 @@
 'use client';
 
-import { GoogleMapsEmbed } from '@next/third-parties/google';
 import { useState, useEffect } from 'react';
 import Script from 'next/script';
 
@@ -8,50 +7,16 @@ export function ShowroomLocation() {
   const [showFallback, setShowFallback] = useState(false);
 
   useEffect(() => {
-    // Preload and initialize Constant Contact form immediately
-    const initializeForm = () => {
-      // Check if Constant Contact widget is available
-      if (typeof (window as Record<string, unknown>).ConstantContact !== 'undefined') {
-        // Force initialization of the form
-        const formElement = document.querySelector('.ctct-inline-form');
-        if (formElement && (window as Record<string, unknown>).ConstantContact) {
-          try {
-            ((window as Record<string, unknown>).ConstantContact as { init: () => void }).init();
-          } catch (error) {
-            console.warn('Constant Contact initialization error:', error);
-          }
-        }
-      }
-    };
-
-    // Try to initialize immediately if script is already loaded
-    initializeForm();
-
-    // Set a timeout to show fallback form if Constant Contact doesn't load
+    // Set a timer to show fallback after 5 seconds if Constant Contact doesn't load
     const timer = setTimeout(() => {
       const formElement = document.querySelector('.ctct-inline-form');
-      if (formElement && formElement.children.length === 0) {
+      if (!formElement || formElement.children.length === 0) {
+        console.log('Constant Contact form not loaded, showing fallback');
         setShowFallback(true);
       }
-    }, 3000); // Reduced from 5 seconds to 3 seconds for faster fallback
+    }, 5000);
 
-    // Listen for the script load event
-    const handleScriptLoad = () => {
-      setTimeout(initializeForm, 100); // Small delay to ensure script is fully loaded
-    };
-
-    // Check if script is already loaded, otherwise listen for it
-    const script = document.querySelector('script[src*="signup-form-widget"]');
-    if (script) {
-      script.addEventListener('load', handleScriptLoad);
-    }
-
-    return () => {
-      clearTimeout(timer);
-      if (script) {
-        script.removeEventListener('load', handleScriptLoad);
-      }
-    };
+    return () => clearTimeout(timer);
   }, []);
   const showroomInfo = {
     name: 'Kawai Piano Gallery Houston',
@@ -86,19 +51,6 @@ export function ShowroomLocation() {
         id="signupScript"
         src="https://static.ctctcdn.com/js/signup-form-widget/current/signup-form-widget.min.js"
         strategy="afterInteractive"
-        onLoad={() => {
-          // Initialize form as soon as script loads
-          setTimeout(() => {
-            if (typeof (window as Record<string, unknown>).ConstantContact !== 'undefined') {
-              try {
-                ((window as Record<string, unknown>).ConstantContact as { init: () => void }).init();
-              } catch (error) {
-                console.warn('Constant Contact initialization error:', error);
-                setShowFallback(true);
-              }
-            }
-          }, 500);
-        }}
         onError={() => {
           console.warn('Failed to load Constant Contact script');
           setShowFallback(true);
@@ -119,14 +71,17 @@ export function ShowroomLocation() {
             <div className="grid lg:grid-cols-5 min-h-[600px]">
               {/* Map - Left Side */}
               <div className="lg:col-span-3 relative">
-                <GoogleMapsEmbed
-                  apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ''}
-                  height={600}
-                  width="100%"
-                  mode="place"
-                  q="5800 Richmond Ave, Houston, TX 77057"
-                  zoom="15"
-                />
+                <div className="w-full h-[600px]">
+                  <iframe
+                    width="100%"
+                    height="600"
+                    style={{ border: 0 }}
+                    loading="lazy"
+                    allowFullScreen
+                    referrerPolicy="no-referrer-when-downgrade"
+                    src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&q=5800+Richmond+Ave+Houston+TX+77057&zoom=15`}
+                  />
+                </div>
                 {/* Subtle overlay gradient */}
                 <div className="absolute inset-0 bg-gradient-to-r from-kawai-black/5 via-transparent to-transparent pointer-events-none" />
               </div>

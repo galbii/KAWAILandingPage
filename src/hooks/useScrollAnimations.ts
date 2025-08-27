@@ -64,23 +64,6 @@ export function useScrollAnimations() {
       }
     };
 
-    // Intersection Observer for scroll animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('scroll-visible');
-        }
-      });
-    }, observerOptions);
-
-    // Observe all scroll-animate elements including value proposition animations
-    const animateElements = document.querySelectorAll('.scroll-animate, .scroll-animate-left, .scroll-animate-right, .scroll-animate-scale, .value-prop-left, .value-prop-center, .value-prop-right, .value-prop-cta-section');
-    animateElements.forEach((el) => observer.observe(el));
 
     // Add scroll listener
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -91,7 +74,6 @@ export function useScrollAnimations() {
     // Cleanup
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      observer.disconnect();
     };
   }, []);
 }

@@ -67,3 +67,5 @@ This is a landing page for a **KAWAI piano sale event** in partnership with **Sa
 - Sophisticated, premium-focused design aesthetic
 - memorize how we've implemented our analytics
 - memorize this form that we're using for our ctas
+- can you memorize NOT to start any development servers
+- memorize don't use npm use bun please

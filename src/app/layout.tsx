@@ -4,6 +4,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import { WebVitals } from "@/components/WebVitals";
 import { PostHogProvider } from "@/components/PostHogProvider";
 import PostHogDebugDashboard from "@/components/PostHogDebugDashboard";
+import CalendlyPreloader from "@/components/CalendlyPreloader";
 import Script from "next/script";
 import "./globals.css";
 
@@ -48,6 +49,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Calendly Resources Preloading for Performance */}
+        <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+        
         {/* Google Tag Manager */}
         <Script id="google-tag-manager" strategy="afterInteractive">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -87,9 +91,16 @@ height="0" width="0" style={{display:'none',visibility:'hidden'}}></iframe></nos
         {/* End Google Tag Manager (noscript) */}
         <PostHogProvider>
           {children}
+          <CalendlyPreloader />
         </PostHogProvider>
         <PostHogDebugDashboard />
         <WebVitals />
+        
+        {/* Calendly JavaScript Preloading */}
+        <Script 
+          src="https://assets.calendly.com/assets/external/widget.js" 
+          strategy="afterInteractive"
+        />
         
         {/* Google Ads Conversion Tracking */}
         <Script 

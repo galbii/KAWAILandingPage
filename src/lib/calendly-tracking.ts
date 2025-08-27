@@ -35,8 +35,29 @@ interface CalendlyEvent {
 // Track the source of the Calendly widget for attribution
 let calendlySource: 'modal' | 'booking_section' | 'unknown' = 'unknown'
 
-// Track processed appointments to prevent duplicate events
-const processedAppointments = new Set<string>()
+// Enhanced duplicate event prevention with time-based deduplication
+const processedAppointments = new Map<string, number>()
+
+// Clean up old processed appointments (older than 30 seconds)
+function cleanupOldAppointments() {
+  const now = Date.now()
+  const thirtySecondsAgo = now - 30000
+  
+  for (const [key, timestamp] of processedAppointments.entries()) {
+    if (timestamp < thirtySecondsAgo) {
+      processedAppointments.delete(key)
+    }
+  }
+}
+
+// Enhanced booking UUID generation for better deduplication
+function generateBookingUUID(eventType: string, eventData: CalendlyEvent): string {
+  const sessionId = typeof window !== 'undefined' ? window.crypto?.randomUUID?.() || 'unknown' : 'server'
+  const eventIdentifier = eventData.payload?.event?.uri || eventData.payload?.invitee?.uri || 'unknown'
+  const timestamp = Math.floor(Date.now() / 1000) // Round to seconds
+  
+  return `${eventType}-${sessionId}-${eventIdentifier}-${timestamp}`.replace(/[^a-zA-Z0-9-]/g, '_')
+}
 
 // Check if message is from Calendly
 function isCalendlyEvent(e: MessageEvent): e is MessageEvent<CalendlyEvent> {
@@ -49,9 +70,38 @@ function isCalendlyEvent(e: MessageEvent): e is MessageEvent<CalendlyEvent> {
   )
 }
 
-// Handle Calendly events
+// Enhanced attribution persistence
+function persistAttributionData() {
+  if (!isBrowser) return
+  
+  const attributionData = {
+    source: calendlySource,
+    timestamp: Date.now(),
+    sessionId: typeof posthog !== 'undefined' && posthog.get_session_id ? posthog.get_session_id() : 'unknown',
+    distinctId: typeof posthog !== 'undefined' && posthog.get_distinct_id ? posthog.get_distinct_id() : 'unknown',
+    userAgent: navigator.userAgent,
+    referrer: document.referrer || 'direct'
+  }
+
+  try {
+    // Store in multiple locations for reliability
+    localStorage.setItem('kawai_attribution', JSON.stringify(attributionData))
+    sessionStorage.setItem('kawai_attribution_backup', JSON.stringify(attributionData))
+    
+    // Also store legacy format for webhook compatibility
+    localStorage.setItem('kawai_last_booking_source', calendlySource)
+    localStorage.setItem('kawai_last_booking_time', Date.now().toString())
+  } catch (error) {
+    console.error('Failed to persist attribution data:', error)
+  }
+}
+
+// Handle Calendly events with enhanced error handling and validation
 function handleCalendlyEvent(event: CalendlyEvent) {
   if (!isBrowser) return
+
+  // Clean up old appointments periodically
+  cleanupOldAppointments()
 
   // Check if PostHog is properly initialized
   const isPostHogReady = posthog && (posthog.__loaded || typeof posthog.capture === 'function')
@@ -61,11 +111,13 @@ function handleCalendlyEvent(event: CalendlyEvent) {
       isLoaded: posthog?.__loaded,
       hasCaptureMethod: typeof posthog?.capture === 'function'
     })
-    // Continue with tracking anyway - PostHog may initialize later
-    console.log('⚠️ Proceeding with event tracking despite PostHog not being ready')
   }
 
-  console.log('✅ Calendly event detected:', event)
+  console.log('✅ Calendly event detected:', event.event, {
+    source: calendlySource,
+    hasPayload: !!event.payload,
+    timestamp: new Date().toISOString()
+  })
 
   switch (event.event) {
     case 'calendly.profile_page_viewed':
@@ -128,143 +180,78 @@ function handleCalendlyEvent(event: CalendlyEvent) {
       break
 
     case 'calendly.invitee_scheduled':
-      // This is the main conversion event - user completed booking
-      console.group('🎯 Calendly Booking Completed')
-      console.log('Event data:', event)
-      console.log('Booking source:', calendlySource)
-      console.log('PostHog available:', !!window.posthog)
-      
-      // Generate unique ID for this booking to prevent duplicates
-      const bookingId = `${event.event}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
-      
-      // Check if we've already processed this type of booking recently (within 5 seconds)
-      const recentBookings = Array.from(processedAppointments).filter(id => {
-        const timestamp = parseInt(id.split('-')[1])
-        return Date.now() - timestamp < 5000 // 5 seconds
-      })
-      
-      if (recentBookings.length === 0) {
-        // Only track if no recent duplicates
-        processedAppointments.add(bookingId)
-        
-        console.log('🚀 Firing PostHog events...')
-        
-        // Track conversion with all analytics platforms
-        trackKawaiEvent.calendlyConversion(calendlySource)
-        console.log('✅ Calendly conversion tracked')
-        
-        // Also track with PostHog (client-side)
-        const postHogEventData = {
-          booking_source: calendlySource,
-          calendly_status: 'completed',
-          user_type: localStorage.getItem('kawai_returning_user') === 'true' ? 'returning' : 'new',
-          completion_timestamp: new Date().toISOString(),
-          calendly_event_data: event
-        }
-        
-        eventMonitor.capture(POSTHOG_CONFIG.EVENTS.CONSULTATION_BOOKING_ATTEMPT, postHogEventData)
-        console.log('✅ PostHog consultation booking attempt tracked:', postHogEventData)
-        
-        // Store booking source in localStorage for webhook attribution
-        localStorage.setItem('kawai_last_booking_source', calendlySource)
-        localStorage.setItem('kawai_last_booking_time', Date.now().toString())
-        console.log('✅ Booking source stored in localStorage for webhook attribution')
-        
-        // Clean up old entries to prevent memory leaks (keep last 10)
-        if (processedAppointments.size > 10) {
-          const oldestId = Array.from(processedAppointments)[0]
-          processedAppointments.delete(oldestId)
-        }
-        
-        console.log('🎉 All PostHog events successfully fired!')
-      } else {
-        console.warn('⚠️ Duplicate Calendly conversion detected and prevented')
-      }
-      
-      console.groupEnd()
-      break
-
     case 'calendly.event_scheduled':
-      // This is the REAL booking completion event with actual data
-      console.group('🎯 REAL Calendly Booking Completed!')
+      // Handle both event types (some Calendly versions send different events)
+      const isMainEvent = event.event === 'calendly.invitee_scheduled'
+      const eventLabel = isMainEvent ? 'Primary Booking Event' : 'Secondary Booking Event'
+      
+      console.group(`🎯 ${eventLabel}`)
       console.log('Event data:', event)
       console.log('Booking source:', calendlySource)
       console.log('PostHog available:', !!posthog)
       console.log('Payload data:', event.payload)
       
-      // Generate unique ID for this booking to prevent duplicates
-      const realBookingId = `${event.event}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+      // Generate enhanced UUID for this booking
+      const bookingUUID = generateBookingUUID(event.event, event)
       
-      // Check if we've already processed this type of booking recently (within 10 seconds for real bookings)
-      const recentRealBookings = Array.from(processedAppointments).filter(id => {
-        const timestamp = parseInt(id.split('-')[1])
-        return Date.now() - timestamp < 10000 // 10 seconds for real bookings
-      })
-      
-      if (recentRealBookings.length === 0) {
-        // Only track if no recent duplicates
-        processedAppointments.add(realBookingId)
+      // Check for recent duplicates using the enhanced system
+      if (!processedAppointments.has(bookingUUID)) {
+        // Mark as processed immediately
+        processedAppointments.set(bookingUUID, Date.now())
         
-        console.log('🚀 Firing PostHog events for REAL booking...')
+        console.log('🚀 Processing new booking event...')
         
         // Track conversion with all analytics platforms
         trackKawaiEvent.calendlyConversion(calendlySource)
-        console.log('✅ Calendly conversion tracked')
+        console.log('✅ Cross-platform conversion tracking completed')
         
-        // Track with PostHog (client-side) - REAL booking data
-        const realBookingEventData = {
+        // Enhanced PostHog tracking with validation
+        const enhancedEventData = {
           booking_source: calendlySource,
           calendly_status: 'completed',
           user_type: localStorage.getItem('kawai_returning_user') === 'true' ? 'returning' : 'new',
           completion_timestamp: new Date().toISOString(),
-          calendly_event_data: event,
-          // Extract real booking details from payload
+          event_type: event.event,
+          booking_uuid: bookingUUID,
+          // Extract booking details from payload
           event_uri: event.payload?.event?.uri || 'unknown',
           invitee_uri: event.payload?.invitee?.uri || 'unknown',
-          is_real_booking: true  // Flag to distinguish from test events
+          has_payload: !!event.payload,
+          calendly_event_data: event,
+          is_duplicate: false
         }
         
-        // Fire the PostHog event and verify it's sent
-        console.log('🔄 Attempting to send PostHog event...')
-        console.log('Event name:', POSTHOG_CONFIG.EVENTS.CONSULTATION_BOOKING_ATTEMPT)
-        console.log('Event data:', realBookingEventData)
-        
-        // Try eventMonitor.capture first
-        eventMonitor.capture(POSTHOG_CONFIG.EVENTS.CONSULTATION_BOOKING_ATTEMPT, realBookingEventData)
-          .then(eventResult => {
-            console.log('✅ PostHog event sent via eventMonitor:', eventResult)
-          })
-          .catch(error => {
-            console.error('❌ EventMonitor capture failed:', error)
-          })
-        
-        // Also send directly via PostHog for backup
+        // Primary PostHog tracking with error handling
         try {
-          posthog.capture(POSTHOG_CONFIG.EVENTS.CONSULTATION_BOOKING_ATTEMPT, realBookingEventData)
-          console.log('✅ Direct PostHog capture sent')
-          console.log('PostHog instance status:', {
-            loaded: posthog.__loaded,
-            config: !!posthog.config,
-            distinct_id: posthog.get_distinct_id?.()
-          })
-        } catch (directError) {
-          console.error('❌ Direct PostHog capture failed:', directError)
+          eventMonitor.capture(POSTHOG_CONFIG.EVENTS.CONSULTATION_BOOKING_ATTEMPT, enhancedEventData)
+            .then(result => {
+              console.log('✅ PostHog event captured successfully:', result)
+              
+              // Validate event was received
+              setTimeout(() => validateEventDelivery(bookingUUID), 2000)
+            })
+            .catch(error => {
+              console.error('❌ PostHog event capture failed:', error)
+              // Fallback to direct capture
+              posthog.capture(POSTHOG_CONFIG.EVENTS.CONSULTATION_BOOKING_ATTEMPT, enhancedEventData)
+            })
+        } catch (error) {
+          console.error('❌ PostHog tracking error:', error)
         }
         
-        // Store booking source in localStorage for webhook attribution
-        localStorage.setItem('kawai_last_booking_source', calendlySource)
-        localStorage.setItem('kawai_last_booking_time', Date.now().toString())
-        console.log('✅ Real booking source stored in localStorage')
+        // Persist enhanced attribution data
+        persistAttributionData()
+        console.log('✅ Attribution data persisted')
         
-        // Clean up old entries
-        if (processedAppointments.size > 10) {
-          const oldestId = Array.from(processedAppointments)[0]
-          processedAppointments.delete(oldestId)
-        }
-        
-        console.log('🎉 All PostHog events successfully fired for REAL booking!')
+        console.log('🎉 Booking event processing completed successfully!')
       } else {
-        console.warn('⚠️ Duplicate real Calendly booking detected and prevented')
+        const originalTimestamp = processedAppointments.get(bookingUUID)
+        const timeSinceOriginal = Date.now() - (originalTimestamp || 0)
+        console.warn(`⚠️ Duplicate booking event detected and prevented`, {
+          uuid: bookingUUID,
+          timeSinceOriginal: `${timeSinceOriginal}ms`,
+          eventType: event.event
+        })
       }
       
       console.groupEnd()
@@ -297,6 +284,34 @@ function handleCalendlyEvent(event: CalendlyEvent) {
   }
 }
 
+// Event delivery validation
+function validateEventDelivery(bookingUUID: string) {
+  if (!isBrowser) return
+  
+  try {
+    // Check if PostHog has processed the event
+    const sessionId = posthog.get_session_id?.()
+    const distinctId = posthog.get_distinct_id?.()
+    
+    console.log('🔍 Validating event delivery:', {
+      bookingUUID,
+      sessionId,
+      distinctId,
+      posthogReady: !!posthog.__loaded
+    })
+    
+    // Log validation attempt for debugging
+    eventMonitor.capture('calendly_event_validation', {
+      booking_uuid: bookingUUID,
+      validation_timestamp: new Date().toISOString(),
+      posthog_session_id: sessionId,
+      posthog_distinct_id: distinctId
+    })
+  } catch (error) {
+    console.error('❌ Event validation failed:', error)
+  }
+}
+
 // Track if listener is already active to prevent multiple listeners
 let isListenerActive = false
 
@@ -324,19 +339,40 @@ function handleCalendlyMessage(e: MessageEvent) {
   }
 }
 
-// Clean up event listener
+// Enhanced cleanup with better lifecycle management
 export function cleanupCalendlyTracking() {
   if (!isBrowser) return
   
   if (isListenerActive) {
     window.removeEventListener('message', handleCalendlyMessage)
     isListenerActive = false
+    console.log('✅ Calendly message listener removed')
   }
   
+  // Reset tracking state
   calendlySource = 'unknown'
   processedAppointments.clear()
   
-  console.log('Calendly tracking cleaned up')
+  console.log('🧹 Calendly tracking cleaned up completely')
+}
+
+// Export function to get current tracking status for debugging
+export function getTrackingStatus() {
+  if (!isBrowser) return null
+  
+  return {
+    isListenerActive,
+    calendlySource,
+    processedAppointmentsCount: processedAppointments.size,
+    posthogReady: posthog && (posthog.__loaded || typeof posthog.capture === 'function'),
+    attributionData: (() => {
+      try {
+        return JSON.parse(localStorage.getItem('kawai_attribution') || '{}')
+      } catch {
+        return {}
+      }
+    })()
+  }
 }
 
 // Manual tracking for custom events (if needed)

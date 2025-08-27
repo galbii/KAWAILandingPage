@@ -19,6 +19,7 @@ export function CountdownTimer() {
   const [isVisible, setIsVisible] = useState(false);
   const [isMinimized, setIsMinimized] = useState(true); // Start minimized
   const [hasScrolled, setHasScrolled] = useState(false);
+  const [hasBeenDismissed, setHasBeenDismissed] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -46,7 +47,7 @@ export function CountdownTimer() {
 
   // Separate effect to handle expansion after scroll
   useEffect(() => {
-    if (hasScrolled && isMinimized) {
+    if (hasScrolled && isMinimized && !hasBeenDismissed) {
       console.log('HasScrolled is true and timer is minimized - starting expansion timer');
       
       const timeout = setTimeout(() => {
@@ -59,7 +60,7 @@ export function CountdownTimer() {
         clearTimeout(timeout);
       };
     }
-  }, [hasScrolled, isMinimized]);
+  }, [hasScrolled, isMinimized, hasBeenDismissed]);
 
   useEffect(() => {
     if (!mounted) return;
@@ -97,6 +98,7 @@ export function CountdownTimer() {
 
   const handleMinimize = () => {
     setIsMinimized(true);
+    setHasBeenDismissed(true);
     // Track minimize action
     trackKawaiEvent.secureSpot('countdown-timer-minimize');
   };
@@ -113,7 +115,7 @@ export function CountdownTimer() {
 
   return (
     <>
-      <div className="fixed bottom-4 right-4 z-40 sm:bottom-6 sm:right-6">
+      <div className="fixed bottom-4 right-4 z-40 sm:bottom-6 sm:right-6" style={{ paddingRight: '12px', paddingTop: '12px' }}>
         {isVisible && (
           <>
             {isMinimized ? (

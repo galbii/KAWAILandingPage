@@ -16,7 +16,7 @@ export default function ValuePropositionSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6 value-prop-grid-mobile">
           
           {/* Modern Technology */}
-          <div className="text-center value-prop-left value-prop-mobile-compact">
+          <div className="text-center value-prop-mobile-compact">
             <div className="mb-4">
               <div className="w-16 h-16 mx-auto bg-white/15 backdrop-blur-sm rounded-3xl flex items-center justify-center border border-white/25 shadow-2xl value-prop-icon">
                 <Cpu className="w-8 h-8 text-white" />
@@ -31,7 +31,7 @@ export default function ValuePropositionSection() {
           </div>
 
           {/* High-Quality Selection */}
-          <div className="text-center value-prop-center value-prop-mobile-compact">
+          <div className="text-center value-prop-mobile-compact">
             <div className="mb-4">
               <div className="w-16 h-16 mx-auto bg-white/15 backdrop-blur-sm rounded-3xl flex items-center justify-center border border-white/25 shadow-2xl value-prop-icon">
                 <Piano className="w-8 h-8 text-white" />
@@ -46,7 +46,7 @@ export default function ValuePropositionSection() {
           </div>
 
           {/* 10 Year Warranty */}
-          <div className="text-center value-prop-right value-prop-mobile-compact">
+          <div className="text-center value-prop-mobile-compact">
             <div className="mb-4">
               <div className="w-16 h-16 mx-auto bg-white/15 backdrop-blur-sm rounded-3xl flex items-center justify-center border border-white/25 shadow-2xl value-prop-icon">
                 <Shield className="w-8 h-8 text-white" />
@@ -63,7 +63,7 @@ export default function ValuePropositionSection() {
         </div>
 
         {/* Subtle Call to Action */}
-        <div className="mt-6 text-center value-prop-cta-section value-prop-cta-mobile">
+        <div className="mt-6 text-center value-prop-cta-mobile">
           <a 
             href="tel:7139040001"
             onClick={() => trackKawaiEvent.callPhone('value_proposition_section')}

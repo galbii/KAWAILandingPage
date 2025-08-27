@@ -1,12 +1,12 @@
 {
   "app/page.tsx -> ./client-page": {
-    "id": 6445,
+    "id": 3473,
     "files": [
       "static/chunks/916-6cbfc60936b5e889.js",
       "static/chunks/584.5bede994c9507221.js",
       "static/chunks/21-5997835b24fda109.js",
-      "static/chunks/293-19f64164e8a2b10c.js",
-      "static/chunks/445.e25d70e5b604e371.js"
+      "static/chunks/249-2c7e86e031ba8ae7.js",
+      "static/chunks/473.1a1ab72c64fa74e6.js"
     ]
   }
 }

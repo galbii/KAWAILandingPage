@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import PianoConsultationDialog from '@/components/PianoConsultationDialog';
 import ImageModal from '@/components/ImageModal';
+import { useIntersectionAnimation } from '@/hooks/useIntersectionAnimation';
 
 export default function AboutEventSection() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,6 +21,20 @@ export default function AboutEventSection() {
     alt: '',
   });
 
+  // Animation hooks
+  const { ref: headerRef, isVisible: headerVisible } = useIntersectionAnimation({
+    threshold: 0.3,
+    rootMargin: '0px 0px -50px 0px'
+  });
+  const { ref: contentRef, isVisible: contentVisible } = useIntersectionAnimation({
+    threshold: 0.2,
+    rootMargin: '0px 0px -100px 0px'
+  });
+  const { ref: galleryRef, isVisible: galleryVisible } = useIntersectionAnimation({
+    threshold: 0.1,
+    rootMargin: '0px 0px -150px 0px'
+  });
+
   const openImageModal = (src: string, alt: string, width?: number, height?: number) => {
     setImageModal({ isOpen: true, src, alt, width, height });
   };
@@ -30,19 +45,17 @@ export default function AboutEventSection() {
   return (
     <>
       {/* Piano Types Header - Moved higher to separate sections */}
-      <div className="py-8 bg-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-6 text-center scroll-animate">
+      <div ref={headerRef} className="py-8 bg-white border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-6 text-center">
           {/* Desktop version - normal text */}
-          <h2 className="hidden md:block text-sm md:text-base font-normal text-gray-500 tracking-wider leading-relaxed opacity-80">
+          <h2 className={`hidden md:block text-sm md:text-base font-normal text-gray-500 tracking-wider leading-relaxed opacity-80 transition-all duration-700 ${headerVisible ? 'translate-y-0 opacity-80' : '-translate-y-5 opacity-0'}`}>
             HOUSTON PIANO SALES | BABY GRANDS | UPRIGHTS | DIGITALS | <span className="text-kawai-red">USED PIANOS HOUSTON</span> | FINANCING AVAILABLE
           </h2>
-          {/* Mobile version - scrolling text */}
-          <div className="md:hidden overflow-hidden relative w-full">
-            <div className="animate-scroll-mobile">
-              <h2 className="text-sm font-normal text-gray-500 tracking-wider leading-relaxed opacity-80 whitespace-nowrap inline-block">
-                HOUSTON PIANO SALES | BABY GRANDS | UPRIGHTS | DIGITALS | <span className="text-kawai-red">USED PIANOS HOUSTON</span> | FINANCING AVAILABLE
-              </h2>
-            </div>
+          {/* Mobile version - wrapped text */}
+          <div className="md:hidden">
+            <h2 className={`text-sm font-normal text-gray-500 tracking-wider leading-relaxed opacity-80 break-words transition-all duration-700 ${headerVisible ? 'translate-y-0 opacity-80' : '-translate-y-5 opacity-0'}`}>
+              HOUSTON PIANO SALES | BABY GRANDS | UPRIGHTS | DIGITALS | <span className="text-kawai-red">USED PIANOS HOUSTON</span> | FINANCING AVAILABLE
+            </h2>
           </div>
         </div>
       </div>
@@ -51,23 +64,23 @@ export default function AboutEventSection() {
         <div className="max-w-7xl mx-auto px-6">
 
         {/* Event Description */}
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6 scroll-animate-left">
+        <div ref={contentRef} className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="space-y-6">
             <div className="flex flex-col items-center text-center mb-6">
               <Image 
                 src="/images/optimized/logos/Kawai-Red.webp"
                 alt="KAWAI Piano Sales Houston - Premium Piano Dealer"
                 width={120}
                 height={64}
-                className="h-16 w-auto mb-4"
+                className={`h-16 w-auto mb-4 transition-all duration-600 delay-200 ${contentVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
               />
-              <h3 className="text-2xl md:text-3xl font-bold tracking-tight">
+              <h3 className={`text-2xl md:text-3xl font-bold tracking-tight transition-all duration-600 delay-400 ${contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                 Houston&apos;s Premier <span className="text-kawai-red">Piano Sale Event</span>
               </h3>
             </div>
 
             {/* Mobile Letter Image - Shown on mobile right after title */}
-            <div className="lg:hidden relative mb-8 scroll-animate">
+            <div className={`lg:hidden relative mb-8 transition-all duration-700 delay-500 ${contentVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
               <Image 
                 src="/images/letter.png"
                 alt="SHSU Houston Piano Sale Event Letter - Piano Deals Houston"
@@ -79,20 +92,20 @@ export default function AboutEventSection() {
             </div>
             
             <div className="space-y-4 text-muted-foreground leading-relaxed">
-              <p className="text-base">
+              <p className={`text-base transition-all duration-600 delay-600 ${contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                 For over five years, our exclusive partnership with Sam Houston State University has made us Houston&apos;s trusted piano dealer, bringing Greater Houston Area families access to premium KAWAI piano sales at specially negotiated pricing.
               </p>
               
-              <p className="text-base">
+              <p className={`text-base transition-all duration-600 delay-750 ${contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                 This four-day exclusive Houston piano sale event features carefully selected digital and acoustic instruments. From used pianos Houston families love to brand new grand pianos, each instrument meets SHSU&apos;s rigorous quality standards for exceptional sound and craftsmanship.
               </p>
               
-              <p className="text-base">
+              <p className={`text-base transition-all duration-600 delay-900 ${contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                 Whether you&apos;re seeking piano deals Houston residents can trust, need piano lessons Houston area, or want professional-grade instruments, this event offers unmatched piano sales Houston has to offer with institutional endorsement.
               </p>
             </div>
 
-            <div className="bg-gradient-to-r from-kawai-red/5 to-tsu-blue/5 rounded-lg p-6 border border-kawai-red/20">
+            <div className={`bg-gradient-to-r from-kawai-red/5 to-tsu-blue/5 rounded-lg p-6 border border-kawai-red/20 transition-all duration-700 delay-1100 ${contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
               <div className="text-center">
                 <h4 className="text-lg font-semibold text-black mb-2">Secure Your Savings</h4>
                 <p className="text-sm text-muted-foreground mb-4">Don&apos;t miss out on exclusive deals, <span className="text-kawai-red/80 font-medium">priority access to our premium selection</span>, <span className="text-kawai-red font-medium">free delivery and tuning</span></p>
@@ -121,7 +134,7 @@ export default function AboutEventSection() {
           </div>
 
           {/* Desktop Letter Image - Hidden on mobile */}
-          <div className="hidden lg:block relative scroll-animate-right">
+          <div className={`hidden lg:block relative transition-all duration-700 delay-700 ${contentVisible ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 translate-x-6 scale-95'}`}>
             <Image 
               src="/images/letter.png"
               alt="SHSU Houston Piano Sale Event Letter - Piano Deals Houston"
@@ -134,12 +147,11 @@ export default function AboutEventSection() {
         </div>
 
         {/* Bento Grid Gallery */}
-        <div className="mt-16">
-          <div className="grid grid-cols-6 gap-0 h-[40rem]">
+        <div ref={galleryRef} className="mt-16 overflow-hidden">
+          <div className="grid grid-cols-6 gap-0 min-h-[40rem] w-full max-w-full">
             {/* KAWAI CA901 - Hero */}
             <div 
-              className="col-span-3 row-span-2 relative overflow-hidden scroll-animate cursor-pointer hover:scale-105 transition-transform duration-300" 
-              style={{ animationDelay: '0.1s' }}
+              className={`col-span-3 row-span-2 relative overflow-hidden cursor-pointer hover:scale-105 transition-all duration-700 ${galleryVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
               onClick={() => openImageModal("/images/optimized/gallery/KAWAI-CA901B-24 copy_800.webp", "KAWAI CA901 Digital Piano", 800, 600)}
             >
               <Image 
@@ -147,15 +159,13 @@ export default function AboutEventSection() {
                 alt="KAWAI CA901 Digital Piano"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover opacity-0 animate-fade-in-slow pointer-events-none"
-                style={{ animationDelay: '0.2s' }}
+                className="object-cover pointer-events-none"
               />
             </div>
 
             {/* KAWAI CA501 */}
             <div 
-              className="col-span-3 row-span-1 relative overflow-hidden scroll-animate cursor-pointer hover:scale-105 transition-transform duration-300" 
-              style={{ animationDelay: '0.3s' }}
+              className={`col-span-3 row-span-1 relative overflow-hidden cursor-pointer hover:scale-105 transition-all duration-600 delay-150 ${galleryVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
               onClick={() => openImageModal("/images/optimized/gallery/KAWAI-CA501W-39 copy_800.webp", "KAWAI CA501 Digital Piano", 800, 600)}
             >
               <Image 
@@ -163,15 +173,13 @@ export default function AboutEventSection() {
                 alt="KAWAI CA501 Digital Piano"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover opacity-0 animate-fade-in-slow pointer-events-none"
-                style={{ animationDelay: '0.6s' }}
+                className="object-cover pointer-events-none"
               />
             </div>
 
             {/* KAWAI CA401 */}
             <div 
-              className="col-span-2 row-span-1 relative overflow-hidden scroll-animate cursor-pointer hover:scale-105 transition-transform duration-300" 
-              style={{ animationDelay: '0.5s' }}
+              className={`col-span-2 row-span-1 relative overflow-hidden cursor-pointer hover:scale-105 transition-all duration-600 delay-300 ${galleryVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
               onClick={() => openImageModal("/images/optimized/gallery/KAWAI_CA401B-43 copy_800.webp", "KAWAI CA401 Digital Piano", 800, 600)}
             >
               <Image 
@@ -179,15 +187,13 @@ export default function AboutEventSection() {
                 alt="KAWAI CA401 Digital Piano"
                 fill
                 sizes="(max-width: 768px) 100vw, 33vw"
-                className="object-cover opacity-0 animate-fade-in-slow pointer-events-none"
-                style={{ animationDelay: '1.0s' }}
+                className="object-cover pointer-events-none"
               />
             </div>
 
             {/* Connectivity */}
             <div 
-              className="col-span-1 row-span-1 relative overflow-hidden scroll-animate cursor-pointer hover:scale-105 transition-transform duration-300" 
-              style={{ animationDelay: '0.7s' }}
+              className={`col-span-1 row-span-1 relative overflow-hidden cursor-pointer hover:scale-105 transition-all duration-600 delay-450 ${galleryVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
               onClick={() => openImageModal("/images/optimized/gallery/connectivity_800.webp", "Connectivity Features", 800, 600)}
             >
               <Image 
@@ -195,15 +201,13 @@ export default function AboutEventSection() {
                 alt="Connectivity Features"
                 fill
                 sizes="(max-width: 768px) 100vw, 16vw"
-                className="object-cover opacity-0 animate-fade-in-slow pointer-events-none"
-                style={{ animationDelay: '1.4s' }}
+                className="object-cover pointer-events-none"
               />
             </div>
 
             {/* CA401 Supplement */}
             <div 
-              className="col-span-3 row-span-1 relative overflow-hidden scroll-animate cursor-pointer hover:scale-105 transition-transform duration-300" 
-              style={{ animationDelay: '0.9s' }}
+              className={`col-span-3 row-span-1 relative overflow-hidden cursor-pointer hover:scale-105 transition-all duration-600 delay-600 ${galleryVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
               onClick={() => openImageModal("/images/optimized/gallery/CA401 Supplement Image_800.webp", "KAWAI CA401 Supplement", 800, 600)}
             >
               <Image 
@@ -211,15 +215,13 @@ export default function AboutEventSection() {
                 alt="KAWAI CA401 Supplement"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover opacity-0 animate-fade-in-slow pointer-events-none"
-                style={{ animationDelay: '1.8s' }}
+                className="object-cover pointer-events-none"
               />
             </div>
 
             {/* CA701R */}
             <div 
-              className="col-span-2 row-span-1 relative overflow-hidden scroll-animate cursor-pointer hover:scale-105 transition-transform duration-300" 
-              style={{ animationDelay: '1.1s' }}
+              className={`col-span-2 row-span-1 relative overflow-hidden cursor-pointer hover:scale-105 transition-all duration-600 delay-750 ${galleryVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
               onClick={() => openImageModal("/images/optimized/gallery/CA701R-43 copy_800.webp", "KAWAI CA701R Digital Piano", 800, 600)}
             >
               <Image 
@@ -227,15 +229,13 @@ export default function AboutEventSection() {
                 alt="KAWAI CA701R Digital Piano"
                 fill
                 sizes="(max-width: 768px) 100vw, 33vw"
-                className="object-cover opacity-0 animate-fade-in-slow pointer-events-none"
-                style={{ animationDelay: '2.2s' }}
+                className="object-cover pointer-events-none"
               />
             </div>
 
             {/* SK Series */}
             <div 
-              className="col-span-1 row-span-1 relative overflow-hidden scroll-animate cursor-pointer hover:scale-105 transition-transform duration-300" 
-              style={{ animationDelay: '1.3s' }}
+              className={`col-span-1 row-span-1 relative overflow-hidden cursor-pointer hover:scale-105 transition-all duration-600 delay-900 ${galleryVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
               onClick={() => openImageModal("/images/optimized/gallery/SK_800.webp", "KAWAI SK Series", 800, 600)}
             >
               <Image 
@@ -243,8 +243,7 @@ export default function AboutEventSection() {
                 alt="KAWAI SK Series"
                 fill
                 sizes="(max-width: 768px) 100vw, 16vw"
-                className="object-cover opacity-0 animate-fade-in-slow pointer-events-none"
-                style={{ animationDelay: '2.6s' }}
+                className="object-cover pointer-events-none"
               />
             </div>
           </div>

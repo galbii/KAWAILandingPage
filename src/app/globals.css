@@ -690,97 +690,7 @@ body {
   }
 }
 
-/* Enhanced Value Proposition Animations */
-.value-prop-left {
-  opacity: 0;
-  transform: translateX(-40px) scale(0.95);
-  transition: all 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  will-change: opacity, transform;
-}
 
-.value-prop-left.scroll-visible {
-  opacity: 1;
-  transform: translateX(0) scale(1);
-}
-
-.value-prop-center {
-  opacity: 0;
-  transform: scale(0.9) translateY(30px);
-  transition: all 1.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-  will-change: opacity, transform;
-}
-
-.value-prop-center.scroll-visible {
-  opacity: 1;
-  transform: scale(1) translateY(0);
-}
-
-.value-prop-right {
-  opacity: 0;
-  transform: translateX(40px) scale(0.95);
-  transition: all 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  will-change: opacity, transform;
-}
-
-.value-prop-right.scroll-visible {
-  opacity: 1;
-  transform: translateX(0) scale(1);
-}
-
-/* Enhanced icon animations */
-.value-prop-icon {
-  transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-  will-change: transform;
-}
-
-.value-prop-left.scroll-visible .value-prop-icon {
-  animation: iconSpinIn 1.2s ease-out 0.6s both;
-}
-
-.value-prop-center.scroll-visible .value-prop-icon {
-  animation: iconBounceScale 1.4s ease-out 0.8s both;
-}
-
-.value-prop-right.scroll-visible .value-prop-icon {
-  animation: iconSlideRotate 1.2s ease-out 1.0s both;
-}
-
-/* Enhanced text animations */
-.value-prop-title {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.value-prop-left.scroll-visible .value-prop-title {
-  animation: textFadeUp 0.8s ease-out 1.0s both;
-}
-
-.value-prop-center.scroll-visible .value-prop-title {
-  animation: textFadeUp 0.8s ease-out 1.2s both;
-}
-
-.value-prop-right.scroll-visible .value-prop-title {
-  animation: textFadeUp 0.8s ease-out 1.4s both;
-}
-
-.value-prop-desc {
-  opacity: 0;
-  transform: translateY(15px);
-  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.value-prop-left.scroll-visible .value-prop-desc {
-  animation: textSlideUp 0.6s ease-out 1.2s both;
-}
-
-.value-prop-center.scroll-visible .value-prop-desc {
-  animation: textSlideUp 0.6s ease-out 1.4s both;
-}
-
-.value-prop-right.scroll-visible .value-prop-desc {
-  animation: textSlideUp 0.6s ease-out 1.6s both;
-}
 
 /* Enhanced card hover effects */
 .value-prop-card {
@@ -816,86 +726,9 @@ body {
   left: 100%;
 }
 
-/* Keyframe animations */
-@keyframes iconSpinIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.5) rotate(-90deg);
-  }
-  70% {
-    transform: scale(1.1) rotate(10deg);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) rotate(0deg);
-  }
-}
 
-@keyframes iconBounceScale {
-  0% {
-    opacity: 0;
-    transform: scale(0);
-  }
-  50% {
-    transform: scale(1.3);
-  }
-  70% {
-    transform: scale(0.9);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes iconSlideRotate {
-  0% {
-    opacity: 0;
-    transform: translateX(20px) rotate(45deg) scale(0.7);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0) rotate(0deg) scale(1);
-  }
-}
-
-@keyframes textFadeUp {
-  0% {
-    opacity: 0;
-    transform: translateY(25px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes textSlideUp {
-  0% {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Mobile optimizations */
+/* Mobile value proposition styles */
 @media (max-width: 768px) {
-  .value-prop-left,
-  .value-prop-center,
-  .value-prop-right {
-    transform: translateY(20px) scale(0.95);
-    margin-bottom: 0;
-  }
-  
-  .value-prop-left.scroll-visible,
-  .value-prop-center.scroll-visible,
-  .value-prop-right.scroll-visible {
-    transform: translateY(0) scale(1);
-  }
-  
   /* Ultra-compact mobile layout for value propositions */
   .value-prop-mobile-compact .value-prop-icon {
     width: 3rem !important;
@@ -957,18 +790,6 @@ body {
   }
 }
 
-/* Enhanced CTA Section */
-.value-prop-cta-section {
-  opacity: 0;
-  transform: translateY(40px) scale(0.95);
-  transition: all 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-  will-change: opacity, transform;
-}
-
-.value-prop-cta-section.scroll-visible {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
 
 .elegant-cta-card {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
@@ -1205,6 +1026,149 @@ body {
   }
 }
 
+/* === Modern Hero Section Animations (2025) === */
+
+/* Sophisticated Staggered Entrance */
+@keyframes heroEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.96);
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+@keyframes heroEntranceSubtle {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Typography Reveal Animations */
+@keyframes letterReveal {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.8);
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+@keyframes wordReveal {
+  from {
+    opacity: 0;
+    transform: translateY(25px) scale(0.9);
+    filter: blur(1px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+/* Enhanced Floating Animation */
+@keyframes premiumFloat {
+  0%, 100% {
+    transform: translateY(0) rotateZ(0deg);
+  }
+  25% {
+    transform: translateY(-8px) rotateZ(0.5deg);
+  }
+  50% {
+    transform: translateY(-12px) rotateZ(0deg);
+  }
+  75% {
+    transform: translateY(-8px) rotateZ(-0.5deg);
+  }
+}
+
+/* Subtle Parallax Enhancements */
+@keyframes parallaxSlow {
+  from {
+    transform: translateY(0) scale(1);
+  }
+  to {
+    transform: translateY(-20px) scale(1.02);
+  }
+}
+
+@keyframes parallaxMedium {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-40px);
+  }
+}
+
+/* Button Enhancement Animations */
+@keyframes buttonHoverLift {
+  from {
+    transform: translateY(0) scale(1);
+    box-shadow: 0 4px 12px rgba(204, 0, 0, 0.2);
+  }
+  to {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(204, 0, 0, 0.4);
+  }
+}
+
+@keyframes buttonRipple {
+  from {
+    transform: scale(0);
+    opacity: 1;
+  }
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Luxury Glow Effects */
+@keyframes luxuryGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.1), 0 0 40px rgba(255, 215, 0, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.2), 0 0 60px rgba(255, 215, 0, 0.2);
+  }
+}
+
+@keyframes subtleShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Event Urgency Animations */
+@keyframes urgencyPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 15px rgba(239, 68, 68, 0);
+  }
+}
+
 /* Mobile CTA Optimizations */
 @media (max-width: 768px) {
   .elegant-cta-card {
@@ -1226,35 +1190,6 @@ body {
   }
 }
 
-/* Accessibility */
-@media (prefers-reduced-motion: reduce) {
-  .value-prop-left,
-  .value-prop-center,
-  .value-prop-right,
-  .value-prop-title,
-  .value-prop-desc,
-  .value-prop-cta-section {
-    transition: opacity 0.3s ease !important;
-    transform: none !important;
-  }
-  
-  .value-prop-icon,
-  .value-prop-card,
-  .elegant-cta-card,
-  .elegant-phone-button {
-    animation: none !important;
-    transition: opacity 0.3s ease !important;
-  }
-  
-  .cta-subtitle,
-  .cta-description,
-  .cta-button-wrapper,
-  .cta-footer {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-  }
-}
 
 /* Countdown Timer Styles */
 .timer-glassmorphism {
@@ -1272,6 +1207,7 @@ body {
   max-width: 200px;
   width: auto;
   position: relative;
+  overflow: visible;
 }
 
 .timer-slide-in {
@@ -1376,10 +1312,10 @@ body {
 
 .timer-close-btn {
   position: absolute;
-  top: -8px;
-  right: -8px;
-  width: 20px;
-  height: 20px;
+  top: 4px;
+  right: 4px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -1389,7 +1325,7 @@ body {
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s ease-out;
-  z-index: 10;
+  z-index: 1001;
 }
 
 .timer-close-btn:hover {
@@ -1580,59 +1516,6 @@ body {
   transform: translateY(var(--scroll-offset-fast, 0));
 }
 
-/* Scroll-triggered Animations */
-.scroll-animate {
-  opacity: 0;
-  transform: translateY(8px);
-  transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  will-change: opacity, transform;
-}
-
-.scroll-animate.scroll-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.scroll-animate-left {
-  opacity: 0;
-  transform: translateX(-12px);
-  transition: all 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.scroll-animate-left.scroll-visible {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.scroll-animate-right {
-  opacity: 0;
-  transform: translateX(12px);
-  transition: all 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.scroll-animate-right.scroll-visible {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.scroll-animate-scale {
-  opacity: 0;
-  transform: scale(0.98);
-  transition: all 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.scroll-animate-scale.scroll-visible {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* Staggered Animation Delays */
-.scroll-animate:nth-child(1) { transition-delay: 0ms; }
-.scroll-animate:nth-child(2) { transition-delay: 200ms; }
-.scroll-animate:nth-child(3) { transition-delay: 400ms; }
-.scroll-animate:nth-child(4) { transition-delay: 600ms; }
-.scroll-animate:nth-child(5) { transition-delay: 800ms; }
-.scroll-animate:nth-child(6) { transition-delay: 1000ms; }
 
 /* Smooth Scrolling */
 html {
@@ -1644,11 +1527,7 @@ html {
     scroll-behavior: auto;
   }
   
-  .parallax-element,
-  .scroll-animate,
-  .scroll-animate-left,
-  .scroll-animate-right,
-  .scroll-animate-scale {
+  .parallax-element {
     transform: none !important;
     opacity: 1 !important;
     transition: none !important;
@@ -1733,6 +1612,146 @@ html {
   animation: morphBounce 1s ease-out;
 }
 
+/* === Modern Hero Animation Classes === */
+
+/* Staggered Entrance Effects */
+.animate-hero-entrance {
+  animation: heroEntrance 1.0s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.animate-hero-entrance-subtle {
+  animation: heroEntranceSubtle 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Typography Reveal Classes */
+.animate-letter-reveal {
+  animation: letterReveal 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.animate-word-reveal {
+  animation: wordReveal 1.0s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Enhanced Floating */
+.animate-premium-float {
+  animation: premiumFloat 6s ease-in-out infinite;
+}
+
+/* Subtle Parallax */
+.parallax-slow-enhanced {
+  animation: parallaxSlow 0.6s ease-out forwards;
+}
+
+.parallax-medium-enhanced {
+  animation: parallaxMedium 0.8s ease-out forwards;
+}
+
+/* Button Enhancements */
+.btn-luxury-hover {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.btn-luxury-hover::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+  transition: all 0.6s ease;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.btn-luxury-hover:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn-luxury-hover:hover {
+  animation: buttonHoverLift 0.3s ease-out forwards;
+}
+
+/* Luxury Glow Effects */
+.animate-luxury-glow {
+  animation: luxuryGlow 4s ease-in-out infinite;
+}
+
+/* Subtle Shimmer Effect */
+.shimmer-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: subtleShimmer 3s ease-in-out infinite;
+}
+
+/* Urgency Animation */
+.animate-urgency {
+  animation: urgencyPulse 2s ease-in-out infinite;
+}
+
+/* Advanced Animation Delays for Staggered Effects */
+.animate-delay-50 { animation-delay: 0.05s; }
+.animate-delay-75 { animation-delay: 0.075s; }
+.animate-delay-150 { animation-delay: 0.15s; }
+.animate-delay-250 { animation-delay: 0.25s; }
+.animate-delay-350 { animation-delay: 0.35s; }
+.animate-delay-450 { animation-delay: 0.45s; }
+.animate-delay-550 { animation-delay: 0.55s; }
+.animate-delay-650 { animation-delay: 0.65s; }
+.animate-delay-750 { animation-delay: 0.75s; }
+.animate-delay-850 { animation-delay: 0.85s; }
+.animate-delay-950 { animation-delay: 0.95s; }
+.animate-delay-1000 { animation-delay: 1s; }
+.animate-delay-1100 { animation-delay: 1.1s; }
+.animate-delay-1200 { animation-delay: 1.2s; }
+
+/* Accessibility - Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-entrance,
+  .animate-hero-entrance-subtle,
+  .animate-letter-reveal,
+  .animate-word-reveal,
+  .animate-premium-float,
+  .parallax-slow-enhanced,
+  .parallax-medium-enhanced,
+  .animate-luxury-glow,
+  .shimmer-effect::before,
+  .animate-urgency {
+    animation: none;
+    transition: none;
+  }
+  
+  /* Provide instant visibility for reduced motion users */
+  .animate-hero-entrance,
+  .animate-hero-entrance-subtle,
+  .animate-letter-reveal,
+  .animate-word-reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+  
+  /* Keep hover effects but make them instant */
+  .btn-luxury-hover:hover {
+    animation: none;
+    transform: translateY(-2px) scale(1.01);
+  }
+}
+
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
   width: 8px;
@@ -1802,8 +1821,7 @@ html {
 
 /* Ensure all containers respect viewport width */
 .container, 
-section, 
-div:not([class*="absolute"]):not([class*="fixed"]) {
+section {
   max-width: 100vw;
   overflow-x: hidden;
 }
