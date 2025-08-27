@@ -22,15 +22,15 @@ export default function AboutEventSection() {
   });
 
   // Animation hooks
-  const { ref: headerRef, isVisible: headerVisible } = useIntersectionAnimation({
+  const { ref: headerRef, isVisible: headerVisible } = useIntersectionAnimation<HTMLDivElement>({
     threshold: 0.3,
     rootMargin: '0px 0px -50px 0px'
   });
-  const { ref: contentRef, isVisible: contentVisible } = useIntersectionAnimation({
+  const { ref: contentRef, isVisible: contentVisible } = useIntersectionAnimation<HTMLDivElement>({
     threshold: 0.2,
     rootMargin: '0px 0px -100px 0px'
   });
-  const { ref: galleryRef, isVisible: galleryVisible } = useIntersectionAnimation({
+  const { ref: galleryRef, isVisible: galleryVisible } = useIntersectionAnimation<HTMLDivElement>({
     threshold: 0.1,
     rootMargin: '0px 0px -150px 0px'
   });

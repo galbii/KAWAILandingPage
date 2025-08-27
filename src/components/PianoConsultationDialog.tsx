@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -20,64 +20,7 @@ export default function PianoConsultationDialog({ isOpen, onClose }: PianoConsul
   const { trackBookingAttempt } = usePostHog();
   const calendlyContainerRef = useRef<HTMLDivElement>(null);
   
-  useEffect(() => {
-    if (isOpen) {
-      // PostHog: Track consultation modal opened
-      trackBookingAttempt({
-        bookingSource: 'modal',
-        calendlyStatus: 'opened'
-      });
-
-      // Use the preloaded widget instead of initializing a new one
-      console.log('🚀 Using preloaded Calendly widget for instant display');
-      movePreloadedWidget();
-    }
-
-    return () => {
-      if (isOpen) {
-        // PostHog: Track consultation modal closed/abandoned
-        trackBookingAttempt({
-          bookingSource: 'modal',
-          calendlyStatus: 'abandoned',
-          abandonmentStage: 'modal_close'
-        });
-
-        // Return the widget to the preloader when modal closes
-        returnWidgetToPreloader();
-      }
-    };
-  }, [isOpen, trackBookingAttempt]);
-
-  const movePreloadedWidget = () => {
-    const preloadedWidget = document.getElementById('calendly-preloaded-widget');
-    const modalContainer = calendlyContainerRef.current;
-
-    console.log('🔍 Checking for preloaded widget...', {
-      preloadedWidget: !!preloadedWidget,
-      modalContainer: !!modalContainer,
-      preloadedContent: preloadedWidget?.innerHTML?.length || 0
-    });
-
-    if (preloadedWidget && modalContainer && preloadedWidget.innerHTML.trim().length > 0) {
-      // Move the preloaded widget content to the modal
-      const widgetContent = preloadedWidget.innerHTML;
-      modalContainer.innerHTML = widgetContent;
-
-      // Apply modal-specific styles
-      modalContainer.style.width = '100%';
-      modalContainer.style.height = '100%';
-      modalContainer.style.position = 'relative';
-      modalContainer.style.minWidth = '320px';
-      
-      console.log('✅ Preloaded widget moved to modal - instant display!');
-    } else {
-      console.warn('⚠️ Preloaded widget not ready, initializing new widget...');
-      // Fallback: initialize a new widget
-      initializeFallbackWidget();
-    }
-  };
-
-  const initializeFallbackWidget = () => {
+  const initializeFallbackWidget = useCallback(() => {
     console.log('🔄 Initializing fallback Calendly widget...');
     
     // Initialize tracking
@@ -110,9 +53,38 @@ export default function PianoConsultationDialog({ isOpen, onClose }: PianoConsul
     };
     
     waitForCalendly();
-  };
+  }, []);
 
-  const returnWidgetToPreloader = () => {
+  const movePreloadedWidget = useCallback(() => {
+    const preloadedWidget = document.getElementById('calendly-preloaded-widget');
+    const modalContainer = calendlyContainerRef.current;
+
+    console.log('🔍 Checking for preloaded widget...', {
+      preloadedWidget: !!preloadedWidget,
+      modalContainer: !!modalContainer,
+      preloadedContent: preloadedWidget?.innerHTML?.length || 0
+    });
+
+    if (preloadedWidget && modalContainer && preloadedWidget.innerHTML.trim().length > 0) {
+      // Move the preloaded widget content to the modal
+      const widgetContent = preloadedWidget.innerHTML;
+      modalContainer.innerHTML = widgetContent;
+
+      // Apply modal-specific styles
+      modalContainer.style.width = '100%';
+      modalContainer.style.height = '100%';
+      modalContainer.style.position = 'relative';
+      modalContainer.style.minWidth = '320px';
+      
+      console.log('✅ Preloaded widget moved to modal - instant display!');
+    } else {
+      console.warn('⚠️ Preloaded widget not ready, initializing new widget...');
+      // Fallback: initialize a new widget
+      initializeFallbackWidget();
+    }
+  }, [initializeFallbackWidget]);
+
+  const returnWidgetToPreloader = useCallback(() => {
     const preloadedWidget = document.getElementById('calendly-preloaded-widget');
     const modalContainer = calendlyContainerRef.current;
 
@@ -126,7 +98,35 @@ export default function PianoConsultationDialog({ isOpen, onClose }: PianoConsul
     
     // Clean up tracking
     cleanupCalendlyTracking();
-  };
+  }, []);
+
+  useEffect(() => {
+    if (isOpen) {
+      // PostHog: Track consultation modal opened
+      trackBookingAttempt({
+        bookingSource: 'modal',
+        calendlyStatus: 'opened'
+      });
+
+      // Use the preloaded widget instead of initializing a new one
+      console.log('🚀 Using preloaded Calendly widget for instant display');
+      movePreloadedWidget();
+    }
+
+    return () => {
+      if (isOpen) {
+        // PostHog: Track consultation modal closed/abandoned
+        trackBookingAttempt({
+          bookingSource: 'modal',
+          calendlyStatus: 'abandoned',
+          abandonmentStage: 'modal_close'
+        });
+
+        // Return the widget to the preloader when modal closes
+        returnWidgetToPreloader();
+      }
+    };
+  }, [isOpen, trackBookingAttempt, movePreloadedWidget, returnWidgetToPreloader]);
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>

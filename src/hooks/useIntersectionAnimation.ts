@@ -8,10 +8,10 @@ interface UseIntersectionAnimationOptions {
   triggerOnce?: boolean;
 }
 
-export function useIntersectionAnimation(options: UseIntersectionAnimationOptions = {}) {
+export function useIntersectionAnimation<T extends HTMLElement = HTMLElement>(options: UseIntersectionAnimationOptions = {}) {
   const { threshold = 0.1, rootMargin = '0px 0px -50px 0px', triggerOnce = true } = options;
   const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<T>(null);
 
   useEffect(() => {
     const element = ref.current;
