@@ -63,6 +63,8 @@ const nextConfig: NextConfig = {
                 https://us-assets.i.posthog.com 
                 https://us.i.posthog.com 
                 https://static.ctctcdn.com 
+                https://listgrowth.ctctcdn.com 
+                https://api.constantcontact.com 
                 https://visitor.constantcontact.com 
                 https://www.google-analytics.com 
                 https://www.google.com
@@ -85,7 +87,10 @@ const nextConfig: NextConfig = {
                 https://googleads.g.doubleclick.net 
                 https://www.googleadservices.com
                 https://www.google.com
-                https://www.gstatic.com;
+                https://www.gstatic.com
+                https://static.ctctcdn.com
+                https://listgrowth.ctctcdn.com
+                https://visitor.constantcontact.com;
               frame-src 'self' 
                 https://calendly.com 
                 https://assets.calendly.com 
@@ -103,7 +108,8 @@ const nextConfig: NextConfig = {
                 https://us-assets.i.posthog.com
                 https://business.facebook.com
                 https://www.facebook.com;
-              style-src 'self' 'unsafe-inline';
+              style-src 'self' 'unsafe-inline' 
+                https://static.ctctcdn.com;
               font-src 'self' data:;
               object-src 'none';
               base-uri 'self';
