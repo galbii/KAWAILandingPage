@@ -106,8 +106,8 @@ function PianoSection({ piano, index }: PianoSectionProps) {
                 </h2>
               </div>
               
-              {/* Pricing Section - Hidden for now */}
-              <div className="space-y-2 hidden">
+              {/* Pricing Section */}
+              <div className="space-y-2">
                 <div className="flex items-center gap-3">
                   <span className="text-lg text-gray-500 line-through">
                     ${piano.originalPrice.toLocaleString()}

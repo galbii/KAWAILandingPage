@@ -165,15 +165,15 @@ function handleCalendlyEvent(event: CalendlyEvent) {
       // Track with Google Analytics and other platforms
       trackKawaiEvent.calendlyInteraction('time_selected', calendlySource)
       
-      // Track with PostHog for funnel analysis
+      // Track with PostHog for funnel analysis using proper schema
       eventMonitor.capture(POSTHOG_CONFIG.EVENTS.CONSULTATION_BOOKING_ATTEMPT, {
         booking_source: calendlySource,
         calendly_status: 'time_selected',
         user_type: localStorage.getItem('kawai_returning_user') === 'true' ? 'returning' : 'new',
-        interaction_timestamp: new Date().toISOString(),
-        calendly_event_data: event,
-        funnel_step: 'time_selection',
-        engagement_level: 'high'
+        // Optional contextual properties for funnel analysis
+        models_viewed_count: parseInt(localStorage.getItem('kawai_pianos_viewed') || '0'),
+        session_quality: parseInt(localStorage.getItem('kawai_session_quality') || '75'), // Higher quality for time selection
+        total_interactions: parseInt(localStorage.getItem('kawai_total_interactions') || '2')
       })
       
       console.log('✅ Time selection tracked in PostHog and analytics')
@@ -205,35 +205,56 @@ function handleCalendlyEvent(event: CalendlyEvent) {
         trackKawaiEvent.calendlyConversion(calendlySource)
         console.log('✅ Cross-platform conversion tracking completed')
         
-        // Enhanced PostHog tracking with validation
+        // Enhanced PostHog tracking with proper validation schema
         const enhancedEventData = {
           booking_source: calendlySource,
           calendly_status: 'completed',
           user_type: localStorage.getItem('kawai_returning_user') === 'true' ? 'returning' : 'new',
-          completion_timestamp: new Date().toISOString(),
-          event_type: event.event,
-          booking_uuid: bookingUUID,
-          // Extract booking details from payload
-          event_uri: event.payload?.event?.uri || 'unknown',
-          invitee_uri: event.payload?.invitee?.uri || 'unknown',
-          has_payload: !!event.payload,
-          calendly_event_data: event,
-          is_duplicate: false
+          // Optional contextual properties for funnel analysis
+          models_viewed_count: parseInt(localStorage.getItem('kawai_pianos_viewed') || '0'),
+          session_quality: parseInt(localStorage.getItem('kawai_session_quality') || '50'),
+          total_interactions: parseInt(localStorage.getItem('kawai_total_interactions') || '1')
         }
         
         // Primary PostHog tracking with error handling
         try {
+          // Track the booking attempt completion
           eventMonitor.capture(POSTHOG_CONFIG.EVENTS.CONSULTATION_BOOKING_ATTEMPT, enhancedEventData)
             .then(result => {
-              console.log('✅ PostHog event captured successfully:', result)
+              console.log('✅ PostHog booking attempt event captured successfully:', result)
+            })
+            .catch(error => {
+              console.error('❌ PostHog booking attempt event capture failed:', error)
+              // Fallback to direct capture
+              posthog.capture(POSTHOG_CONFIG.EVENTS.CONSULTATION_BOOKING_ATTEMPT, enhancedEventData)
+            })
+
+          // Also track the actual Calendly appointment with detailed data
+          const appointmentData = {
+            booking_id: bookingUUID,
+            invitee_name: 'Contact Information Provided', // Privacy-safe generic value
+            invitee_email: 'contact@calendly-form.com', // Privacy-safe generic value
+            event_type_name: 'KAWAI Piano Consultation',
+            scheduled_time: new Date().toISOString(),
+            duration_minutes: 30,
+            location_type: 'video_call',
+            booking_source: calendlySource,
+            calendly_event_type: event.event,
+            additional_notes: `Calendly event: ${event.event}, Source: ${calendlySource}`,
+            lead_score: parseInt(localStorage.getItem('kawai_session_quality') || '50')
+          }
+          
+          eventMonitor.capture(POSTHOG_CONFIG.EVENTS.CALENDLY_APPOINTMENT_BOOKED, appointmentData)
+            .then(result => {
+              console.log('✅ PostHog appointment event captured successfully:', result)
               
               // Validate event was received
               setTimeout(() => validateEventDelivery(bookingUUID), 2000)
             })
             .catch(error => {
-              console.error('❌ PostHog event capture failed:', error)
+              console.error('❌ PostHog appointment event capture failed:', error)
               // Fallback to direct capture
-              posthog.capture(POSTHOG_CONFIG.EVENTS.CONSULTATION_BOOKING_ATTEMPT, enhancedEventData)
+              posthog.capture(POSTHOG_CONFIG.EVENTS.CALENDLY_APPOINTMENT_BOOKED, appointmentData)
             })
         } catch (error) {
           console.error('❌ PostHog tracking error:', error)
