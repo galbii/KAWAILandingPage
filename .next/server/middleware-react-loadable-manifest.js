@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST='{"app/page.tsx -> ./client-page":{"id":3473,"files":["static/chunks/916-6cbfc60936b5e889.js","static/chunks/584.5bede994c9507221.js","static/chunks/21-5997835b24fda109.js","static/chunks/249-15bdeb0e033cc0a0.js","static/chunks/473.8b274560dbc70fe2.js"]}}';
+self.__REACT_LOADABLE_MANIFEST="{\"app/page.tsx -> ./client-page\":{\"id\":\"app/page.tsx -> ./client-page\",\"files\":[\"static/chunks/_app-pages-browser_src_app_client-page_tsx.js\"]}}"

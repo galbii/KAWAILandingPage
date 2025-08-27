@@ -6,7 +6,7 @@ export interface Piano {
   originalPrice: string;
   savings: string;
   monthlyPayment: string;
-  remaining: number;
+  remaining: string;
   features: string[];
   badge: string;
   image: string;
@@ -23,7 +23,7 @@ export const pianos: Piano[] = [
     originalPrice: "$1,099",
     savings: "$150",
     monthlyPayment: "$79",
-    remaining: 12,
+    remaining: "3 more",
     features: ["88 Weighted Keys", "Premium Sound Engine", "Bluetooth Ready", "SHSU Approved"],
     badge: "STUDENT FAVORITE",
     image: "/images/optimized/pianos/es120.webp",
@@ -38,7 +38,7 @@ export const pianos: Piano[] = [
     originalPrice: "$1,399",
     savings: "$400",
     monthlyPayment: "$83",
-    remaining: 8,
+    remaining: "5 more",
     features: ["88 Keys", "Bluetooth Ready", "App Compatible", "Faculty Choice"],
     badge: "BEST VALUE",
     image: "/images/optimized/pianos/ES520W_above_1200.webp",
@@ -53,7 +53,7 @@ export const pianos: Piano[] = [
     originalPrice: "$8,395",
     savings: "$2,005",
     monthlyPayment: "$532",
-    remaining: 4,
+    remaining: "2 more",
     features: ["Perfect Home Size", "Rich Acoustic Tone", "SHSU Standard", "Free Setup"],
     badge: "FAMILY FAVORITE",
     image: "/images/optimized/pianos/K-200_EP_styling_1200.webp",
@@ -68,7 +68,7 @@ export const pianos: Piano[] = [
     originalPrice: "$18,995",
     savings: "$6,045",
     monthlyPayment: "$1,079",
-    remaining: 2,
+    remaining: "1 more",
     features: ["Performance Grade", "Concert Quality", "Faculty Approved", "White Glove Delivery"],
     badge: "PREMIUM SELECTION",
     image: "/images/optimized/pianos/GL10_1200.webp",

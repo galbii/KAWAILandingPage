@@ -1,31 +1,38 @@
 # Calendly Integration Implementation Guide
 
-This document outlines the comprehensive Calendly integration implementation for the KAWAI Piano Landing Page, including widget management, event tracking, and PostHog analytics integration.
+This document outlines the comprehensive Calendly integration implementation for the KAWAI Piano Landing Page, including inline widget display, event tracking, and PostHog analytics integration.
 
 ## 🎯 Overview
 
-The Calendly integration provides a seamless booking experience for piano consultations with:
-- **Preloaded widget system** for instant display
+The Calendly integration provides a seamless inline booking experience for piano consultations with:
+- **Inline widget display** directly on the page in a dedicated booking section
+- **Lazy loading** for optimal performance (loads when section becomes visible)
 - **Multi-platform analytics tracking** (PostHog, Google Analytics, Meta Pixel)
 - **Advanced event deduplication** and validation
 - **Attribution tracking** across user journey
-- **Modal and inline widget support**
+- **Background preloader** for enhanced performance
 
 ## 📋 Architecture
 
 ### Core Components
 
-#### 1. Widget Management (`PianoConsultationDialog.tsx`)
-- **Preloaded widget system**: Widget loads in background for instant modal display
-- **Modal container**: Responsive dialog with proper accessibility
+#### 1. Inline Widget Display (`BookingSection.tsx`)
+- **Lazy loading**: Widget loads only when section comes into view (intersection observer)
+- **Responsive container**: Full-width inline display with proper height
+- **Loading states**: Skeleton loading and progress indicators
 - **Error handling**: Graceful fallbacks for widget initialization failures
 
-#### 2. Event Tracking (`calendly-tracking.ts`)
+#### 2. Background Preloader (`CalendlyPreloader.tsx`)
+- **Hidden widget preloading**: Loads widget in background for performance optimization
+- **Attribution setup**: Initializes tracking before widget interaction
+- **Script dependency management**: Ensures Calendly scripts are ready
+
+#### 3. Event Tracking (`calendly-tracking.ts`)
 - **PostMessage listener**: Captures Calendly events via `window.postMessage()`
 - **Event validation**: Ensures data quality and prevents duplicates
 - **Multi-platform tracking**: Synchronized analytics across platforms
 
-#### 3. Analytics Integration (`usePostHog.ts`)
+#### 4. Analytics Integration (`usePostHog.ts`)
 - **Session quality scoring**: Behavioral analysis for lead qualification
 - **User identification**: Cross-session tracking and attribution
 - **Feature flag integration**: A/B testing support
@@ -91,28 +98,111 @@ Based on Calendly's official documentation, we track these events:
 
 ## 🔧 Implementation Details
 
-### Widget Preloading System
+### Inline Widget Display System
 
 ```typescript
-// Background widget preloading for instant modal display
+// Main booking section with lazy loading
+const BookingSection = () => {
+  const [shouldLoadCalendly, setShouldLoadCalendly] = useState(false);
+  const [isCalendlyLoaded, setIsCalendlyLoaded] = useState(false);
+  const calendlyContainerRef = useRef<HTMLDivElement>(null);
+
+  // Lazy loading with intersection observer
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoadCalendly(true);
+        }
+      },
+      { threshold: 0.3, rootMargin: '100px' }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Initialize widget when section becomes visible
+  useEffect(() => {
+    if (!shouldLoadCalendly) return;
+
+    const initializeWidget = () => {
+      if (calendlyContainerRef.current && window.Calendly) {
+        window.Calendly.initInlineWidget({
+          url: 'https://calendly.com/kawaipianogallery/shsu-piano-sale',
+          parentElement: calendlyContainerRef.current,
+          utm: {
+            utmSource: 'kawai-landing-page',
+            utmMedium: 'booking-section',
+            utmCampaign: 'shsu-piano-sale-2025'
+          }
+        });
+        setIsCalendlyLoaded(true);
+      }
+    };
+
+    // Initialize tracking and widget
+    initializeCalendlyTracking('booking_section');
+    initializeWidget();
+  }, [shouldLoadCalendly]);
+
+  return (
+    <section id="booking-consultation" className="bg-white py-16">
+      <div className="max-w-7xl mx-auto px-6">
+        {/* Loading skeleton */}
+        {!isCalendlyLoaded && shouldLoadCalendly && <LoadingSkeleton />}
+        
+        {/* Calendly widget container */}
+        <div 
+          ref={calendlyContainerRef}
+          className="calendly-inline-widget-container"
+          style={{ 
+            minWidth: '320px',
+            width: '100%',
+            height: '600px'
+          }}
+        />
+      </div>
+    </section>
+  );
+};
+```
+
+### Background Preloader System
+
+```typescript
+// Background widget preloading for performance optimization
 const CalendlyPreloader = () => {
   useEffect(() => {
-    // Initialize Calendly widget in hidden container
-    window.Calendly?.initInlineWidget({
-      url: 'https://calendly.com/kawaipianogallery/shsu-piano-sale',
-      parentElement: preloadContainer,
-      utm: {
-        utmSource: 'kawai-landing-page',
-        utmMedium: 'preload',
-        utmCampaign: 'shsu-piano-sale-2025'
+    setTimeout(() => {
+      if (window.Calendly?.initInlineWidget && preloadedWidgetRef.current) {
+        // Initialize widget in hidden container for performance
+        window.Calendly.initInlineWidget({
+          url: 'https://calendly.com/kawaipianogallery/shsu-piano-sale',
+          parentElement: preloadedWidgetRef.current,
+          utm: {
+            utmSource: 'kawai-landing-page',
+            utmMedium: 'modal',
+            utmCampaign: 'shsu-piano-sale-2025'
+          }
+        });
       }
-    });
+    }, 1000);
   }, []);
 
   return (
     <div 
-      id="calendly-preloaded-widget" 
-      style={{ display: 'none' }}
+      id="calendly-preloaded-widget"
+      style={{
+        position: 'fixed',
+        top: '-9999px',
+        left: '-9999px',
+        opacity: 0,
+        pointerEvents: 'none'
+      }}
     />
   );
 };
@@ -155,39 +245,57 @@ function persistAttributionData() {
 
 ## 🎨 User Experience Features
 
-### Modal Integration
+### Lazy Loading Integration
 
 ```typescript
-// Instant widget display using preloaded content
-const movePreloadedWidget = () => {
-  const preloadedWidget = document.getElementById('calendly-preloaded-widget');
-  const modalContainer = calendlyContainerRef.current;
+// Intersection observer for performance optimization
+useEffect(() => {
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        // Start loading Calendly when section comes into view
+        setShouldLoadCalendly(true);
+      }
+    },
+    { 
+      threshold: 0.3,
+      rootMargin: '100px' // Pre-load when within 100px of viewport
+    }
+  );
 
-  if (preloadedWidget && modalContainer) {
-    // Move preloaded content to modal
-    modalContainer.innerHTML = preloadedWidget.innerHTML;
-    
-    // Apply modal-specific styles
-    modalContainer.style.width = '100%';
-    modalContainer.style.height = '100%';
+  if (sectionRef.current) {
+    observer.observe(sectionRef.current);
   }
-};
+
+  return () => observer.disconnect();
+}, []);
 ```
 
-### Responsive Design
+### Loading States & Responsive Design
 
 ```typescript
-// Modal configuration for optimal mobile experience
-<DialogContent className="max-w-4xl w-full h-[90vh] max-h-[800px] p-0">
-  <div 
-    ref={calendlyContainerRef}
-    style={{ 
-      minWidth: '320px',
-      height: '100%',
-      width: '100%'
-    }}
-  />
-</DialogContent>
+// Loading skeleton while widget initializes
+{!isCalendlyLoaded && shouldLoadCalendly && (
+  <div className="space-y-4">
+    <LoadingSkeleton className="h-8 w-64 mx-auto" />
+    <LoadingSkeleton className="h-96 w-full" />
+    <div className="text-center text-gray-500 text-sm">
+      Loading booking calendar...
+    </div>
+  </div>
+)}
+
+// Responsive widget container
+<div 
+  ref={calendlyContainerRef}
+  className="calendly-inline-widget-container"
+  style={{ 
+    minWidth: '320px',
+    width: '100%',
+    height: '600px',
+    position: 'relative'
+  }}
+/>
 ```
 
 ## 📈 Analytics Integration
@@ -195,21 +303,34 @@ const movePreloadedWidget = () => {
 ### Multi-Platform Tracking
 
 ```typescript
-// Synchronized tracking across platforms
+// Synchronized tracking across platforms for inline widget
 case 'calendly.invitee_scheduled':
   // Google Analytics conversion
-  trackKawaiEvent.calendlyConversion(calendlySource);
+  trackKawaiEvent.calendlyConversion(calendlySource); // 'booking_section'
   
-  // PostHog with validation
+  // PostHog booking attempt completion
   eventMonitor.capture(POSTHOG_CONFIG.EVENTS.CONSULTATION_BOOKING_ATTEMPT, {
-    booking_source: calendlySource,
-    calendly_status: 'completed'
+    booking_source: 'booking_section',
+    calendly_status: 'completed',
+    user_type: localStorage.getItem('kawai_returning_user') === 'true' ? 'returning' : 'new',
+    models_viewed_count: parseInt(localStorage.getItem('kawai_pianos_viewed') || '0'),
+    session_quality: parseInt(localStorage.getItem('kawai_session_quality') || '50'),
+    total_interactions: parseInt(localStorage.getItem('kawai_total_interactions') || '1')
   });
   
-  // PostHog appointment details
+  // PostHog appointment details with inline widget attribution
   eventMonitor.capture(POSTHOG_CONFIG.EVENTS.CALENDLY_APPOINTMENT_BOOKED, {
     booking_id: bookingUUID,
-    event_type_name: 'KAWAI Piano Consultation'
+    invitee_name: 'Contact Information Provided',
+    invitee_email: 'contact@calendly-form.com',
+    event_type_name: 'KAWAI Piano Consultation',
+    scheduled_time: new Date().toISOString(),
+    duration_minutes: 30,
+    location_type: 'video_call',
+    booking_source: 'booking_section',
+    calendly_event_type: event.event,
+    additional_notes: `Inline widget booking from booking section`,
+    lead_score: parseInt(localStorage.getItem('kawai_session_quality') || '50')
   });
 ```
 

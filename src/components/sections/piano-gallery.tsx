@@ -31,7 +31,7 @@ const featuredPianos: FeaturedPiano[] = [
     salePrice: 949,
     savings: 150,
     keyFeatures: ["88 Weighted Keys", "Responsive Hammer Action", "19 Premium Sounds"],
-    availability: "Limited Stock"
+    availability: "3 more"
   },
   {
     id: "es-520",
@@ -44,7 +44,7 @@ const featuredPianos: FeaturedPiano[] = [
     salePrice: 999,
     savings: 400,
     keyFeatures: ["88 Weighted Keys", "Bluetooth Connectivity", "38 Premium Sounds"],
-    availability: "Very Limited"
+    availability: "5 more"
   },
   {
     id: "k-200",
@@ -57,7 +57,7 @@ const featuredPianos: FeaturedPiano[] = [
     salePrice: 6390,
     savings: 2005,
     keyFeatures: ["Solid Spruce Soundboard", "Premium Action", "114cm Height"],
-    availability: "Few Remaining"
+    availability: "2 more"
   },
   {
     id: "gl-10",
@@ -70,7 +70,7 @@ const featuredPianos: FeaturedPiano[] = [
     salePrice: 12950,
     savings: 6045,
     keyFeatures: ["5'1\" Baby Grand", "Premium Action", "Solid Spruce Soundboard"],
-    availability: "Exclusive Offer"
+    availability: "1 more"
   }
 ];
 
@@ -204,7 +204,7 @@ export function FeaturedDeals() {
       <section className="py-12 text-center bg-kawai-pearl">
         <div className="max-w-2xl mx-auto px-6 space-y-4">
           <h3 className="font-heading text-2xl font-semibold text-kawai-black">
-            Ready to Find Your Perfect Piano?
+            View our special deals in Person
           </h3>
           <p className="text-kawai-black/70 max-w-md mx-auto">
             Get personalized recommendations and schedule your consultation
@@ -213,7 +213,7 @@ export function FeaturedDeals() {
             onClick={() => setIsModalOpen(true)}
             className="inline-flex items-center px-8 py-4 bg-red-700 hover:bg-red-600 text-white font-semibold text-lg rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 group"
           >
-            <span>Secure Your Savings</span>
+            <span>Book your appointment now</span>
             <svg
               className="w-6 h-6 ml-3 transition-transform duration-300 group-hover:translate-x-1"
               fill="none"
