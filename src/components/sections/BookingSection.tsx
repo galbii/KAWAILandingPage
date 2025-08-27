@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { LoadingSkeleton } from '@/components/ui/loading-skeleton';
+// import { LoadingSkeleton } from '@/components/ui/loading-skeleton';
 import { initializeCalendlyTracking, cleanupCalendlyTracking } from '@/lib/calendly-tracking';
 import '@/lib/calendly-debug'; // Load debug utilities
 import '@/types/calendly';
@@ -192,12 +192,13 @@ export default function BookingSection() {
       // Clean up tracking
       cleanupCalendlyTracking();
       
-      // Safe DOM cleanup on unmount
-      if (calendlyContainerRef.current) {
+      // Safe DOM cleanup on unmount - capture ref value to avoid stale closure
+      const container = calendlyContainerRef.current;
+      if (container) {
         try {
           // Clear container content safely
-          while (calendlyContainerRef.current.firstChild) {
-            calendlyContainerRef.current.removeChild(calendlyContainerRef.current.firstChild);
+          while (container.firstChild) {
+            container.removeChild(container.firstChild);
           }
           console.log('🧹 Cleaned up Calendly container on unmount');
         } catch (cleanupError) {

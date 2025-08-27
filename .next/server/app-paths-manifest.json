@@ -1,3 +1,7 @@
 {
+  "/api/bookings/route": "app/api/bookings/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/bookings/test/route": "app/api/bookings/test/route.js",
+  "/api/webhooks/cal/route": "app/api/webhooks/cal/route.js",
   "/page": "app/page.js"
 }

@@ -171,7 +171,7 @@ function PianoSection({ piano, index }: PianoSectionProps) {
 
 export function FeaturedDeals() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const heroRef = useRef<HTMLDivElement>(null);
+  // const heroRef = useRef<HTMLDivElement>(null);
   const { ref: headerRef, isVisible: headerVisible } = useIntersectionAnimation({
     threshold: 0.2,
     rootMargin: '0px 0px -100px 0px'

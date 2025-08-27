@@ -57,9 +57,9 @@ declare global {
     fbq: (action: string, event: string, parameters?: PixelParameters) => void
     gtag: (command: string, targetId?: string | Date, config?: Record<string, unknown>) => void
     posthog: {
-      identify: (distinctId: string, properties?: Record<string, any>) => void
-      capture: (eventName: string, properties?: Record<string, any>) => void
-      setPersonProperties: (properties: Record<string, any>, propertiesOnce?: Record<string, any>) => void
+      identify: (distinctId: string, properties?: Record<string, unknown>) => void
+      capture: (eventName: string, properties?: Record<string, unknown>) => void
+      setPersonProperties: (properties: Record<string, unknown>, propertiesOnce?: Record<string, unknown>) => void
     }
   }
 }
@@ -190,7 +190,7 @@ export const trackDemographics = {
         }
         
         // Set person properties using PostHog's $set method
-        const personProperties: Record<string, any> = {}
+        const personProperties: Record<string, unknown> = {}
         
         // Basic demographics
         if (userData.age_group) personProperties.age_group = userData.age_group
