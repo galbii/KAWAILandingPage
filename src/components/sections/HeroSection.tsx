@@ -43,7 +43,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative h-screen flex items-center justify-center text-white hero-parallax scroll-container overflow-hidden w-full">
+    <section className="relative min-h-screen flex items-center justify-center text-white hero-parallax scroll-container overflow-hidden w-full">
       {/* Video Background */}
       <video
         autoPlay
@@ -77,84 +77,86 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/15 to-black/25"></div>
       </div>
       
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 text-center hero-content pt-20 sm:pt-24">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 text-center hero-content py-8 sm:py-12 lg:pt-20 lg:pb-12">
         
         {/* Partnership Branding */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-12 animate-premium-float animate-hero-entrance-subtle animate-delay-500">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-8 sm:mb-12 animate-premium-float animate-hero-entrance-subtle animate-delay-500">
           <div className="flex items-center gap-4">
             <Image
               src="/images/optimized/logos/Kawai-Red.webp"
               alt="KAWAI"
               width={160}
               height={64}
-              className="drop-shadow-lg"
+              className="drop-shadow-lg w-32 sm:w-40"
               priority
             />
             <div className="hidden sm:block w-px h-12 bg-gradient-to-b from-transparent via-orange-400/60 to-transparent"></div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-orange-500">SHSU</div>
+              <div className="text-xl sm:text-2xl font-bold text-orange-500">SHSU</div>
               <div className="text-xs text-orange-400 tracking-wide">PARTNERSHIP</div>
             </div>
           </div>
         </div>
         
-        <div className="space-y-2 mb-8 animate-hero-entrance-subtle animate-delay-1000">
-          <div className="text-xs md:text-sm text-orange-500 font-medium tracking-wider uppercase">Sam Houston State University is proud to present</div>
+        <div className="space-y-2 mb-6 sm:mb-8 animate-hero-entrance-subtle animate-delay-1000">
+          <div className="text-xs sm:text-sm text-orange-500 font-medium tracking-wider uppercase px-2">Sam Houston State University is proud to present</div>
         </div>
 
         {/* Main Headlines */}
-        <div className="space-y-6 mb-12">
-          <h1 className="font-heading leading-tight">
-            <div className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-white tracking-tight mb-4 animate-hero-entrance-subtle animate-delay-1500">
+        <div className="space-y-4 sm:space-y-6 mb-8 sm:mb-12">
+          <h1 className="font-heading leading-tight px-2">
+            <div className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white tracking-tight mb-2 sm:mb-4 animate-hero-entrance-subtle animate-delay-1500">
               EXCLUSIVE
             </div>
-            <div className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light text-white tracking-wide animate-hero-entrance-subtle animate-delay-2000">
+            <div className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-white tracking-wide animate-hero-entrance-subtle animate-delay-2000">
               PIANO SALE
             </div>
           </h1>
           
           {/* Premium Value Proposition */}
-          <div className="space-y-4 animate-hero-entrance-subtle animate-delay-2500">
-            <div className="text-lg md:text-xl text-white font-light">Modern Technology • Special University Pricing</div>
+          <div className="space-y-4 animate-hero-entrance-subtle animate-delay-2500 px-2">
+            <div className="text-base sm:text-lg md:text-xl text-white font-light">Modern Technology • Special University Pricing</div>
           </div>
         </div>
         
         {/* Event Details & CTA */}
-        <div className="space-y-6 max-w-4xl mx-auto">
+        <div className="space-y-4 sm:space-y-6 max-w-4xl mx-auto px-2">
           
           {/* Event Timing with Urgency */}
-          <div className="space-y-3 animate-hero-entrance-subtle animate-delay-3000">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-red-600/20 backdrop-blur-sm rounded-full border border-red-400/30">
+          <div className="space-y-2 sm:space-y-3 animate-hero-entrance-subtle animate-delay-3000">
+            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-red-600/20 backdrop-blur-sm rounded-full border border-red-400/30">
               <div className="w-2 h-2 bg-red-400 rounded-full animate-pulse"></div>
-              <span className="text-red-300 font-semibold tracking-wide text-sm">4 DAYS ONLY</span>
+              <span className="text-red-300 font-semibold tracking-wide text-xs sm:text-sm">4 DAYS ONLY</span>
             </div>
-            <div className="text-xl md:text-2xl font-light text-white tracking-wider">September 11-14, 2025</div>
-            <div className="text-base text-white/90">Houston • While Selection Lasts</div>
+            <div className="text-lg sm:text-xl md:text-2xl font-light text-white tracking-wider">September 11-14, 2025</div>
+            <div className="text-sm sm:text-base text-white/90">Houston • While Selection Lasts</div>
           </div>
           
           {/* Primary Call to Action */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-hero-entrance-subtle animate-delay-3500">
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center animate-hero-entrance-subtle animate-delay-3500">
             <button 
               onClick={handleExploreCollectionClick}
-              className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-8 py-3 text-lg font-bold rounded-lg shadow-2xl transition-all duration-300 hover:scale-105 border-2 border-red-400/50 w-full sm:w-auto cursor-pointer relative"
+              className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-6 sm:px-8 py-3 text-base sm:text-lg font-bold rounded-lg shadow-2xl transition-all duration-300 hover:scale-105 border-2 border-red-400/50 w-full sm:w-auto cursor-pointer relative"
               style={{ pointerEvents: 'auto', zIndex: 50 }}
               type="button"
             >
-              Explore Exclusive Collection
+              <span className="block sm:hidden">Explore Collection</span>
+              <span className="hidden sm:block">Explore Exclusive Collection</span>
             </button>
             
             <button 
               onClick={handleReserveConsultationClick}
-              className="bg-white/10 backdrop-blur-sm border border-white/30 text-white hover:bg-white/20 px-8 py-3 text-lg font-medium rounded-lg transition-all duration-300 hover:scale-105 w-full sm:w-auto cursor-pointer relative"
+              className="bg-white/10 backdrop-blur-sm border border-white/30 text-white hover:bg-white/20 px-6 sm:px-8 py-3 text-base sm:text-lg font-medium rounded-lg transition-all duration-300 hover:scale-105 w-full sm:w-auto cursor-pointer relative"
               style={{ pointerEvents: 'auto', zIndex: 50 }}
               type="button"
             >
-              Reserve Private Consultation
+              <span className="block sm:hidden">Reserve Consultation</span>
+              <span className="hidden sm:block">Reserve Private Consultation</span>
             </button>
           </div>
           
           {/* Supporting Message */}
-          <div className="text-base text-white/80 italic animate-hero-entrance-subtle animate-delay-4000">
+          <div className="text-sm sm:text-base text-white/80 italic animate-hero-entrance-subtle animate-delay-4000">
             Your purchase supports the SHSU Music Department
           </div>
         </div>

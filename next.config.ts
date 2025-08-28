@@ -66,6 +66,7 @@ const nextConfig: NextConfig = {
                 https://listgrowth.ctctcdn.com 
                 https://api.constantcontact.com 
                 https://visitor.constantcontact.com 
+                https://ui.constantcontact.com 
                 https://www.google-analytics.com 
                 https://www.google.com
                 https://www.gstatic.com
@@ -117,7 +118,7 @@ const nextConfig: NextConfig = {
               font-src 'self' data:;
               object-src 'none';
               base-uri 'self';
-              form-action 'self' https://visitor.constantcontact.com;
+              form-action 'self' https://visitor.constantcontact.com https://ui.constantcontact.com;
               frame-ancestors 'none';
               upgrade-insecure-requests;
             `.replace(/\s{2,}/g, ' ').trim()

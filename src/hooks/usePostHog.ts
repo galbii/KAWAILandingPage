@@ -36,7 +36,6 @@ interface UsePostHogReturn {
   trackConsultationIntent: (event: ConsultationEvent) => void
   trackBookingAttempt: (data: BookingAttemptData) => void
   trackPianoInterest: (pianos: PianoModel[], behavior: PianoBehaviorData) => void
-  trackEventInterest: (data: EventInterestData) => void
   identifyUser: (userData: UserData) => void
   getFeatureFlag: (flagName: string) => string | boolean
 }
@@ -139,9 +138,7 @@ export function usePostHog(): UsePostHogReturn {
     postHogAnalytics.trackPianoInterest(pianos, behavior)
   }, [])
 
-  const trackEventInterest = useCallback((data: EventInterestData) => {
-    postHogAnalytics.trackEventAttendance(data)
-  }, [])
+  // Removed trackEventInterest - no longer tracking kawai_event_interest
 
   const identifyUser = useCallback((userData: UserData) => {
     const enhancedUserData = {
@@ -184,7 +181,6 @@ export function usePostHog(): UsePostHogReturn {
     trackConsultationIntent,
     trackBookingAttempt,
     trackPianoInterest,
-    trackEventInterest,
     identifyUser,
     getFeatureFlag,
   }

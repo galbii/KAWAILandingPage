@@ -141,21 +141,7 @@ class PostHogAnalytics {
     })
   }
 
-  trackEventAttendance(eventData: {
-    eventDates: string
-    location: string
-    interactionType: 'view' | 'save_date' | 'directions'
-  }) {
-    if (!this.initialized) return
-    
-    posthog.capture('kawai_event_interest', {
-      event_dates: eventData.eventDates,
-      event_location: eventData.location,
-      interaction_type: eventData.interactionType,
-      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      timestamp: new Date().toISOString(),
-    })
-  }
+  // Removed trackEventAttendance - no longer tracking kawai_event_interest
 
   // User identification for consultation bookings
   identifyUser(userData: {

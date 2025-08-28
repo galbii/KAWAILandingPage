@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { WebVitals } from "@/components/WebVitals";
 import { PostHogProvider } from "@/components/PostHogProvider";
 import PostHogDebugDashboard from "@/components/PostHogDebugDashboard";
 // Removed CalendlyPreloader - using inline widget in BookingSection instead
 import Script from "next/script";
-import "./globals.css";
+import ".././globals.css";
 
 const playfairDisplay = Playfair_Display({
   variable: "--font-playfair-display",
@@ -60,19 +61,15 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://www.google.com/recaptcha/" />
         <link rel="dns-prefetch" href="https://www.gstatic.com/recaptcha/" />
         
-        {/* Google tag (gtag.js) */}
-        <Script 
-          src="https://www.googletagmanager.com/gtag/js?id=G-P91EKWK0XB" 
-          strategy="afterInteractive" 
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-P91EKWK0XB');
-          `}
+        {/* Google Tag Manager */}
+        <Script id="google-tag-manager" strategy="afterInteractive">
+          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NN27CTQX');`}
         </Script>
+        {/* End Google Tag Manager */}
         
         {/* Meta Pixel Code */}
         <script dangerouslySetInnerHTML={{
@@ -97,6 +94,10 @@ src="https://www.facebook.com/tr?id=783258114117252&ev=PageView&noscript=1"
       <body
         className={`${playfairDisplay.variable} ${inter.variable} antialiased overflow-x-hidden`}
       >
+        {/* Google Tag Manager (noscript) */}
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NN27CTQX"
+height="0" width="0" style={{display:'none',visibility:'hidden'}}></iframe></noscript>
+        {/* End Google Tag Manager (noscript) */}
         <PostHogProvider>
           {children}
         </PostHogProvider>
@@ -120,9 +121,11 @@ src="https://www.facebook.com/tr?id=783258114117252&ev=PageView&noscript=1"
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'AW-755074614');
+            gtag('config', 'G-P91EKWK0XB');
           `}
         </Script>
         
+        <GoogleAnalytics gaId="G-P91EKWK0XB" />
       </body>
     </html>
   );

@@ -144,15 +144,7 @@ function handleCalendlyEvent(event: CalendlyEvent) {
       
       trackKawaiEvent.calendlyInteraction('event_type_viewed', calendlySource)
       
-      // Track event browsing in PostHog  
-      eventMonitor.capture('calendly_event_browsed', {
-        booking_source: calendlySource,
-        event_type: 'Piano Consultation',
-        browse_timestamp: new Date().toISOString(),
-        user_type: localStorage.getItem('kawai_returning_user') === 'true' ? 'returning' : 'new',
-        funnel_step: 'event_browsing',
-        engagement_level: 'medium'
-      })
+      // Removed calendly_event_browsed tracking
       
       console.log('✅ Event type browsing tracked')
       break

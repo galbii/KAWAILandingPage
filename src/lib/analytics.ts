@@ -329,12 +329,22 @@ export const trackEvent = {
     // IMPORTANT: This function should ONLY be used for actual conversions (Calendly appointment scheduling)
     // All other interactions should use buttonClick() or other engagement tracking functions
     
-    // Google Analytics - Generate Lead (actual conversion)
+    console.log('🎯 GA4 Lead Generation Event:', {
+      action,
+      location,
+      value: additionalData?.is_actual_conversion ? 50 : 1,
+      additionalData
+    })
+    
+    // Google Analytics - Generate Lead (actual conversion) with enhanced parameters
     sendGAEvent('event', 'generate_lead', {
-      event_category: 'lead_generation', 
+      currency: 'USD',
+      value: additionalData?.is_actual_conversion ? 50 : 1,
+      lead_source: location,
+      lead_type: 'piano_consultation',
+      event_category: 'lead_generation',
       action: action,
       location: location,
-      value: additionalData?.is_actual_conversion ? 50 : 1, // Higher value for actual conversions
       ...additionalData
     })
     
@@ -395,6 +405,36 @@ export const trackEvent = {
       event_category: 'engagement',
       content_type: contentType,
       location: location,
+      ...additionalData
+    })
+  },
+
+  // Piano consultation interest tracking (NOT purchases - just service interest)
+  viewConsultation: (consultationType: string, location: string, additionalData?: Record<string, string | number | boolean>) => {
+    if (!isBrowser) return
+    
+    console.log('🎹 Piano Consultation Interest:', {
+      consultationType,
+      location,
+      additionalData
+    })
+    
+    // GA4 view_item event for consultation services (not products)
+    sendGAEvent('event', 'view_item', {
+      currency: 'USD',
+      value: 50, // Estimated consultation value
+      items: [{
+        item_id: 'piano_consultation',
+        item_name: consultationType,
+        item_category: 'consultation_service',
+        item_category2: 'piano_expertise',
+        affiliation: 'KAWAI Houston',
+        price: 50,
+        quantity: 1
+      }],
+      event_category: 'consultation_interest',
+      consultation_type: consultationType,
+      source_location: location,
       ...additionalData
     })
   }
@@ -490,7 +530,16 @@ export const trackWebVitals = {
 export const trackKawaiEvent = {
   // Consultation booking CTA click (engagement, not conversion - only actual Calendly scheduling is conversion)
   bookConsultation: (source: string) => {
+    // Track as both button click and consultation interest
     trackEvent.buttonClick('Book Consultation', source, {
+      event_type: 'piano_consultation',
+      event_date: 'september_2025',
+      cta_intent: 'consultation_booking',
+      interaction_type: 'consultation_interest'
+    })
+
+    // Track consultation interest with GA4 view_item event
+    trackEvent.viewConsultation('Piano Consultation Booking', source, {
       event_type: 'piano_consultation',
       event_date: 'september_2025',
       cta_intent: 'consultation_booking',
@@ -535,7 +584,16 @@ export const trackKawaiEvent = {
 
   // Event registration CTA click (engagement, not conversion - only actual Calendly scheduling is conversion)
   secureSpot: (source: string) => {
+    // Track as both button click and consultation interest
     trackEvent.buttonClick('Secure Your Spot', source, {
+      event_type: 'sale_event_registration',
+      event_date: 'september_2025',
+      cta_intent: 'event_registration',
+      interaction_type: 'event_interest'
+    })
+
+    // Track event interest with GA4 view_item event
+    trackEvent.viewConsultation('Piano Sale Event Registration', source, {
       event_type: 'sale_event_registration',
       event_date: 'september_2025',
       cta_intent: 'event_registration',
@@ -695,5 +753,25 @@ export const trackKawaiEvent = {
       engagementScore: 50, // Medium intent signal
       timeToIntent: Math.floor(performance.now() / 1000)
     })
+  },
+
+  // Test function to validate GA4 tracking is working
+  testTracking: () => {
+    if (!isBrowser) return
+    
+    console.log('🧪 Testing GA4 tracking implementation...')
+    
+    // Test generate_lead event
+    trackEvent.generateLead('test_lead_generation', 'test_validation', {
+      is_actual_conversion: false,
+      test_event: true
+    })
+    
+    // Test consultation interest
+    trackEvent.viewConsultation('Test Piano Consultation', 'test_validation', {
+      test_event: true
+    })
+    
+    console.log('✅ GA4 test events sent - check browser network tab and GA4 DebugView')
   }
 }

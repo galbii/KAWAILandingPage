@@ -1,9 +1,10 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import PianoConsultationDialog from '@/components/PianoConsultationDialog';
 import { useIntersectionAnimation } from '@/hooks/useIntersectionAnimation';
+import { usePostHog } from '@/hooks/usePostHog';
 
 interface FeaturedPiano {
   id: string;
@@ -77,15 +78,56 @@ const featuredPianos: FeaturedPiano[] = [
 interface PianoSectionProps {
   piano: FeaturedPiano;
   index: number;
+  hasTrackedAnyPiano: React.MutableRefObject<boolean>;
 }
 
-function PianoSection({ piano, index }: PianoSectionProps) {
+function PianoSection({ piano, index, hasTrackedAnyPiano }: PianoSectionProps) {
   const { ref: sectionRef, isVisible } = useIntersectionAnimation({
     threshold: 0.2,
     rootMargin: '0px 0px -100px 0px'
   });
+  const { trackPianoView } = usePostHog();
+  const activeTimer = useRef<NodeJS.Timeout | null>(null);
 
   const isEven = index % 2 === 0;
+
+  // Track piano gallery view after 6 seconds (once per page view, any model)
+  useEffect(() => {
+    // Clear any existing timer first
+    if (activeTimer.current) {
+      clearTimeout(activeTimer.current);
+      activeTimer.current = null;
+    }
+
+    if (isVisible && !hasTrackedAnyPiano.current) {
+      activeTimer.current = setTimeout(() => {
+        // Double-check we haven't tracked any piano yet
+        if (!hasTrackedAnyPiano.current) {
+          // Mark as tracked FIRST to prevent duplicate calls
+          hasTrackedAnyPiano.current = true;
+          
+          trackPianoView({
+            model: piano.model,
+            price: `$${piano.salePrice}`,
+            category: piano.category.includes('Digital') ? 'Digital' : 
+                     piano.category.includes('Grand') ? 'Acoustic' : 
+                     piano.category.includes('Upright') ? 'Acoustic' : 'Digital',
+            timeSpent: 6,
+            sourceSection: 'featured_deals_gallery',
+            interactionType: 'view'
+          });
+        }
+        activeTimer.current = null;
+      }, 6000); // 6 seconds
+    }
+
+    return () => {
+      if (activeTimer.current) {
+        clearTimeout(activeTimer.current);
+        activeTimer.current = null;
+      }
+    };
+  }, [isVisible, piano.model, piano.salePrice, piano.category, trackPianoView, hasTrackedAnyPiano]);
 
   return (
     <section 
@@ -117,7 +159,7 @@ function PianoSection({ piano, index }: PianoSectionProps) {
                   </span>
                 </div>
                 <div className={`inline-flex items-center bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold transition-all duration-500 delay-400 hover:bg-green-200 hover:scale-105 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
-                  Save up to $6,045 on open-box deals
+                  Save ${piano.savings.toLocaleString()} on open-box deals
                 </div>
               </div>
               
@@ -171,6 +213,7 @@ function PianoSection({ piano, index }: PianoSectionProps) {
 
 export function FeaturedDeals() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const hasTrackedAnyPiano = useRef<boolean>(false);
   // const heroRef = useRef<HTMLDivElement>(null);
   const { ref: headerRef, isVisible: headerVisible } = useIntersectionAnimation({
     threshold: 0.2,
@@ -218,7 +261,7 @@ export function FeaturedDeals() {
 
       {/* Piano Models */}
       {featuredPianos.map((piano, index) => (
-        <PianoSection key={piano.id} piano={piano} index={index} />
+        <PianoSection key={piano.id} piano={piano} index={index} hasTrackedAnyPiano={hasTrackedAnyPiano} />
       ))}
       
       {/* CTA Section */}
