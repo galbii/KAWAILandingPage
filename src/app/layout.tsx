@@ -121,10 +121,12 @@ height="0" width="0" style={{display:'none',visibility:'hidden'}}></iframe></nos
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'AW-755074614');
+            gtag('config', 'G-P91EKWK0XB');
           `}
         </Script>
+        
+        <GoogleAnalytics gaId="G-P91EKWK0XB" />
       </body>
-      <GoogleAnalytics gaId="G-P91EKWK0XB" />
     </html>
   );
 }
