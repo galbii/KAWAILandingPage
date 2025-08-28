@@ -1846,3 +1846,84 @@ section {
     font-size: clamp(2rem, 8vw, 6rem) !important;
   }
 }
+
+/* React-PDF Styles */
+.pdf-viewer {
+  @apply w-full;
+}
+
+.pdf-page {
+  @apply mx-auto;
+}
+
+.react-pdf__Document {
+  @apply flex flex-col items-center;
+}
+
+.react-pdf__Page {
+  @apply max-w-full h-auto;
+}
+
+.react-pdf__Page__canvas {
+  @apply max-w-full h-auto;
+}
+
+.react-pdf__Page__textContent {
+  @apply opacity-0 pointer-events-none;
+}
+
+.react-pdf__Page__annotations {
+  @apply opacity-100;
+}
+
+/* PDF Modal Specific Styles */
+.pdf-modal-viewer {
+  @apply max-w-full max-h-full;
+}
+
+.pdf-modal-viewer .react-pdf__Document {
+  @apply w-full h-full;
+}
+
+.pdf-modal-viewer .react-pdf__Page {
+  @apply mx-auto shadow-lg;
+  max-width: 100% !important;
+  max-height: 75vh !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.pdf-modal-viewer .react-pdf__Page::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 15%;
+  background: white;
+  z-index: 10;
+}
+
+.pdf-modal-viewer .react-pdf__Page__canvas {
+  @apply max-w-full max-h-full;
+  width: auto !important;
+  height: auto !important;
+  max-height: 75vh !important;
+}
+
+/* Hide signature area at bottom of PDF */
+.pdf-viewer .react-pdf__Page {
+  position: relative;
+  overflow: hidden;
+}
+
+.pdf-viewer .react-pdf__Page::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 15%;
+  background: white;
+  z-index: 10;
+}

@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import PianoConsultationDialog from '@/components/PianoConsultationDialog';
 import ImageModal from '@/components/ImageModal';
+import PdfViewer from '@/components/PdfViewer';
 import { useIntersectionAnimation } from '@/hooks/useIntersectionAnimation';
 
 export default function AboutEventSection() {
@@ -79,16 +80,18 @@ export default function AboutEventSection() {
               </h3>
             </div>
 
-            {/* Mobile Letter Image - Shown on mobile right after title */}
+            {/* Mobile Letter PDF - Shown on mobile right after title */}
             <div className={`lg:hidden relative mb-8 transition-all duration-700 delay-500 ${contentVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
-              <Image 
-                src="/images/letter.png"
-                alt="SHSU Houston Piano Sale Event Letter - Piano Deals Houston"
-                width={800}
-                height={600}
-                className="w-full h-auto object-contain opacity-90 max-w-md mx-auto cursor-pointer hover:opacity-100 transition-opacity"
-                onClick={() => openImageModal("/images/letter.png", "SHSU Houston Piano Sale Event Letter - Piano Deals Houston", 800, 600)}
-              />
+              <div className="max-w-md mx-auto">
+                <PdfViewer
+                  file="/Kawai Signed_2 1 (1).pdf"
+                  className="cursor-pointer hover:shadow-lg transition-shadow rounded-lg overflow-hidden"
+                  width={400}
+                  onClick={() => openImageModal("/Kawai Signed_2 1 (1).pdf", "SHSU Houston Piano Sale Event Letter - Piano Deals Houston", 800, 600)}
+                  loading="Loading piano sale letter..."
+                  error="Unable to load letter PDF"
+                />
+              </div>
             </div>
             
             <div className="space-y-4 text-muted-foreground leading-relaxed">
@@ -133,15 +136,15 @@ export default function AboutEventSection() {
             </div>
           </div>
 
-          {/* Desktop Letter Image - Hidden on mobile */}
+          {/* Desktop Letter PDF - Hidden on mobile */}
           <div className={`hidden lg:block relative transition-all duration-700 delay-700 ${contentVisible ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 translate-x-6 scale-95'}`}>
-            <Image 
-              src="/images/letter.png"
-              alt="SHSU Houston Piano Sale Event Letter - Piano Deals Houston"
-              width={800}
-              height={600}
-              className="w-full h-auto object-contain opacity-90 cursor-pointer hover:opacity-100 transition-opacity"
-              onClick={() => openImageModal("/images/letter.png", "SHSU Houston Piano Sale Event Letter - Piano Deals Houston", 800, 600)}
+            <PdfViewer
+              file="/Kawai Signed_2 1 (1).pdf"
+              className="cursor-pointer hover:shadow-lg transition-shadow rounded-lg overflow-hidden"
+              width={600}
+              onClick={() => openImageModal("/Kawai Signed_2 1 (1).pdf", "SHSU Houston Piano Sale Event Letter - Piano Deals Houston", 800, 600)}
+              loading="Loading piano sale letter..."
+              error="Unable to load letter PDF"
             />
           </div>
         </div>

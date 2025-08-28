@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import Image from 'next/image';
+import PdfViewer from '@/components/PdfViewer';
 
 interface ImageModalProps {
   isOpen: boolean;
@@ -21,6 +22,18 @@ export default function ImageModal({
   width = 800, 
   height = 600 
 }: ImageModalProps) {
+  // Check if the file is a PDF
+  const isPdf = src.toLowerCase().endsWith('.pdf');
+  const [windowWidth, setWindowWidth] = useState(800);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setWindowWidth(window.innerWidth);
+      const handleResize = () => setWindowWidth(window.innerWidth);
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }
+  }, []);
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -71,28 +84,40 @@ export default function ImageModal({
       {/* Centered image container */}
       <div className="absolute inset-0 flex items-center justify-center p-6">
         <div 
-          className="relative bg-white rounded-lg shadow-2xl overflow-hidden"
+          className={`relative bg-white rounded-lg shadow-2xl overflow-hidden ${isPdf ? 'max-w-5xl max-h-[90vh]' : ''}`}
           onClick={(e) => e.stopPropagation()}
           style={{ 
-            maxWidth: '90vw', 
-            maxHeight: '90vh'
+            maxWidth: isPdf ? '90vw' : '90vw', 
+            maxHeight: isPdf ? '90vh' : '90vh'
           }}
         >
-          <Image
-            src={src}
-            alt={alt}
-            width={width || 800}
-            height={height || 600}
-            className="block"
-            style={{ 
-              maxWidth: '90vw', 
-              maxHeight: '90vh',
-              width: 'auto',
-              height: 'auto',
-              objectFit: 'contain'
-            }}
-            priority
-          />
+          {isPdf ? (
+            <div className="p-4 max-w-full max-h-full overflow-auto">
+              <PdfViewer
+                file={src}
+                className="pdf-modal-viewer"
+                width={Math.min(800, windowWidth * 0.8)}
+                loading="Loading PDF..."
+                error="Unable to load PDF"
+              />
+            </div>
+          ) : (
+            <Image
+              src={src}
+              alt={alt}
+              width={width || 800}
+              height={height || 600}
+              className="block"
+              style={{ 
+                maxWidth: '90vw', 
+                maxHeight: '90vh',
+                width: 'auto',
+                height: 'auto',
+                objectFit: 'contain'
+              }}
+              priority
+            />
+          )}
         </div>
       </div>
     </div>

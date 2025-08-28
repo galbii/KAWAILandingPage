@@ -89,6 +89,8 @@ const nextConfig: NextConfig = {
                 https://www.googleadservices.com
                 https://www.google.com
                 https://www.gstatic.com
+                https://www.googletagmanager.com
+                https://tagmanager.google.com
                 https://static.ctctcdn.com
                 https://listgrowth.ctctcdn.com
                 https://visitor.constantcontact.com;
@@ -111,6 +113,7 @@ const nextConfig: NextConfig = {
                 https://www.facebook.com;
               style-src 'self' 'unsafe-inline' 
                 https://static.ctctcdn.com
+                https://assets.calendly.com
                 https://us.posthog.com 
                 https://app.posthog.com 
                 https://us.i.posthog.com 

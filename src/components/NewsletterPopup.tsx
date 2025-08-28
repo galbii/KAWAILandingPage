@@ -1,10 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import Script from 'next/script';
 
 type PopupPosition = 'center' | 'bottom-right' | 'slide-left' | 'exit-intent';
 
@@ -14,11 +12,11 @@ interface NewsletterPopupProps {
 
 export function NewsletterPopup({ position = 'center' }: NewsletterPopupProps) {
   const [isVisible, setIsVisible] = useState(false);
-  const [showFallback, setShowFallback] = useState(false);
+  // const [showFallback, setShowFallback] = useState(true); // Unused for now
 
   useEffect(() => {
     // Check if user has already dismissed this popup or subscribed
-    const hasSeenPopup = localStorage.getItem('kawai_newsletter_popup_seen');
+    // const hasSeenPopup = localStorage.getItem('kawai_newsletter_popup_seen'); // Unused for now
     
     // TEMPORARY: For testing, always show popup regardless of localStorage
     // Remove this line in production and uncomment the line below
@@ -32,38 +30,7 @@ export function NewsletterPopup({ position = 'center' }: NewsletterPopupProps) {
     return () => clearTimeout(timer);
   }, []);
 
-  useEffect(() => {
-    if (isVisible) {
-      // Set a timer to show fallback after 3 seconds if Constant Contact doesn't load
-      const fallbackTimer = setTimeout(() => {
-        const formElement = document.querySelector('.ctct-inline-form');
-        if (!formElement || formElement.children.length === 0) {
-          console.log('Constant Contact form not loaded in popup, showing fallback');
-          setShowFallback(true);
-        }
-      }, 3000);
-
-      // Also check every second for the first 10 seconds
-      let checkCount = 0;
-      const checkTimer = setInterval(() => {
-        checkCount++;
-        const formElement = document.querySelector('.ctct-inline-form');
-        if (formElement && formElement.children.length > 0) {
-          console.log('Constant Contact form loaded successfully');
-          clearInterval(checkTimer);
-        } else if (checkCount >= 10) {
-          console.log('Constant Contact form failed to load after 10 seconds');
-          setShowFallback(true);
-          clearInterval(checkTimer);
-        }
-      }, 1000);
-
-      return () => {
-        clearTimeout(fallbackTimer);
-        clearInterval(checkTimer);
-      };
-    }
-  }, [isVisible]);
+  // Simplified - no complex detection logic
 
   const handleClose = () => {
     setIsVisible(false);
@@ -78,7 +45,7 @@ export function NewsletterPopup({ position = 'center' }: NewsletterPopupProps) {
     
     try {
       // This will use the existing Constant Contact form action
-      const response = await fetch('https://ui.constantcontact.com/sa/fwtf.jsp?llr=1cf63f1b41f15055378de822630a40df&m=1141953948742&ea=' + encodeURIComponent(email) + '&p=oi', {
+      await fetch('https://ui.constantcontact.com/sa/fwtf.jsp?llr=1cf63f1b41f15055378de822630a40df&m=1141953948742&ea=' + encodeURIComponent(email) + '&p=oi', {
         method: 'POST',
         mode: 'no-cors'
       });
@@ -204,50 +171,40 @@ export function NewsletterPopup({ position = 'center' }: NewsletterPopupProps) {
             </div>
           </div>
 
-          {/* Constant Contact Form */}
-          <div className="p-6 min-h-[200px]">
-            {!showFallback ? (
-              <div 
-                dangerouslySetInnerHTML={{
-                  __html: `
-                    <!-- Begin Constant Contact Inline Form Code -->
-                    <div class="ctct-inline-form" data-form-id="3ba8c9c8-796d-41fd-987f-7a506d7e03be"></div>
-                    <!-- End Constant Contact Inline Form Code -->
-                  `
-                }}
-              />
-            ) : (
-              <div className="p-4 bg-amber-50 border border-amber-200 rounded">
-                <p className="text-sm text-amber-800 mb-3">Having trouble loading the form? Use this backup:</p>
-                <form onSubmit={handleSubmit} className="space-y-3">
-                  <input 
-                    type="email" 
-                    name="email"
-                    placeholder="Enter your email"
-                    className="w-full px-3 py-2 border border-gray-300 rounded"
-                    required 
-                  />
-                  <button 
-                    type="submit"
-                    style={{
-                      width: '100%',
-                      backgroundColor: '#DC2626',
-                      color: 'white',
-                      padding: '12px 24px',
-                      borderRadius: '8px',
-                      fontWeight: '500',
-                      fontSize: '14px',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.05em',
-                      border: 'none',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    Subscribe to VIP List
-                  </button>
-                </form>
+          {/* Email Signup Form */}
+          <div className="p-6">
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <input 
+                  type="email" 
+                  name="email"
+                  placeholder="Enter your email address"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-kawai-red focus:border-transparent text-sm"
+                  required 
+                />
               </div>
-            )}
+              <button 
+                type="submit"
+                style={{
+                  width: '100%',
+                  backgroundColor: '#DC2626',
+                  color: 'white',
+                  padding: '12px 24px',
+                  borderRadius: '8px',
+                  fontWeight: '500',
+                  fontSize: '14px',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em',
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'background-color 0.2s ease'
+                }}
+                onMouseEnter={(e) => (e.target as HTMLButtonElement).style.backgroundColor = '#991B1B'}
+                onMouseLeave={(e) => (e.target as HTMLButtonElement).style.backgroundColor = '#DC2626'}
+              >
+                Get Exclusive VIP Offers & Events
+              </button>
+            </form>
           </div>
 
           {/* Footer */}
