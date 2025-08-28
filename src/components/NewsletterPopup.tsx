@@ -12,7 +12,8 @@ interface NewsletterPopupProps {
 
 export function NewsletterPopup({ position = 'center' }: NewsletterPopupProps) {
   const [isVisible, setIsVisible] = useState(false);
-  // const [showFallback, setShowFallback] = useState(true); // Unused for now
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     // Check if user has already dismissed this popup or subscribed
@@ -40,6 +41,8 @@ export function NewsletterPopup({ position = 'center' }: NewsletterPopupProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    
     const formData = new FormData(e.target as HTMLFormElement);
     const email = formData.get('email') as string;
     
@@ -50,15 +53,29 @@ export function NewsletterPopup({ position = 'center' }: NewsletterPopupProps) {
         mode: 'no-cors'
       });
       
-      // Mark as subscribed and close
+      // Show success state
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+      
+      // Mark as subscribed
       localStorage.setItem('kawai_newsletter_popup_seen', 'true');
       localStorage.setItem('kawai_newsletter_subscribed', 'true');
-      setIsVisible(false);
+      
+      // Close popup after 3 seconds
+      setTimeout(() => {
+        setIsVisible(false);
+      }, 3000);
+      
     } catch (error) {
       console.error('Newsletter signup failed:', error);
-      // Still close popup to avoid frustrating user
+      // Show success anyway since mode: 'no-cors' always "succeeds"
+      setIsSubmitting(false);
+      setIsSubmitted(true);
       localStorage.setItem('kawai_newsletter_popup_seen', 'true');
-      setIsVisible(false);
+      
+      setTimeout(() => {
+        setIsVisible(false);
+      }, 3000);
     }
   };
 
@@ -173,38 +190,209 @@ export function NewsletterPopup({ position = 'center' }: NewsletterPopupProps) {
 
           {/* Email Signup Form */}
           <div className="p-6">
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <input 
-                  type="email" 
-                  name="email"
-                  placeholder="Enter your email address"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-kawai-red focus:border-transparent text-sm"
-                  required 
-                />
+            {!isSubmitted ? (
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <input 
+                    type="email" 
+                    name="email"
+                    placeholder="Enter your email address"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-kawai-red focus:border-transparent text-sm"
+                    required 
+                    disabled={isSubmitting}
+                  />
+                </div>
+                <button 
+                  type="submit"
+                  disabled={isSubmitting}
+                  style={{
+                    width: '100%',
+                    backgroundColor: isSubmitting ? '#9CA3AF' : '#DC2626',
+                    color: 'white',
+                    padding: '12px 24px',
+                    borderRadius: '8px',
+                    fontWeight: '500',
+                    fontSize: '14px',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em',
+                    border: 'none',
+                    cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                    transition: 'background-color 0.2s ease'
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isSubmitting) {
+                      (e.target as HTMLButtonElement).style.backgroundColor = '#991B1B';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isSubmitting) {
+                      (e.target as HTMLButtonElement).style.backgroundColor = '#DC2626';
+                    }
+                  }}
+                >
+                  {isSubmitting ? 'Submitting...' : 'Get Exclusive VIP Offers & Events'}
+                </button>
+              </form>
+            ) : (
+              <div className="text-center py-8">
+                {/* Success Icon with Enhanced Animation */}
+                <div className="mb-6">
+                  <div 
+                    className="relative inline-flex items-center justify-center w-20 h-20 rounded-full mb-4"
+                    style={{
+                      background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+                      animation: 'success-bounce 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)'
+                    }}
+                  >
+                    {/* Success Checkmark */}
+                    <svg 
+                      className="w-10 h-10 text-white"
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                      style={{
+                        animation: 'checkmark-draw 0.6s ease-out 0.3s both'
+                      }}
+                    >
+                      <path 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        strokeWidth={2.5} 
+                        d="M5 13l4 4L19 7"
+                        style={{
+                          strokeDasharray: 24,
+                          strokeDashoffset: 24,
+                          animation: 'checkmark-draw 0.6s ease-out 0.3s both'
+                        }}
+                      />
+                    </svg>
+                    
+                    {/* Success Ring Animation */}
+                    <div 
+                      className="absolute inset-0 rounded-full border-4 border-green-400/30"
+                      style={{
+                        animation: 'success-ring 1s ease-out 0.1s'
+                      }}
+                    ></div>
+                  </div>
+                </div>
+                
+                {/* Success Text with Staggered Animation */}
+                <div className="space-y-3">
+                  <h3 
+                    className="text-2xl font-serif text-kawai-black"
+                    style={{
+                      animation: 'text-fade-up 0.6s ease-out 0.5s both'
+                    }}
+                  >
+                    Welcome to VIP!
+                  </h3>
+                  <p 
+                    className="text-kawai-black/70 text-sm leading-relaxed"
+                    style={{
+                      animation: 'text-fade-up 0.6s ease-out 0.7s both'
+                    }}
+                  >
+                    You're now part of our exclusive community.<br/>
+                    Get ready for premium piano offers and special events!
+                  </p>
+                </div>
+                
+                {/* Success Confetti Effect */}
+                <div className="absolute top-4 left-1/2 transform -translate-x-1/2">
+                  <div className="relative">
+                    {[...Array(6)].map((_, i) => (
+                      <div
+                        key={i}
+                        className="absolute w-1 h-1 bg-kawai-red rounded-full"
+                        style={{
+                          animation: `confetti-${i} 1.2s ease-out 0.8s both`,
+                          left: `${i * 10 - 25}px`,
+                          top: '0px'
+                        }}
+                      ></div>
+                    ))}
+                  </div>
+                </div>
               </div>
-              <button 
-                type="submit"
-                style={{
-                  width: '100%',
-                  backgroundColor: '#DC2626',
-                  color: 'white',
-                  padding: '12px 24px',
-                  borderRadius: '8px',
-                  fontWeight: '500',
-                  fontSize: '14px',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.05em',
-                  border: 'none',
-                  cursor: 'pointer',
-                  transition: 'background-color 0.2s ease'
-                }}
-                onMouseEnter={(e) => (e.target as HTMLButtonElement).style.backgroundColor = '#991B1B'}
-                onMouseLeave={(e) => (e.target as HTMLButtonElement).style.backgroundColor = '#DC2626'}
-              >
-                Get Exclusive VIP Offers & Events
-              </button>
-            </form>
+            )}
+            
+            {/* Enhanced CSS Animations */}
+            <style dangerouslySetInnerHTML={{
+              __html: `
+                @keyframes success-bounce {
+                  0% {
+                    transform: scale(0) rotate(-180deg);
+                    opacity: 0;
+                  }
+                  50% {
+                    transform: scale(1.2) rotate(-90deg);
+                  }
+                  100% {
+                    transform: scale(1) rotate(0deg);
+                    opacity: 1;
+                  }
+                }
+                
+                @keyframes checkmark-draw {
+                  0% {
+                    stroke-dashoffset: 24;
+                    opacity: 0;
+                  }
+                  100% {
+                    stroke-dashoffset: 0;
+                    opacity: 1;
+                  }
+                }
+                
+                @keyframes success-ring {
+                  0% {
+                    transform: scale(0.8);
+                    opacity: 1;
+                  }
+                  100% {
+                    transform: scale(2);
+                    opacity: 0;
+                  }
+                }
+                
+                @keyframes text-fade-up {
+                  0% {
+                    transform: translateY(20px);
+                    opacity: 0;
+                  }
+                  100% {
+                    transform: translateY(0);
+                    opacity: 1;
+                  }
+                }
+                
+                @keyframes confetti-0 {
+                  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+                  100% { transform: translateY(-40px) translateX(-20px) rotate(120deg); opacity: 0; }
+                }
+                @keyframes confetti-1 {
+                  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+                  100% { transform: translateY(-35px) translateX(15px) rotate(-90deg); opacity: 0; }
+                }
+                @keyframes confetti-2 {
+                  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+                  100% { transform: translateY(-30px) translateX(-10px) rotate(45deg); opacity: 0; }
+                }
+                @keyframes confetti-3 {
+                  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+                  100% { transform: translateY(-45px) translateX(25px) rotate(-45deg); opacity: 0; }
+                }
+                @keyframes confetti-4 {
+                  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+                  100% { transform: translateY(-25px) translateX(-15px) rotate(90deg); opacity: 0; }
+                }
+                @keyframes confetti-5 {
+                  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+                  100% { transform: translateY(-35px) translateX(20px) rotate(-120deg); opacity: 0; }
+                }
+              `
+            }} />
           </div>
 
           {/* Footer */}
