@@ -16,17 +16,6 @@
       "static/chunks/main-app.js",
       "static/chunks/app/error.js"
     ],
-    "/university-dallas/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/university-dallas/layout.css",
-      "static/chunks/app/university-dallas/layout.js"
-    ],
-    "/university-dallas/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/university-dallas/page.js"
-    ],
     "/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",

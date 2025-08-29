@@ -6,13 +6,6 @@
       "static/chunks/_app-pages-browser_src_app_client-page_tsx.js"
     ]
   },
-  "app/university-dallas/page.tsx -> ./client-page": {
-    "id": "app/university-dallas/page.tsx -> ./client-page",
-    "files": [
-      "static/css/_app-pages-browser_src_app_university-dallas_client-page_tsx.css",
-      "static/chunks/_app-pages-browser_src_app_university-dallas_client-page_tsx.js"
-    ]
-  },
   "lib/analytics.ts -> @/lib/posthog": {
     "id": "lib/analytics.ts -> @/lib/posthog",
     "files": []
