@@ -16,8 +16,11 @@ export default function BookingSection() {
   useEffect(() => {
     if (!shouldLoadCalendly) return;
 
+    // Capture ref value at the beginning to avoid stale closure warnings
+    const containerElement = calendlyContainerRef.current;
+
     console.log('🔄 Starting standalone Calendly initialization...');
-    console.log('Container ref available:', !!calendlyContainerRef.current);
+    console.log('Container ref available:', !!containerElement);
 
     // Initialize tracking first
     initializeCalendlyTracking('booking_section');
@@ -192,13 +195,12 @@ export default function BookingSection() {
       // Clean up tracking
       cleanupCalendlyTracking();
       
-      // Safe DOM cleanup on unmount - capture ref value to avoid stale closure
-      const container = calendlyContainerRef.current;
-      if (container) {
+      // Safe DOM cleanup on unmount - use captured ref value
+      if (containerElement) {
         try {
           // Clear container content safely
-          while (container.firstChild) {
-            container.removeChild(container.firstChild);
+          while (containerElement.firstChild) {
+            containerElement.removeChild(containerElement.firstChild);
           }
           console.log('🧹 Cleaned up Calendly container on unmount');
         } catch (cleanupError) {

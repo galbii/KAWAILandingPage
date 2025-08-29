@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { WebVitals } from "@/components/WebVitals";
-import { PostHogProvider } from "@/components/PostHogProvider";
-import PostHogDebugDashboard from "@/components/PostHogDebugDashboard";
+import { WebVitals } from "./components/WebVitals";
+import { PostHogProvider } from "./components/PostHogProvider";
+import PostHogDebugDashboard from "./components/PostHogDebugDashboard";
 // Removed CalendlyPreloader - using inline widget in BookingSection instead
 import Script from "next/script";
 import ".././globals.css";

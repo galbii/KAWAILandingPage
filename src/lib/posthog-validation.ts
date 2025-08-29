@@ -18,14 +18,33 @@ export interface EventTrackingResponse {
   validation: PostHogEventValidation
 }
 
+// Campaign properties schema - common to all events
+const CAMPAIGN_PROPERTIES_SCHEMA = {
+  campaign_id: { type: 'string', required: false, maxLength: 100 },
+  partner: { type: 'string', required: false, maxLength: 50 },
+  event_context: { type: 'string', required: false, maxLength: 100 },
+  page_variant: { type: 'string', required: false, maxLength: 50 },
+  target_audience: { type: 'string', required: false, maxLength: 50 },
+  campaign_type: { type: 'string', required: false, enum: ['university_partnership', 'direct_marketing'] },
+  university: { type: 'string', required: false, maxLength: 200 },
+  program_focus: { type: 'string', required: false, maxLength: 100 },
+  // UTM equivalent properties
+  utm_source: { type: 'string', required: false, maxLength: 100 },
+  utm_medium: { type: 'string', required: false, maxLength: 100 },
+  utm_campaign: { type: 'string', required: false, maxLength: 100 },
+  utm_content: { type: 'string', required: false, maxLength: 100 },
+  utm_term: { type: 'string', required: false, maxLength: 100 }
+}
+
 // Event property validation schemas
 const PIANO_MODEL_SCHEMA = {
   model_name: { type: 'string', required: true, maxLength: 100 },
   model_price: { type: 'string', required: true, pattern: /^\$[\d,]+$/ },
   model_category: { type: 'string', required: true, enum: ['Digital', 'Acoustic', 'Hybrid'] },
   time_spent_seconds: { type: 'number', required: false, min: 0, max: 3600 },
-  source_section: { type: 'string', required: true, maxLength: 50 },
-  interaction_type: { type: 'string', required: false, enum: ['view', 'compare', 'calculate_payment'] }
+  source_section: { type: 'string', required: true, maxLength: 100 }, // Increased for campaign-enhanced sections
+  interaction_type: { type: 'string', required: false, enum: ['view', 'compare', 'calculate_payment'] },
+  ...CAMPAIGN_PROPERTIES_SCHEMA
 }
 
 const CONSULTATION_INTENT_SCHEMA = {
@@ -34,7 +53,8 @@ const CONSULTATION_INTENT_SCHEMA = {
   session_duration_seconds: { type: 'number', required: true, min: 0, max: 86400 },
   engagement_score: { type: 'number', required: true, min: 0, max: 100 },
   time_to_intent_seconds: { type: 'number', required: true, min: 0, max: 86400 },
-  high_intent: { type: 'boolean', required: false }
+  high_intent: { type: 'boolean', required: false },
+  ...CAMPAIGN_PROPERTIES_SCHEMA
 }
 
 const BOOKING_ATTEMPT_SCHEMA = {
@@ -44,14 +64,16 @@ const BOOKING_ATTEMPT_SCHEMA = {
   session_quality: { type: 'number', required: false, min: 0, max: 100 },
   user_type: { type: 'string', required: false, enum: ['new', 'returning'] },
   models_viewed_count: { type: 'number', required: false, min: 0, max: 50 },
-  total_interactions: { type: 'number', required: false, min: 0, max: 100 }
+  total_interactions: { type: 'number', required: false, min: 0, max: 100 },
+  ...CAMPAIGN_PROPERTIES_SCHEMA
 }
 
 const EVENT_ATTENDANCE_SCHEMA = {
   event_dates: { type: 'string', required: true, maxLength: 100 },
   event_location: { type: 'string', required: true, maxLength: 100 },
   interaction_type: { type: 'string', required: true, enum: ['view', 'save_date', 'directions'] },
-  timezone: { type: 'string', required: false, maxLength: 50 }
+  timezone: { type: 'string', required: false, maxLength: 50 },
+  ...CAMPAIGN_PROPERTIES_SCHEMA
 }
 
 const CALENDLY_APPOINTMENT_SCHEMA = {
@@ -66,7 +88,8 @@ const CALENDLY_APPOINTMENT_SCHEMA = {
   booking_source: { type: 'string', required: false, enum: ['modal', 'booking_section', 'direct'] },
   calendly_event_type: { type: 'string', required: false, maxLength: 100 },
   additional_notes: { type: 'string', required: false, maxLength: 500 },
-  lead_score: { type: 'number', required: false, min: 0, max: 100 }
+  lead_score: { type: 'number', required: false, min: 0, max: 100 },
+  ...CAMPAIGN_PROPERTIES_SCHEMA
 }
 
 const EVENT_SCHEMAS: Record<string, Record<string, unknown>> = {
@@ -352,6 +375,35 @@ export async function testEventCapture(): Promise<void> {
     { logValidation: true }
   )
   console.log('Invalid Event Result (should have errors):', invalidEvent)
+
+  // Test UTD campaign event
+  const utdCampaignEvent = await captureWithValidation(
+    POSTHOG_CONFIG.EVENTS.PIANO_MODEL_VIEWED,
+    {
+      model_name: 'CA99',
+      model_price: '$4,799',
+      model_category: 'Digital',
+      time_spent_seconds: 60,
+      source_section: 'university-dallas:gallery',
+      interaction_type: 'view',
+      // Campaign properties
+      campaign_id: 'utd-partnership-2025',
+      partner: 'UTD',
+      event_context: 'university_partnership',
+      page_variant: 'university-dallas',
+      target_audience: 'students_faculty',
+      campaign_type: 'university_partnership',
+      university: 'University of Texas at Dallas',
+      program_focus: 'music_education',
+      utm_source: 'utd',
+      utm_medium: 'partnership',
+      utm_campaign: 'utd-partnership-2025',
+      utm_content: 'university-dallas',
+      utm_term: 'students_faculty'
+    },
+    { logValidation: true }
+  )
+  console.log('UTD Campaign Event Result:', utdCampaignEvent)
 
   console.groupEnd()
 }

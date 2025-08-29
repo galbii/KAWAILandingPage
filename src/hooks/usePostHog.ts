@@ -1,10 +1,13 @@
 'use client'
 
 import { useCallback, useEffect, useRef } from 'react'
+import { usePathname } from 'next/navigation'
 import { postHogAnalytics } from '@/lib/posthog'
 import { eventMonitor } from '@/lib/posthog-validation'
 import { POSTHOG_CONFIG } from '@/lib/posthog-config'
+import { getCampaignContext, formatSourceSection, getCampaignUTMEquivalent } from '@/lib/campaign-context'
 import type { PianoModel, ConsultationEvent, PianoInteractionEvent } from '@/lib/posthog'
+import type { CampaignContext } from '@/lib/campaign-context'
 
 interface BookingAttemptData {
   bookingSource: 'modal' | 'booking_section'
@@ -33,22 +36,42 @@ interface UsePostHogReturn {
   trackPianoInterest: (pianos: PianoModel[], behavior: PianoBehaviorData) => void
   identifyUser: (userData: UserData) => void
   getFeatureFlag: (flagName: string) => string | boolean
+  getCampaignContext: () => CampaignContext
 }
 
 export function usePostHog(): UsePostHogReturn {
+  const pathname = usePathname()
   const viewStartTime = useRef<number>(Date.now())
   const interactionCount = useRef<number>(0)
   const modelsViewed = useRef<PianoModel[]>([])
+  
+  // Get campaign context for current page
+  const campaignContext = getCampaignContext(pathname)
 
   const trackPianoView = useCallback((model: PianoInteractionEvent) => {
-    // Track with validation
+    // Enhanced source section with campaign context
+    const enhancedSourceSection = formatSourceSection(campaignContext, model.sourceSection)
+    const utmData = getCampaignUTMEquivalent(campaignContext)
+    
+    // Track with validation and campaign context
     eventMonitor.capture(POSTHOG_CONFIG.EVENTS.PIANO_MODEL_VIEWED, {
       model_name: model.model,
       model_price: model.price,
       model_category: model.category,
       time_spent_seconds: model.timeSpent,
-      source_section: model.sourceSection,
-      interaction_type: model.interactionType
+      source_section: enhancedSourceSection,
+      interaction_type: model.interactionType,
+      // Campaign context properties
+      campaign_id: campaignContext.campaign_id,
+      partner: campaignContext.partner,
+      event_context: campaignContext.event_context,
+      page_variant: campaignContext.page_variant,
+      target_audience: campaignContext.target_audience,
+      campaign_type: campaignContext.campaign_type,
+      university: campaignContext.university,
+      program_focus: campaignContext.program_focus,
+      // UTM equivalent data
+      ...utmData
     })
     
     // Add to models viewed for session tracking
@@ -63,7 +86,7 @@ export function usePostHog(): UsePostHogReturn {
     }
     
     interactionCount.current += 1
-  }, [])
+  }, [campaignContext])
 
   // Helper function to calculate session quality
   const calculateSessionQuality = useCallback(() => {
@@ -95,24 +118,36 @@ export function usePostHog(): UsePostHogReturn {
   }, [])
 
   const trackConsultationIntent = useCallback((event: ConsultationEvent) => {
-    postHogAnalytics.trackConsultationIntent(event)
+    const utmData = getCampaignUTMEquivalent(campaignContext)
     
-    // Enhance with session data
-    const sessionData = {
+    // Enhance with campaign context and session data
+    const enhancedEvent = {
       ...event,
       modelsViewed: modelsViewed.current.length,
       totalInteractions: interactionCount.current,
       sessionDuration: Math.floor((Date.now() - viewStartTime.current) / 1000),
+      // Campaign context properties
+      campaign_id: campaignContext.campaign_id,
+      partner: campaignContext.partner,
+      event_context: campaignContext.event_context,
+      page_variant: campaignContext.page_variant,
+      target_audience: campaignContext.target_audience,
+      campaign_type: campaignContext.campaign_type,
+      university: campaignContext.university,
+      program_focus: campaignContext.program_focus,
+      // UTM equivalent data
+      ...utmData
     }
     
-    postHogAnalytics.trackConsultationIntent(sessionData)
-  }, [])
+    postHogAnalytics.trackConsultationIntent(enhancedEvent)
+  }, [campaignContext])
 
   const trackBookingAttempt = useCallback((data: BookingAttemptData) => {
     const sessionQuality = calculateSessionQuality()
     const isReturning = typeof localStorage !== 'undefined' ? localStorage.getItem('kawai_returning_user') === 'true' : false
+    const utmData = getCampaignUTMEquivalent(campaignContext)
     
-    // Track with validation
+    // Track with validation and campaign context
     eventMonitor.capture(POSTHOG_CONFIG.EVENTS.CONSULTATION_BOOKING_ATTEMPT, {
       booking_source: data.bookingSource,
       calendly_status: data.calendlyStatus,
@@ -120,14 +155,25 @@ export function usePostHog(): UsePostHogReturn {
       session_quality: sessionQuality,
       user_type: isReturning ? 'returning' : 'new',
       models_viewed_count: modelsViewed.current.length,
-      total_interactions: interactionCount.current
+      total_interactions: interactionCount.current,
+      // Campaign context properties
+      campaign_id: campaignContext.campaign_id,
+      partner: campaignContext.partner,
+      event_context: campaignContext.event_context,
+      page_variant: campaignContext.page_variant,
+      target_audience: campaignContext.target_audience,
+      campaign_type: campaignContext.campaign_type,
+      university: campaignContext.university,
+      program_focus: campaignContext.program_focus,
+      // UTM equivalent data
+      ...utmData
     })
     
     // Mark as returning user
     if (typeof localStorage !== 'undefined') {
       localStorage.setItem('kawai_returning_user', 'true')
     }
-  }, [calculateSessionQuality]);
+  }, [calculateSessionQuality, campaignContext]);
 
   const trackPianoInterest = useCallback((pianos: PianoModel[], behavior: PianoBehaviorData) => {
     postHogAnalytics.trackPianoInterest(pianos, behavior)
@@ -171,6 +217,11 @@ export function usePostHog(): UsePostHogReturn {
     return () => clearInterval(interval)
   }, [calculateSessionQuality])
 
+  // Get current campaign context
+  const getCurrentCampaignContext = useCallback(() => {
+    return campaignContext
+  }, [campaignContext])
+
   return {
     trackPianoView,
     trackConsultationIntent,
@@ -178,5 +229,6 @@ export function usePostHog(): UsePostHogReturn {
     trackPianoInterest,
     identifyUser,
     getFeatureFlag,
+    getCampaignContext: getCurrentCampaignContext,
   }
 }
