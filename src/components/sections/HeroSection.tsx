@@ -100,11 +100,11 @@ export default function HeroSection() {
         {/* Main Headlines - Centerpiece */}
         <div className="space-y-4 sm:space-y-6 mb-8 sm:mb-12">
           <h1 className="font-heading leading-tight px-2">
-            <div className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white tracking-tight mb-2 sm:mb-4 animate-luxury-fade-in animate-delay-900 drop-shadow-2xl">
-              KAWAI PIANO GALLERY
+            <div className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tight mb-2 sm:mb-4 animate-luxury-fade-in animate-delay-900 drop-shadow-2xl">
+              <span className="text-red-600">KAWAI</span> <span className="text-white">X</span> <span className="text-orange-400">SAM HOUSTON</span>
             </div>
             <div className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-white tracking-wide animate-luxury-fade-in animate-delay-1200 drop-shadow-2xl">
-              UNIVERSITY SALE
+              HOUSTON EXCLUSIVE SALE
             </div>
           </h1>
           
