@@ -59,20 +59,20 @@ export default function FooterSection() {
               <div className="flex items-start space-x-3">
                 <div className="w-5 h-5 text-primary mt-1">📍</div>
                 <div className="text-gray-300 text-sm">
-                  3100 Cleburne Street<br />
-                  Houston, TX 77004
+                  601 W. Plano Parkway, Suite 153<br />
+                  Plano, TX 75075
                 </div>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-5 h-5 text-primary">📞</div>
-                <a href="tel:7135550123" className="text-gray-300 hover:text-gold transition-colors duration-300 text-sm">
-                  (713) 555-0123
+                <a href="tel:9726452514" className="text-gray-300 hover:text-gold transition-colors duration-300 text-sm">
+                  (972) 645-2514
                 </a>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-5 h-5 text-primary">✉️</div>
-                <a href="mailto:info@kawaisale.com" className="text-gray-300 hover:text-gold transition-colors duration-300 text-sm">
-                  info@kawaisale.com
+                <a href="mailto:info@kawaipianosdallas.com" className="text-gray-300 hover:text-gold transition-colors duration-300 text-sm">
+                  info@kawaipianosdallas.com
                 </a>
               </div>
             </div>

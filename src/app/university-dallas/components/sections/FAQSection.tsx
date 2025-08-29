@@ -10,36 +10,36 @@ interface FAQItem {
 
 const faqData: FAQItem[] = [
   {
-    question: "Where can I find piano sales in Houston?",
-    answer: "Our KAWAI piano sales Houston event at our dealership offers the best selection of digital and acoustic pianos in the Greater Houston Area. We're Houston's trusted piano dealer with over 5 years of partnership with SHSU."
+    question: "Where can I find piano sales in Dallas?",
+    answer: "Our KAWAI piano sales Dallas event at our dealership offers the best selection of digital and acoustic pianos in the Greater Dallas Area. We're Dallas's trusted piano dealer with over 5 years of partnership with UTD."
   },
   {
-    question: "Do you have used pianos for sale in Houston?",
-    answer: "Yes! Our Houston piano sale event features both new and carefully selected used pianos Houston families love. All used pianos are inspected by SHSU music faculty and come with warranties. Prices start at $949 for digital pianos."
+    question: "Do you have used pianos for sale in Dallas?",
+    answer: "Yes! Our Dallas piano sale event features both new and carefully selected used pianos Dallas families love. All used pianos are inspected by UTD music faculty and come with warranties. Prices start at $949 for digital pianos."
   },
   {
-    question: "What piano deals are available in Houston during the event?",
-    answer: "Piano deals Houston residents can save up to $6,000 on premium KAWAI instruments. Our event features special pricing on digital pianos, upright pianos, and grand pianos, plus free delivery and tuning for early bird customers."
+    question: "What piano deals are available in Dallas during the event?",
+    answer: "Piano deals Dallas residents can save up to $6,000 on premium KAWAI instruments. Our event features special pricing on digital pianos, upright pianos, and grand pianos, plus free delivery and tuning for early bird customers."
   },
   {
-    question: "Do you offer piano lessons in Houston area?",
-    answer: "While our primary focus is piano sales Houston, we can connect you with qualified piano teachers in the Houston area through our SHSU Music Department partnership. Many of our piano customers also take advantage of piano lessons Houston has to offer."
+    question: "Do you offer piano lessons in Dallas area?",
+    answer: "While our primary focus is piano sales Dallas, we can connect you with qualified piano teachers in the Dallas area through our UTD Music Department partnership. Many of our piano customers also take advantage of piano lessons Dallas has to offer."
   },
   {
-    question: "Where is your Houston piano store located?",
-    answer: "Our Houston piano sale event takes place at our KAWAI Piano Gallery Houston showroom at 5800 Richmond Ave. As Houston's premier piano dealer, our convenient location makes it easy for Greater Houston Area families to shop for pianos."
+    question: "Where is your Dallas piano store located?",
+    answer: "Our Dallas piano sale event takes place at our KAWAI Piano Gallery Dallas showroom at 601 W. Plano Parkway, Suite 153. As Dallas's premier piano dealer, our convenient location makes it easy for Greater Dallas Area families to shop for pianos."
   },
   {
-    question: "What types of pianos are available at your Houston location?",
-    answer: "Our piano store Houston event features KAWAI digital pianos, upright acoustic pianos, and grand pianos. From compact ES-120 models perfect for apartments to full-size GL-10 grand pianos, we have options for every Houston piano family."
+    question: "What types of pianos are available at your Dallas location?",
+    answer: "Our piano store Dallas event features KAWAI digital pianos, upright acoustic pianos, and grand pianos. From compact ES-120 models perfect for apartments to full-size GL-10 grand pianos, we have options for every Dallas piano family."
   },
   {
-    question: "Do you provide financing for piano purchases in Houston?",
-    answer: "Yes! We offer financing options for our piano sales Houston event. Monthly payments start as low as $79 for digital pianos. Our financing makes premium KAWAI pianos accessible to all Houston families."
+    question: "Do you provide financing for piano purchases in Dallas?",
+    answer: "Yes! We offer financing options for our piano sales Dallas event. Monthly payments start as low as $79 for digital pianos. Our financing makes premium KAWAI pianos accessible to all Dallas families."
   },
   {
-    question: "What makes your Houston piano sale different from other dealers?",
-    answer: "Our partnership with Sam Houston State University's Music Department ensures every piano meets institutional quality standards. Unlike other piano dealers Houston offers, our instruments are faculty-approved and your purchase directly supports SHSU's music programs through our ongoing partnership."
+    question: "What makes your Dallas piano sale different from other dealers?",
+    answer: "Our partnership with University of Texas at Dallas's Music Department ensures every piano meets institutional quality standards. Unlike other piano dealers Dallas offers, our instruments are faculty-approved and your purchase directly supports UTD's music programs through our ongoing partnership."
   }
 ];
 
@@ -58,7 +58,7 @@ export default function FAQSection() {
             Frequently Asked Questions
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Everything you need to know about our Houston piano sales event and KAWAI piano deals
+            Everything you need to know about our Dallas piano sales event and KAWAI piano deals
           </p>
         </div>
 
@@ -94,7 +94,7 @@ export default function FAQSection() {
 
         <div className="text-center mt-12">
           <p className="text-gray-600 mb-4">
-            Have more questions about our Houston piano sales?
+            Have more questions about our Dallas piano sales?
           </p>
           <button className="bg-kawai-red text-white px-8 py-3 rounded-lg font-medium hover:bg-kawai-red/90 transition-colors">
             Contact Our Piano Experts

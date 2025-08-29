@@ -668,6 +668,7 @@ body {
 @media (max-width: 768px) {
   .value-prop-background-fixed {
     background-attachment: scroll !important;
+    background-size: cover !important;
   }
   
   /* Faster animations on mobile for better performance */

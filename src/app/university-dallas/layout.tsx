@@ -21,14 +21,14 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Piano Sales Houston | KAWAI Piano Deals & Used Pianos | SHSU Event Sept 2025",
-  description: "Houston piano sales event featuring KAWAI digital & acoustic pianos. Save up to $6,000 on new & used pianos. Piano deals Houston - SHSU partnership Sept 11-14, 2025. Free delivery!",
+  title: "Piano Sales Dallas | KAWAI Piano Deals & Used Pianos | UTD Event Sept 2025",
+  description: "Dallas piano sales event featuring KAWAI digital & acoustic pianos. Save up to $6,000 on new & used pianos. Piano deals Dallas - UTD partnership Sept 18-21, 2025. Free delivery!",
   icons: {
     apple: '/images/optimized/logos/Kawai-Red.webp',
   },
   openGraph: {
-    title: "Piano Sales Houston | KAWAI Piano Deals & Used Pianos | SHSU Event Sept 2025",
-    description: "Houston piano sales event featuring KAWAI digital & acoustic pianos. Save up to $6,000 on new & used pianos. Piano deals Houston - SHSU partnership Sept 11-14, 2025. Free delivery!",
+    title: "Piano Sales Dallas | KAWAI Piano Deals & Used Pianos | UTD Event Sept 2025",
+    description: "Dallas piano sales event featuring KAWAI digital & acoustic pianos. Save up to $6,000 on new & used pianos. Piano deals Dallas - UTD partnership Sept 18-21, 2025. Free delivery!",
     images: [
       {
         url: '/images/optimized/misc/kawai-piano-hands_1200.webp',

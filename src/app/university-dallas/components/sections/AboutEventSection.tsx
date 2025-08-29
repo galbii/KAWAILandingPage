@@ -70,13 +70,13 @@ export default function AboutEventSection() {
             <div className="flex flex-col items-center text-center mb-6">
               <Image 
                 src="/images/Kawai (Red)(2).png"
-                alt="KAWAI Piano Sales Houston - Premium Piano Dealer"
+                alt="KAWAI Piano Sales Dallas - Premium Piano Dealer"
                 width={240}
                 height={60}
                 className={`h-16 w-auto mb-4 transition-all duration-600 delay-200 ${contentVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
               />
               <h3 className={`text-2xl md:text-3xl font-bold tracking-tight transition-all duration-600 delay-400 ${contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                Houston&apos;s Premier <span className="text-kawai-red">Piano Sale Event</span>
+                Dallas&apos;s Premier <span className="text-kawai-red">Piano Sale Event</span>
               </h3>
             </div>
 
@@ -84,10 +84,10 @@ export default function AboutEventSection() {
             <div className={`lg:hidden relative mb-8 transition-all duration-700 delay-500 ${contentVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
               <div className="max-w-xs sm:max-w-sm mx-auto">
                 <PdfViewer
-                  file="/Kawai Signed_2 1 (1).pdf"
+                  file="/utd_letter.pdf"
                   className="cursor-pointer hover:shadow-sm transition-shadow rounded-lg overflow-hidden"
                   width={320}
-                  onClick={() => openImageModal("/Kawai Signed_2 1 (1).pdf", "SHSU Houston Piano Sale Event Letter - Piano Deals Houston", 800, 600)}
+                  onClick={() => openImageModal("/utd_letter.pdf", "UTD Dallas Piano Sale Event Letter - Piano Deals Dallas", 800, 600)}
                   loading="Loading piano sale letter..."
                   error="Unable to load letter PDF"
                 />
@@ -96,15 +96,15 @@ export default function AboutEventSection() {
             
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p className={`text-base transition-all duration-600 delay-600 ${contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                For over five years, our exclusive partnership with Sam Houston State University has made us Houston&apos;s trusted piano dealer, bringing Greater Houston Area families access to premium KAWAI piano sales at specially negotiated pricing.
+                For over five years, our exclusive partnership with University of Texas at Dallas has made us Dallas&apos;s trusted piano dealer, bringing Greater Dallas Area families access to premium KAWAI piano sales at specially negotiated pricing.
               </p>
               
               <p className={`text-base transition-all duration-600 delay-750 ${contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                This four-day exclusive Houston piano sale event features carefully selected digital and acoustic instruments. From used pianos Houston families love to brand new grand pianos, each instrument meets SHSU&apos;s rigorous quality standards for exceptional sound and craftsmanship.
+                This four-day exclusive Dallas piano sale event features carefully selected digital and acoustic instruments. From used pianos Dallas families love to brand new grand pianos, each instrument meets UTD&apos;s rigorous quality standards for exceptional sound and craftsmanship.
               </p>
               
               <p className={`text-base transition-all duration-600 delay-900 ${contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                Whether you&apos;re seeking piano deals Houston residents can trust, need piano lessons Houston area, or want professional-grade instruments, this event offers unmatched piano sales Houston has to offer with institutional endorsement.
+                Whether you&apos;re seeking piano deals Dallas residents can trust, need piano lessons Dallas area, or want professional-grade instruments, this event offers unmatched piano sales Dallas has to offer with institutional endorsement.
               </p>
             </div>
 
@@ -139,10 +139,10 @@ export default function AboutEventSection() {
           {/* Desktop Letter PDF - Hidden on mobile */}
           <div className={`hidden lg:block relative transition-all duration-700 delay-700 ${contentVisible ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 translate-x-6 scale-95'}`}>
             <PdfViewer
-              file="/Kawai Signed_2 1 (1).pdf"
+              file="/utd_letter.pdf"
               className="cursor-pointer hover:shadow-lg transition-shadow rounded-lg overflow-hidden"
               width={600}
-              onClick={() => openImageModal("/Kawai Signed_2 1 (1).pdf", "SHSU Houston Piano Sale Event Letter - Piano Deals Houston", 800, 600)}
+              onClick={() => openImageModal("/utd_letter.pdf", "UTD Dallas Piano Sale Event Letter - Piano Deals Dallas", 800, 600)}
               loading="Loading piano sale letter..."
               error="Unable to load letter PDF"
             />

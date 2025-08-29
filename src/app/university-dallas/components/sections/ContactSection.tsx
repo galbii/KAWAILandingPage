@@ -46,8 +46,8 @@ export default function ContactSection() {
                 <div>
                   <h4 className="font-semibold text-gray-dark mb-1">Showroom Address</h4>
                   <p className="text-gray-medium leading-relaxed">
-                    5800 Richmond Ave<br />
-                    Houston, TX 77057<br />
+                    601 W. Plano Parkway, Suite 153<br />
+                    Plano, TX 75075<br />
                     <span className="text-sm text-primary font-medium">Official Kawai Piano Gallery</span>
                   </p>
                 </div>
@@ -63,18 +63,18 @@ export default function ContactSection() {
                   <h4 className="font-semibold text-gray-dark mb-1">Phone & Email</h4>
                   <p className="text-gray-medium">
                     <a 
-                      href="tel:7139040001" 
+                      href="tel:9726452514" 
                       onClick={() => trackKawaiEvent.callPhone('contact_section')}
                       className="hover:text-primary transition-colors"
                     >
-                      (713) 904-0001
+                      (972) 645-2514
                     </a><br />
                     <a 
-                      href="mailto:info@kawaipianoshouston.com" 
+                      href="mailto:info@kawaipianosdallas.com" 
                       onClick={() => trackKawaiEvent.emailContact('contact_section')}
                       className="hover:text-primary transition-colors"
                     >
-                      info@kawaipianoshouston.com
+                      info@kawaipianosdallas.com
                     </a>
                   </p>
                 </div>

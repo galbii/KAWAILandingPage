@@ -87,24 +87,41 @@ export default function HeroSection() {
             />
             <div className="hidden sm:block w-px h-12 bg-gradient-to-b from-transparent via-orange-400/40 to-transparent"></div>
             <div className="text-center">
-              <div className="text-xl sm:text-2xl font-bold text-orange-400 drop-shadow-lg">SHSU</div>
+              <div className="text-xl sm:text-2xl font-bold text-orange-400 drop-shadow-lg">UTD</div>
               <div className="text-xs text-orange-300 tracking-wide drop-shadow-sm">PARTNERSHIP</div>
             </div>
           </div>
         </div>
         
         <div className="space-y-2 mb-6 sm:mb-8 animate-elegant-slide-up animate-delay-600">
-          <div className="text-xs sm:text-sm text-orange-400 font-medium tracking-wider uppercase px-2 drop-shadow-sm">Sam Houston State University is proud to present</div>
+          <div className="text-xs sm:text-sm text-orange-400 font-medium tracking-wider uppercase px-2 drop-shadow-sm">University of Texas at Dallas is proud to present</div>
         </div>
 
         {/* Main Headlines - Centerpiece */}
         <div className="space-y-4 sm:space-y-6 mb-8 sm:mb-12">
           <h1 className="font-heading leading-tight px-2">
-            <div className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white tracking-tight mb-2 sm:mb-4 animate-luxury-fade-in animate-delay-900 drop-shadow-2xl">
-              KAWAI PIANO GALLERY
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 md:gap-8 mb-2 sm:mb-4 animate-luxury-fade-in animate-delay-900">
+              {/* UTD Logo - First on mobile, last on desktop */}
+              <Image
+                src="/images/cd908542103759.57c06762b252e.jpg"
+                alt="UT Dallas Logo"
+                width={320}
+                height={160}
+                className="h-20 sm:h-24 md:h-28 lg:h-32 xl:h-36 w-auto drop-shadow-2xl order-1 sm:order-3"
+              />
+              {/* Cross symbol */}
+              <div className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white drop-shadow-2xl order-2">✕</div>
+              {/* KAWAI Logo - Last on mobile, first on desktop */}
+              <Image
+                src="/images/Kawai (Red)(2).png"
+                alt="KAWAI Logo"
+                width={160}
+                height={48}
+                className="h-10 sm:h-12 md:h-16 lg:h-18 xl:h-20 w-auto drop-shadow-2xl order-3 sm:order-1"
+              />
             </div>
             <div className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-white tracking-wide animate-luxury-fade-in animate-delay-1200 drop-shadow-2xl">
-              UNIVERSITY SALE
+              DALLAS EXCLUSIVE EVENT
             </div>
           </h1>
           
@@ -123,7 +140,7 @@ export default function HeroSection() {
               <div className="w-2 h-2 bg-red-400 rounded-full animate-pulse drop-shadow-sm"></div>
               <span className="text-red-200 font-semibold tracking-wide text-xs sm:text-sm drop-shadow-sm">4 DAYS ONLY</span>
             </div>
-            <div className="text-lg sm:text-xl md:text-2xl font-light text-white tracking-wider drop-shadow-lg">September 11-14, 2025</div>
+            <div className="text-lg sm:text-xl md:text-2xl font-light text-white tracking-wider drop-shadow-lg">September 18-21, 2025</div>
             <div className="text-sm sm:text-base text-white/95 drop-shadow-sm animate-elegant-slide-up animate-delay-2000">Book for first picks on select deals and early bird viewing</div>
           </div>
           
@@ -131,7 +148,7 @@ export default function HeroSection() {
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
             <button 
               onClick={handleExploreCollectionClick}
-              className="bg-white/15 backdrop-blur-md border border-white/25 text-white hover:bg-white/25 px-6 sm:px-8 py-3 text-base sm:text-lg font-medium rounded-lg transition-all duration-500 hover:scale-105 hover:shadow-2xl w-full sm:w-auto cursor-pointer relative drop-shadow-lg animate-gentle-scale animate-delay-2200"
+              className="bg-white text-black hover:bg-gray-100 px-6 sm:px-8 py-3 text-base sm:text-lg font-medium rounded-lg transition-all duration-500 hover:scale-105 hover:shadow-2xl w-full sm:w-auto cursor-pointer relative drop-shadow-lg animate-gentle-scale animate-delay-2200"
               style={{ pointerEvents: 'auto', zIndex: 50 }}
               type="button"
             >
@@ -152,7 +169,7 @@ export default function HeroSection() {
           
           {/* Supporting Message */}
           <div className="text-sm sm:text-base text-white/90 italic animate-elegant-slide-up animate-delay-2600 drop-shadow-sm">
-            Your purchase supports the SHSU Music Department
+            Your purchase supports the UTD Music Department
           </div>
         </div>
       </div>

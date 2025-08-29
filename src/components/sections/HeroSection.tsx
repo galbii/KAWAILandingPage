@@ -131,7 +131,7 @@ export default function HeroSection() {
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
             <button 
               onClick={handleExploreCollectionClick}
-              className="bg-white/15 backdrop-blur-md border border-white/25 text-white hover:bg-white/25 px-6 sm:px-8 py-3 text-base sm:text-lg font-medium rounded-lg transition-all duration-500 hover:scale-105 hover:shadow-2xl w-full sm:w-auto cursor-pointer relative drop-shadow-lg animate-gentle-scale animate-delay-2200"
+              className="bg-white text-black hover:bg-gray-100 px-6 sm:px-8 py-3 text-base sm:text-lg font-medium rounded-lg transition-all duration-500 hover:scale-105 hover:shadow-2xl w-full sm:w-auto cursor-pointer relative drop-shadow-lg animate-gentle-scale animate-delay-2200"
               style={{ pointerEvents: 'auto', zIndex: 50 }}
               type="button"
             >

@@ -25,7 +25,7 @@ const featuredPianos: FeaturedPiano[] = [
     id: "es-120",
     model: "ES-120",
     title: "Kawai ES-120",
-    description: "Compact digital piano with Responsive Hammer Compact action, 88 weighted keys, and premium piano sounds. Perfect for Houston piano lessons, home practice, and portable performances.",
+    description: "Compact digital piano with Responsive Hammer Compact action, 88 weighted keys, and premium piano sounds. Perfect for Dallas piano lessons, home practice, and portable performances.",
     image: "/images/optimized/pianos/es120.webp",
     category: "Digital Piano",
     originalPrice: 1099,
@@ -51,7 +51,7 @@ const featuredPianos: FeaturedPiano[] = [
     id: "k-200",
     model: "K-200",
     title: "Kawai K-200",
-    description: "Professional upright piano with premium spruce soundboard, responsive action, and rich, resonant tone. Popular choice for Houston piano families, serious students, teachers, and music institutions.",
+    description: "Professional upright piano with premium spruce soundboard, responsive action, and rich, resonant tone. Popular choice for Dallas piano families, serious students, teachers, and music institutions.",
     image: "/images/optimized/pianos/K-200_EP_styling_1200.webp",
     category: "Upright Piano",
     originalPrice: 8395,
@@ -197,7 +197,7 @@ function PianoSection({ piano, index, hasTrackedAnyPiano }: PianoSectionProps) {
             <div className={`relative transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-6 scale-95'}`}>
               <Image
                 src={piano.image}
-                alt={`${piano.title} - Houston Piano Sales - Available at KAWAI Piano Store Houston`}
+                alt={`${piano.title} - Dallas Piano Sales - Available at KAWAI Piano Store Dallas`}
                 width={800}
                 height={600}
                 className="w-full h-auto object-cover"
@@ -244,13 +244,13 @@ export function FeaturedDeals() {
                 <div className="bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
                   LIMITED TIME EVENT
                 </div>
-                <span className="text-red-600 font-bold text-lg">September 11th - 14th, 2025</span>
+                <span className="text-red-600 font-bold text-lg">September 18th - 21st, 2025</span>
               </div>
             </div>
           </div>
           
           <p className={`text-base md:text-lg leading-relaxed text-kawai-black/70 max-w-3xl mx-auto transition-all duration-600 delay-600 ${headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-            Experience our handpicked selection of premium digital and acoustic pianos with university-exclusive pricing. Each masterfully crafted instrument showcases KAWAI&apos;s legendary quality, ready for immediate delivery from our Houston showroom. Every purchase directly benefits SHSU&apos;s Music Department programs.
+            Experience our handpicked selection of premium digital and acoustic pianos with university-exclusive pricing. Each masterfully crafted instrument showcases KAWAI&apos;s legendary quality, ready for immediate delivery from our Dallas showroom. Every purchase directly benefits UTD&apos;s Music Department programs.
           </p>
         </div>
         

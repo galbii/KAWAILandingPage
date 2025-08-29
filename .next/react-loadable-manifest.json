@@ -10,12 +10,12 @@
       "static/chunks/21-2533f32f55e16a85.js",
       "static/chunks/674-a257e78ab72a3fc8.js",
       "static/chunks/437.cd3df3315706bd65.js",
-      "static/chunks/815.176cc628e722401f.js",
+      "static/chunks/815.d5628a7319204a77.js",
       "static/chunks/780.b9eb7381a0353b77.js"
     ]
   },
   "app/sam-houston/page.tsx -> ./client-page": {
-    "id": 1958,
+    "id": 5549,
     "files": [
       "static/css/1dfb5e71b60cea90.css",
       "static/chunks/9b0008ae.ba2580a9d2115f53.js",
@@ -25,12 +25,12 @@
       "static/chunks/21-2533f32f55e16a85.js",
       "static/chunks/674-a257e78ab72a3fc8.js",
       "static/chunks/437.cd3df3315706bd65.js",
-      "static/chunks/815.176cc628e722401f.js",
-      "static/chunks/958.b4a4ea74360bfe2d.js"
+      "static/chunks/815.d5628a7319204a77.js",
+      "static/chunks/549.fcc1c1caa52a5cf8.js"
     ]
   },
   "app/university-dallas/page.tsx -> ./client-page": {
-    "id": 9961,
+    "id": 2945,
     "files": [
       "static/css/1dfb5e71b60cea90.css",
       "static/chunks/9b0008ae.ba2580a9d2115f53.js",
@@ -40,7 +40,7 @@
       "static/chunks/21-2533f32f55e16a85.js",
       "static/chunks/674-a257e78ab72a3fc8.js",
       "static/chunks/437.cd3df3315706bd65.js",
-      "static/chunks/961.35180002bf9767cf.js"
+      "static/chunks/945.4ea7a1278f2afaaa.js"
     ]
   },
   "lib/analytics.ts -> @/lib/posthog": {

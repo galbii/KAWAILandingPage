@@ -19,7 +19,7 @@ export default function ValuePropositionSection() {
             Special University Pricing
           </h2>
           <p className="font-body text-lg sm:text-xl text-white/90 max-w-2xl mx-auto">
-            Exclusive savings for the SHSU community with flexible financing options
+            Exclusive savings for the UTD community with flexible financing options
           </p>
         </div>
 
@@ -36,7 +36,7 @@ export default function ValuePropositionSection() {
                 University Pricing
               </h3>
               <p className="font-body text-white/80 leading-relaxed text-sm sm:text-base max-w-xs mx-auto">
-                Exclusive discounts for SHSU students, faculty, and staff with special financing available
+                Exclusive discounts for UTD students, faculty, and staff with special financing available
               </p>
             </div>
           </div>
@@ -81,7 +81,7 @@ export default function ValuePropositionSection() {
             </p>
           </div>
           <a 
-            href="tel:7139040001"
+            href="tel:9726452514"
             onClick={() => trackKawaiEvent.callPhone('value_proposition_section')}
             className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-6 sm:px-8 py-3 sm:py-4 border border-white/20 hover:bg-white/15 hover:scale-105 transition-all duration-300 transform"
           >
@@ -91,7 +91,7 @@ export default function ValuePropositionSection() {
                 Call now for pricing & financing
               </p>
               <p className="font-heading text-white text-base sm:text-lg font-medium">
-                (713) 904-0001
+                (972) 645-2514
               </p>
             </div>
           </a>

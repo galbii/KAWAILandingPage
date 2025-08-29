@@ -68,9 +68,9 @@ export default function PianoConsultationDialog({ isOpen, onClose }: PianoConsul
                      style="background: #dc2626; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;">
                     Book directly on Calendly →
                   </a>
-                  <a href="tel:+1-281-890-7464" 
+                  <a href="tel:+1-972-645-2514" 
                      style="background: #16a34a; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;">
-                    Call (281) 890-7464
+                    Call (972) 645-2514
                   </a>
                 </div>
               </div>

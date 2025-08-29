@@ -8,20 +8,20 @@ export function StructuredData() {
       <LocalBusinessJsonLd
         type="Store"
         id="https://www.kawai-piano-sale-houston.com"
-        name="KAWAI Piano Sales Houston - SHSU Partnership Event"
-        description="Exclusive KAWAI piano sale event in Houston featuring digital and acoustic pianos at special prices. Partnership with Sam Houston State University."
+        name="KAWAI Piano Sales Houston - UTD Partnership Event"
+        description="Exclusive KAWAI piano sale event in Houston featuring digital and acoustic pianos at special prices. Partnership with University of Texas at Dallas."
         url="https://www.kawai-piano-sale-houston.com"
-        telephone="+1-713-XXX-XXXX"
+        telephone="+1-972-645-2514"
         address={{
-          streetAddress: "Sam Houston State University",
-          addressLocality: "Houston",
+          streetAddress: "601 W. Plano Parkway, Suite 153",
+          addressLocality: "Plano",
           addressRegion: "TX",
-          postalCode: "77340",
+          postalCode: "75075",
           addressCountry: "US",
         }}
         geo={{
-          latitude: "30.7128",
-          longitude: "-95.5527",
+          latitude: "33.0198",
+          longitude: "-96.6989",
         }}
         images={[
           "/images/optimized/pianos/es120.webp",
@@ -37,13 +37,13 @@ export function StructuredData() {
             opens: "09:00",
             closes: "18:00",
             dayOfWeek: [
+              "Wednesday",
               "Thursday",
               "Friday",
               "Saturday",
-              "Sunday",
             ],
-            validFrom: "2025-09-11",
-            validThrough: "2025-09-14",
+            validFrom: "2025-09-18",
+            validThrough: "2025-09-21",
           },
         ]}
         rating={{
@@ -59,26 +59,26 @@ export function StructuredData() {
             },
             itemOffered: {
               name: "KAWAI Piano Sales",
-              description: "Digital and acoustic pianos including upright and grand pianos with special Houston pricing.",
+              description: "Digital and acoustic pianos including upright and grand pianos with special Dallas pricing.",
             },
           },
         ]}
         areaServed={[
           {
             geoMidpoint: {
-              latitude: "29.7604",
-              longitude: "-95.3698",
+              latitude: "32.7767",
+              longitude: "-96.7970",
             },
-            geoRadius: "50000", // 50km radius covering Greater Houston Area
+            geoRadius: "50000", // 50km radius covering Greater Dallas Area
           },
         ]}
       />
       
       <EventJsonLd
         name="KAWAI Piano Sale Event Houston"
-        startDate="2025-09-11T09:00:00-05:00"
-        endDate="2025-09-14T18:00:00-05:00"
-        description="Exclusive KAWAI piano sale event in Houston featuring digital and acoustic pianos at special reduced prices. Partnership with Sam Houston State University offering savings up to $6,000."
+        startDate="2025-09-18T09:00:00-05:00"
+        endDate="2025-09-21T18:00:00-05:00"
+        description="Exclusive KAWAI piano sale event in Houston featuring digital and acoustic pianos at special reduced prices. Partnership with University of Texas at Dallas offering savings up to $6,000."
         location={{
           name: "Sam Houston State University",
           address: {
@@ -101,8 +101,8 @@ export function StructuredData() {
             priceCurrency: "USD",
             availability: "https://schema.org/InStock",
             url: "https://www.kawai-piano-sale-houston.com",
-            validFrom: "2025-09-11",
-            validThrough: "2025-09-14",
+            validFrom: "2025-09-18",
+            validThrough: "2025-09-21",
           },
         ]}
         performer={{
@@ -110,7 +110,7 @@ export function StructuredData() {
           sameAs: "https://www.kawai-global.com",
         }}
         organizer={{
-          name: "Sam Houston State University Music Department",
+          name: "University of Texas at Dallas Music Department",
           sameAs: "https://www.shsu.edu",
         }}
         eventStatus="https://schema.org/EventScheduled"

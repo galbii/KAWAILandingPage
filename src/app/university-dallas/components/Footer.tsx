@@ -72,7 +72,7 @@ export function Footer() {
               />
               <Button
                 type="submit"
-                className="px-6 py-2 bg-kawai-red hover:bg-kawai-red/90 text-white shadow-md hover:shadow-lg transition-all"
+                className="px-6 py-2 bg-black hover:bg-gray-800 text-white shadow-md hover:shadow-lg transition-all"
               >
                 Subscribe
               </Button>
@@ -86,26 +86,26 @@ export function Footer() {
               <div className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-kawai-red" />
                 <a 
-                  href="tel:7139040001"
+                  href="tel:9726452514"
                   onClick={() => trackKawaiEvent.callPhone('footer')}
                   className="hover:text-kawai-red transition-colors cursor-pointer"
                 >
-                  (713) 904-0001
+                  (972) 645-2514
                 </a>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-kawai-red" />
                 <a 
-                  href="mailto:info@kawaipianoshouston.com"
+                  href="mailto:info@kawaipianosdallas.com"
                   onClick={() => trackKawaiEvent.emailContact('footer')}
                   className="hover:text-kawai-red transition-colors cursor-pointer"
                 >
-                  info@kawaipianoshouston.com
+                  info@kawaipianosdallas.com
                 </a>
               </div>
               <div className="flex items-center space-x-3">
                 <MapPin className="h-5 w-5 text-kawai-red" />
-                <span>5800 Richmond Ave, Houston, TX 77057</span>
+                <span>601 W. Plano Parkway, Suite 153, Plano, TX 75075</span>
               </div>
             </div>
           </div>

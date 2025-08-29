@@ -13,7 +13,6 @@ import BookingSection from './components/sections/BookingSection';
 import { ShowroomLocation } from './components/sections/showroom-location';
 import { Footer } from './components/Footer';
 import { StructuredData } from './components/SEO/StructuredData';
-import FAQSection from './components/sections/FAQSection';
 import { CountdownTimer } from './components/CountdownTimer';
 import { NewsletterPopup } from './components/NewsletterPopup';
 
@@ -53,7 +52,6 @@ export default function ClientHomePage() {
       <ValuePropositionSection />
       <FeaturedDeals />
       <BookingSection />
-      <FAQSection />
       <ShowroomLocation />
       <Footer />
       <CountdownTimer />

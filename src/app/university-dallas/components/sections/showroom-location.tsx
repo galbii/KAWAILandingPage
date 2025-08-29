@@ -19,11 +19,11 @@ export function ShowroomLocation() {
     return () => clearTimeout(timer);
   }, []);
   const showroomInfo = {
-    name: 'Kawai Piano Gallery Houston',
-    address: '5800 Richmond Ave, Houston, TX 77057',
-    website: 'https://www.kawaipianoshouston.com/',
-    phone: '(713) 904-0001',
-    serviceArea: 'Serving Houston, Texas and surrounding areas',
+    name: 'Kawai Piano Gallery Dallas',
+    address: '601 W. Plano Parkway, Suite 153, Plano, TX 75075',
+    website: 'https://www.kawaipianosdallas.com/',
+    phone: '(972) 645-2514',
+    serviceArea: 'Serving Dallas, Texas and surrounding areas',
     hours: [
       { day: 'Monday', time: '10:00 am–7:00 pm' },
       { day: 'Tuesday', time: '10:00 am–7:00 pm' },
@@ -79,7 +79,7 @@ export function ShowroomLocation() {
                     loading="lazy"
                     allowFullScreen
                     referrerPolicy="no-referrer-when-downgrade"
-                    src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&q=5800+Richmond+Ave+Houston+TX+77057&zoom=15`}
+                    src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&q=601+W+Plano+Parkway+Suite+153+Plano+TX+75075&zoom=15`}
                   />
                 </div>
                 {/* Subtle overlay gradient */}
@@ -117,7 +117,7 @@ export function ShowroomLocation() {
                         Having trouble loading the form? Use this contact form instead.
                       </p>
                     </div>
-                    <form className="space-y-4" action="mailto:info@kawaipianoshouston.com" method="post" encType="text/plain">
+                    <form className="space-y-4" action="mailto:info@kawaipianosdallas.com" method="post" encType="text/plain">
                       <div>
                         <label htmlFor="fallback-name" className="block text-sm font-medium text-kawai-black mb-2">Name</label>
                         <input 
