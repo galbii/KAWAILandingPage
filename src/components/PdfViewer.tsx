@@ -63,7 +63,7 @@ export default function PdfViewer({
 
   if (loadError) {
     return (
-      <div className={`flex items-center justify-center p-8 bg-gray-50 rounded-lg ${className}`}>
+      <div className={`flex items-center justify-center p-4 ${className}`}>
         <div className="text-center">
           <p className="text-red-600 mb-2">Error loading PDF</p>
           <p className="text-sm text-gray-500">{loadError}</p>
@@ -79,7 +79,7 @@ export default function PdfViewer({
         onLoadSuccess={onDocumentLoadSuccess}
         onLoadError={onDocumentLoadError}
         loading={
-          <div className="flex items-center justify-center p-8 bg-gray-50 rounded-lg">
+          <div className="flex items-center justify-center p-4">
             <div className="text-center">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-kawai-red mx-auto mb-2"></div>
               <p className="text-gray-600">{loading}</p>
@@ -87,7 +87,7 @@ export default function PdfViewer({
           </div>
         }
         error={
-          <div className="flex items-center justify-center p-8 bg-gray-50 rounded-lg">
+          <div className="flex items-center justify-center p-4">
             <div className="text-center">
               <p className="text-red-600">{error}</p>
             </div>
@@ -102,7 +102,7 @@ export default function PdfViewer({
           scale={scale}
           renderTextLayer={true}
           renderAnnotationLayer={true}
-          className="pdf-page shadow-lg"
+          className="pdf-page"
           devicePixelRatio={devicePixelRatio}
         />
       </Document>

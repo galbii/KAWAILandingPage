@@ -61,12 +61,12 @@ export default function AboutEventSection() {
         </div>
       </div>
 
-      <section id="about-event" className="py-24 bg-muted/30 scroll-container">
-        <div className="max-w-7xl mx-auto px-6">
+      <section id="about-event" className="py-16 sm:py-20 lg:py-24 bg-muted/30 scroll-container">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
         {/* Event Description */}
-        <div ref={contentRef} className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
+        <div ref={contentRef} className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          <div className="space-y-4 sm:space-y-6">
             <div className="flex flex-col items-center text-center mb-6">
               <Image 
                 src="/images/Kawai (Red)(2).png"
@@ -82,11 +82,11 @@ export default function AboutEventSection() {
 
             {/* Mobile Letter PDF - Shown on mobile right after title */}
             <div className={`lg:hidden relative mb-8 transition-all duration-700 delay-500 ${contentVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
-              <div className="max-w-md mx-auto">
+              <div className="max-w-xs sm:max-w-sm mx-auto">
                 <PdfViewer
                   file="/Kawai Signed_2 1 (1).pdf"
-                  className="cursor-pointer hover:shadow-lg transition-shadow rounded-lg overflow-hidden"
-                  width={400}
+                  className="cursor-pointer hover:shadow-sm transition-shadow rounded-lg overflow-hidden"
+                  width={320}
                   onClick={() => openImageModal("/Kawai Signed_2 1 (1).pdf", "SHSU Houston Piano Sale Event Letter - Piano Deals Houston", 800, 600)}
                   loading="Loading piano sale letter..."
                   error="Unable to load letter PDF"
@@ -150,8 +150,9 @@ export default function AboutEventSection() {
         </div>
 
         {/* Bento Grid Gallery */}
-        <div ref={galleryRef} className="mt-16 overflow-hidden">
-          <div className="grid grid-cols-6 gap-0 min-h-[40rem] w-full max-w-full">
+        <div ref={galleryRef} className="mt-12 sm:mt-16 overflow-hidden">
+          {/* Desktop Gallery - Complex Bento Grid */}
+          <div className="hidden md:grid grid-cols-6 gap-0 min-h-[40rem] w-full max-w-full">
             {/* KAWAI CA901 - Hero */}
             <div 
               className={`col-span-3 row-span-2 relative overflow-hidden cursor-pointer hover:scale-105 transition-all duration-700 ${galleryVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
@@ -161,7 +162,7 @@ export default function AboutEventSection() {
                 src="/images/optimized/gallery/KAWAI-CA901B-24 copy_800.webp"
                 alt="KAWAI CA901 Digital Piano"
                 fill
-                sizes="(max-width: 768px) 100vw, 50vw"
+                sizes="50vw"
                 className="object-cover pointer-events-none"
               />
             </div>
@@ -175,7 +176,7 @@ export default function AboutEventSection() {
                 src="/images/optimized/gallery/KAWAI-CA501W-39 copy_800.webp"
                 alt="KAWAI CA501 Digital Piano"
                 fill
-                sizes="(max-width: 768px) 100vw, 50vw"
+                sizes="50vw"
                 className="object-cover pointer-events-none"
               />
             </div>
@@ -189,7 +190,7 @@ export default function AboutEventSection() {
                 src="/images/optimized/gallery/KAWAI_CA401B-43 copy_800.webp"
                 alt="KAWAI CA401 Digital Piano"
                 fill
-                sizes="(max-width: 768px) 100vw, 33vw"
+                sizes="33vw"
                 className="object-cover pointer-events-none"
               />
             </div>
@@ -203,7 +204,7 @@ export default function AboutEventSection() {
                 src="/images/optimized/gallery/connectivity_800.webp"
                 alt="Connectivity Features"
                 fill
-                sizes="(max-width: 768px) 100vw, 16vw"
+                sizes="16vw"
                 className="object-cover pointer-events-none"
               />
             </div>
@@ -217,7 +218,7 @@ export default function AboutEventSection() {
                 src="/images/optimized/gallery/CA401 Supplement Image_800.webp"
                 alt="KAWAI CA401 Supplement"
                 fill
-                sizes="(max-width: 768px) 100vw, 50vw"
+                sizes="50vw"
                 className="object-cover pointer-events-none"
               />
             </div>
@@ -231,7 +232,7 @@ export default function AboutEventSection() {
                 src="/images/optimized/gallery/CA701R-43 copy_800.webp"
                 alt="KAWAI CA701R Digital Piano"
                 fill
-                sizes="(max-width: 768px) 100vw, 33vw"
+                sizes="33vw"
                 className="object-cover pointer-events-none"
               />
             </div>
@@ -245,9 +246,110 @@ export default function AboutEventSection() {
                 src="/images/optimized/gallery/SK_800.webp"
                 alt="KAWAI SK Series"
                 fill
-                sizes="(max-width: 768px) 100vw, 16vw"
+                sizes="16vw"
                 className="object-cover pointer-events-none"
               />
+            </div>
+          </div>
+
+          {/* Mobile Gallery - Simple 2-Column Grid */}
+          <div className="md:hidden grid grid-cols-2 gap-2 sm:gap-3">
+            {/* KAWAI CA901 - Hero (spans 2 columns) */}
+            <div 
+              className={`col-span-2 h-48 sm:h-56 relative overflow-hidden cursor-pointer hover:scale-105 transition-all duration-700 rounded-lg ${galleryVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
+              onClick={() => openImageModal("/images/optimized/gallery/KAWAI-CA901B-24 copy_800.webp", "KAWAI CA901 Digital Piano", 800, 600)}
+            >
+              <Image 
+                src="/images/optimized/gallery/KAWAI-CA901B-24 copy_800.webp"
+                alt="KAWAI CA901 Digital Piano"
+                fill
+                sizes="100vw"
+                className="object-cover pointer-events-none"
+              />
+            </div>
+
+            {/* KAWAI CA501 */}
+            <div 
+              className={`h-32 sm:h-40 relative overflow-hidden cursor-pointer hover:scale-105 transition-all duration-600 delay-150 rounded-lg ${galleryVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+              onClick={() => openImageModal("/images/optimized/gallery/KAWAI-CA501W-39 copy_800.webp", "KAWAI CA501 Digital Piano", 800, 600)}
+            >
+              <Image 
+                src="/images/optimized/gallery/KAWAI-CA501W-39 copy_800.webp"
+                alt="KAWAI CA501 Digital Piano"
+                fill
+                sizes="50vw"
+                className="object-cover pointer-events-none"
+              />
+            </div>
+
+            {/* KAWAI CA401 */}
+            <div 
+              className={`h-32 sm:h-40 relative overflow-hidden cursor-pointer hover:scale-105 transition-all duration-600 delay-300 rounded-lg ${galleryVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+              onClick={() => openImageModal("/images/optimized/gallery/KAWAI_CA401B-43 copy_800.webp", "KAWAI CA401 Digital Piano", 800, 600)}
+            >
+              <Image 
+                src="/images/optimized/gallery/KAWAI_CA401B-43 copy_800.webp"
+                alt="KAWAI CA401 Digital Piano"
+                fill
+                sizes="50vw"
+                className="object-cover pointer-events-none"
+              />
+            </div>
+
+            {/* CA701R */}
+            <div 
+              className={`h-32 sm:h-40 relative overflow-hidden cursor-pointer hover:scale-105 transition-all duration-600 delay-450 rounded-lg ${galleryVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+              onClick={() => openImageModal("/images/optimized/gallery/CA701R-43 copy_800.webp", "KAWAI CA701R Digital Piano", 800, 600)}
+            >
+              <Image 
+                src="/images/optimized/gallery/CA701R-43 copy_800.webp"
+                alt="KAWAI CA701R Digital Piano"
+                fill
+                sizes="50vw"
+                className="object-cover pointer-events-none"
+              />
+            </div>
+
+            {/* CA401 Supplement */}
+            <div 
+              className={`h-32 sm:h-40 relative overflow-hidden cursor-pointer hover:scale-105 transition-all duration-600 delay-600 rounded-lg ${galleryVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+              onClick={() => openImageModal("/images/optimized/gallery/CA401 Supplement Image_800.webp", "KAWAI CA401 Supplement", 800, 600)}
+            >
+              <Image 
+                src="/images/optimized/gallery/CA401 Supplement Image_800.webp"
+                alt="KAWAI CA401 Supplement"
+                fill
+                sizes="50vw"
+                className="object-cover pointer-events-none"
+              />
+            </div>
+
+            {/* Connectivity + SK Series combined for mobile */}
+            <div className="grid grid-cols-2 gap-2 col-span-2">
+              <div 
+                className={`h-20 sm:h-24 relative overflow-hidden cursor-pointer hover:scale-105 transition-all duration-600 delay-750 rounded-lg ${galleryVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+                onClick={() => openImageModal("/images/optimized/gallery/connectivity_800.webp", "Connectivity Features", 800, 600)}
+              >
+                <Image 
+                  src="/images/optimized/gallery/connectivity_800.webp"
+                  alt="Connectivity Features"
+                  fill
+                  sizes="25vw"
+                  className="object-cover pointer-events-none"
+                />
+              </div>
+              <div 
+                className={`h-20 sm:h-24 relative overflow-hidden cursor-pointer hover:scale-105 transition-all duration-600 delay-900 rounded-lg ${galleryVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+                onClick={() => openImageModal("/images/optimized/gallery/SK_800.webp", "KAWAI SK Series", 800, 600)}
+              >
+                <Image 
+                  src="/images/optimized/gallery/SK_800.webp"
+                  alt="KAWAI SK Series"
+                  fill
+                  sizes="25vw"
+                  className="object-cover pointer-events-none"
+                />
+              </div>
             </div>
           </div>
         </div>

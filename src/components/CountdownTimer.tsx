@@ -25,42 +25,46 @@ export function CountdownTimer() {
     setMounted(true);
   }, []);
 
-  // Show timer immediately when mounted (always visible)
+  // Detect scroll and show timer based on scroll amount
   useEffect(() => {
     if (!mounted) return;
-    setIsVisible(true); // Always visible as dot
-  }, [mounted]);
 
-  // Auto-expansion effect (no scroll detection)
-  useEffect(() => {
-    if (!mounted) return;
-    
-    // Set hasScrolled to true after a short delay (no scroll required)
-    const timeout = setTimeout(() => {
-      setHasScrolled(true);
-    }, 1000);
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const scrollPercentage = (scrollPosition / (documentHeight - windowHeight)) * 100;
+
+      // Show timer when user has scrolled 25% or more and hasn't been shown yet
+      if (scrollPercentage >= 25 && !hasScrolled && !hasBeenDismissed) {
+        console.log('🎯 User scrolled 25% - showing countdown timer');
+        setHasScrolled(true);
+        setIsVisible(true);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
     
     return () => {
-      clearTimeout(timeout);
+      window.removeEventListener('scroll', handleScroll);
     };
-  }, [mounted]);
+  }, [mounted, hasScrolled, hasBeenDismissed]);
 
-  // Separate effect to handle expansion after scroll
+  // Auto-expand timer after it becomes visible
   useEffect(() => {
-    if (hasScrolled && isMinimized && !hasBeenDismissed) {
-      console.log('HasScrolled is true and timer is minimized - starting expansion timer');
+    if (hasScrolled && isMinimized && !hasBeenDismissed && isVisible) {
+      console.log('🚀 Timer is visible - expanding after 3 seconds');
       
       const timeout = setTimeout(() => {
-        console.log('2 seconds passed - expanding timer');
-        setIsMinimized(false); // Expand to full view
-      }, 2000);
+        console.log('📈 Expanding timer to full view');
+        setIsMinimized(false);
+      }, 3000);
       
       return () => {
-        console.log('Cleanup timeout');
         clearTimeout(timeout);
       };
     }
-  }, [hasScrolled, isMinimized, hasBeenDismissed]);
+  }, [hasScrolled, isMinimized, hasBeenDismissed, isVisible]);
 
   useEffect(() => {
     if (!mounted) return;
@@ -115,7 +119,7 @@ export function CountdownTimer() {
 
   return (
     <>
-      <div className="fixed bottom-4 right-4 z-40 sm:bottom-6 sm:right-6" style={{ paddingRight: '12px', paddingTop: '12px' }}>
+      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6" style={{ paddingRight: '12px', paddingTop: '12px', zIndex: 1050 }}>
         {isVisible && (
           <>
             {isMinimized ? (

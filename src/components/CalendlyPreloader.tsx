@@ -1,97 +1,59 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import { initializeCalendlyTracking } from '@/lib/calendly-tracking';
+import { useEffect } from 'react';
 import '@/types/calendly';
 
 export default function CalendlyPreloader() {
-  const preloadedWidgetRef = useRef<HTMLDivElement>(null);
-  const isInitializedRef = useRef(false);
-
   useEffect(() => {
-    // Initialize the preloaded widget once when component mounts
-    if (!isInitializedRef.current) {
-      // Wait a bit for the script to load, then initialize
-      setTimeout(() => {
-        initializePreloadedWidget();
-      }, 1000); // Give script time to load
-      isInitializedRef.current = true;
-    }
+    // Resource preloader - warm up Calendly servers and cache resources
+    const preloadCalendlyResources = () => {
+      console.log('🚀 Preloading Calendly resources for faster modal loading...');
+      
+      // Create invisible iframe to preload the booking page and warm up servers
+      const preloadFrame = document.createElement('iframe');
+      preloadFrame.src = 'https://calendly.com/kawaipianogallery/shsu-piano-sale?utm_source=kawai-landing-page&utm_medium=preload&utm_campaign=shsu-piano-sale-2025';
+      preloadFrame.style.cssText = `
+        position: fixed;
+        top: -9999px;
+        left: -9999px;
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+        pointer-events: none;
+        z-index: -1;
+        border: none;
+      `;
+      preloadFrame.setAttribute('aria-hidden', 'true');
+      preloadFrame.setAttribute('tabindex', '-1');
+      
+      // Add frame to DOM to trigger resource loading
+      document.body.appendChild(preloadFrame);
+      
+      // Set up cleanup - remove preload frame after resources are cached
+      const cleanup = () => {
+        if (preloadFrame.parentNode) {
+          preloadFrame.parentNode.removeChild(preloadFrame);
+          console.log('✅ Calendly preload frame cleaned up');
+        }
+      };
+      
+      // Clean up after 10 seconds (resources should be cached by then)
+      setTimeout(cleanup, 10000);
+      
+      // Also clean up if user navigates away
+      window.addEventListener('beforeunload', cleanup, { once: true });
+      
+      console.log('✅ Calendly resource preloading initiated');
+    };
+    
+    // Start preloading after a short delay to not block initial page load
+    const timeoutId = setTimeout(preloadCalendlyResources, 2000);
+    
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, []);
 
-  const initializePreloadedWidget = () => {
-    console.log('🚀 Starting preloaded Calendly widget initialization...');
-    
-    let attempts = 0;
-    const maxAttempts = 50; // Try for up to 5 seconds
-    
-    const waitForCalendly = () => {
-      attempts++;
-      console.log(`⏳ Attempt ${attempts}: Checking for Calendly...`, {
-        calendlyExists: !!window.Calendly,
-        initInlineWidget: !!(window.Calendly?.initInlineWidget),
-        containerExists: !!preloadedWidgetRef.current
-      });
-      
-      if (window.Calendly && window.Calendly.initInlineWidget && preloadedWidgetRef.current) {
-        try {
-          console.log('🎯 All dependencies ready, initializing widget...');
-          
-          // Initialize tracking for the preloaded widget
-          initializeCalendlyTracking('modal');
-          
-          // Initialize the widget in the hidden container
-          window.Calendly.initInlineWidget({
-            url: 'https://calendly.com/kawaipianogallery/shsu-piano-sale',
-            parentElement: preloadedWidgetRef.current,
-            utm: {
-              utmSource: 'kawai-landing-page',
-              utmMedium: 'modal',
-              utmCampaign: 'shsu-piano-sale-2025'
-            }
-          });
-          
-          console.log('✅ Preloaded Calendly widget initialized successfully!');
-        } catch (error) {
-          console.error('❌ Failed to initialize preloaded Calendly widget:', error);
-        }
-      } else if (attempts < maxAttempts) {
-        // Wait and try again
-        setTimeout(waitForCalendly, 100);
-      } else {
-        console.error('❌ Failed to load Calendly after maximum attempts');
-        console.error('Final state:', {
-          calendlyExists: !!window.Calendly,
-          initInlineWidget: !!(window.Calendly?.initInlineWidget),
-          containerExists: !!preloadedWidgetRef.current
-        });
-      }
-    };
-
-    waitForCalendly();
-  };
-
-  return (
-    <>
-      {/* Hidden preloaded widget container */}
-      <div
-        id="calendly-preloaded-widget"
-        ref={preloadedWidgetRef}
-        style={{
-          position: 'fixed',
-          top: '-9999px',
-          left: '-9999px',
-          width: '100%',
-          height: '600px',
-          minWidth: '320px',
-          opacity: 0,
-          pointerEvents: 'none',
-          zIndex: -1
-        }}
-        className="calendly-inline-widget-container"
-      >
-        {/* This will be populated by Calendly.initInlineWidget */}
-      </div>
-    </>
-  );
+  // This component doesn't render anything visible - it's purely for resource preloading
+  return null;
 }

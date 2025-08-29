@@ -1,87 +1,102 @@
-import { Cpu, Piano, Shield, Phone } from 'lucide-react';
+import { GraduationCap, Piano, Shield, Phone } from 'lucide-react';
 import { trackKawaiEvent } from '@/lib/analytics';
 
 export default function ValuePropositionSection() {
   return (
-    <section className="relative overflow-hidden value-prop-section-mobile py-4 lg:py-6 w-full">
+    <section className="relative overflow-hidden py-16 lg:py-20">
       
-      {/* Enhanced Background Image with Fixed Attachment */}
+      {/* Background Image */}
       <div className="value-prop-background-fixed"></div>
       
-      {/* Elegant Dark Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70 value-prop-overlay"></div>
+      {/* Simple Dark Overlay */}
+      <div className="absolute inset-0 bg-black/75"></div>
     
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
+        
+        {/* Section Header */}
+        <div className="text-center mb-12 lg:mb-16 opacity-0 animate-fade-in-up">
+          <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
+            Special University Pricing
+          </h2>
+          <p className="font-body text-lg sm:text-xl text-white/90 max-w-2xl mx-auto">
+            Exclusive savings for the SHSU community with flexible financing options
+          </p>
+        </div>
+
         {/* Value Propositions Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6 value-prop-grid-mobile">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 lg:gap-12">
           
-          {/* Modern Technology */}
-          <div className="text-center value-prop-mobile-compact">
-            <div className="mb-4">
-              <div className="w-16 h-16 mx-auto bg-white/15 backdrop-blur-sm rounded-3xl flex items-center justify-center border border-white/25 shadow-2xl value-prop-icon">
-                <Cpu className="w-8 h-8 text-white" />
-              </div>
+          {/* University Pricing */}
+          <div className="text-center space-y-4 md:space-y-6 opacity-0 animate-fade-in-up [animation-delay:200ms]">
+            <div className="flex justify-center transform transition-transform duration-300 hover:scale-110">
+              <GraduationCap className="w-10 h-10 sm:w-12 sm:h-12 text-white" />
             </div>
-            <h3 className="font-heading text-lg lg:text-xl text-white mb-3 tracking-wide value-prop-title">
-              MODERN TECHNOLOGY
-            </h3>
-            <p className="font-body text-gray-200 leading-snug max-w-sm mx-auto text-sm value-prop-desc">
-              Advanced digital features and cutting-edge piano technology for enhanced musical expression
-            </p>
+            <div className="space-y-2 md:space-y-3">
+              <h3 className="font-heading text-lg sm:text-xl lg:text-2xl text-white font-semibold">
+                University Pricing
+              </h3>
+              <p className="font-body text-white/80 leading-relaxed text-sm sm:text-base max-w-xs mx-auto">
+                Exclusive discounts for SHSU students, faculty, and staff with special financing available
+              </p>
+            </div>
           </div>
 
-          {/* High-Quality Selection */}
-          <div className="text-center value-prop-mobile-compact">
-            <div className="mb-4">
-              <div className="w-16 h-16 mx-auto bg-white/15 backdrop-blur-sm rounded-3xl flex items-center justify-center border border-white/25 shadow-2xl value-prop-icon">
-                <Piano className="w-8 h-8 text-white" />
-              </div>
+          {/* Premium Selection */}
+          <div className="text-center space-y-4 md:space-y-6 opacity-0 animate-fade-in-up [animation-delay:400ms]">
+            <div className="flex justify-center transform transition-transform duration-300 hover:scale-110">
+              <Piano className="w-10 h-10 sm:w-12 sm:h-12 text-white" />
             </div>
-            <h3 className="font-heading text-lg lg:text-xl text-white mb-3 tracking-wide value-prop-title">
-              HIGH-QUALITY SELECTION
-            </h3>
-            <p className="font-body text-gray-200 leading-snug max-w-sm mx-auto text-sm value-prop-desc">
-              Shop a piano collection that meets rigorous standards, ensuring exceptional tone, touch, and durability
-            </p>
+            <div className="space-y-2 md:space-y-3">
+              <h3 className="font-heading text-lg sm:text-xl lg:text-2xl text-white font-semibold">
+                Premium Selection
+              </h3>
+              <p className="font-body text-white/80 leading-relaxed text-sm sm:text-base max-w-xs mx-auto">
+                Hand-selected KAWAI pianos offering exceptional value with professional-grade performance
+              </p>
+            </div>
           </div>
 
-          {/* 10 Year Warranty */}
-          <div className="text-center value-prop-mobile-compact">
-            <div className="mb-4">
-              <div className="w-16 h-16 mx-auto bg-white/15 backdrop-blur-sm rounded-3xl flex items-center justify-center border border-white/25 shadow-2xl value-prop-icon">
-                <Shield className="w-8 h-8 text-white" />
-              </div>
+          {/* Protection & Support */}
+          <div className="text-center space-y-4 md:space-y-6 opacity-0 animate-fade-in-up [animation-delay:600ms]">
+            <div className="flex justify-center transform transition-transform duration-300 hover:scale-110">
+              <Shield className="w-10 h-10 sm:w-12 sm:h-12 text-white" />
             </div>
-            <h3 className="font-heading text-lg lg:text-xl text-white mb-3 tracking-wide value-prop-title">
-              10 YEAR WARRANTY
-            </h3>
-            <p className="font-body text-gray-200 leading-snug max-w-sm mx-auto text-sm value-prop-desc">
-              All pianos have been professionally maintained and some come with a 10-year manufacturer&apos;s warranty
-            </p>
+            <div className="space-y-2 md:space-y-3">
+              <h3 className="font-heading text-lg sm:text-xl lg:text-2xl text-white font-semibold">
+                Protection & Support
+              </h3>
+              <p className="font-body text-white/80 leading-relaxed text-sm sm:text-base max-w-xs mx-auto">
+                Comprehensive warranties and ongoing support to protect your investment for years to come
+              </p>
+            </div>
           </div>
 
         </div>
 
-        {/* Subtle Call to Action */}
-        <div className="mt-6 text-center value-prop-cta-mobile">
+        {/* Call to Action */}
+        <div className="mt-12 sm:mt-16 text-center opacity-0 animate-fade-in-up [animation-delay:800ms]">
+          <div className="max-w-2xl mx-auto mb-6">
+            <p className="font-body text-white/90 text-base sm:text-lg mb-4 sm:mb-6">
+              Don&apos;t miss this limited-time opportunity to own a world-class KAWAI piano at university pricing.
+            </p>
+          </div>
           <a 
             href="tel:7139040001"
             onClick={() => trackKawaiEvent.callPhone('value_proposition_section')}
-            className="inline-block"
+            className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-6 sm:px-8 py-3 sm:py-4 border border-white/20 hover:bg-white/15 hover:scale-105 transition-all duration-300 transform"
           >
-            <div className="bg-white/5 backdrop-blur-sm rounded-xl px-6 py-4 border border-white/10 hover:bg-white/8 hover:border-white/20 transition-all duration-300">
-              <p className="font-body text-white/70 text-base italic mb-1">
-                Call Now
+            <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+            <div className="text-left">
+              <p className="font-body text-white/70 text-xs sm:text-sm">
+                Call now for pricing & financing
               </p>
-              <div className="flex items-center justify-center gap-2">
-                <Phone className="w-5 h-5 text-white" />
-                <p className="font-body text-white text-lg font-medium">
-                  (713) 904-0001
-                </p>
-              </div>
+              <p className="font-heading text-white text-base sm:text-lg font-medium">
+                (713) 904-0001
+              </p>
             </div>
           </a>
         </div>
+
       </div>
     </section>
   );

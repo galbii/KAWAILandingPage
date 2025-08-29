@@ -253,11 +253,24 @@ export default function BookingSection() {
             </p>
           </div>
 
-          {/* Loading state - only show when nothing is ready */}
+          {/* Enhanced loading state with skeleton */}
           {!shouldLoadCalendly && (
-            <div className="bg-gray-50 border border-gray-200 rounded-lg p-8 text-center">
-              <div className="w-8 h-8 border-2 border-kawai-red border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-              <p className="text-gray-600">Loading booking system...</p>
+            <div className="bg-gray-50 border border-gray-200 rounded-lg p-8">
+              <div className="text-center mb-6">
+                <div className="w-8 h-8 border-2 border-kawai-red border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+                <p className="text-gray-600">Loading booking calendar...</p>
+                <p className="text-sm text-gray-500 mt-2">Enhanced with preloaded resources</p>
+              </div>
+              {/* Calendar skeleton */}
+              <div className="space-y-4">
+                <div className="h-8 bg-gray-200 rounded animate-pulse"></div>
+                <div className="grid grid-cols-7 gap-2">
+                  {[...Array(35)].map((_, i) => (
+                    <div key={i} className="h-8 bg-gray-200 rounded animate-pulse"></div>
+                  ))}
+                </div>
+                <div className="h-12 bg-gray-200 rounded animate-pulse"></div>
+              </div>
             </div>
           )}
 

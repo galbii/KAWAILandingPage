@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { WebVitals } from "@/components/WebVitals";
 import { PostHogProvider } from "@/components/PostHogProvider";
 import PostHogDebugDashboard from "@/components/PostHogDebugDashboard";
-// Removed CalendlyPreloader - using inline widget in BookingSection instead
+import CalendlyPreloader from "@/components/CalendlyPreloader";
 import Script from "next/script";
 import "./globals.css";
 
@@ -51,7 +52,20 @@ export default function RootLayout({
         {/* Viewport for mobile Calendly support - per official docs */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         
-        {/* Calendly Resources - exact format from official docs */}
+        {/* Calendly Performance Optimizations */}
+        {/* DNS prefetch for Calendly domains */}
+        <link rel="dns-prefetch" href="https://calendly.com" />
+        <link rel="dns-prefetch" href="https://assets.calendly.com" />
+        
+        {/* Preconnect to Calendly with crossorigin for faster requests */}
+        <link rel="preconnect" href="https://assets.calendly.com" />
+        <link rel="preconnect" href="https://calendly.com" />
+        
+        {/* Preload critical Calendly resources */}
+        <link href="https://assets.calendly.com/assets/external/widget.css" rel="preload" as="style" />
+        <link href="https://assets.calendly.com/assets/external/widget.js" rel="preload" as="script" />
+        
+        {/* Load Calendly CSS immediately for faster rendering */}
         <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
         
         {/* Google ReCAPTCHA Resources for Calendly */}
@@ -102,8 +116,9 @@ src="https://www.facebook.com/tr?id=783258114117252&ev=PageView&noscript=1"
         </PostHogProvider>
         <PostHogDebugDashboard />
         <WebVitals />
+        <CalendlyPreloader />
         
-        {/* Calendly JavaScript Preloading */}
+        {/* Calendly JavaScript Loading */}
         <Script 
           src="https://assets.calendly.com/assets/external/widget.js" 
           strategy="afterInteractive"
@@ -123,6 +138,7 @@ src="https://www.facebook.com/tr?id=783258114117252&ev=PageView&noscript=1"
           `}
         </Script>
         
+        <GoogleAnalytics gaId="G-P91EKWK0XB" />
       </body>
     </html>
   );

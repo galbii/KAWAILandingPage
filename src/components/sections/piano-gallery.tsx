@@ -159,7 +159,7 @@ function PianoSection({ piano, index, hasTrackedAnyPiano }: PianoSectionProps) {
                   </span>
                 </div>
                 <div className={`inline-flex items-center bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold transition-all duration-500 delay-400 hover:bg-green-200 hover:scale-105 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
-                  Save ${piano.savings.toLocaleString()} on open-box deals
+                  Special offers on gently used products
                 </div>
               </div>
               
@@ -250,7 +250,7 @@ export function FeaturedDeals() {
           </div>
           
           <p className={`text-base md:text-lg leading-relaxed text-kawai-black/70 max-w-3xl mx-auto transition-all duration-600 delay-600 ${headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-            Discover our curated collection of digital and acoustic pianos at exclusive pricing. Each instrument represents the pinnacle of KAWAI craftsmanship, available at our Greater Houston Area showroom. Your purchase supports SHSU&apos;s Music Department.
+            Experience our handpicked selection of premium digital and acoustic pianos with university-exclusive pricing. Each masterfully crafted instrument showcases KAWAI&apos;s legendary quality, ready for immediate delivery from our Houston showroom. Every purchase directly benefits SHSU&apos;s Music Department programs.
           </p>
         </div>
         
@@ -268,10 +268,10 @@ export function FeaturedDeals() {
       <section className="py-12 text-center bg-kawai-pearl">
         <div className="max-w-2xl mx-auto px-6 space-y-4">
           <h3 className="font-heading text-2xl font-semibold text-kawai-black">
-            View our special deals in Person
+            Secure Your Spot for VIP Access
           </h3>
           <p className="text-kawai-black/70 max-w-md mx-auto">
-            Get personalized recommendations and schedule your consultation
+            Reserve your private consultation to unlock exclusive pricing and get first pick of our premium inventory
           </p>
           <button 
             onClick={() => setIsModalOpen(true)}

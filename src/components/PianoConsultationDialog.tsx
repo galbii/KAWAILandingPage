@@ -26,7 +26,12 @@ export default function PianoConsultationDialog({ isOpen, onClose }: PianoConsul
     // Initialize tracking
     initializeCalendlyTracking('modal');
     
+    let attempts = 0;
+    const maxAttempts = 100; // 10 seconds timeout (100 * 100ms)
+    
     const waitForCalendly = () => {
+      attempts++;
+      
       if (window.Calendly && window.Calendly.initInlineWidget && calendlyContainerRef.current) {
         try {
           // Clear container first
@@ -46,9 +51,32 @@ export default function PianoConsultationDialog({ isOpen, onClose }: PianoConsul
         } catch (error) {
           console.error('❌ Failed to initialize fallback Calendly widget:', error);
         }
-      } else {
-        console.log('⏳ Waiting for Calendly for fallback widget...');
+      } else if (attempts < maxAttempts) {
+        console.log(`⏳ Waiting for Calendly for fallback widget... (${attempts}/${maxAttempts})`);
         setTimeout(waitForCalendly, 100);
+      } else {
+        console.error('❌ Calendly failed to load after 10 seconds timeout');
+        if (calendlyContainerRef.current) {
+          calendlyContainerRef.current.innerHTML = `
+            <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; background: #f9f9f9; padding: 40px;">
+              <div style="text-align: center;">
+                <h3 style="color: #dc2626; margin-bottom: 16px; font-size: 18px;">Unable to load booking calendar</h3>
+                <p style="color: #6b7280; margin-bottom: 24px; font-size: 14px;">Please try one of these alternatives:</p>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                  <a href="https://calendly.com/kawaipianogallery/shsu-piano-sale" 
+                     target="_blank" 
+                     style="background: #dc2626; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;">
+                    Book directly on Calendly →
+                  </a>
+                  <a href="tel:+1-281-890-7464" 
+                     style="background: #16a34a; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;">
+                    Call (281) 890-7464
+                  </a>
+                </div>
+              </div>
+            </div>
+          `;
+        }
       }
     };
     

@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    contentSecurityPolicy: "default-src 'self'; script-src 'self' 'unsafe-inline'; object-src 'none';",
   },
   // Performance optimizations
   experimental: {
@@ -54,7 +54,10 @@ const nextConfig: NextConfig = {
                 https://us.posthog.com 
                 https://app.posthog.com 
                 https://us.i.posthog.com 
-                https://us-assets.i.posthog.com;
+                https://us-assets.i.posthog.com
+                https://www.recaptcha.net
+                https://recaptcha.google.com
+                https://accounts.google.com;
               connect-src 'self' 
                 https://api.calendly.com 
                 https://calendly.com 
@@ -79,7 +82,9 @@ const nextConfig: NextConfig = {
                 https://business.facebook.com
                 https://www.facebook.com
                 https://googleads.g.doubleclick.net 
-                https://www.googleadservices.com;
+                https://www.googleadservices.com
+                https://notifier-configs.airbrake.io
+                https://dfp.calendly.com;
               img-src 'self' data: blob: 
                 https://www.google-analytics.com 
                 https://stats.g.doubleclick.net 
