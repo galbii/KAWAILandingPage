@@ -1,32 +1,13 @@
 {
   "app/page.tsx -> ./client-page": {
-    "id": 4780,
+    "id": "app/page.tsx -> ./client-page",
     "files": [
-      "static/css/1dfb5e71b60cea90.css",
-      "static/chunks/9b0008ae.ba2580a9d2115f53.js",
-      "static/chunks/916-d92ff73e53e96d81.js",
-      "static/chunks/504.6569e84d0a2952e7.js",
-      "static/chunks/21-5997835b24fda109.js",
-      "static/chunks/293-6959e9695623ddaa.js",
-      "static/chunks/928.b2e49ba8ea84731a.js",
-      "static/chunks/780.7bd0fdb519d8896c.js"
-    ]
-  },
-  "app/sam-houston/page.tsx -> ./client-page": {
-    "id": 5549,
-    "files": [
-      "static/css/1dfb5e71b60cea90.css",
-      "static/chunks/9b0008ae.ba2580a9d2115f53.js",
-      "static/chunks/916-d92ff73e53e96d81.js",
-      "static/chunks/504.6569e84d0a2952e7.js",
-      "static/chunks/21-5997835b24fda109.js",
-      "static/chunks/293-6959e9695623ddaa.js",
-      "static/chunks/928.b2e49ba8ea84731a.js",
-      "static/chunks/549.ed623e9638d7a172.js"
+      "static/css/_app-pages-browser_src_app_client-page_tsx.css",
+      "static/chunks/_app-pages-browser_src_app_client-page_tsx.js"
     ]
   },
   "lib/analytics.ts -> @/lib/posthog": {
-    "id": 3471,
+    "id": "lib/analytics.ts -> @/lib/posthog",
     "files": []
   }
 }

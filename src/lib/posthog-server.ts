@@ -21,8 +21,12 @@ function initServerPostHog(): PostHog | null {
   try {
     serverPostHog = new PostHog(apiKey, {
       host,
+      // Optimized for serverless/Next.js
+      flushAt: 1,        // Immediate flush for short-lived functions
+      flushInterval: 0,  // Don't wait for batch
       // Disable features that don't work server-side
       disableGeoip: false,
+      // Enhanced privacy and compliance
     })
 
     console.log('PostHog server-side client initialized')
@@ -105,6 +109,9 @@ export async function captureServerEvent(
         event: eventName,
         properties: enhancedProperties
       })
+
+      // Ensure immediate flush for serverless environments
+      await client.flush()
 
       console.log(`PostHog server event captured: ${eventName}`, {
         distinctId,
@@ -263,11 +270,33 @@ function calculateAdvanceBookingDays(scheduledTime: string): number {
 }
 
 // Shutdown function for graceful cleanup
-export function shutdownServerPostHog(): void {
+export async function shutdownServerPostHog(): Promise<void> {
   if (serverPostHog) {
-    serverPostHog.shutdown()
-    serverPostHog = null
-    console.log('PostHog server client shut down')
+    try {
+      // Flush any pending events
+      await serverPostHog.flush()
+      // Shutdown the client
+      await serverPostHog.shutdown()
+      serverPostHog = null
+      console.log('PostHog server client shut down gracefully')
+    } catch (error) {
+      console.error('Error during PostHog server shutdown:', error)
+      serverPostHog = null
+    }
+  }
+}
+
+// Utility function for Next.js API routes to ensure proper cleanup
+export function withPostHogCleanup<T extends unknown[], R>(
+  handler: (...args: T) => Promise<R>
+) {
+  return async (...args: T): Promise<R> => {
+    try {
+      return await handler(...args)
+    } finally {
+      // Always attempt cleanup after API route execution
+      await shutdownServerPostHog()
+    }
   }
 }
 

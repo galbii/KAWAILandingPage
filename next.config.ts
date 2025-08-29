@@ -127,7 +127,7 @@ const nextConfig: NextConfig = {
               object-src 'none';
               base-uri 'self';
               form-action 'self' https://visitor.constantcontact.com https://ui.constantcontact.com;
-              frame-ancestors 'none';
+              frame-ancestors 'self' https://*.posthog.com;
               upgrade-insecure-requests;
             `.replace(/\s{2,}/g, ' ').trim()
           }

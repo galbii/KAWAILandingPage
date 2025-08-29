@@ -18,11 +18,6 @@ interface PianoBehaviorData {
   interactions: number
 }
 
-interface EventInterestData {
-  eventDates: string
-  location: string
-  interactionType: 'view' | 'save_date' | 'directions'
-}
 
 interface UserData {
   email?: string
