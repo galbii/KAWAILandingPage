@@ -100,25 +100,42 @@ export default function HeroSection() {
         {/* Main Headlines - Centerpiece */}
         <div className="space-y-4 sm:space-y-6 mb-8 sm:mb-12">
           <h1 className="font-heading leading-tight px-2">
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 md:gap-8 mb-2 sm:mb-4 animate-luxury-fade-in animate-delay-900">
-              {/* UTD Logo - First on mobile, last on desktop */}
-              <Image
-                src="/images/cd908542103759.57c06762b252e.jpg"
-                alt="UT Dallas Logo"
-                width={320}
-                height={160}
-                className="h-20 sm:h-24 md:h-28 lg:h-32 xl:h-36 w-auto drop-shadow-2xl order-1 sm:order-3"
-              />
-              {/* Cross symbol */}
-              <div className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white drop-shadow-2xl order-2">✕</div>
-              {/* KAWAI Logo - Last on mobile, first on desktop */}
-              <Image
-                src="/images/Kawai (Red)(2).png"
-                alt="KAWAI Logo"
-                width={160}
-                height={48}
-                className="h-10 sm:h-12 md:h-16 lg:h-18 xl:h-20 w-auto drop-shadow-2xl order-3 sm:order-1"
-              />
+            <div className="animate-luxury-fade-in animate-delay-900 mb-2 sm:mb-4">
+              {/* Mobile Layout - Vertical Stack */}
+              <div className="flex flex-col items-center justify-center gap-3 sm:hidden">
+                {/* Sam Houston text - First on mobile */}
+                <div className="text-2xl md:text-3xl font-bold text-white drop-shadow-2xl tracking-wide">
+                  SAM HOUSTON
+                </div>
+                {/* Cross symbol */}
+                <div className="text-xl font-black text-white drop-shadow-2xl">✕</div>
+                {/* KAWAI text - Last on mobile */}
+                <div className="text-2xl md:text-3xl font-bold text-white drop-shadow-2xl tracking-wide">
+                  KAWAI
+                </div>
+              </div>
+              
+              {/* Desktop Layout - Horizontal */}
+              <div className="hidden sm:flex items-center justify-center gap-6 md:gap-8">
+                {/* KAWAI Logo - First on desktop */}
+                <Image
+                  src="/images/Kawai (Red)(2).png"
+                  alt="KAWAI Logo"
+                  width={160}
+                  height={48}
+                  className="h-12 md:h-16 lg:h-18 xl:h-20 w-auto drop-shadow-2xl"
+                />
+                {/* Cross symbol */}
+                <div className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white drop-shadow-2xl">✕</div>
+                {/* UTD Logo - Last on desktop */}
+                <Image
+                  src="/images/cd908542103759.57c06762b252e.jpg"
+                  alt="UT Dallas Logo"
+                  width={320}
+                  height={160}
+                  className="h-24 md:h-28 lg:h-32 xl:h-36 w-auto drop-shadow-2xl"
+                />
+              </div>
             </div>
             <div className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-white tracking-wide animate-luxury-fade-in animate-delay-1200 drop-shadow-2xl">
               DALLAS EXCLUSIVE EVENT

@@ -1953,19 +1953,8 @@ section {
   max-height: 75vh !important;
 }
 
-/* Hide signature area at bottom of PDF */
+/* Remove PDF text cutoff - allow full content visibility */
 .pdf-viewer .react-pdf__Page {
   position: relative;
-  overflow: hidden;
-}
-
-.pdf-viewer .react-pdf__Page::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 15%;
-  background: white;
-  z-index: 10;
+  overflow: visible;
 }
