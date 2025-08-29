@@ -268,16 +268,16 @@ export function FeaturedDeals() {
       <section className="py-12 text-center bg-kawai-pearl">
         <div className="max-w-2xl mx-auto px-6 space-y-4">
           <h3 className="font-heading text-2xl font-semibold text-kawai-black">
-            Secure Your Spot for VIP Access
+            Reserve Your Appointment - Limited Time Slots
           </h3>
-          <p className="text-kawai-black/70 max-w-md mx-auto">
-            Reserve your private consultation to unlock exclusive pricing and get first pick of our premium inventory
+          <p className="text-kawai-black/70 max-w-lg mx-auto">
+            Only 12 appointment slots available for first selection access. Reserve your spot now for guaranteed priority viewing and exclusive appointment pricing.
           </p>
           <button 
             onClick={() => setIsModalOpen(true)}
             className="inline-flex items-center px-8 py-4 bg-red-700 hover:bg-red-600 text-white font-semibold text-lg rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 group"
           >
-            <span>Book your appointment now</span>
+            <span>Reserve My Spot</span>
             <svg
               className="w-6 h-6 ml-3 transition-transform duration-300 group-hover:translate-x-1"
               fill="none"
@@ -288,6 +288,9 @@ export function FeaturedDeals() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </button>
+          <p className="text-sm text-red-600 font-medium">
+            Only 4 slots remaining for September 11th • Walk-ins welcome with remaining inventory
+          </p>
         </div>
       </section>
       

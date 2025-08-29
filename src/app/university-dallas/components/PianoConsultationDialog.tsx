@@ -38,12 +38,12 @@ export default function PianoConsultationDialog({ isOpen, onClose }: PianoConsul
           calendlyContainerRef.current.innerHTML = '';
           
           window.Calendly.initInlineWidget({
-            url: 'https://calendly.com/kawaipianogallery/shsu-piano-sale',
+            url: 'https://calendly.com/kawaipianogallery/utd-x-kawai-piano-sale',
             parentElement: calendlyContainerRef.current,
             utm: {
               utmSource: 'kawai-landing-page',
               utmMedium: 'modal',
-              utmCampaign: 'shsu-piano-sale-2025'
+              utmCampaign: 'utd-piano-sale-2025'
             }
           });
           
@@ -63,7 +63,7 @@ export default function PianoConsultationDialog({ isOpen, onClose }: PianoConsul
                 <h3 style="color: #dc2626; margin-bottom: 16px; font-size: 18px;">Unable to load booking calendar</h3>
                 <p style="color: #6b7280; margin-bottom: 24px; font-size: 14px;">Please try one of these alternatives:</p>
                 <div style="display: flex; flex-direction: column; gap: 12px;">
-                  <a href="https://calendly.com/kawaipianogallery/shsu-piano-sale" 
+                  <a href="https://calendly.com/kawaipianogallery/utd-x-kawai-piano-sale" 
                      target="_blank" 
                      style="background: #dc2626; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;">
                     Book directly on Calendly →

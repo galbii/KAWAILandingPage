@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-import PianoConsultationDialog from '@/components/PianoConsultationDialog';
+import PianoConsultationDialog from '../PianoConsultationDialog';
 import { useIntersectionAnimation } from '@/hooks/useIntersectionAnimation';
 import { usePostHog } from '@/hooks/usePostHog';
 
@@ -32,7 +32,7 @@ const featuredPianos: FeaturedPiano[] = [
     salePrice: 949,
     savings: 150,
     keyFeatures: ["88 Weighted Keys", "Responsive Hammer Action", "19 Premium Sounds"],
-    availability: "3 more"
+    availability: "Only 3 left - UTD partnership priority booking"
   },
   {
     id: "es-520",
@@ -45,7 +45,7 @@ const featuredPianos: FeaturedPiano[] = [
     salePrice: 999,
     savings: 400,
     keyFeatures: ["88 Weighted Keys", "Bluetooth Connectivity", "38 Premium Sounds"],
-    availability: "5 more"
+    availability: "5 remaining - Dallas VIP early access priority"
   },
   {
     id: "k-200",
@@ -58,7 +58,7 @@ const featuredPianos: FeaturedPiano[] = [
     salePrice: 6390,
     savings: 2005,
     keyFeatures: ["Solid Spruce Soundboard", "Premium Action", "114cm Height"],
-    availability: "2 more"
+    availability: "Only 2 left - UTD faculty/staff guaranteed priority"
   },
   {
     id: "gl-10",
@@ -71,7 +71,7 @@ const featuredPianos: FeaturedPiano[] = [
     salePrice: 12950,
     savings: 6045,
     keyFeatures: ["5'1\" Baby Grand", "Premium Action", "Solid Spruce Soundboard"],
-    availability: "1 more"
+    availability: "Final Dallas unit - UTD partnership exclusive access"
   }
 ];
 
@@ -230,7 +230,7 @@ export function FeaturedDeals() {
             {/* Premium Gallery Title */}
             <div className={`relative inline-block mb-6 transition-all duration-600 delay-200 ${headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
               <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-kawai-black mb-2">
-                HOUSTON PIANO GALLERY
+                DALLAS PIANO GALLERY
               </h1>
               <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-red-600 to-red-700 rounded-full shadow-lg"></div>
             </div>
@@ -268,26 +268,31 @@ export function FeaturedDeals() {
       <section className="py-12 text-center bg-kawai-pearl">
         <div className="max-w-2xl mx-auto px-6 space-y-4">
           <h3 className="font-heading text-2xl font-semibold text-kawai-black">
-            Secure Your Spot for VIP Access
+            Reserve Your Appointment - Limited Time Slots
           </h3>
-          <p className="text-kawai-black/70 max-w-md mx-auto">
-            Reserve your private consultation to unlock exclusive pricing and get first pick of our premium inventory
+          <p className="text-kawai-black/70 max-w-lg mx-auto">
+            Only 15 appointment slots available for first selection access. Reserve your spot now for guaranteed priority viewing and exclusive appointment pricing.
           </p>
-          <button 
-            onClick={() => setIsModalOpen(true)}
-            className="inline-flex items-center px-8 py-4 bg-red-700 hover:bg-red-600 text-white font-semibold text-lg rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 group"
-          >
-            <span>Book your appointment now</span>
-            <svg
-              className="w-6 h-6 ml-3 transition-transform duration-300 group-hover:translate-x-1"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
+          <div className="space-y-2">
+            <button 
+              onClick={() => setIsModalOpen(true)}
+              className="inline-flex items-center px-8 py-4 bg-red-700 hover:bg-red-600 text-white font-semibold text-lg rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 group"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </button>
+              <span>Reserve My Spot</span>
+              <svg
+                className="w-6 h-6 ml-3 transition-transform duration-300 group-hover:translate-x-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </button>
+            <p className="text-sm text-orange-600 font-medium">
+              Only 5 slots remaining for September 18th • Walk-ins welcome with remaining inventory
+            </p>
+          </div>
         </div>
       </section>
       

@@ -30,7 +30,7 @@ export function StructuredData() {
         ]}
         sameAs={[
           "https://www.kawai-global.com",
-          "https://www.shsu.edu",
+          "https://www.utdallas.edu",
         ]}
         openingHours={[
           {
@@ -80,12 +80,12 @@ export function StructuredData() {
         endDate="2025-09-21T18:00:00-05:00"
         description="Exclusive KAWAI piano sale event in Houston featuring digital and acoustic pianos at special reduced prices. Partnership with University of Texas at Dallas offering savings up to $6,000."
         location={{
-          name: "Sam Houston State University",
+          name: "University of Texas at Dallas",
           address: {
-            streetAddress: "1806 Ave J",
-            addressLocality: "Huntsville",
+            streetAddress: "800 W Campbell Rd",
+            addressLocality: "Richardson",
             addressRegion: "TX",
-            postalCode: "77340",
+            postalCode: "75080",
             addressCountry: "US",
           },
         }}
@@ -111,7 +111,7 @@ export function StructuredData() {
         }}
         organizer={{
           name: "University of Texas at Dallas Music Department",
-          sameAs: "https://www.shsu.edu",
+          sameAs: "https://www.utdallas.edu",
         }}
         eventStatus="https://schema.org/EventScheduled"
         eventAttendanceMode="https://schema.org/OfflineEventAttendanceMode"

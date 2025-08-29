@@ -261,12 +261,6 @@ export function ShowroomLocation() {
                 >
                   Get Directions
                 </a>
-                <a 
-                  href="/contact"
-                  className="block w-full border-2 border-kawai-red text-kawai-red hover:bg-kawai-red hover:text-white py-3 text-center font-medium transition-colors text-sm tracking-wide uppercase rounded-lg"
-                >
-                  Contact Us
-                </a>
               </div>
             </div>
           </div>

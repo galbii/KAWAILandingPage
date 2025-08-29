@@ -19,7 +19,7 @@ const faqData: FAQItem[] = [
   },
   {
     question: "What piano deals are available in Dallas during the event?",
-    answer: "Piano deals Dallas residents can save up to $6,000 on premium KAWAI instruments. Our event features special pricing on digital pianos, upright pianos, and grand pianos, plus free delivery and tuning for early bird customers."
+    answer: "Piano deals Dallas residents can save up to $6,000 on premium KAWAI instruments. Our event features special pricing on digital pianos, upright pianos, and grand pianos, plus free delivery and tuning for VIP early access customers. Limited quantities available - only 25 consultation slots for guaranteed first selection."
   },
   {
     question: "Do you offer piano lessons in Dallas area?",
@@ -35,11 +35,19 @@ const faqData: FAQItem[] = [
   },
   {
     question: "Do you provide financing for piano purchases in Dallas?",
-    answer: "Yes! We offer financing options for our piano sales Dallas event. Monthly payments start as low as $79 for digital pianos. Our financing makes premium KAWAI pianos accessible to all Dallas families."
+    answer: "Yes! We offer financing options for our piano sales Dallas event. Monthly payments start as low as $79 for digital pianos. VIP consultation customers receive priority approval and exclusive financing terms. Limited-time special rates available only during this event."
   },
   {
     question: "What makes your Dallas piano sale different from other dealers?",
     answer: "Our partnership with University of Texas at Dallas's Music Department ensures every piano meets institutional quality standards. Unlike other piano dealers Dallas offers, our instruments are faculty-approved and your purchase directly supports UTD's music programs through our ongoing partnership."
+  },
+  {
+    question: "How do I get priority booking for the Dallas event?",
+    answer: "UTD students, faculty, and staff receive automatic priority booking privileges. With only 15 VIP consultation slots available for Day 1 early access, we recommend booking within 48 hours to guarantee your preferred time slot and first selection of our premium Dallas inventory."
+  },
+  {
+    question: "How do I secure priority access to the best piano deals?",
+    answer: "VIP consultation bookings receive guaranteed first selection privileges and early access to our premium inventory. With only 25 consultation slots available, booking early ensures you get priority access to the most sought-after instruments and exclusive early bird pricing."
   }
 ];
 
@@ -96,9 +104,14 @@ export default function FAQSection() {
           <p className="text-gray-600 mb-4">
             Have more questions about our Dallas piano sales?
           </p>
-          <button className="bg-kawai-red text-white px-8 py-3 rounded-lg font-medium hover:bg-kawai-red/90 transition-colors">
-            Contact Our Piano Experts
-          </button>
+          <div className="space-y-2">
+            <button className="bg-kawai-red text-white px-8 py-3 rounded-lg font-medium hover:bg-kawai-red/90 transition-colors">
+              Contact Our Piano Experts - VIP Priority Line
+            </button>
+            <p className="text-sm text-orange-600 font-medium">
+              Call within 24 hours for guaranteed consultation slot
+            </p>
+          </div>
         </div>
       </div>
     </section>

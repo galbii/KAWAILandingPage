@@ -1,10 +1,4 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/api/bookings/route": "app/api/bookings/route.js",
-  "/api/bookings/test/route": "app/api/bookings/test/route.js",
-  "/api/webhooks/cal/route": "app/api/webhooks/cal/route.js",
-  "/api/error-tracking/route": "app/api/error-tracking/route.js",
   "/page": "app/page.js",
-  "/university-dallas/page": "app/university-dallas/page.js",
-  "/sam-houston/page": "app/sam-houston/page.js"
+  "/university-dallas/page": "app/university-dallas/page.js"
 }

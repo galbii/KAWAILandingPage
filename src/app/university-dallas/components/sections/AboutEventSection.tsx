@@ -3,7 +3,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import PianoConsultationDialog from '@/components/PianoConsultationDialog';
+import PianoConsultationDialog from '../PianoConsultationDialog';
 import ImageModal from '@/components/ImageModal';
 import PdfViewer from '@/components/PdfViewer';
 import { useIntersectionAnimation } from '@/hooks/useIntersectionAnimation';
@@ -110,15 +110,21 @@ export default function AboutEventSection() {
 
             <div className={`bg-gradient-to-r from-kawai-red/5 to-tsu-blue/5 rounded-lg p-6 border border-kawai-red/20 transition-all duration-700 delay-1100 ${contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
               <div className="text-center">
-                <h4 className="text-lg font-semibold text-black mb-2">Secure Your Savings</h4>
-                <p className="text-sm text-muted-foreground mb-4">Don&apos;t miss out on exclusive deals, <span className="text-kawai-red/80 font-medium">priority access to our premium selection</span>, <span className="text-kawai-red font-medium">free delivery and tuning</span></p>
+                <h4 className="text-lg font-semibold text-black mb-2">Limited Dallas Event Capacity - UTD Priority Access</h4>
+                <p className="text-sm text-muted-foreground mb-4">Only 25 private consultation slots available for this exclusive Dallas event. <span className="text-kawai-red/80 font-medium">UTD VIP early access bookings get guaranteed first selection</span> plus <span className="text-kawai-red font-medium">complimentary Dallas delivery and premium tuning service</span></p>
+                <div className="inline-flex items-center gap-2 bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-xs font-semibold mb-4">
+                  <svg className="w-3 h-3 animate-pulse" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                  </svg>
+                  68% of Dallas slots already reserved
+                </div>
                 <div className="space-y-3">
                   <button 
                     onClick={() => setIsModalOpen(true)}
                     className="block w-full bg-red-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-red-700 transition-colors"
                     style={{backgroundColor: '#CC0000', color: '#FFFFFF'}}
                   >
-                    Secure Your Savings
+                    Reserve My VIP Consultation
                   </button>
                   <button 
                     onClick={() => {

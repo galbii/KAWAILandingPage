@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import type { MouseEvent } from 'react';
-import PianoConsultationDialog from '@/components/PianoConsultationDialog';
+import PianoConsultationDialog from '../PianoConsultationDialog';
 import HoustonEventInfoDialog from '@/components/HoustonEventInfoDialog';
 import { trackKawaiEvent } from '@/lib/analytics';
 
@@ -31,10 +31,10 @@ export default function HeroSection() {
     }
   };
 
-  const handleReserveConsultationClick = (e: MouseEvent) => {
+  const handleReserveAppointmentClick = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log('Reserve Consultation clicked');
+    console.log('Reserve Appointment clicked');
     // Track the analytics event
     trackKawaiEvent.secureSpot('hero');
     
@@ -138,32 +138,32 @@ export default function HeroSection() {
           <div className="space-y-2 sm:space-y-3 animate-elegant-slide-up animate-delay-1800">
             <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-red-600/15 backdrop-blur-sm rounded-full border border-red-400/20 shadow-lg">
               <div className="w-2 h-2 bg-red-400 rounded-full animate-pulse drop-shadow-sm"></div>
-              <span className="text-red-200 font-semibold tracking-wide text-xs sm:text-sm drop-shadow-sm">4 DAYS ONLY</span>
+              <span className="text-red-200 font-semibold tracking-wide text-xs sm:text-sm drop-shadow-sm">RESERVE YOUR SPOT - LIMITED APPOINTMENTS</span>
             </div>
             <div className="text-lg sm:text-xl md:text-2xl font-light text-white tracking-wider drop-shadow-lg">September 18-21, 2025</div>
-            <div className="text-sm sm:text-base text-white/95 drop-shadow-sm animate-elegant-slide-up animate-delay-2000">Book for first picks on select deals and early bird viewing</div>
+            <div className="text-sm sm:text-base text-white/95 drop-shadow-sm animate-elegant-slide-up animate-delay-2000">Reserve your appointment now for priority access and guaranteed first selection of premium inventory</div>
           </div>
           
           {/* Primary Call to Action */}
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
             <button 
-              onClick={handleExploreCollectionClick}
-              className="bg-white text-black hover:bg-gray-100 px-6 sm:px-8 py-3 text-base sm:text-lg font-medium rounded-lg transition-all duration-500 hover:scale-105 hover:shadow-2xl w-full sm:w-auto cursor-pointer relative drop-shadow-lg animate-gentle-scale animate-delay-2200"
+              onClick={handleReserveAppointmentClick}
+              className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-6 sm:px-8 py-3 text-base sm:text-lg font-bold rounded-lg shadow-2xl transition-all duration-500 hover:scale-105 hover:shadow-3xl border-2 border-red-400/40 w-full sm:w-auto cursor-pointer relative drop-shadow-lg animate-gentle-scale animate-delay-2200"
               style={{ pointerEvents: 'auto', zIndex: 50 }}
               type="button"
             >
-              <span className="block sm:hidden drop-shadow-sm">Find Your Piano</span>
-              <span className="hidden sm:block drop-shadow-sm">Find Your Perfect Piano</span>
+              <span className="block sm:hidden drop-shadow-sm">Reserve Your Spot</span>
+              <span className="hidden sm:block drop-shadow-sm">Reserve Your Spot</span>
             </button>
             
             <button 
-              onClick={handleReserveConsultationClick}
-              className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-6 sm:px-8 py-3 text-base sm:text-lg font-bold rounded-lg shadow-2xl transition-all duration-500 hover:scale-105 hover:shadow-3xl border-2 border-red-400/40 w-full sm:w-auto cursor-pointer relative drop-shadow-lg animate-gentle-scale animate-delay-2400"
+              onClick={handleExploreCollectionClick}
+              className="bg-white/80 backdrop-blur-sm text-black hover:bg-white/90 px-6 sm:px-8 py-3 text-base sm:text-lg font-medium rounded-lg transition-all duration-500 hover:scale-105 hover:shadow-2xl w-full sm:w-auto cursor-pointer relative drop-shadow-lg animate-gentle-scale animate-delay-2400"
               style={{ pointerEvents: 'auto', zIndex: 50 }}
               type="button"
             >
-              <span className="block sm:hidden drop-shadow-sm">Book Now</span>
-              <span className="hidden sm:block drop-shadow-sm">Book Now</span>
+              <span className="block sm:hidden drop-shadow-sm">View Piano Collection</span>
+              <span className="hidden sm:block drop-shadow-sm">View Piano Collection</span>
             </button>
           </div>
           

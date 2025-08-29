@@ -79,6 +79,10 @@ export default function ValuePropositionSection() {
             <p className="font-body text-white/90 text-base sm:text-lg mb-4 sm:mb-6">
               Don&apos;t miss this limited-time opportunity to own a world-class KAWAI piano at university pricing.
             </p>
+            <div className="inline-flex items-center gap-2 bg-red-600/20 backdrop-blur-sm rounded-full px-4 py-2 mb-4 border border-red-500/30">
+              <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+              <span className="text-white/90 text-sm font-medium">Limited Dallas appointment slots - UTD priority access</span>
+            </div>
           </div>
           <a 
             href="tel:9726452514"
@@ -88,13 +92,16 @@ export default function ValuePropositionSection() {
             <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
             <div className="text-left">
               <p className="font-body text-white/70 text-xs sm:text-sm">
-                Call now for pricing & financing
+                Call now for appointment priority - Dallas event
               </p>
               <p className="font-heading text-white text-base sm:text-lg font-medium">
                 (972) 645-2514
               </p>
             </div>
           </a>
+          <p className="text-white/60 text-xs sm:text-sm mt-3">
+            UTD partnership exclusive • Only 8 Dallas appointment slots remaining
+          </p>
         </div>
 
       </div>

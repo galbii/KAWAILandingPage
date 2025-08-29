@@ -67,12 +67,12 @@ export default function BookingSection() {
                 
                 // Initialize the Calendly widget
                 window.Calendly.initInlineWidget({
-                  url: 'https://calendly.com/kawaipianogallery/shsu-piano-sale',
+                  url: 'https://calendly.com/kawaipianogallery/utd-x-kawai-piano-sale',
                   parentElement: calendlyContainerRef.current,
                   utm: {
                     utmSource: 'kawai-landing-page',
                     utmMedium: 'booking-section',
-                    utmCampaign: 'shsu-piano-sale-2025'
+                    utmCampaign: 'utd-piano-sale-2025'
                   }
                 });
                 
@@ -279,31 +279,14 @@ export default function BookingSection() {
           {/* Calendly Widget Container - only show when ready to load */}
           {shouldLoadCalendly && (
             <div className="calendly-widget-wrapper">
-              {/* Primary: HTML-based widget (official Calendly pattern) */}
+              {/* Calendly inline widget begin */}
               <div 
                 className="calendly-inline-widget" 
-                data-url="https://calendly.com/kawaipianogallery/shsu-piano-sale?utm_source=kawai-landing-page&utm_medium=booking-section&utm_campaign=shsu-piano-sale-2025"
-                style={{
-                  minWidth: '320px',
-                  height: isCalendlyLoaded ? '0px' : '630px', // Hide HTML widget when JS loads
-                  width: '100%',
-                  overflow: 'hidden',
-                  display: isCalendlyLoaded ? 'none' : 'block'
-                }}
+                data-url="https://calendly.com/kawaipianogallery/utd-x-kawai-piano-sale"
+                style={{minWidth: '320px', height: '700px'}}
               />
-
-              {/* Backup: JavaScript initialization container */}
-              <div 
-                ref={calendlyContainerRef}
-                className="calendly-js-container"
-                style={{ 
-                  minWidth: '320px',
-                  width: '100%',
-                  height: '630px',
-                  position: 'relative',
-                  display: isCalendlyLoaded ? 'block' : 'none'
-                }}
-              />
+              <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+              {/* Calendly inline widget end */}
             </div>
           )}
         </div>

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { trackKawaiEvent } from '@/lib/analytics';
-import PianoConsultationDialog from '@/components/PianoConsultationDialog';
+import PianoConsultationDialog from '../PianoConsultationDialog';
 
 export default function ContactSection() {
   const [isModalOpen, setIsModalOpen] = useState(false);
