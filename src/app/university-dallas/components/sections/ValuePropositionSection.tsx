@@ -51,7 +51,7 @@ export default function ValuePropositionSection() {
                 Premium Selection
               </h3>
               <p className="font-body text-white/80 leading-relaxed text-sm sm:text-base max-w-xs mx-auto">
-                Hand-selected KAWAI pianos offering exceptional value with professional-grade performance
+                Hand-selected KAWAI pianos offering exceptional value with professional-grade performance and complimentary delivery & tuning
               </p>
             </div>
           </div>
@@ -66,7 +66,7 @@ export default function ValuePropositionSection() {
                 Protection & Support
               </h3>
               <p className="font-body text-white/80 leading-relaxed text-sm sm:text-base max-w-xs mx-auto">
-                Comprehensive warranties and ongoing support to protect your investment for years to come
+                Comprehensive warranties, ongoing support, and free professional tuning to protect your investment for years to come
               </p>
             </div>
           </div>

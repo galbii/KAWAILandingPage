@@ -198,7 +198,7 @@ export default function HeroSection() {
               <span className="text-red-200 font-semibold tracking-wide text-xs sm:text-sm drop-shadow-sm">SCHEDULE YOUR APPOINTMENT</span>
             </div>
             <div className="text-lg sm:text-xl md:text-2xl font-light text-white tracking-wider drop-shadow-lg hero-animate hero-animate-6">September 18-21, 2025</div>
-            <div className="text-sm sm:text-base text-white/95 drop-shadow-sm hero-animate hero-animate-7">Book your appointment for special event pricing on a wide variety of KAWAI pianos</div>
+            <div className="text-sm sm:text-base text-white/95 drop-shadow-sm hero-animate hero-animate-7">Book your appointment for special event pricing on a wide variety of KAWAI pianos with free delivery and tuning</div>
           </div>
           
           {/* Primary Call to Action */}

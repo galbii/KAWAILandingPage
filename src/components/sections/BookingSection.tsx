@@ -251,7 +251,7 @@ export default function BookingSection() {
               Schedule Your Piano Consultation
             </h2>
             <p className="text-lg md:text-xl leading-relaxed text-kawai-black/70 max-w-2xl mx-auto">
-              Get personalized recommendations from our expert piano consultants. Select a convenient time for your one-on-one session.
+              Get personalized recommendations from our expert piano consultants. Select a convenient time for your one-on-one session with complimentary delivery and tuning included.
             </p>
           </div>
 
