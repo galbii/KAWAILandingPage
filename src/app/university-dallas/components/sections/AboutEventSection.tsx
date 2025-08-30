@@ -124,7 +124,7 @@ export default function AboutEventSection() {
                     className="block w-full bg-red-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-red-700 transition-colors"
                     style={{backgroundColor: '#CC0000', color: '#FFFFFF'}}
                   >
-                    Reserve My VIP Consultation
+                    Secure My Savings
                   </button>
                   <button 
                     onClick={() => {

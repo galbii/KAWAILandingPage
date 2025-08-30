@@ -32,7 +32,7 @@ const featuredPianos: FeaturedPiano[] = [
     salePrice: 949,
     savings: 150,
     keyFeatures: ["88 Weighted Keys", "Responsive Hammer Action", "19 Premium Sounds"],
-    availability: "Only 3 left - UTD partnership priority booking"
+    availability: "Available for demonstration"
   },
   {
     id: "es-520",
@@ -45,7 +45,7 @@ const featuredPianos: FeaturedPiano[] = [
     salePrice: 999,
     savings: 400,
     keyFeatures: ["88 Weighted Keys", "Bluetooth Connectivity", "38 Premium Sounds"],
-    availability: "5 remaining - Dallas VIP early access priority"
+    availability: "Available for demonstration"
   },
   {
     id: "k-200",
@@ -58,7 +58,7 @@ const featuredPianos: FeaturedPiano[] = [
     salePrice: 6390,
     savings: 2005,
     keyFeatures: ["Solid Spruce Soundboard", "Premium Action", "114cm Height"],
-    availability: "Only 2 left - UTD faculty/staff guaranteed priority"
+    availability: "Available for demonstration"
   },
   {
     id: "gl-10",
@@ -71,7 +71,7 @@ const featuredPianos: FeaturedPiano[] = [
     salePrice: 12950,
     savings: 6045,
     keyFeatures: ["5'1\" Baby Grand", "Premium Action", "Solid Spruce Soundboard"],
-    availability: "Final Dallas unit - UTD partnership exclusive access"
+    availability: "Available for demonstration"
   }
 ];
 
@@ -148,18 +148,13 @@ function PianoSection({ piano, index, hasTrackedAnyPiano }: PianoSectionProps) {
                 </h2>
               </div>
               
-              {/* Pricing Section */}
+              {/* Experience Information */}
               <div className={`space-y-2 transition-all duration-600 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                <div className={`flex items-center gap-3 transition-all duration-500 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}>
-                  <span className="text-lg text-gray-500 line-through transition-all duration-300 hover:scale-105">
-                    ${piano.originalPrice.toLocaleString()}
-                  </span>
-                  <span className="text-2xl md:text-3xl font-bold text-red-600 transition-all duration-300 hover:scale-110 hover:text-red-700">
-                    ${piano.salePrice.toLocaleString()}
-                  </span>
-                </div>
-                <div className={`inline-flex items-center bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold transition-all duration-500 delay-400 hover:bg-green-200 hover:scale-105 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
-                  Special offers on gently used products
+                <div className={`inline-flex items-center bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-500 delay-300 hover:bg-blue-200 hover:scale-105 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
+                  <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" clipRule="evenodd" />
+                  </svg>
+                  Book Your Appointment for More Information
                 </div>
               </div>
               
@@ -183,10 +178,10 @@ function PianoSection({ piano, index, hasTrackedAnyPiano }: PianoSectionProps) {
                 
                 {/* Availability */}
                 <div className="flex items-center gap-2 text-sm">
-                  <svg className="w-4 h-4 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                  <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-orange-600 font-medium">{piano.availability}</span>
+                  <span className="text-green-600 font-medium">{piano.availability}</span>
                 </div>
               </div>
             </div>
@@ -229,6 +224,7 @@ export function FeaturedDeals() {
           <div className={`mb-8 transition-all duration-600 ${headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
             {/* Premium Gallery Title */}
             <div className={`relative inline-block mb-6 transition-all duration-600 delay-200 ${headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+              <div className="text-red-600 font-bold text-lg mb-2 tracking-wide">FEATURED MODELS</div>
               <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-kawai-black mb-2">
                 DALLAS PIANO GALLERY
               </h1>
@@ -238,11 +234,11 @@ export function FeaturedDeals() {
             {/* Premium Subtitle */}
             <div className={`space-y-4 mb-6 transition-all duration-600 delay-400 ${headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
               <p className="text-xl md:text-2xl font-semibold text-gray-700 tracking-wide">
-                Premium Collection • Exclusive Prices
+                Premium Collection • Expert Guidance
               </p>
               <div className="flex items-center justify-center gap-4 flex-wrap">
-                <div className="bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                  LIMITED TIME EVENT
+                <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                  EXCLUSIVE SHOWCASE
                 </div>
                 <span className="text-red-600 font-bold text-lg">September 18th - 21st, 2025</span>
               </div>
@@ -250,7 +246,7 @@ export function FeaturedDeals() {
           </div>
           
           <p className={`text-base md:text-lg leading-relaxed text-kawai-black/70 max-w-3xl mx-auto transition-all duration-600 delay-600 ${headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-            Experience our handpicked selection of premium digital and acoustic pianos with university-exclusive pricing. Each masterfully crafted instrument showcases KAWAI&apos;s legendary quality, ready for immediate delivery from our Dallas showroom. Every purchase directly benefits UTD&apos;s Music Department programs.
+            Check out some featured models we have available. Book your appointment to experience our handpicked selection of premium digital and acoustic pianos with exclusive university pricing. Each masterfully crafted instrument showcases KAWAI&apos;s legendary quality, available at special event pricing through scheduled appointments with our piano experts. Partnership with UTD brings special pricing and music education benefits to our community.
           </p>
         </div>
         
@@ -268,17 +264,17 @@ export function FeaturedDeals() {
       <section className="py-12 text-center bg-kawai-pearl">
         <div className="max-w-2xl mx-auto px-6 space-y-4">
           <h3 className="font-heading text-2xl font-semibold text-kawai-black">
-            Reserve Your Appointment - Limited Time Slots
+            Schedule Your Personal Appointment
           </h3>
           <p className="text-kawai-black/70 max-w-lg mx-auto">
-            Only 15 appointment slots available for first selection access. Reserve your spot now for guaranteed priority viewing and exclusive appointment pricing.
+            Get priority access to special university pricing and deals when you book your appointment. See more models in person and connect with our KAWAI piano experts for personalized recommendations.
           </p>
           <div className="space-y-2">
             <button 
               onClick={() => setIsModalOpen(true)}
               className="inline-flex items-center px-8 py-4 bg-red-700 hover:bg-red-600 text-white font-semibold text-lg rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 group"
             >
-              <span>Reserve My Spot</span>
+              <span>Book Appointment</span>
               <svg
                 className="w-6 h-6 ml-3 transition-transform duration-300 group-hover:translate-x-1"
                 fill="none"
@@ -289,8 +285,8 @@ export function FeaturedDeals() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </button>
-            <p className="text-sm text-orange-600 font-medium">
-              Only 5 slots remaining for September 18th • Walk-ins welcome with remaining inventory
+            <p className="text-sm text-blue-600 font-medium">
+              September 18th-21st experiences available • Walk-ins welcome
             </p>
           </div>
         </div>

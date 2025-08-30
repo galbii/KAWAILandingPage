@@ -67,12 +67,37 @@ export default function HeroSection() {
         <source src="/videos/CA.mp4" type="video/mp4" />
       </video>
       
-      {/* Subtle Background Enhancement - No Dark Overlay */}
+      {/* Enhanced Background Overlay for Better Text Readability */}
       <div className="absolute inset-0 z-5" style={{ pointerEvents: 'none' }}>
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/5 to-black/10"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/30 to-black/40"></div>
       </div>
       
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 text-center hero-content py-8 sm:py-12 lg:pt-20 lg:pb-12">
+      <div className="relative z-30 w-full max-w-7xl mx-auto px-4 sm:px-6 text-center hero-content py-8 sm:py-12 lg:pt-20 lg:pb-12">
+        <style jsx>{`
+          .hero-content,
+          .hero-content *,
+          .hero-content span,
+          .hero-content div,
+          .hero-content h1,
+          .hero-content button {
+            color: #ffffff !important;
+            opacity: 1 !important;
+            filter: none !important;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.8) !important;
+          }
+          .hero-content .text-red-600 {
+            color: #dc2626 !important;
+          }
+          .hero-content .text-orange-400 {
+            color: #fb923c !important;
+          }
+          .hero-content .text-red-200 {
+            color: #fecaca !important;
+          }
+          .hero-content .text-orange-300 {
+            color: #fdba74 !important;
+          }
+        `}</style>
         
         {/* Partnership Branding */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-8 sm:mb-12 animate-sophisticated-float animate-elegant-slide-up animate-delay-300">
@@ -144,7 +169,7 @@ export default function HeroSection() {
           
           {/* Premium Value Proposition */}
           <div className="space-y-4 animate-premium-glow animate-delay-1500 px-2">
-            <div className="text-base sm:text-lg md:text-xl text-white font-light drop-shadow-lg">Cutting Edge Technology • Special University Pricing</div>
+            <div className="text-base sm:text-lg md:text-xl text-white font-light drop-shadow-lg">Cutting Edge Technology • Expert Piano Guidance</div>
           </div>
         </div>
         
@@ -155,10 +180,10 @@ export default function HeroSection() {
           <div className="space-y-2 sm:space-y-3 animate-elegant-slide-up animate-delay-1800">
             <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-red-600/15 backdrop-blur-sm rounded-full border border-red-400/20 shadow-lg">
               <div className="w-2 h-2 bg-red-400 rounded-full animate-pulse drop-shadow-sm"></div>
-              <span className="text-red-200 font-semibold tracking-wide text-xs sm:text-sm drop-shadow-sm">RESERVE YOUR SPOT - LIMITED APPOINTMENTS</span>
+              <span className="text-red-200 font-semibold tracking-wide text-xs sm:text-sm drop-shadow-sm">SCHEDULE YOUR APPOINTMENT</span>
             </div>
             <div className="text-lg sm:text-xl md:text-2xl font-light text-white tracking-wider drop-shadow-lg">September 18-21, 2025</div>
-            <div className="text-sm sm:text-base text-white/95 drop-shadow-sm animate-elegant-slide-up animate-delay-2000">Reserve your appointment now for priority access and guaranteed first selection of premium inventory</div>
+            <div className="text-sm sm:text-base text-white/95 drop-shadow-sm animate-elegant-slide-up animate-delay-2000">Schedule your personal appointment with KAWAI piano experts for personalized recommendations and guidance</div>
           </div>
           
           {/* Primary Call to Action */}
@@ -169,8 +194,8 @@ export default function HeroSection() {
               style={{ pointerEvents: 'auto', zIndex: 50 }}
               type="button"
             >
-              <span className="block sm:hidden drop-shadow-sm">Reserve Your Spot</span>
-              <span className="hidden sm:block drop-shadow-sm">Reserve Your Spot</span>
+              <span className="block sm:hidden drop-shadow-sm">Book Appointment</span>
+              <span className="hidden sm:block drop-shadow-sm">Book Appointment</span>
             </button>
             
             <button 
