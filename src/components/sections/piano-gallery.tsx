@@ -138,8 +138,22 @@ function PianoSection({ piano, index, hasTrackedAnyPiano }: PianoSectionProps) {
         <div className={`grid lg:grid-cols-2 gap-4 lg:gap-6 items-center ${
           isEven ? '' : 'lg:grid-flow-col-dense'
         }`}>
+          {/* Image */}
+          <div className={`relative ${isEven ? 'order-1 lg:order-2' : 'order-1 lg:col-start-1'}`}>
+            <div className={`relative transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-6 scale-95'}`}>
+              <Image
+                src={piano.image}
+                alt={`${piano.title} - Houston Piano Sales - Available at KAWAI Piano Store Houston`}
+                width={800}
+                height={600}
+                className="w-full h-auto object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 40vw"
+              />
+            </div>
+          </div>
+
           {/* Content */}
-          <div className={`space-y-4 ${isEven ? '' : 'lg:col-start-2'}`}>
+          <div className={`space-y-4 ${isEven ? 'order-2 lg:order-1' : 'order-2 lg:col-start-2'}`}>
             <div className="space-y-3">
               <div className={`space-y-1 transition-all duration-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                 <div className="text-sm font-medium text-gray-600 break-words overflow-hidden">{piano.category}</div>
@@ -154,7 +168,7 @@ function PianoSection({ piano, index, hasTrackedAnyPiano }: PianoSectionProps) {
                   <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" clipRule="evenodd" />
                   </svg>
-                  Book Your Appointment for More Information
+                  Book an Appointment for Priority Deals and University Pricing
                 </div>
               </div>
               
@@ -184,20 +198,6 @@ function PianoSection({ piano, index, hasTrackedAnyPiano }: PianoSectionProps) {
                   <span className="text-green-600 font-medium">{piano.availability}</span>
                 </div>
               </div>
-            </div>
-          </div>
-
-          {/* Image */}
-          <div className={`relative ${isEven ? '' : 'lg:col-start-1'}`}>
-            <div className={`relative transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-6 scale-95'}`}>
-              <Image
-                src={piano.image}
-                alt={`${piano.title} - Houston Piano Sales - Available at KAWAI Piano Store Houston`}
-                width={800}
-                height={600}
-                className="w-full h-auto object-cover"
-                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 40vw"
-              />
             </div>
           </div>
         </div>

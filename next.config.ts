@@ -159,7 +159,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: 'Link',
-            value: '</videos/CA.mp4>; rel=preload; as=video; type="video/mp4"',
+            value: '</videos/CA.webm>; rel=preload; as=video; type="video/webm"',
           },
         ],
       },

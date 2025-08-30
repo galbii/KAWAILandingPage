@@ -64,6 +64,7 @@ export default function HeroSection() {
           });
         }}
       >
+        <source src="/videos/CA.webm" type="video/webm" />
         <source src="/videos/CA.mp4" type="video/mp4" />
       </video>
       
