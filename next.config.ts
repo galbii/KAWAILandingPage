@@ -34,6 +34,7 @@ const nextConfig: NextConfig = {
             key: 'Content-Security-Policy',
             value: `
               default-src 'self';
+              upgrade-insecure-requests;
               script-src 'self' 'unsafe-inline' 'unsafe-eval' 
                 https://assets.calendly.com 
                 https://static.ctctcdn.com 
