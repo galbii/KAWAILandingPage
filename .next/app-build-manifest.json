@@ -1,3 +1,134 @@
 {
-  "pages": {}
+  "pages": {
+    "/_not-found/page": [
+      "static/chunks/webpack-10f735e6c6f524e8.js",
+      "static/chunks/4bd1b696-c49c6f05a40ba469.js",
+      "static/chunks/9da6db1e-a71b64d7d68083df.js",
+      "static/chunks/964-8da11aec878ded65.js",
+      "static/chunks/main-app-72c2435fb5c25bcf.js",
+      "static/chunks/app/_not-found/page-83de70b8636bf66b.js"
+    ],
+    "/global-error": [
+      "static/chunks/webpack-10f735e6c6f524e8.js",
+      "static/chunks/4bd1b696-c49c6f05a40ba469.js",
+      "static/chunks/9da6db1e-a71b64d7d68083df.js",
+      "static/chunks/964-8da11aec878ded65.js",
+      "static/chunks/main-app-72c2435fb5c25bcf.js",
+      "static/chunks/352-f811a9c279394c3d.js",
+      "static/chunks/app/global-error-a8026aabf55c7828.js"
+    ],
+    "/layout": [
+      "static/chunks/webpack-10f735e6c6f524e8.js",
+      "static/chunks/4bd1b696-c49c6f05a40ba469.js",
+      "static/chunks/9da6db1e-a71b64d7d68083df.js",
+      "static/chunks/964-8da11aec878ded65.js",
+      "static/chunks/main-app-72c2435fb5c25bcf.js",
+      "static/css/96799959c7330994.css",
+      "static/css/f3483dff6aef41da.css",
+      "static/chunks/352-f811a9c279394c3d.js",
+      "static/chunks/851-db20d1596e2f5cc0.js",
+      "static/chunks/559-51534a4e16a4abfa.js",
+      "static/chunks/21-2533f32f55e16a85.js",
+      "static/chunks/674-ae82c6a4325965bd.js",
+      "static/chunks/959-d51203aacce7a075.js",
+      "static/chunks/app/layout-ca3d74b559689240.js"
+    ],
+    "/error": [
+      "static/chunks/webpack-10f735e6c6f524e8.js",
+      "static/chunks/4bd1b696-c49c6f05a40ba469.js",
+      "static/chunks/9da6db1e-a71b64d7d68083df.js",
+      "static/chunks/964-8da11aec878ded65.js",
+      "static/chunks/main-app-72c2435fb5c25bcf.js",
+      "static/chunks/352-f811a9c279394c3d.js",
+      "static/chunks/app/error-b0f755ce46e768ec.js"
+    ],
+    "/api/bookings/route": [
+      "static/chunks/webpack-10f735e6c6f524e8.js",
+      "static/chunks/4bd1b696-c49c6f05a40ba469.js",
+      "static/chunks/9da6db1e-a71b64d7d68083df.js",
+      "static/chunks/964-8da11aec878ded65.js",
+      "static/chunks/main-app-72c2435fb5c25bcf.js",
+      "static/chunks/21-2533f32f55e16a85.js",
+      "static/chunks/app/api/bookings/route-9779e5b897318700.js"
+    ],
+    "/api/bookings/test/route": [
+      "static/chunks/webpack-10f735e6c6f524e8.js",
+      "static/chunks/4bd1b696-c49c6f05a40ba469.js",
+      "static/chunks/9da6db1e-a71b64d7d68083df.js",
+      "static/chunks/964-8da11aec878ded65.js",
+      "static/chunks/main-app-72c2435fb5c25bcf.js",
+      "static/chunks/21-2533f32f55e16a85.js",
+      "static/chunks/app/api/bookings/test/route-9779e5b897318700.js"
+    ],
+    "/api/webhooks/cal/route": [
+      "static/chunks/webpack-10f735e6c6f524e8.js",
+      "static/chunks/4bd1b696-c49c6f05a40ba469.js",
+      "static/chunks/9da6db1e-a71b64d7d68083df.js",
+      "static/chunks/964-8da11aec878ded65.js",
+      "static/chunks/main-app-72c2435fb5c25bcf.js",
+      "static/chunks/app/api/webhooks/cal/route-39fcb96044ab36c8.js"
+    ],
+    "/api/error-tracking/route": [
+      "static/chunks/webpack-10f735e6c6f524e8.js",
+      "static/chunks/4bd1b696-c49c6f05a40ba469.js",
+      "static/chunks/9da6db1e-a71b64d7d68083df.js",
+      "static/chunks/964-8da11aec878ded65.js",
+      "static/chunks/main-app-72c2435fb5c25bcf.js",
+      "static/chunks/21-2533f32f55e16a85.js",
+      "static/chunks/app/api/error-tracking/route-9779e5b897318700.js"
+    ],
+    "/page": [
+      "static/chunks/webpack-10f735e6c6f524e8.js",
+      "static/chunks/4bd1b696-c49c6f05a40ba469.js",
+      "static/chunks/9da6db1e-a71b64d7d68083df.js",
+      "static/chunks/964-8da11aec878ded65.js",
+      "static/chunks/main-app-72c2435fb5c25bcf.js",
+      "static/chunks/app/page-dca3780dd64de75f.js"
+    ],
+    "/sam-houston/layout": [
+      "static/chunks/webpack-10f735e6c6f524e8.js",
+      "static/chunks/4bd1b696-c49c6f05a40ba469.js",
+      "static/chunks/9da6db1e-a71b64d7d68083df.js",
+      "static/chunks/964-8da11aec878ded65.js",
+      "static/chunks/main-app-72c2435fb5c25bcf.js",
+      "static/css/96799959c7330994.css",
+      "static/chunks/352-f811a9c279394c3d.js",
+      "static/chunks/851-db20d1596e2f5cc0.js",
+      "static/chunks/559-51534a4e16a4abfa.js",
+      "static/chunks/21-2533f32f55e16a85.js",
+      "static/chunks/674-ae82c6a4325965bd.js",
+      "static/chunks/959-d51203aacce7a075.js",
+      "static/chunks/app/sam-houston/layout-1f9f87d0c6923415.js"
+    ],
+    "/sam-houston/page": [
+      "static/chunks/webpack-10f735e6c6f524e8.js",
+      "static/chunks/4bd1b696-c49c6f05a40ba469.js",
+      "static/chunks/9da6db1e-a71b64d7d68083df.js",
+      "static/chunks/964-8da11aec878ded65.js",
+      "static/chunks/main-app-72c2435fb5c25bcf.js",
+      "static/chunks/app/sam-houston/page-6064100279aa1a74.js"
+    ],
+    "/university-dallas/layout": [
+      "static/chunks/webpack-10f735e6c6f524e8.js",
+      "static/chunks/4bd1b696-c49c6f05a40ba469.js",
+      "static/chunks/9da6db1e-a71b64d7d68083df.js",
+      "static/chunks/964-8da11aec878ded65.js",
+      "static/chunks/main-app-72c2435fb5c25bcf.js",
+      "static/css/96799959c7330994.css",
+      "static/chunks/352-f811a9c279394c3d.js",
+      "static/chunks/851-db20d1596e2f5cc0.js",
+      "static/chunks/559-51534a4e16a4abfa.js",
+      "static/chunks/21-2533f32f55e16a85.js",
+      "static/chunks/674-ae82c6a4325965bd.js",
+      "static/chunks/app/university-dallas/layout-314266b74b4b6e95.js"
+    ],
+    "/university-dallas/page": [
+      "static/chunks/webpack-10f735e6c6f524e8.js",
+      "static/chunks/4bd1b696-c49c6f05a40ba469.js",
+      "static/chunks/9da6db1e-a71b64d7d68083df.js",
+      "static/chunks/964-8da11aec878ded65.js",
+      "static/chunks/main-app-72c2435fb5c25bcf.js",
+      "static/chunks/app/university-dallas/page-5ae56de3cc047b8b.js"
+    ]
+  }
 }
